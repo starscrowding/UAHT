@@ -41,6 +41,15 @@ contract UAHT is ERC20 {
         usdt = at;
     }
 
+    function delegate(address to, bool confirm) public operable {
+        require(confirm);
+        operator = to;
+    }
+
+    function moderate(uint256 x) public operable {
+        rate = x;
+    }
+
     function swap(uint256 uah) virtual public view returns(uint256) {
         return uah * 1 ether / rate;
     }
@@ -49,40 +58,20 @@ contract UAHT is ERC20 {
         require(uah > 0);
         uint256 proof = swap(uah);
         require(proof <= stake[msg.sender]);
-        uint256 allowance = this.allowance(operator, address(this));
-        if (allowance > 0 && allowance <= this.balanceOf(operator)) {
-            if (uah <= allowance) {
-                this.transferFrom(operator, to, uah);
-            } else {
-                uint256 extra = uah - allowance;
-                this.transferFrom(operator, to, allowance);
-                _mint(to, extra);
-            }
-        } else {
-            _mint(to, uah);
-        }
         stake[msg.sender] -= proof;
+        _mint(to, uah);
         flow += proof;
         emit Output(to, uah);
     }
 
     function outflow(uint256 uah) public operable {
         require(usdt != address(0));
-        require(uah <= this.balanceOf(msg.sender));
+        require(uah > 0 && uah <= this.balanceOf(msg.sender));
         uint256 matic = swap(uah);
         require(matic <= flow);
         payable(msg.sender).transfer(matic);
         flow -= matic;
         _burn(msg.sender, uah);
-    }
-
-    function delegate(address to, bool confirm) public operable {
-        require(confirm);
-        operator = to;
-    }
-
-    function moderate(uint256 x) public operable {
-        rate = x;
     }
 
     receive() external payable inflow {}

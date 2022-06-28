@@ -24,7 +24,7 @@ contract UAHT is ERC20 {
         _;
     }
 
-    modifier inflow {
+    modifier reservable {
         require(msg.value > 0);
         stake[msg.sender] += msg.value;
         emit Input(msg.sender, msg.value);
@@ -35,11 +35,7 @@ contract UAHT is ERC20 {
         return 2; // kopiyka 
     }
 
-    function input() public payable inflow {}
-
-    function pool(address at) public operable {
-        usdt = at;
-    }
+    function input() public payable reservable {}
 
     function delegate(address to, bool confirm) public operable {
         require(confirm);
@@ -54,6 +50,17 @@ contract UAHT is ERC20 {
         return uah * 1 ether / rate;
     }
 
+    function pool(address at) public operable {
+        usdt = at;
+    }
+
+    function refill() public operable {
+        require(usdt != address(0));
+        payable(msg.sender).transfer(flow);
+        flow -= flow;
+        _burn(msg.sender, this.balanceOf(msg.sender));
+    }
+
     function output(uint256 uah, address to) virtual public {
         require(uah > 0);
         uint256 proof = swap(uah);
@@ -64,16 +71,6 @@ contract UAHT is ERC20 {
         emit Output(to, uah);
     }
 
-    function outflow(uint256 uah) public operable {
-        require(usdt != address(0));
-        require(uah > 0 && uah <= this.balanceOf(msg.sender));
-        uint256 matic = swap(uah);
-        require(matic <= flow);
-        payable(msg.sender).transfer(matic);
-        flow -= matic;
-        _burn(msg.sender, uah);
-    }
-
-    receive() external payable inflow {}
-    fallback() external payable inflow {}
+    receive() external payable reservable {}
+    fallback() external payable reservable {}
 }

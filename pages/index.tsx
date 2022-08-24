@@ -1,7 +1,7 @@
 import {NextPage} from 'next';
 import Head from 'next/head';
 import {Container, Row, Col, Text} from '@nextui-org/react';
-import {BASE} from '@space/hooks/api';
+import {BASE, CONTRACT} from '@space/hooks/api';
 import {Logo} from '@space/components/Logo';
 import styles from '../styles/home.module.scss';
 
@@ -22,7 +22,7 @@ const Home: NextPage = () => {
           <main>
             <section>
               <Row justify="center" align="center">
-                <Logo />
+                <Logo href={CONTRACT} />
               </Row>
               <Row justify="center" align="center">
                 <Text h6 size={17} color="white" css={{m: 0}}>
@@ -33,7 +33,9 @@ const Home: NextPage = () => {
           </main>
           <footer className={styles.footer}>
             <Row justify="center" align="center">
-              <a title="воля">🔱</a>
+              <a href={CONTRACT} title="воля">
+                🔱
+              </a>
             </Row>
           </footer>
         </Col>

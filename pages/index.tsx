@@ -1,8 +1,9 @@
 import {NextPage} from 'next';
 import Head from 'next/head';
 import {Container, Row, Col, Text} from '@nextui-org/react';
-import {BASE, CONTRACT} from '@space/hooks/api';
+import {BASE, CONTRACT, CODE} from '@space/hooks/api';
 import {Logo} from '@space/components/Logo';
+import {Presentation} from '@space/components/Presentation';
 import styles from '../styles/home.module.scss';
 
 const Home: NextPage = () => {
@@ -29,11 +30,12 @@ const Home: NextPage = () => {
                   токен без меж для вільних людей
                 </Text>
               </Row>
+              <Presentation />
             </section>
           </main>
           <footer className={styles.footer}>
             <Row justify="center" align="center">
-              <a href={CONTRACT} title="воля">
+              <a href={CODE} title="воля">
                 🔱
               </a>
             </Row>

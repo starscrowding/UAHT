@@ -1,0 +1,22 @@
+.wallet {
+  margin-top: 1rem;
+}
+
+.row {
+  margin: 0.5rem 0;
+}
+
+.button {
+  margin: 5px !important;
+  text-transform: none;
+}
+
+.name {
+  margin-right: 0.75rem;
+}
+
+@media only screen and (max-width: 480px) {
+  .address {
+    zoom: 0.75;
+  }
+}

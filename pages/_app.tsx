@@ -1,6 +1,7 @@
-import type { AppProps } from 'next/app';
-import { createTheme, NextUIProvider } from '@nextui-org/react';
-import { ThemeProvider as NextThemesProvider } from 'next-themes';
+import type {AppProps} from 'next/app';
+import {createTheme, NextUIProvider} from '@nextui-org/react';
+import {ThemeProvider as NextThemesProvider} from 'next-themes';
+import {MetaMaskProvider} from 'metamask-react';
 import variables from '@space/styles/variables.module.scss';
 
 const baseTheme = {
@@ -26,7 +27,9 @@ function SpaceApp({ Component, pageProps }: AppProps) {
       }}
     >
       <NextUIProvider>
-        <Component {...pageProps} />
+        <MetaMaskProvider>
+          <Component {...pageProps} />
+        </MetaMaskProvider>
       </NextUIProvider>
     </NextThemesProvider>
   );

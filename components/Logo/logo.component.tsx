@@ -5,14 +5,16 @@ export const Logo = ({
   className,
   href = '/',
   size = 50,
+  target,
 }: {
   className?: string;
   href?: string;
   size?: number;
+  target?: string;
 }) => {
   return (
     <Link href={href}>
-      <a className={className}>
+      <a className={className} target={target}>
         <Text
           h1
           css={{

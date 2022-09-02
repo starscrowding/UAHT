@@ -7,3 +7,14 @@
 .footer {
   padding: 2rem 0;
 }
+
+.metamask {
+  width: 33px;
+  height: 33px;
+  background-color: #000000;
+  background-image: url('/metamask.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+  margin: 5px;
+}

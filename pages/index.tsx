@@ -1,12 +1,16 @@
 import {NextPage} from 'next';
 import Head from 'next/head';
 import {Container, Row, Col, Text} from '@nextui-org/react';
+import {useMetaMask} from 'metamask-react';
 import {BASE, CONTRACT, CODE} from '@space/hooks/api';
 import {Logo} from '@space/components/Logo';
 import {Presentation} from '@space/components/Presentation';
+import {MetamaskStatus} from '@space/components/Metamask';
+import {Wallet} from '@space/components/Wallet';
 import styles from '../styles/home.module.scss';
 
 const Home: NextPage = () => {
+  const MM = useMetaMask();
   return (
     <>
       <Head>
@@ -22,20 +26,24 @@ const Home: NextPage = () => {
         <Col>
           <main>
             <section>
+              <Row justify="flex-end" align="center">
+                <MetamaskStatus />
+                <div className={styles.metamask} title="MetaMask" />
+              </Row>
               <Row justify="center" align="center">
-                <Logo href={CONTRACT} />
+                <Logo href={CONTRACT} target="_blank" />
               </Row>
               <Row justify="center" align="center">
                 <Text h6 size={17} color="white" css={{m: 0}}>
                   токен без меж для вільних людей
                 </Text>
               </Row>
-              <Presentation />
+              {MM.status === 'connected' ? <Wallet /> : <Presentation />}
             </section>
           </main>
           <footer className={styles.footer}>
             <Row justify="center" align="center">
-              <a href={CODE} title="воля">
+              <a href={`${CODE}#readme`} title="воля">
                 🔱
               </a>
             </Row>

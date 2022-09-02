@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useMetaMask} from 'metamask-react';
 import {Loading} from '@nextui-org/react';
 import styles from './metamask.module.scss';
@@ -26,8 +26,25 @@ export const Address = ({account = ''}: {account: string}) => {
 };
 
 export const MetamaskStatus = () => {
-  const [step, setStep] = useState(0);
   const MM = useMetaMask();
+  const [isMobile, setIsMobile] = useState<boolean>();
+  const [step, setStep] = useState(0);
+
+  const switchNetwork = async () => {
+    try {
+      await MM.switchChain(POLYGON_ID);
+    } catch (err) {
+      // no Polygon added
+      if ((err as any)?.code === 4902) {
+        MM.addChain(POLYGON);
+      }
+    }
+  };
+
+  useEffect(() => {
+    setIsMobile(/iPhone|iPad|iPod|Android/i.test(navigator.userAgent));
+  }, []);
+
   return (
     <div>
       {MM.status === 'connecting' || (MM.status === 'initializing' && <Loading type="points" />)}
@@ -43,28 +60,19 @@ export const MetamaskStatus = () => {
               Встанови
             </a>
           )}
-          {step === 1 && <a onClick={() => location.reload()}>Онови сторінку</a>}
+          {step === 1 && isMobile ? (
+            <a href="https://metamask.app.link/dapp/uaht.io" target="_blank" rel="noreferrer">
+              Відкрий у додатку
+            </a>
+          ) : (
+            <a onClick={() => location.reload()}>Онови сторінку</a>
+          )}
         </>
       )}
-      {MM.status === 'notConnected' && <a onClick={MM.connect}>Підключи</a>}
+      {MM.status === 'notConnected' && <a onClick={() => MM.connect()}>Підключи</a>}
       {MM.status === 'connected' && (
         <>
-          {MM.chainId !== POLYGON_ID && (
-            <a
-              onClick={async () => {
-                try {
-                  await MM.switchChain(POLYGON_ID);
-                } catch (err) {
-                  // no Polygon added
-                  if ((err as any)?.code === 4902) {
-                    MM.addChain(POLYGON);
-                  }
-                }
-              }}
-            >
-              Активуй Polygon
-            </a>
-          )}
+          {MM.chainId !== POLYGON_ID && <a onClick={() => switchNetwork()}>Активуй Polygon</a>}
           {MM.chainId === POLYGON_ID && <Address account={MM.account} />}
         </>
       )}

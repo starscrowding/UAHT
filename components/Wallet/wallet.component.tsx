@@ -4,7 +4,7 @@ import {Card, Row, Text, Button, Collapse} from '@nextui-org/react';
 import {useConnectedMetaMask} from 'metamask-react';
 import UAHT_ABI from '@space/contracts/UAHT.abi.json';
 import {ADDRESS} from '@space/hooks/api';
-import {POLYGON_ID} from '../Metamask';
+import {POLYGON_ID, POLYGON} from '../Metamask';
 import styles from './wallet.module.scss';
 
 export const Wallet = () => {
@@ -45,7 +45,18 @@ export const Wallet = () => {
   }, [MM]);
 
   if (MM.chainId !== POLYGON_ID) {
-    return <Card className={styles.wallet}>Для користування треба активація мережі Polygon</Card>;
+    return (
+      <Card className={styles.wallet}>
+        <Row className={styles.row} justify="flex-start" align="center" wrap="wrap">
+          Для користування треба активація мережі Polygon
+        </Row>
+        <Row className={styles.row} justify="flex-start" align="center" wrap="wrap">
+          <Button className={styles.button} size="sm" auto onClick={() => MM.addChain(POLYGON)}>
+            Додати Polygon
+          </Button>
+        </Row>
+      </Card>
+    );
   }
 
   return (

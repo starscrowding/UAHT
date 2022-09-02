@@ -60,12 +60,16 @@ export const MetamaskStatus = () => {
               Встанови
             </a>
           )}
-          {step === 1 && isMobile ? (
-            <a href="https://metamask.app.link/dapp/uaht.io" target="_blank" rel="noreferrer">
-              Відкрий у додатку
-            </a>
-          ) : (
-            <a onClick={() => location.reload()}>Онови сторінку</a>
+          {step === 1 && (
+            <>
+              {isMobile ? (
+                <a href="https://metamask.app.link/dapp/uaht.io" target="_blank" rel="noreferrer">
+                  Відкрий у додатку
+                </a>
+              ) : (
+                <a onClick={() => location.reload()}>Онови сторінку</a>
+              )}
+            </>
           )}
         </>
       )}

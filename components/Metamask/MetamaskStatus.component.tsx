@@ -64,26 +64,24 @@ export const MetamaskStatus = () => {
       {MM.status === 'unavailable' && (
         <>
           {step === 0 && (
-            <a
-              onClick={() => {
-                window.open('https://metamask.io/', '_blank');
-                setStep(1);
-              }}
-            >
-              Встанови
-            </a>
-          )}
-          {step === 1 && (
             <>
               {isMobile ? (
                 <a href="https://metamask.app.link/dapp/uaht.io" target="_blank" rel="noreferrer">
                   Відкрий у додатку
                 </a>
               ) : (
-                <a onClick={() => location.reload()}>Онови сторінку</a>
+                <a
+                  onClick={() => {
+                    window.open('https://metamask.io/', '_blank');
+                    setTimeout(() => setStep(1), 123);
+                  }}
+                >
+                  Встанови
+                </a>
               )}
             </>
           )}
+          {step === 1 && <a onClick={() => location.reload()}>Онови сторінку</a>}
         </>
       )}
       {MM.status === 'notConnected' && <a onClick={() => MM.connect()}>Підключи</a>}

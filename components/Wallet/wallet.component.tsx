@@ -1,12 +1,12 @@
 import {useCallback, useEffect, useState, useMemo} from 'react';
-import {Card, Row, Text, Button, Collapse, Input, Radio, Popover} from '@nextui-org/react';
-import Link from 'next/link';
+import {Card, Row, Text, Button, Collapse, Input, Radio} from '@nextui-org/react';
 import {useConnectedMetaMask} from 'metamask-react';
 import {ethers} from 'ethers';
-import {FaTelegramPlane, FaInfoCircle} from 'react-icons/fa';
+import {FaTelegramPlane} from 'react-icons/fa';
 import classNames from 'classnames';
 import UAHT_ABI from '@space/contracts/UAHT.abi.json';
 import {ADDRESS, TELEGRAM} from '@space/hooks/api';
+import {Info} from '@space/components/Info';
 import {POLYGON_ID, POLYGON, Address} from '../Metamask';
 import styles from './wallet.module.scss';
 
@@ -28,35 +28,6 @@ export const RESOURCES: {[key: string]: {text: string; help: string; validator: 
     help: 'https://kuna.io/kuna-code/uk?r=kunaid-i50d4fvk13eb',
     validator: /^.+UAH-KCode$/,
   },
-};
-
-export const Info = ({
-  text,
-  link,
-  className,
-}: {
-  text?: string;
-  link?: string;
-  className?: string;
-}) => {
-  return text ? (
-    <Popover placement="top">
-      <Popover.Trigger>
-        <div className={className}>
-          <FaInfoCircle color="white" />
-        </div>
-      </Popover.Trigger>
-      <Popover.Content>
-        <Text css={{p: '$10'}}>{text}</Text>
-      </Popover.Content>
-    </Popover>
-  ) : link ? (
-    <Link href={link}>
-      <a className={className} target="_blank">
-        <FaInfoCircle color="white" />
-      </a>
-    </Link>
-  ) : null;
 };
 
 export const RequestButton = ({disabled}: {disabled?: boolean}) => (

@@ -7,6 +7,7 @@ import {Logo} from '@space/components/Logo';
 import {Presentation} from '@space/components/Presentation';
 import {MetamaskStatus} from '@space/components/Metamask';
 import {Wallet} from '@space/components/Wallet';
+import {Info} from '@space/components/Info';
 import styles from '../styles/home.module.scss';
 
 const Home: NextPage = () => {
@@ -37,6 +38,7 @@ const Home: NextPage = () => {
                 <Text h6 size={17} color="white" css={{m: 0}}>
                   токен без меж для вільних людей
                 </Text>
+                <Info link={'https://t.me/uaht_info'} className={styles.ml05} />
               </Row>
               {MM.status === 'connected' ? <Wallet /> : <Presentation />}
             </section>

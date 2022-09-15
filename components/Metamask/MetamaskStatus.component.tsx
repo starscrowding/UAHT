@@ -1,6 +1,8 @@
 import {useEffect, useState} from 'react';
-import {useMetaMask} from 'metamask-react';
+import classNames from 'classnames';
 import {Loading} from '@nextui-org/react';
+import {useMetaMask} from 'metamask-react';
+import {FaCopy, FaCheck} from 'react-icons/fa';
 import styles from './metamask.module.scss';
 
 export const POLYGON_ID = '0x89'; // 137
@@ -16,12 +18,23 @@ export const POLYGON = {
   blockExplorerUrls: ['https://polygonscan.com'],
 };
 
-export const Address = ({account = ''}: {account: string}) => {
+export const Address = ({account = '', className}: {account: string; className?: string}) => {
+  const [state, setState] = useState('ready');
   return (
     <a
-      className={styles.copy}
-      onClick={() => navigator.clipboard.writeText(account)}
-    >{`${account?.slice(0, 4)}...${account?.slice(-4)}`}</a>
+      className={classNames(styles.copy, className)}
+      onClick={() => {
+        try {
+          navigator?.clipboard?.writeText(account);
+        } finally {
+          setState('done');
+          setTimeout(() => setState('ready'), 1234);
+        }
+      }}
+    >
+      {state === 'done' ? <FaCheck /> : <FaCopy />}{' '}
+      {`${account?.slice(0, 4)}...${account?.slice(-4)}`}
+    </a>
   );
 };
 

@@ -7,12 +7,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@nextui-org/react": "v1.0.0-beta.10",
     "classnames": "^2.3.1",
     "crypto-js": "^4.1.1",
     "ethers": "^5.7.0",
     "metamask-react": "^2.4.0",
-    "next": "12.0.10",
-    "next-themes": "^0.0.15",
+    "next": "12.3.0",
+    "next-themes": "^0.2.1",
     "nookies": "^2.5.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
@@ -20,7 +21,6 @@
     "swr": "^1.2.2"
   },
   "devDependencies": {
-    "@nextui-org/react": "1.0.2-beta.3",
     "@types/crypto-js": "^4.1.1",
     "@types/node": "17.0.15",
     "@types/react": "17.0.39",

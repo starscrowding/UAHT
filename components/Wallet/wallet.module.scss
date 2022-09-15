@@ -1,3 +1,5 @@
+@import '../../styles/variables.module.scss';
+
 .wallet {
   margin-top: 1rem;
 }
@@ -15,8 +17,16 @@
   margin-right: 0.75rem;
 }
 
+.action {
+  background: linear-gradient(112deg, #06b7db -63.59%, #ff4ecd -20.3%, #0072f5 70.46%);
+}
+
 @media only screen and (max-width: 480px) {
   .address {
     zoom: 0.75;
+  }
+
+  .radio > div {
+    flex-direction: column;
   }
 }

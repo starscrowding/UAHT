@@ -1,11 +1,18 @@
-## About `UAHT`
+## Статут
 
-- https://uaht.io/
+0. Мета спільноти UAHT - розвиток web3 технологій та залучення віртуальних активів в Україну для розвитку економіки.
+1. Токен UAHT - токен без меж для вільних людей - віртуальний актив, який посвідчує права вимоги безвідсоткової поворотної фінансової допомоги.
+2. Контракт UAHT - ERC-20 смарт контракт в блокчейн мережі Polygon, який успадковує основні принципи Tether.
+3. uaht.io - платформа для операцій із UAHT через гаманець Metamask.
 
-## Contract
+## Умови
 
-- https://polygonscan.com/token/0x0d9447e16072b636b4a1e8f2b8c644e58f3eaa6a#readContract
+UAHT може використовуватись згідно прав і свобод людини відповідно до ліцензії MIT.
 
-## Tether
+## Посилання
 
-- https://tether.to/
+- UAHT: https://uaht.io/
+- Tether: https://tether.to/
+- Polygon: https://polygon.technology/
+- Контракт: https://polygonscan.com/token/0x0d9447e16072b636b4a1e8f2b8c644e58f3eaa6a#readContract
+- Metamask: https://metamask.io/

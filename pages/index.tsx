@@ -45,7 +45,7 @@ const Home: NextPage = () => {
           </main>
           <footer className={styles.footer}>
             <Row justify="center" align="center">
-              <a href={`${CODE}#readme`} target="_blank" rel="noreferrer" title="воля">
+              <a href={`${CODE}#readme`} target="_blank" rel="noreferrer" title="Статут - Воля 1.0">
                 🔱
               </a>
             </Row>

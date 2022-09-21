@@ -3,22 +3,23 @@ import {NextPage, NextPageContext} from 'next';
 import {Container, Row, Spacer, Card, Button, Input, Text} from '@nextui-org/react';
 import {ethers} from 'ethers';
 import {isAdmin} from '@space/hooks/route';
-import {RESOURCES} from '@space/components/Wallet';
-import {CONTRACT} from '@space/hooks/api';
+import {RESOURCES, PROVIDERS} from '@space/components/Wallet/constants';
+import {CONTRACT, RESERVE_URL} from '@space/hooks/api';
 import styles from '../styles/variables.module.scss';
 
 export const parseCode = (code: string = '') => {
   try {
     const body = atob(code.split('.')[0]);
     const signature = code.split('.')[1];
-    const [priority, stamp, type, resource, value, account] = body.split(':');
+    const [priority, stamp, type, source, value, account, payload] = body.split(':');
     return {
       priority,
       stamp,
       type,
-      resource,
+      source,
       value,
       account,
+      payload,
       body,
       signature,
     };
@@ -35,6 +36,11 @@ const Admin: NextPage = () => {
   const [validSignature, setValidSignature] = useState(false);
 
   const trx = useMemo(() => parseCode(code), [code]);
+  const source = useMemo(() => {
+    if (trx && trx.source) {
+      return RESOURCES[trx.source] || PROVIDERS[trx.source];
+    }
+  }, [trx]);
   const expired = useMemo(() => {
     return (
       trx?.stamp?.slice(0, 4) !==
@@ -68,6 +74,11 @@ const Admin: NextPage = () => {
 
   return (
     <Container>
+      <Row>
+        <a href={RESERVE_URL} target="_blank" rel="noreferrer">
+          Резерв
+        </a>
+      </Row>
       <Spacer />
       <Card>
         <Input placeholder="Код" onChange={e => setCode(e?.target?.value)} />
@@ -81,13 +92,8 @@ const Admin: NextPage = () => {
             <>
               {trx.type === 'i' ? (
                 <Row align="center" wrap="wrap">
-                  <Button
-                    className={styles.m1}
-                    as="a"
-                    target="_blank"
-                    href={RESOURCES[trx.resource].help}
-                  >
-                    Ввід коду {trx.resource}
+                  <Button className={styles.m1} as="a" target="_blank" href={source?.help}>
+                    Ввід - {trx.source}
                   </Button>
                   <Button
                     className={styles.m1}
@@ -111,13 +117,8 @@ const Admin: NextPage = () => {
                       >
                         {`UAHT.output(${+trx.value * 100})`}
                       </Button>
-                      <Button
-                        className={styles.m1}
-                        as="a"
-                        target="_blank"
-                        href={RESOURCES[trx.resource].help}
-                      >
-                        Вивід коду {trx.resource}
+                      <Button className={styles.m1} as="a" target="_blank" href={source?.help}>
+                        Вивід - {trx.source}
                       </Button>
                     </Row>
                   ) : (

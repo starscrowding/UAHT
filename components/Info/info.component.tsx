@@ -2,15 +2,7 @@ import Link from 'next/link';
 import {FaInfoCircle} from 'react-icons/fa';
 import {Text, Popover} from '@nextui-org/react';
 
-export const Info = ({
-  text,
-  link,
-  className,
-}: {
-  text?: string;
-  link?: string;
-  className?: string;
-}) => {
+export const Info = ({text, link, className}: {text?: any; link?: string; className?: string}) => {
   return text ? (
     <Popover placement="top">
       <Popover.Trigger>

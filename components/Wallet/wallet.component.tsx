@@ -3,6 +3,7 @@ import {Card, Row, Text, Button, Collapse, Switch} from '@nextui-org/react';
 import {useConnectedMetaMask} from 'metamask-react';
 import classNames from 'classnames';
 import {ADDRESS} from '@space/hooks/api';
+import {Info} from '@space/components/Info';
 import {POLYGON_ID} from '../Metamask';
 import {MINIMUM} from './constants';
 import {useInit, useAddToken, useSign, useValidateCode, useValidateId} from './hooks';
@@ -108,6 +109,22 @@ export const Wallet = () => {
             <a onClick={() => setFiat(true)} className={classNames({[styles.underline]: fiat})}>
               Фіат
             </a>
+          </Row>
+          <Row justify="flex-end" align="center">
+            <Text small color="grey">
+              партнерський пул: freelook
+            </Text>
+            <Info
+              className={styles.partner}
+              text={
+                <>
+                  З приводу партнерства звертайся до спільноти{' '}
+                  <a href="https://t.me/uaht_group" target="_blank" rel="noreferrer">
+                    @uaht_group
+                  </a>
+                </>
+              }
+            />
           </Row>
           {fiat ? (
             <Fiat

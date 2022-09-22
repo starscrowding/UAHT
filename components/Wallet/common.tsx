@@ -1,5 +1,5 @@
 import {ReactElement} from 'react';
-import {Card, Row, Button} from '@nextui-org/react';
+import {Card, Row, Button, Container} from '@nextui-org/react';
 import {FaTelegramPlane} from 'react-icons/fa';
 import {TELEGRAM} from '@space/hooks/api';
 import {POLYGON} from '../Metamask';
@@ -52,14 +52,16 @@ export const RequestButton = ({disabled}: {disabled?: boolean}) => (
 export const Empty = ({MM}: any) => {
   return (
     <Card className={styles.wallet}>
-      <Row className={styles.row} justify="flex-start" align="center" wrap="wrap">
-        Для користування треба активація мережі Polygon
-      </Row>
-      <Row className={styles.row} justify="flex-start" align="center" wrap="wrap">
-        <Button className={styles.button} size="sm" auto onClick={() => MM.addChain(POLYGON)}>
-          Додати Polygon
-        </Button>
-      </Row>
+      <Container>
+        <Row className={styles.row} justify="flex-start" align="center" wrap="wrap">
+          Для користування треба активація мережі Polygon
+        </Row>
+        <Row className={styles.row} justify="flex-start" align="center" wrap="wrap">
+          <Button className={styles.button} size="sm" auto onClick={() => MM.addChain(POLYGON)}>
+            Додати Polygon
+          </Button>
+        </Row>
+      </Container>
     </Card>
   );
 };

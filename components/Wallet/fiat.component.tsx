@@ -57,7 +57,7 @@ export const Fiat = ({
                 <Info className={styles.ml1} link={PROVIDERS[provider]?.help} />
               </>
             ) : (
-              <div className={styles.ml1}>...</div>
+              <div className={styles.ml1}>👆</div>
             )}
           </Row>
           <Row>
@@ -65,11 +65,15 @@ export const Fiat = ({
             <Address className={styles.ml1} account={`ПФД ${MM.account}`} />
             <Info className={styles.ml1} text="Поворотна фінансова допомога безвідсоткова" />
           </Row>
+          <Row align="center" className={styles.mt05}>
+            <RequestButton disabled={!provider} />
+            {provider ? <Info text="Повідом про переказ 🤝" className={styles.ml1} /> : null}
+          </Row>
         </div>
       }
       O={
         <div>
-          <Row className={styles.row}>
+          <Row className={styles.mv1} align="center">
             <Input
               underlined
               color="secondary"
@@ -115,7 +119,7 @@ export const Fiat = ({
               Підписати
             </Button>
           </Row>
-          <Row align="center">
+          <Row align="center" className={styles.mt05}>
             <RequestButton disabled={!provider || !signature} />
             {provider && signature ? (
               <>

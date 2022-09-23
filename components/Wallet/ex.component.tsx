@@ -49,7 +49,7 @@ export const Ex = ({
       }
       I={
         <div>
-          <Row className={styles.row} align="center">
+          <Row className={styles.mv1} align="center">
             <Input
               underlined
               disabled={!resource}
@@ -61,7 +61,7 @@ export const Ex = ({
             />
             <Info link={RESOURCES[resource]?.help} className={styles.ml1} />
           </Row>
-          <Row align="center">
+          <Row align="center" className={styles.mt05}>
             <RequestButton disabled={!resource || !code} />
             {resource && code ? (
               <>
@@ -87,7 +87,7 @@ export const Ex = ({
       }
       O={
         <div>
-          <Row className={styles.row}>
+          <Row className={styles.mv1} align="center">
             <Input
               underlined
               color="secondary"
@@ -123,7 +123,7 @@ export const Ex = ({
               Підписати
             </Button>
           </Row>
-          <Row align="center">
+          <Row align="center" className={styles.mt05}>
             <RequestButton disabled={!resource || !signature} />
             {resource && signature ? (
               <>

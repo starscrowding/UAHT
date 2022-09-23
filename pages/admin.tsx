@@ -74,7 +74,7 @@ const Admin: NextPage = () => {
 
   return (
     <Container>
-      <Row>
+      <Row className={styles.mv1}>
         <a href={RESERVE_URL} target="_blank" rel="noreferrer">
           Резерв
         </a>

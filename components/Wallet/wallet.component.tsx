@@ -60,7 +60,7 @@ export const Wallet = () => {
           </div>
         </Row>
         <Collapse
-          expanded
+          expanded={false}
           title={<div className={styles.name}>Баланс:</div>}
           subtitle={
             <Text
@@ -72,7 +72,7 @@ export const Wallet = () => {
             </Text>
           }
         >
-          <Row className={styles.row} justify="flex-start" align="center" wrap="wrap">
+          <Row className={styles.row} justify="space-between" align="center" wrap="wrap">
             <Button.Group color="gradient" ghost>
               {[
                 {name: 'Ввід', act: 'input'},
@@ -92,6 +92,29 @@ export const Wallet = () => {
                 </Button>
               ))}
             </Button.Group>
+            <div className={classNames(styles.flex, styles.ac)}>
+              <Text small color="grey">
+                партнерський пул:
+                <select className={styles.partner} name="partner">
+                  {['freelook'].map(p => (
+                    <option key={p} value={p}>
+                      {p}
+                    </option>
+                  ))}
+                </select>
+              </Text>
+              <Info
+                className={styles.partner}
+                text={
+                  <>
+                    З приводу партнерства звертайся до спільноти{' '}
+                    <a href="https://t.me/uaht_group" target="_blank" rel="noreferrer">
+                      @uaht_group
+                    </a>
+                  </>
+                }
+              />
+            </div>
           </Row>
           <Row className={styles.mv1} justify="flex-start" align="center" wrap="wrap">
             <a onClick={() => setFiat(false)} className={classNames({[styles.underline]: !fiat})}>
@@ -109,22 +132,6 @@ export const Wallet = () => {
             <a onClick={() => setFiat(true)} className={classNames({[styles.underline]: fiat})}>
               Фіат
             </a>
-          </Row>
-          <Row justify="flex-end" align="center">
-            <Text small color="grey">
-              партнерський пул: freelook
-            </Text>
-            <Info
-              className={styles.partner}
-              text={
-                <>
-                  З приводу партнерства звертайся до спільноти{' '}
-                  <a href="https://t.me/uaht_group" target="_blank" rel="noreferrer">
-                    @uaht_group
-                  </a>
-                </>
-              }
-            />
           </Row>
           {fiat ? (
             <Fiat
@@ -169,7 +176,7 @@ export const Wallet = () => {
           )}
         </Collapse>
         <Collapse
-          expanded
+          expanded={true}
           title={<div className={styles.name}>Адреса токена:</div>}
           subtitle={
             <div className={styles.address}>

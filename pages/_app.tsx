@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import type {AppProps} from 'next/app';
 import {createTheme, NextUIProvider} from '@nextui-org/react';
 import {ThemeProvider as NextThemesProvider} from 'next-themes';
@@ -20,15 +19,15 @@ const darkTheme = createTheme({
 
 function SpaceApp({ Component, pageProps }: AppProps) {
 
-  const onLoad = useCallback(() => {
+  const onLoad = () => {
     const w = window as any;
     w.dataLayer = w.dataLayer || [];
-    const gtag = (...args:any) => {
-      w.dataLayer.push(...args);
+    function gtag(...args:any) {
+      w.dataLayer.push(arguments);
     }
     gtag('js', new Date());
     gtag('config', 'G-2LWYCR888X');
-  }, []);
+  };
 
   return (
     <NextThemesProvider

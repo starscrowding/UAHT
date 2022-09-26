@@ -24,7 +24,7 @@ function SpaceApp({ Component, pageProps }: AppProps) {
     const w = window as any;
     w.dataLayer = w.dataLayer || [];
     const gtag = (...args:any) => {
-      w.dataLayer.push(args);
+      w.dataLayer.push(...args);
     }
     gtag('js', new Date());
     gtag('config', 'G-2LWYCR888X');

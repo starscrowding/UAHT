@@ -2,7 +2,7 @@ import {useCallback, useState, useMemo} from 'react';
 import {Card, Row, Text, Button, Collapse, Switch} from '@nextui-org/react';
 import {useConnectedMetaMask} from 'metamask-react';
 import classNames from 'classnames';
-import {ADDRESS, DAO} from '@space/hooks/api';
+import {ADDRESS, DAO, TOKEN_LIST} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
 import {POLYGON_ID} from '../Metamask';
 import {MINIMUM} from './constants';
@@ -18,6 +18,7 @@ export const Wallet = () => {
   const [priority] = useState(0);
   const [action, setAction] = useState('input');
   const [balance, setBalance] = useState(0);
+  const [matic, setMatic] = useState();
   const [reserve, setReserve] = useState();
   const [amount, setAmount] = useState<number | string>(MINIMUM);
   const [resource, setResource] = useState('');
@@ -44,7 +45,7 @@ export const Wallet = () => {
     setSignature('');
   }, [setSignature]);
 
-  useInit({resource, setCode, setId, provider, setBalance, setReserve, MM});
+  useInit({resource, setCode, setId, provider, setBalance, setMatic, setReserve, MM});
 
   if (MM.chainId !== POLYGON_ID) {
     return <Empty {...{MM}} />;
@@ -61,7 +62,28 @@ export const Wallet = () => {
         </Row>
         <Collapse
           expanded={false}
-          title={<div className={styles.name}>Баланс:</div>}
+          title={
+            <Row justify="space-between" align="center" wrap="wrap">
+              <div className={styles.name}>Баланс:</div>
+              {matic !== undefined ? (
+                <div>
+                  <Text
+                    color={matic > 0 ? 'success' : 'error'}
+                    small
+                    title="Додати MATIC для переказів"
+                    className={classNames(styles.pointer, styles.mr1)}
+                    onClick={e => {
+                      e?.preventDefault();
+                      e?.stopPropagation();
+                      window.open('https://wallet.polygon.technology/gas-swap/', '_blank');
+                    }}
+                  >
+                    газ: {matic} +
+                  </Text>
+                </div>
+              ) : null}
+            </Row>
+          }
           subtitle={
             <Text
               css={{
@@ -193,6 +215,16 @@ export const Wallet = () => {
           <Row className={styles.row} justify="flex-start" align="center" wrap="wrap">
             <Button className={styles.button} size="sm" auto onClick={() => addToken()}>
               Додати в Metamask
+            </Button>
+            <Button
+              className={styles.button}
+              size="sm"
+              auto
+              onClick={() => {
+                window.open(`https://tokenlists.org/token-list?url=${TOKEN_LIST}`, '_blank');
+              }}
+            >
+              Токен List
             </Button>
             <Button
               className={styles.button}

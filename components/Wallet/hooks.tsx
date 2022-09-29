@@ -2,9 +2,19 @@ import {useEffect, useCallback} from 'react';
 import {ethers} from 'ethers';
 import UAHT_ABI from '@space/contracts/UAHT.abi.json';
 import {api, ADDRESS, RESERVE} from '@space/hooks/api';
+import {precision} from './helpers';
 import {PROVIDERS, RESOURCES, MIN_CODE_LENGTH} from './constants';
 
-export const useInit = ({resource, setCode, setId, provider, setBalance, setReserve, MM}: any) => {
+export const useInit = ({
+  resource,
+  setCode,
+  setId,
+  provider,
+  setBalance,
+  setMatic,
+  setReserve,
+  MM,
+}: any) => {
   useEffect(() => {
     setCode('');
   }, [resource, setCode]);
@@ -18,8 +28,12 @@ export const useInit = ({resource, setCode, setId, provider, setBalance, setRese
       const web3Provider = new ethers.providers.Web3Provider(MM.ethereum);
       const uaht = new ethers.Contract(ADDRESS, UAHT_ABI, web3Provider);
       try {
-        const balance = await uaht.balanceOf(MM.account);
-        setBalance(balance?.toNumber() / 100);
+        const [balance, gas] = await Promise.all([
+          uaht.balanceOf(MM.account),
+          web3Provider.getBalance(MM.account),
+        ]);
+        setBalance(ethers.utils.formatUnits(balance, 2));
+        setMatic(precision(ethers.utils.formatEther(gas), 3));
       } catch (e) {
         console.log(e);
       }

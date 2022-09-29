@@ -18,7 +18,15 @@ export const POLYGON = {
   blockExplorerUrls: ['https://polygonscan.com'],
 };
 
-export const Address = ({account = '', className}: {account: string; className?: string}) => {
+export const Address = ({
+  account = '',
+  className,
+  name,
+}: {
+  account: string;
+  className?: string;
+  name?: string;
+}) => {
   const [state, setState] = useState('ready');
   return (
     <a
@@ -33,7 +41,7 @@ export const Address = ({account = '', className}: {account: string; className?:
       }}
     >
       {state === 'done' ? <FaCheck /> : <FaCopy />}{' '}
-      {`${account?.slice(0, 4)}...${account?.slice(-4)}`}
+      {name || `${account?.slice(0, 4)}...${account?.slice(-4)}`}
     </a>
   );
 };

@@ -1,3 +1,8 @@
+export const precision = (number: string | number, precision: number) => {
+  const factor = Math.pow(10, precision);
+  return Math.round(Number(number) * factor) / factor;
+};
+
 export const getStamp = () => {
   return Date.now().toString();
 };

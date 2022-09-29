@@ -1,0 +1,16 @@
+{
+  "name": "uaht.io",
+  "timestamp": "2022-09-29T08:41:12.278Z",
+  "version": {"major": 1, "minor": 0, "patch": 0},
+  "tokens": [
+    {
+      "chainId": 137,
+      "address": "0x0D9447E16072b636b4a1E8f2b8C644e58F3eaA6A",
+      "name": "uaht.io",
+      "decimals": 2,
+      "symbol": "UAHT",
+      "logoURI": "https://uaht.io/icon.png"
+    }
+  ],
+  "logoURI": "https://uaht.io/icon.png"
+}

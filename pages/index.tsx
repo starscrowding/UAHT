@@ -2,12 +2,13 @@ import {NextPage} from 'next';
 import Head from 'next/head';
 import {Container, Row, Col, Text, Loading} from '@nextui-org/react';
 import {useMetaMask} from 'metamask-react';
-import {BASE, CONTRACT, CODE, DAO} from '@space/hooks/api';
+import {BASE, CONTRACT} from '@space/hooks/api';
 import {Logo} from '@space/components/Logo';
 import {Presentation} from '@space/components/Presentation';
 import {MetamaskStatus} from '@space/components/Metamask';
 import {Wallet} from '@space/components/Wallet';
 import {Info} from '@space/components/Info';
+import {Footer} from '@space/components/Footer';
 import styles from '../styles/home.module.scss';
 
 const Home: NextPage = () => {
@@ -49,18 +50,7 @@ const Home: NextPage = () => {
               )}
             </section>
           </main>
-          <footer className={styles.footer}>
-            <Row justify="center" align="center">
-              <a href={DAO} target="_blank" rel="noreferrer" title="DAO">
-                <Text color="$gray500">@uaht_group</Text>
-              </a>
-            </Row>
-            <Row justify="center" align="center" className={styles.mt05}>
-              <a href={`${CODE}#readme`} target="_blank" rel="noreferrer" title="Статут - Воля 1.0">
-                🔱
-              </a>
-            </Row>
-          </footer>
+          <Footer />
         </Col>
       </Container>
     </>

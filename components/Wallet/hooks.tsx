@@ -55,7 +55,7 @@ export const useInit = ({
     };
     balanceOf();
     reserveOf();
-  }, [MM, setBalance, setReserve]);
+  }, [MM, setBalance, setReserve, setMatic]);
 };
 
 export const useAddToken = ({MM}: any) => async () => {

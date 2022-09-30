@@ -8,7 +8,10 @@ export const Footer = () => {
   useEffect(() => {
     const w = window as any;
     w.googLangInit = () => {
-      new w.google.translate.TranslateElement({pageLanguage: 'uk'}, 'goog_lang_el');
+      new w.google.translate.TranslateElement(
+        {pageLanguage: 'uk', autoDisplay: false},
+        'goog_lang_el'
+      );
     };
   }, []);
 

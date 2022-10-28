@@ -31,9 +31,11 @@ export const Address = ({
   return (
     <a
       className={classNames(styles.copy, className)}
-      onClick={() => {
+      onClick={async () => {
         try {
-          navigator?.clipboard?.writeText(account);
+          await navigator.clipboard.writeText(account);
+        } catch (e) {
+          prompt('Копіювати:', account);
         } finally {
           setState('done');
           setTimeout(() => setState('ready'), 1234);

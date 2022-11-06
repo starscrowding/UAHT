@@ -62,8 +62,8 @@ export const Fiat = ({
           </Row>
           <Row>
             <span>Призначення:</span>
-            <Address className={styles.ml1} account={`ПФД ${MM.account}`} />
-            <Info className={styles.ml1} text="Поворотна фінансова допомога безвідсоткова" />
+            <Address className={styles.ml1} account={`${MM.account}`} />
+            <Info className={styles.ml1} text="Статутний внесок" />
           </Row>
           <Row align="center" className={styles.mt05}>
             <RequestButton disabled={!provider} />

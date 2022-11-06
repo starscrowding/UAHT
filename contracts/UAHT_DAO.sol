@@ -42,7 +42,7 @@ contract UAHT_DAO { // спільнота @uaht_group
     }
 
     function assign(address operator, uint256 stake) public moderable {
-        operators[operator] = stake;
+        operators[operator] = stake; // proof of stake + authority
     }
 
     function propose(uint256 id) public usable { // id повідомлення @uaht_group

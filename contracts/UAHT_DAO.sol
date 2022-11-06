@@ -5,7 +5,7 @@ import "./UAHT.sol";
 
 contract UAHT_DAO { // спільнота @uaht_group
     address moderator;
-    mapping (address => uint256) operators;
+    mapping (address => uint256) operators; // партнерський пул
 
     address public uaht_contract = 0x0D9447E16072b636b4a1E8f2b8C644e58F3eaA6A;
     mapping (uint256 => uint256) public proposal; // виконання за рейтингом
@@ -41,8 +41,8 @@ contract UAHT_DAO { // спільнота @uaht_group
         UAHT(uaht_contract).output(from, uah); // повернення боргу
     }
 
-    function assign(address operator, uint256 allowance) public moderable {
-        operators[operator] = allowance;
+    function assign(address operator, uint256 stake) public moderable {
+        operators[operator] = stake;
     }
 
     function propose(uint256 id) public usable { // id повідомлення @uaht_group

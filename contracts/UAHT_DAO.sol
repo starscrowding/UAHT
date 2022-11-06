@@ -8,7 +8,7 @@ contract UAHT_DAO { // спільнота @uaht_group
     mapping (address => uint256) operators;
 
     address public uaht_contract = 0x0D9447E16072b636b4a1E8f2b8C644e58F3eaA6A;
-    mapping (uint256 => uint256) public proposal;
+    mapping (uint256 => uint256) public proposal; // виконання за рейтингом
 
     constructor() {
         moderator = msg.sender;

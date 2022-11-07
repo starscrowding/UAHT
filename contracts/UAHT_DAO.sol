@@ -19,7 +19,7 @@ contract UAHT_DAO { // спільнота @uaht_group
         _;
     }
 
-    modifier operable {
+    modifier operable { // KYC + AML
         require(operators[msg.sender] > 0);
         _;
     }

@@ -31,7 +31,7 @@ export const Footer = () => {
         <div id="goog_lang_el" />
         <div className={styles.mt05}>
           <Checkbox
-            defaultSelected={true}
+            isSelected={true}
             size="xs"
             onChange={value => {
               if (!value) {

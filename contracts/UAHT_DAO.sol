@@ -24,7 +24,7 @@ contract UAHT_DAO { // спільнота @uaht_group
         _;
     }
 
-    modifier usable {
+    modifier usable { // GDPR
         require(UAHT(uaht_contract).balanceOf(msg.sender) > 0);
         _;
     }

@@ -2,7 +2,7 @@ import {NextPage} from 'next';
 import Head from 'next/head';
 import {Container, Row, Col, Text, Loading} from '@nextui-org/react';
 import {useMetaMask} from 'metamask-react';
-import {BASE, CONTRACT} from '@space/hooks/api';
+import {BASE, CONTRACT, INFO} from '@space/hooks/api';
 import {Logo} from '@space/components/Logo';
 import {Presentation} from '@space/components/Presentation';
 import {MetamaskStatus} from '@space/components/Metamask';
@@ -39,7 +39,7 @@ const Home: NextPage = () => {
                 <Text h6 size={17} color="white" css={{m: 0}}>
                   токен без меж для вільних людей
                 </Text>
-                <Info link={'https://t.me/uaht_info'} className={styles.ml05} />
+                <Info link={INFO} className={styles.ml05} />
               </Row>
               {MM.status === 'initializing' ? (
                 <Row justify="center" align="center" css={{minHeight: '300px'}}>

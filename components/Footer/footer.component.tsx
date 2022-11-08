@@ -1,7 +1,7 @@
 import {useEffect} from 'react';
 import Script from 'next/script';
-import {Row, Text} from '@nextui-org/react';
-import {CODE, DAO} from '@space/hooks/api';
+import {Row, Text, Checkbox} from '@nextui-org/react';
+import {CODE, DAO, INFO} from '@space/hooks/api';
 import styles from './footer.module.scss';
 
 export const Footer = () => {
@@ -23,12 +23,28 @@ export const Footer = () => {
         </a>
       </Row>
       <Row justify="center" align="center" className={styles.mt05}>
-        <a href={`${CODE}#readme`} target="_blank" rel="noreferrer" title="Статут - Воля 1.0">
+        <p className={styles.pointer} title="веб 3.0 #DeFI">
           🔱
-        </a>
+        </p>
       </Row>
-      <Row justify="flex-start" align="center" className={styles.mt1}>
+      <Row justify="space-between" align="center" wrap="wrap" className={styles.mt1}>
         <div id="goog_lang_el" />
+        <div className={styles.mt05}>
+          <Checkbox
+            defaultSelected={true}
+            size="xs"
+            onChange={value => {
+              if (!value) {
+                window.location.href = INFO;
+              }
+            }}
+          >
+            погоджуюсь з
+            <a href={`${CODE}#readme`} target="_blank" rel="noreferrer" title="Статут - Воля 1.0">
+              &nbsp;правилами
+            </a>
+          </Checkbox>
+        </div>
       </Row>
       <Script src="//translate.google.com/translate_a/element.js?cb=googLangInit&hl=en" />
     </footer>

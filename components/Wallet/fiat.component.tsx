@@ -63,7 +63,7 @@ export const Fiat = ({
           <Row>
             <span>Призначення:</span>
             <Address className={styles.ml1} account={`${MM.account}`} />
-            <Info className={styles.ml1} text="Статутний внесок" />
+            <Info className={styles.ml1} text="Безвідсоткові поворотні кошти" />
           </Row>
           <Row align="center" className={styles.mt05}>
             <RequestButton disabled={!provider} />

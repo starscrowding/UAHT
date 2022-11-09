@@ -29,7 +29,7 @@ export const Footer = () => {
       </Row>
       <Row justify="space-between" align="center" wrap="wrap" className={styles.mt1}>
         <div id="goog_lang_el" />
-        <div className={styles.mt05}>
+        <div className={styles.m05}>
           <Checkbox
             isSelected={true}
             size="xs"

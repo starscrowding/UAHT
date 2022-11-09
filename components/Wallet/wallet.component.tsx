@@ -2,6 +2,7 @@ import {useCallback, useState, useMemo} from 'react';
 import {Card, Row, Text, Button, Collapse, Switch} from '@nextui-org/react';
 import {useConnectedMetaMask} from 'metamask-react';
 import classNames from 'classnames';
+import {GoVerified} from 'react-icons/go';
 import {ADDRESS, DAO, TOKEN_LIST} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
 import {POLYGON_ID} from '../Metamask';
@@ -27,6 +28,7 @@ export const Wallet = () => {
   const [signature, setSignature] = useState('');
   const [fiat, setFiat] = useState(false);
   const [id, setId] = useState('');
+  const [varified, setVerified] = useState(false);
   const stamp = useMemo(() => getStamp(), []);
 
   const addToken = useAddToken({MM});
@@ -45,7 +47,7 @@ export const Wallet = () => {
     setSignature('');
   }, [setSignature]);
 
-  useInit({resource, setCode, setId, provider, setBalance, setMatic, setReserve, MM});
+  useInit({resource, setCode, setId, provider, setBalance, setMatic, setReserve, setVerified, MM});
 
   if (MM.chainId !== POLYGON_ID) {
     return <Empty {...{MM}} />;
@@ -56,9 +58,21 @@ export const Wallet = () => {
       <Collapse.Group accordion={false}>
         <Row className={styles.row} justify="flex-start" align="center" wrap="wrap">
           <div className={styles.name}>Гаманець:</div>
-          <div className={styles.address}>
+          <Row align="center" className={styles.address}>
             <Text>{MM.account}</Text>
-          </div>
+            {varified ? (
+              <GoVerified title="Веріфіковано" color="green" className={styles.ml05} />
+            ) : (
+              <GoVerified
+                color="gray"
+                className={classNames(styles.ml05, styles.pointer)}
+                title="Запит на веріфікацію"
+                onClick={() => {
+                  window.open(DAO, '_blank');
+                }}
+              />
+            )}
+          </Row>
         </Row>
         <Collapse
           expanded={false}

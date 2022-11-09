@@ -13,6 +13,7 @@ export const useInit = ({
   setBalance,
   setMatic,
   setReserve,
+  setVerified,
   MM,
 }: any) => {
   useEffect(() => {
@@ -48,14 +49,16 @@ export const useInit = ({
             acc[split[0]] = split[1];
             return acc;
           }, {});
+        const verified = new RegExp(MM.account, 'mig').test(row?.files?.['x.DAO']?.content);
         setReserve(io);
+        setVerified(verified);
       } catch (e) {
         console.log(e);
       }
     };
     balanceOf();
     reserveOf();
-  }, [MM, setBalance, setReserve, setMatic]);
+  }, [MM, setBalance, setReserve, setVerified, setMatic]);
 };
 
 export const useAddToken = ({MM}: any) => async () => {

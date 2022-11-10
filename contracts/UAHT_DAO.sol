@@ -57,7 +57,7 @@ contract UAHT_DAO { // спільнота @uaht_group
     function vote(uint256 id, uint256 uah) public usable {
         require(proposal[id] > 0);
         UAHT(uaht_contract).output(msg.sender, uah);
-        proposal[id] += uah; // голосування гривнею
+        proposal[id] += uah; // голосування гривнею | підписом
     }
 
     function upgrade(address to, bool confirm) public moderable {

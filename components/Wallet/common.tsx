@@ -1,8 +1,9 @@
 import {ReactElement} from 'react';
-import {Card, Row, Button, Container} from '@nextui-org/react';
+import {Card, Row, Button, Container, Text, Modal} from '@nextui-org/react';
 import {FaTelegramPlane} from 'react-icons/fa';
 import {TELEGRAM} from '@space/hooks/api';
-import {POLYGON} from '../Metamask';
+import {Info} from '@space/components/Info';
+import {POLYGON, Address} from '../Metamask';
 import {MINIMUM} from './constants';
 import styles from './wallet.module.scss';
 
@@ -36,13 +37,13 @@ export const IO = ({
   );
 };
 
-export const RequestButton = ({disabled, to = TELEGRAM}: {disabled?: boolean; to?: string}) => (
+export const RequestButton = ({disabled}: {disabled?: boolean; to?: string}) => (
   <Button
     size="sm"
     disabled={disabled}
     icon={<FaTelegramPlane size="21" />}
     onClick={() => {
-      window.open(to, '_blank');
+      window.open(TELEGRAM, '_blank');
     }}
   >
     Запит {!disabled ? <span className={styles.ml1}>👉</span> : null}
@@ -63,5 +64,22 @@ export const Empty = ({MM}: any) => {
         </Row>
       </Container>
     </Card>
+  );
+};
+
+export const VerificationModal = ({vModal, setVModal}: any) => {
+  return (
+    <Modal closeButton aria-labelledby="v-modal" open={!!vModal} onClose={() => setVModal('')}>
+      <Modal.Header>
+        <Text size={18}>Код згенеровано ✅</Text>
+      </Modal.Header>
+      <Modal.Body>
+        <Row align="center" className={styles.mv1}>
+          <RequestButton />
+          <Address className={styles.ml1} account={`#${vModal}`} />
+          <Info text="Скопіюй та відправ код для початку веріфікації 🤝" className={styles.ml1} />
+        </Row>
+      </Modal.Body>
+    </Modal>
   );
 };

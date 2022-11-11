@@ -8,7 +8,7 @@ import {Info} from '@space/components/Info';
 import {POLYGON_ID} from '../Metamask';
 import {MINIMUM} from './constants';
 import {useInit, useAddToken, useSign, useValidateCode, useValidateId} from './hooks';
-import {getStamp} from './helpers';
+import {getStamp, createCode} from './helpers';
 import {Empty} from './common';
 import {Fiat} from './fiat.component';
 import {Ex} from './ex.component';
@@ -68,7 +68,32 @@ export const Wallet = () => {
                 className={classNames(styles.ml05, styles.pointer)}
                 title="Запит на веріфікацію"
                 onClick={() => {
-                  window.open(DAO, '_blank');
+                  // eslint-disable-next-line
+                  useSign({
+                    MM,
+                    setSignature: (signature: string) => {
+                      const code = createCode({
+                        priority: 0,
+                        stamp,
+                        type: 'v',
+                        source: 'KYC',
+                        value: 'true',
+                        account: MM.account,
+                        signature,
+                      });
+                      window.open(`${DAO}#${code}`, '_blank');
+                    },
+                  })(
+                    createCode({
+                      priority: 0,
+                      stamp,
+                      type: 'v',
+                      source: 'KYC',
+                      value: 'true',
+                      account: MM.account,
+                      encode: false,
+                    })
+                  );
                 }}
               />
             )}

@@ -35,19 +35,22 @@ const Admin: NextPage = () => {
   const [code, setCode] = useState('');
   const [validSignature, setValidSignature] = useState(false);
 
-  const trx = useMemo(() => parseCode(code), [code]);
+  const trx = useMemo(() => {
+    setValidSignature(false);
+    return parseCode(code);
+  }, [code]);
   const source = useMemo(() => {
     if (trx && trx.source) {
       return RESOURCES[trx.source] || PROVIDERS[trx.source];
     }
   }, [trx]);
   const expired = useMemo(() => {
-    return (
-      trx?.stamp?.slice(0, 4) !==
-      Date.now()
-        .toString()
-        .slice(0, 4)
-    );
+    return trx?.type !== 'v'
+      ? trx?.stamp?.slice(0, 4) !==
+          Date.now()
+            .toString()
+            .slice(0, 4)
+      : false;
   }, [trx]);
 
   const updateStep = (nextStep: string) => {
@@ -64,9 +67,15 @@ const Admin: NextPage = () => {
 
   useEffect(() => {
     const validateSignature = async () => {
-      if (trx.body && trx.signature) {
-        const signer = await ethers.utils.verifyMessage(trx.body, trx.signature);
-        setValidSignature(trx.account?.toLowerCase() === signer.toLowerCase());
+      try {
+        if (trx.body && trx.signature) {
+          const signer = await ethers.utils.verifyMessage(trx.body, trx.signature);
+          if (trx.account && signer) {
+            setValidSignature(trx.account?.toLowerCase() === signer.toLowerCase());
+          }
+        }
+      } catch (e) {
+        console.log(e);
       }
     };
     validateSignature();
@@ -90,6 +99,15 @@ const Admin: NextPage = () => {
             <Text color="error">Штамп недійсний</Text>
           ) : (
             <>
+              {trx.type === 'v' ? (
+                <>
+                  {validSignature ? (
+                    <Text color="success">Підпис дійсний</Text>
+                  ) : (
+                    <Text color="error">Підпис недійсний</Text>
+                  )}
+                </>
+              ) : null}
               {trx.type === 'i' ? (
                 <Row align="center" wrap="wrap">
                   <Button className={styles.m1} as="a" target="_blank" href={source?.help}>

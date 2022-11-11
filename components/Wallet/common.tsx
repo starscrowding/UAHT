@@ -36,13 +36,13 @@ export const IO = ({
   );
 };
 
-export const RequestButton = ({disabled}: {disabled?: boolean}) => (
+export const RequestButton = ({disabled, to = TELEGRAM}: {disabled?: boolean; to?: string}) => (
   <Button
     size="sm"
     disabled={disabled}
     icon={<FaTelegramPlane size="21" />}
     onClick={() => {
-      window.open(TELEGRAM, '_blank');
+      window.open(to, '_blank');
     }}
   >
     Запит {!disabled ? <span className={styles.ml1}>👉</span> : null}

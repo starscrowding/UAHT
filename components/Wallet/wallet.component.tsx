@@ -1,15 +1,15 @@
 import {useCallback, useState, useMemo} from 'react';
-import {Card, Row, Text, Button, Collapse, Switch} from '@nextui-org/react';
+import {Card, Row, Text, Button, Collapse, Switch, Modal} from '@nextui-org/react';
 import {useConnectedMetaMask} from 'metamask-react';
 import classNames from 'classnames';
 import {GoVerified} from 'react-icons/go';
 import {ADDRESS, DAO, TOKEN_LIST} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
-import {POLYGON_ID} from '../Metamask';
+import {POLYGON_ID, Address} from '../Metamask';
 import {MINIMUM} from './constants';
 import {useInit, useAddToken, useSign, useValidateCode, useValidateId} from './hooks';
 import {getStamp, createCode} from './helpers';
-import {Empty} from './common';
+import {Empty, RequestButton} from './common';
 import {Fiat} from './fiat.component';
 import {Ex} from './ex.component';
 import styles from './wallet.module.scss';
@@ -29,6 +29,7 @@ export const Wallet = () => {
   const [fiat, setFiat] = useState(false);
   const [id, setId] = useState('');
   const [varified, setVerified] = useState(false);
+  const [vModal, setVModal] = useState('');
   const stamp = useMemo(() => getStamp(), []);
 
   const addToken = useAddToken({MM});
@@ -81,7 +82,7 @@ export const Wallet = () => {
                         account: MM.account,
                         signature,
                       });
-                      window.open(`${DAO}#${code}`, '_blank');
+                      setVModal(code);
                     },
                   })(
                     createCode({
@@ -97,6 +98,26 @@ export const Wallet = () => {
                 }}
               />
             )}
+            <Modal
+              closeButton
+              aria-labelledby="v-modal"
+              open={!!vModal}
+              onClose={() => setVModal('')}
+            >
+              <Modal.Header>
+                <Text size={18}>Код згенеровано ✅</Text>
+              </Modal.Header>
+              <Modal.Body>
+                <Row align="center" className={styles.mv1}>
+                  <RequestButton to={DAO} />
+                  <Address className={styles.ml1} account={`#${vModal}`} />
+                  <Info
+                    text="Скопіюй та відправ код для початку веріфікації 🤝"
+                    className={styles.ml1}
+                  />
+                </Row>
+              </Modal.Body>
+            </Modal>
           </Row>
         </Row>
         <Collapse

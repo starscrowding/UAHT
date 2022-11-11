@@ -90,7 +90,13 @@ const Admin: NextPage = () => {
       </Row>
       <Spacer />
       <Card>
-        <Input placeholder="Код" onChange={e => setCode(e?.target?.value)} />
+        <Input
+          placeholder="Код"
+          onChange={e => {
+            const codeValue = e?.target?.value || '';
+            setCode(codeValue.startsWith('#') ? codeValue.slice(1) : codeValue);
+          }}
+        />
       </Card>
       {code && trx ? (
         <div>

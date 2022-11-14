@@ -1,4 +1,4 @@
-import {Row, Button, Input, Radio} from '@nextui-org/react';
+import {Row, Button, Input, Radio, Text} from '@nextui-org/react';
 import {Info} from '@space/components/Info';
 import {Address} from '../Metamask';
 import {PROVIDERS} from './constants';
@@ -140,6 +140,11 @@ export const Fiat = ({
               </>
             ) : null}
           </Row>
+          <div>
+            <Text small color="grey">
+              💸 Обробка по черзі за наявністю обраного резерву
+            </Text>
+          </div>
         </div>
       }
     />

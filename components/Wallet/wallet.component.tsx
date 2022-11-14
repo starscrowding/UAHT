@@ -1,5 +1,6 @@
 import {useCallback, useState, useMemo} from 'react';
 import {Card, Row, Text, Button, Collapse, Switch} from '@nextui-org/react';
+import Image from 'next/image';
 import {useConnectedMetaMask} from 'metamask-react';
 import classNames from 'classnames';
 import {GoVerified} from 'react-icons/go';
@@ -12,6 +13,7 @@ import {getStamp, createCode} from './helpers';
 import {Empty, VerificationModal} from './common';
 import {Fiat} from './fiat.component';
 import {Ex} from './ex.component';
+import {Trade} from './trade.component';
 import styles from './wallet.module.scss';
 
 export const Wallet = () => {
@@ -58,7 +60,7 @@ export const Wallet = () => {
     <Card className={styles.wallet}>
       <Collapse.Group accordion={false}>
         <Row className={styles.row} justify="flex-start" align="center" wrap="wrap">
-          <div className={styles.name}>Гаманець:</div>
+          <div className={styles.name}>💳 Гаманець:</div>
           <Row align="center" className={styles.address}>
             <Text>{MM.account}</Text>
             {varified ? (
@@ -239,8 +241,33 @@ export const Wallet = () => {
           )}
         </Collapse>
         <Collapse
+          expanded={false}
+          title={<div className={styles.name}>💰 Обмін / Торги</div>}
+          subtitle={
+            <Row className={styles.address}>
+              {['MATIC', 'USDT', 'BTC', 'ETH', 'UAH'].map(pair => (
+                <Text
+                  key={pair}
+                  className={styles.pl05}
+                  css={{
+                    textGradient: '45deg, $red600 25%, $green600 75%',
+                  }}
+                >
+                  {pair}
+                </Text>
+              ))}
+            </Row>
+          }
+        >
+          <Trade />
+        </Collapse>
+        <Collapse
           expanded={true}
-          title={<div className={styles.name}>Адреса токена:</div>}
+          title={
+            <div className={styles.name}>
+              <Image src="/icon.png" width="15" height="15" alt="токен" /> Адреса токена:
+            </div>
+          }
           subtitle={
             <div className={styles.address}>
               <Text
@@ -266,17 +293,6 @@ export const Wallet = () => {
               }}
             >
               Токен List
-            </Button>
-            <Button
-              className={styles.button}
-              size="sm"
-              color="gradient"
-              auto
-              onClick={() => {
-                window.open('https://app.uniswap.org/#/swap?chain=polygon', '_blank');
-              }}
-            >
-              Обміняти на Uniswap
             </Button>
           </Row>
         </Collapse>

@@ -77,7 +77,7 @@ export const VerificationModal = ({vModal, setVModal}: any) => {
         <Row align="center" className={styles.mv1}>
           <RequestButton />
           <Address className={styles.ml1} account={`#${vModal}`} />
-          <Info text="Скопіюй та відправ код для початку веріфікації 🤝" className={styles.ml1} />
+          <Info text="Скопіюй та відправ код для початку верифікації 🤝" className={styles.ml1} />
         </Row>
       </Modal.Body>
     </Modal>

@@ -4,7 +4,7 @@ import Image from 'next/image';
 import {useConnectedMetaMask} from 'metamask-react';
 import classNames from 'classnames';
 import {GoVerified} from 'react-icons/go';
-import {ADDRESS, DAO, TOKEN_LIST} from '@space/hooks/api';
+import {ADDRESS, DAO_ADDRESS, DAO, TOKEN_LIST} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
 import {POLYGON_ID} from '../Metamask';
 import {MINIMUM} from './constants';
@@ -14,6 +14,7 @@ import {Empty, VerificationModal} from './common';
 import {Fiat} from './fiat.component';
 import {Ex} from './ex.component';
 import {Trade} from './trade.component';
+import {Dao} from './dao.component';
 import styles from './wallet.module.scss';
 
 export const Wallet = () => {
@@ -64,12 +65,12 @@ export const Wallet = () => {
           <Row align="center" className={styles.address}>
             <Text>{MM.account}</Text>
             {varified ? (
-              <GoVerified title="Веріфіковано" color="green" className={styles.ml05} />
+              <GoVerified title="Верифіковано" color="green" className={styles.ml05} />
             ) : (
               <GoVerified
                 color="gray"
                 className={classNames(styles.ml05, styles.pointer)}
-                title="Запит на веріфікацію"
+                title="Запит на верифікацію"
                 onClick={() => {
                   // eslint-disable-next-line
                   useSign({
@@ -121,7 +122,7 @@ export const Wallet = () => {
                       window.open('https://wallet.polygon.technology/gas-swap/', '_blank');
                     }}
                   >
-                    газ: {matic} +
+                    ⛽ газ: {matic} +
                   </Text>
                 </div>
               ) : null}
@@ -295,6 +296,23 @@ export const Wallet = () => {
               Токен List
             </Button>
           </Row>
+        </Collapse>
+        <Collapse
+          expanded={false}
+          title={<div className={styles.name}>✨ Спільнота DAO:</div>}
+          subtitle={
+            <div className={styles.address}>
+              <Text
+                css={{
+                  textGradient: '45deg, grey 10%, white 50%',
+                }}
+              >
+                {DAO_ADDRESS}
+              </Text>
+            </div>
+          }
+        >
+          <Dao />
         </Collapse>
       </Collapse.Group>
     </Card>

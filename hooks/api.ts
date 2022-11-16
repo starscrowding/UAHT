@@ -1,6 +1,8 @@
 export const BASE = 'https://uaht.io';
 export const ADDRESS = '0x0d9447e16072b636b4a1e8f2b8c644e58f3eaa6a';
+export const DAO_ADDRESS = '0xa3b597358724D07d562615ce2AC8f85a38777257';
 export const CONTRACT = `https://polygonscan.com/token/${ADDRESS}`;
+export const DAO_CONTRACT = `https://polygonscan.com/address/${DAO_ADDRESS}`;
 export const CODE = 'https://github.com/starscrowding/UAHT';
 export const TELEGRAM = 'https://t.me/uaht_io';
 export const GIST = '1fa1723a6df32a9ca42c7f3cfbc4a5e7';

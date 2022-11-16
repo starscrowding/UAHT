@@ -109,7 +109,7 @@ export const Dao = () => {
       </Row>
       {signature && (
         <Row className={styles.row} justify="flex-start" align="center" wrap="wrap">
-          <Address account={signature} />
+          <Address account={`${signature}.${MM.account}`} />
         </Row>
       )}
     </div>

@@ -119,7 +119,10 @@ export const Wallet = () => {
                     onClick={e => {
                       e?.preventDefault();
                       e?.stopPropagation();
-                      window.open('https://wallet.polygon.technology/gas-swap/', '_blank');
+                      window.open(
+                        'https://wallet-beta.polygon.technology/polygon/gas-swap',
+                        '_blank'
+                      );
                     }}
                   >
                     ⛽ газ: {matic} +

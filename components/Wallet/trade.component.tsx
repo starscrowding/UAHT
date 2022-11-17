@@ -21,7 +21,7 @@ export const Trade = () => {
         auto
         onClick={() => {
           window.open(
-            `https://app.ws.exchange/eth/swap?chainId=137&inputCurrency=${ADDRESS}`,
+            `https://app.ws.exchange/ua/eth/swap?chainId=137&inputCurrency=${ADDRESS}`,
             '_blank'
           );
         }}
@@ -34,7 +34,10 @@ export const Trade = () => {
         color="gradient"
         auto
         onClick={() => {
-          window.open(`https://app.uniswap.org/#/tokens/polygon/${ADDRESS}`, '_blank');
+          window.open(
+            `https://app.uniswap.org/#/tokens/polygon/${ADDRESS}?chain=polygon&lng=uk-UA`,
+            '_blank'
+          );
         }}
       >
         Uniswap

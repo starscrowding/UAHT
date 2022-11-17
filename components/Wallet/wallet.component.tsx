@@ -4,16 +4,17 @@ import Image from 'next/image';
 import {useConnectedMetaMask} from 'metamask-react';
 import classNames from 'classnames';
 import {GoVerified} from 'react-icons/go';
-import {ADDRESS, DAO_ADDRESS, DAO, TOKEN_LIST} from '@space/hooks/api';
+import {ADDRESS, DAO_ADDRESS, DAO} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
 import {POLYGON_ID} from '../Metamask';
 import {MINIMUM} from './constants';
-import {useInit, useAddToken, useSign, useValidateCode, useValidateId} from './hooks';
+import {useInit, useSign, useValidateCode, useValidateId} from './hooks';
 import {getStamp, createCode} from './helpers';
 import {Empty, VerificationModal} from './common';
 import {Fiat} from './fiat.component';
 import {Ex} from './ex.component';
 import {Trade} from './trade.component';
+import {Token} from './token.component';
 import {Dao} from './dao.component';
 import styles from './wallet.module.scss';
 
@@ -35,7 +36,6 @@ export const Wallet = () => {
   const [vModal, setVModal] = useState('');
   const stamp = useMemo(() => getStamp(), []);
 
-  const addToken = useAddToken({MM});
   const sign = useSign({MM, setSignature});
   const validateCode = useValidateCode({resource, setCode});
   const validateId = useValidateId({provider, setId});
@@ -284,21 +284,7 @@ export const Wallet = () => {
             </div>
           }
         >
-          <Row className={styles.row} justify="flex-start" align="center" wrap="wrap">
-            <Button className={styles.button} size="sm" auto onClick={() => addToken()}>
-              Додати в Metamask
-            </Button>
-            <Button
-              className={styles.button}
-              size="sm"
-              auto
-              onClick={() => {
-                window.open(`https://tokenlists.org/token-list?url=${TOKEN_LIST}`, '_blank');
-              }}
-            >
-              Токен List
-            </Button>
-          </Row>
+          <Token />
         </Collapse>
         <Collapse
           expanded={false}

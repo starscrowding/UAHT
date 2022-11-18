@@ -32,7 +32,9 @@ export const Token = () => {
         color="gradient"
         auto
         title="Провайдер ліквідності"
-        onClick={() => setShowModal(true)}
+        onClick={() => {
+          setTimeout(() => setShowModal(true), 123);
+        }}
       >
         Стейкінг 🌱
       </Button>

@@ -9,6 +9,7 @@ export const GIST = '1fa1723a6df32a9ca42c7f3cfbc4a5e7';
 export const RESERVE = `https://api.github.com/gists/${GIST}`;
 export const RESERVE_URL = `https://gist.github.com/starscrowding/${GIST}`;
 export const INFO = `https://t.me/uaht_info`;
+export const FAQ = `${CODE}/blob/dev/FAQ.md`;
 export const DAO = 'https://t.me/uaht_group';
 export const TOKEN_LIST = `${BASE}/tokenlist.json`;
 export const ENDPOINT = {

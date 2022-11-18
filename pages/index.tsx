@@ -2,7 +2,8 @@ import {NextPage} from 'next';
 import Head from 'next/head';
 import {Container, Row, Col, Text, Loading} from '@nextui-org/react';
 import {useMetaMask} from 'metamask-react';
-import {BASE, CONTRACT, INFO} from '@space/hooks/api';
+import {FaRegQuestionCircle} from 'react-icons/fa';
+import {BASE, CONTRACT, INFO, FAQ} from '@space/hooks/api';
 import {Logo} from '@space/components/Logo';
 import {Presentation} from '@space/components/Presentation';
 import {MetamaskStatus} from '@space/components/Metamask';
@@ -34,6 +35,15 @@ const Home: NextPage = () => {
               </Row>
               <Row justify="center" align="center">
                 <Logo href={CONTRACT} target="_blank" />
+                <a
+                  className={styles.ml05}
+                  href={FAQ}
+                  target="_blank"
+                  rel="noreferrer"
+                  title="Часті питання | FAQ"
+                >
+                  <FaRegQuestionCircle color="white" size={18} />
+                </a>
               </Row>
               <Row justify="center" align="center">
                 <Text h6 size={17} color="white" css={{m: 0}}>

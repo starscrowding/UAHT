@@ -1,5 +1,4 @@
 import {Row, Button} from '@nextui-org/react';
-import {ADDRESS} from '@space/hooks/api';
 import styles from './wallet.module.scss';
 
 export const Trade = () => {
@@ -20,10 +19,7 @@ export const Trade = () => {
         size="sm"
         auto
         onClick={() => {
-          window.open(
-            `https://app.ws.exchange/ua/eth/swap?chainId=137&inputCurrency=${ADDRESS}`,
-            '_blank'
-          );
+          window.open(`https://app.ws.exchange/ua/eth/swap?chainId=137`, '_blank');
         }}
       >
         WhiteSwap
@@ -34,10 +30,7 @@ export const Trade = () => {
         color="gradient"
         auto
         onClick={() => {
-          window.open(
-            `https://app.uniswap.org/#/tokens/polygon/${ADDRESS}?chain=polygon&lng=uk-UA`,
-            '_blank'
-          );
+          window.open(`https://app.uniswap.org/#/swap?chain=polygon&lng=uk-UA`, '_blank');
         }}
       >
         Uniswap

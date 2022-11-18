@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import {GoVerified} from 'react-icons/go';
 import {ADDRESS, DAO_ADDRESS, DAO} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
-import {POLYGON_ID} from '../Metamask';
+import {Address, POLYGON_ID} from '../Metamask';
 import {MINIMUM} from './constants';
 import {useInit, useSign, useValidateCode, useValidateId} from './hooks';
 import {getStamp, createCode} from './helpers';
@@ -280,6 +280,9 @@ export const Wallet = () => {
                 }}
               >
                 {ADDRESS}
+                <span className={styles.pl05} onClick={e => e?.stopPropagation?.()}>
+                  <Address account={ADDRESS} name=" " />
+                </span>
               </Text>
             </div>
           }

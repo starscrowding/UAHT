@@ -31,7 +31,7 @@ export const parseCode = (code: string = '') => {
 };
 
 const Admin: NextPage = () => {
-  const [step, setStep] = useState('');
+  const [hash, setHash] = useState('');
   const [code, setCode] = useState('');
   const [validSignature, setValidSignature] = useState(false);
 
@@ -53,15 +53,10 @@ const Admin: NextPage = () => {
       : false;
   }, [trx]);
 
-  const updateStep = (nextStep: string) => {
-    setStep(nextStep);
-    window.location.hash = nextStep;
-  };
-
   useEffect(() => {
     const hash = window?.location?.hash;
     if (hash) {
-      setStep(hash.substring(1));
+      setHash(hash.substring(1));
     }
   }, []);
 

@@ -4,7 +4,7 @@ import {Container, Row, Spacer, Card, Button, Input, Text} from '@nextui-org/rea
 import {ethers} from 'ethers';
 import {isAdmin} from '@space/hooks/route';
 import {RESOURCES, PROVIDERS} from '@space/components/Wallet/constants';
-import {CONTRACT, RESERVE_URL} from '@space/hooks/api';
+import {CONTRACT, DAO_CONTRACT, RESERVE_URL} from '@space/hooks/api';
 import styles from '../styles/variables.module.scss';
 
 export const parseCode = (code: string = '') => {
@@ -83,9 +83,15 @@ const Admin: NextPage = () => {
 
   return (
     <Container>
-      <Row className={styles.mv1}>
+      <Row className={styles.mv1} justify="space-evenly">
         <a href={RESERVE_URL} target="_blank" rel="noreferrer">
           Резерв
+        </a>
+        <a href={`${CONTRACT}#readContract`} target="_blank" rel="noreferrer">
+          UAHT
+        </a>
+        <a href={`${DAO_CONTRACT}#readContract`} target="_blank" rel="noreferrer">
+          UAHT_DAO
         </a>
       </Row>
       <Spacer />
@@ -123,9 +129,9 @@ const Admin: NextPage = () => {
                     className={styles.m1}
                     as="a"
                     target="_blank"
-                    href={`${CONTRACT}#writeContract`}
+                    href={`${DAO_CONTRACT}#writeContract#F3`}
                   >
-                    {`UAHT.input(UAH * 100)`}
+                    {`UAHT_DAO.input(UAH * 100)`}
                   </Button>
                 </Row>
               ) : null}
@@ -137,9 +143,9 @@ const Admin: NextPage = () => {
                         className={styles.m1}
                         as="a"
                         target="_blank"
-                        href={`${CONTRACT}#writeContract`}
+                        href={`${DAO_CONTRACT}#writeContract#F4`}
                       >
-                        {`UAHT.output(${+trx.value * 100})`}
+                        {`UAHT_DAO.output(${+trx.value * 100})`}
                       </Button>
                       <Button className={styles.m1} as="a" target="_blank" href={source?.help}>
                         Вивід - {trx.source}

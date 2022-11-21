@@ -14,6 +14,7 @@ import {Empty, VerificationModal} from './common';
 import {Fiat} from './fiat.component';
 import {Ex} from './ex.component';
 import {Trade} from './trade.component';
+import {P2P, BANKS} from './p2p.component';
 import {Token} from './token.component';
 import {Dao} from './dao.component';
 import styles from './wallet.module.scss';
@@ -61,7 +62,11 @@ export const Wallet = () => {
     <Card className={styles.wallet}>
       <Collapse.Group accordion={false}>
         <Row className={styles.row} justify="flex-start" align="center" wrap="wrap">
-          <div className={styles.name}>💳 Гаманець:</div>
+          <div className={styles.name}>
+            {' '}
+            <Image src="/polygon.ico" width="15" height="15" alt="Polygon" title="Polygon" />{' '}
+            Гаманець:
+          </div>
           <Row align="center" className={styles.address}>
             <Text>{MM.account}</Text>
             {varified ? (
@@ -288,6 +293,21 @@ export const Wallet = () => {
           }
         >
           <Token />
+        </Collapse>
+        <Collapse
+          expanded={false}
+          title={<div className={styles.name}>💳 P2P перекази</div>}
+          subtitle={
+            <Row className={styles.address}>
+              {BANKS.map(bank => (
+                <Text key={bank.name} className={styles.pl05} color={bank.color}>
+                  {bank.name}
+                </Text>
+              ))}
+            </Row>
+          }
+        >
+          <P2P />
         </Collapse>
         <Collapse
           expanded={false}

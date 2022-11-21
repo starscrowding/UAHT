@@ -3,7 +3,7 @@ import {ethers} from 'ethers';
 import {useConnectedMetaMask} from 'metamask-react';
 import {Row, Button, Input, Spacer} from '@nextui-org/react';
 import {GoVerified, GoUnverified} from 'react-icons/go';
-import {api, DAO, DAO_CONTRACT, RESERVE} from '@space/hooks/api';
+import {api, DAO, DAO_CONTRACT, RESERVE, CONTRACT} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
 import {useSign} from './hooks';
 import styles from './wallet.module.scss';
@@ -11,6 +11,7 @@ import {Address} from '../Metamask';
 
 export const Dao = () => {
   const MM = useConnectedMetaMask();
+  const [account, setAccount] = useState<string>('');
   const [verified, setVerified] = useState<undefined | boolean>();
   const [signature, setSignature] = useState('');
 
@@ -51,9 +52,24 @@ export const Dao = () => {
           color="secondary"
           type="text"
           placeholder="Верифікація гаманця"
-          width="200px"
-          onChange={e => testAccount(e?.target?.value || '')}
+          width={verified !== undefined && account ? '123px' : '200px'}
+          onChange={e => {
+            setAccount(e?.target?.value || '');
+            testAccount(e?.target?.value || '');
+          }}
         />
+        {verified !== undefined && account ? (
+          <a
+            href={`${CONTRACT}?a=${account}`}
+            target="_blank"
+            rel="noreferrer"
+            className={styles.ml05}
+          >
+            polygonscan↗
+          </a>
+        ) : (
+          undefined
+        )}
         <div className={styles.mh1}>
           {verified === undefined && <GoUnverified title="Перевірити адресу" />}
           {verified === true && <GoVerified title="Верифіковано" color="green" />}

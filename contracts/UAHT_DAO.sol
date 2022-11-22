@@ -4,7 +4,7 @@ pragma solidity ^0.8.13;
 import "./UAHT.sol";
 
 contract UAHT_DAO { // спільнота @uaht_group
-    address moderator; // hodl | safu
+    address moderator; // hodl
     mapping (address => uint256) public operators; // партнерський пул
     address public uaht_contract = 0x0D9447E16072b636b4a1E8f2b8C644e58F3eaA6A;
     mapping (uint256 => uint256) public proposal; // виконання за рейтингом
@@ -13,7 +13,7 @@ contract UAHT_DAO { // спільнота @uaht_group
         moderator = msg.sender;
     }
 
-    modifier moderable {
+    modifier moderable { // SAFU в ОВДП
         require(msg.sender == moderator);
         _;
     }

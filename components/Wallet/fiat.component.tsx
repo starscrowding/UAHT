@@ -1,4 +1,6 @@
-import {Row, Button, Input, Radio, Text} from '@nextui-org/react';
+import {useState} from 'react';
+import classNames from 'classnames';
+import {Row, Button, Input, Radio, Text, Checkbox} from '@nextui-org/react';
 import {Info} from '@space/components/Info';
 import {Address} from '../Metamask';
 import {PROVIDERS} from './constants';
@@ -23,6 +25,7 @@ export const Fiat = ({
   stamp,
   sign,
 }: any) => {
+  const [sent, setSent] = useState(false);
   return (
     <IO
       action={action}
@@ -66,8 +69,20 @@ export const Fiat = ({
             <Info className={styles.ml1} text="Безвідсоткові поворотні кошти" />
           </Row>
           <Row align="center" className={styles.mt05}>
-            <RequestButton disabled={!provider} />
-            {provider ? <Info text="Повідом про переказ 🤝" className={styles.ml1} /> : null}
+            <Checkbox
+              className={classNames(styles.mr1, styles.sent)}
+              size="xs"
+              isDisabled={!provider}
+              onChange={value => setSent(value)}
+            >
+              Переказ зроблено
+            </Checkbox>
+            {provider && sent && (
+              <>
+                <RequestButton />
+                <Info text="Повідом про переказ 🤝" className={styles.ml1} />
+              </>
+            )}
           </Row>
         </div>
       }

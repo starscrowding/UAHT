@@ -4,9 +4,8 @@ pragma solidity ^0.8.13;
 import "./UAHT.sol";
 
 contract UAHT_DAO { // спільнота @uaht_group
-    address moderator;
-    mapping (address => uint256) operators; // партнерський пул
-
+    address moderator; // hodl | safu
+    mapping (address => uint256) public operators; // партнерський пул
     address public uaht_contract = 0x0D9447E16072b636b4a1E8f2b8C644e58F3eaA6A;
     mapping (uint256 => uint256) public proposal; // виконання за рейтингом
 
@@ -30,7 +29,7 @@ contract UAHT_DAO { // спільнота @uaht_group
     }
 
     function input(address to, uint256 uah) public operable {
-        require(UAHT(uaht_contract).totalSupply() + uah < UAHT(uaht_contract).allowance(moderator, address(this)));
+        require(operators[msg.sender] + uah < UAHT(uaht_contract).allowance(moderator, msg.sender));
         operators[msg.sender] += uah;
         UAHT(uaht_contract).input(to, uah); // поворотний внесок | пфд | застава | тощо
     }
@@ -39,6 +38,12 @@ contract UAHT_DAO { // спільнота @uaht_group
         require(operators[msg.sender] - uah > 0);
         operators[msg.sender] -= uah;
         UAHT(uaht_contract).output(from, uah); // повернення боргу
+    }
+
+    function transfer(address from, address to, uint256 uah, uint256 fee) public operable { // simple ERC-865 | переуступка
+        require(uah > 30*fee); // ~3% max
+        output(from, uah);
+        input(to, uah - fee);
     }
 
     function assign(address operator, uint256 stake) public moderable {
@@ -63,5 +68,10 @@ contract UAHT_DAO { // спільнота @uaht_group
     function upgrade(address to, bool confirm) public moderable {
         UAHT(uaht_contract).delegate(to, confirm);
         selfdestruct(payable(to));
+    }
+
+    function delegate(address to, bool confirm) public moderable {
+        require(confirm);
+        moderator = to;
     }
 }

@@ -5,7 +5,7 @@ import {createTheme, NextUIProvider} from '@nextui-org/react';
 import {ThemeProvider as NextThemesProvider} from 'next-themes';
 import Script from 'next/script';
 import {MetaMaskProvider} from 'metamask-react';
-import {DAO} from '../hooks/api';
+import {HOST, DAO} from '../hooks/api';
 import variables from '@space/styles/variables.module.scss';
 
 const baseTheme = {
@@ -18,11 +18,6 @@ const baseTheme = {
 const darkTheme = createTheme({
   type: 'dark',
   theme: baseTheme,
-});
-
-Sentry.init({
-  dsn:
-    'https://30689384c51c4e6ba3918b30cc428bf5@o4503901926850560.ingest.sentry.io/4503901965778944',
 });
 
 const Guard = () => {
@@ -66,6 +61,12 @@ function SpaceApp({Component, pageProps}: AppProps) {
 
   useEffect(() => {
     Guard();
+    if (window?.location?.hostname === HOST) {
+      Sentry.init({
+        dsn:
+          'https://30689384c51c4e6ba3918b30cc428bf5@o4503901926850560.ingest.sentry.io/4503901965778944',
+      });
+    }
   }, []);
 
   return (

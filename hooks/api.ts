@@ -1,4 +1,5 @@
-export const BASE = 'https://uaht.io';
+export const HOST = 'uaht.io';
+export const BASE = `https://${HOST}`;
 export const ADDRESS = '0x0d9447e16072b636b4a1e8f2b8c644e58f3eaa6a';
 export const DAO_ADDRESS = '0xa3b597358724D07d562615ce2AC8f85a38777257';
 export const CONTRACT = `https://polygonscan.com/token/${ADDRESS}`;

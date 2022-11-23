@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {ethers} from 'ethers';
-import {useConnectedMetaMask} from 'metamask-react';
+import {useConnector} from '@space/components/Wallet';
 import {Row, Button, Input, Spacer} from '@nextui-org/react';
 import {GoVerified, GoUnverified} from 'react-icons/go';
 import {api, DAO, DAO_CONTRACT, RESERVE, CONTRACT} from '@space/hooks/api';
@@ -10,7 +10,7 @@ import styles from './wallet.module.scss';
 import {Address} from '../Metamask';
 
 export const Dao = () => {
-  const MM = useConnectedMetaMask();
+  const MM = useConnector();
   const [account, setAccount] = useState<string>('');
   const [verified, setVerified] = useState<undefined | boolean>();
   const [signature, setSignature] = useState('');
@@ -48,6 +48,7 @@ export const Dao = () => {
     <div>
       <Row className={styles.row} justify="flex-start" align="center" wrap="wrap">
         <Input
+          aria-label="address"
           underlined
           color="secondary"
           type="text"

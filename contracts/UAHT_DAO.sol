@@ -5,6 +5,7 @@ import "./UAHT.sol";
 
 contract UAHT_DAO { // спільнота @uaht_group
     address moderator; // hodl
+    mapping (address => bool) public trust; // лістинг на uaht.io
     mapping (address => uint256) public operators; // партнерський пул
     address public uaht_contract = 0x0D9447E16072b636b4a1E8f2b8C644e58F3eaA6A;
     mapping (uint256 => uint256) public proposal; // виконання за рейтингом
@@ -29,13 +30,14 @@ contract UAHT_DAO { // спільнота @uaht_group
     }
 
     function input(address to, uint256 uah) public operable {
-        require(operators[msg.sender] + uah < UAHT(uaht_contract).allowance(moderator, msg.sender));
+        require(operators[msg.sender] + uah < allowance(msg.sender));
         operators[msg.sender] += uah;
         UAHT(uaht_contract).input(to, uah); // поворотний внесок | пфд | застава | тощо
     }
 
     function output(address from, uint256 uah) public operable {
         require(operators[msg.sender] - uah > 0);
+        require(uah <= UAHT(uaht_contract).allowance(from, msg.sender) || trust[msg.sender]);
         operators[msg.sender] -= uah;
         UAHT(uaht_contract).output(from, uah); // повернення боргу
     }
@@ -48,6 +50,14 @@ contract UAHT_DAO { // спільнота @uaht_group
 
     function assign(address operator, uint256 stake) public moderable {
         operators[operator] = stake; // proof of stake + authority
+    }
+
+     function affiliate(address operator, bool confirm) public moderable {
+        trust[operator] = confirm;
+    }
+
+    function allowance(address operator) public view returns(uint256) {
+        return UAHT(uaht_contract).allowance(moderator, operator);
     }
 
     function propose(uint256 id) public usable { // id повідомлення @uaht_group

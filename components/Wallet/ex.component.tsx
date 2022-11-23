@@ -51,6 +51,7 @@ export const Ex = ({
         <div>
           <Row className={styles.mv1} align="center">
             <Input
+              aria-label="code"
               underlined
               disabled={!resource}
               color="secondary"
@@ -89,6 +90,7 @@ export const Ex = ({
         <div>
           <Row className={styles.mv1} align="center">
             <Input
+              aria-label="sum"
               underlined
               color="secondary"
               type="number"

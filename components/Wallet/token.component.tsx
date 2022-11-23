@@ -1,13 +1,13 @@
 import {useState} from 'react';
 import {Row, Button, Modal, Text} from '@nextui-org/react';
-import {useConnectedMetaMask} from 'metamask-react';
+import {useConnector} from '@space/components/Wallet';
 import {ADDRESS, TOKEN_LIST} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
 import {useAddToken} from './hooks';
 import styles from './wallet.module.scss';
 
 export const Token = () => {
-  const MM = useConnectedMetaMask();
+  const MM = useConnector();
   const addToken = useAddToken({MM});
   const [showModal, setShowModal] = useState(false);
 

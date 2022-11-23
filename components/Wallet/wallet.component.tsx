@@ -1,7 +1,7 @@
 import {useCallback, useState, useMemo} from 'react';
 import {Card, Row, Text, Button, Collapse, Switch} from '@nextui-org/react';
 import Image from 'next/image';
-import {useConnectedMetaMask} from 'metamask-react';
+import {useConnector} from '@space/components/Wallet';
 import classNames from 'classnames';
 import {GoVerified} from 'react-icons/go';
 import {ADDRESS, DAO_ADDRESS, DAO} from '@space/hooks/api';
@@ -17,10 +17,11 @@ import {Trade} from './trade.component';
 import {P2P, BANKS} from './p2p.component';
 import {Token} from './token.component';
 import {Dao} from './dao.component';
+import {Actions} from './actions.component';
 import styles from './wallet.module.scss';
 
 export const Wallet = () => {
-  const MM = useConnectedMetaMask();
+  const MM = useConnector();
   const [priority] = useState(0);
   const [action, setAction] = useState('input');
   const [balance, setBalance] = useState(0);
@@ -147,7 +148,7 @@ export const Wallet = () => {
           }
         >
           <Row className={styles.row} justify="space-between" align="center" wrap="wrap">
-            <Button.Group color="gradient" ghost>
+            <Button.Group color="gradient" ghost key={action}>
               {[
                 {name: 'Ввід', act: 'input'},
                 {name: 'Вивід', act: 'output'},
@@ -327,6 +328,7 @@ export const Wallet = () => {
           <Dao />
         </Collapse>
       </Collapse.Group>
+      <Actions />
     </Card>
   );
 };

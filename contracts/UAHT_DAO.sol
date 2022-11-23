@@ -20,6 +20,7 @@ contract UAHT_DAO { // спільнота @uaht_group
     }
 
     modifier operable { // KYC + AML
+        require(msg.sender != moderator);
         require(operators[msg.sender] > 0);
         _;
     }

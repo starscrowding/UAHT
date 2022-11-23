@@ -43,7 +43,7 @@ contract UAHT_DAO { // спільнота @uaht_group
     }
 
     function transfer(address from, address to, uint256 uah, uint256 fee) public operable { // simple ERC-865 | переуступка
-        require(uah > 30*fee); // ~3% max
+        require(uah > 33*fee); // ~3% max
         output(from, uah);
         input(to, uah - fee);
     }

@@ -76,7 +76,11 @@ export const MetamaskStatus = () => {
           {step === 0 && (
             <>
               {isMobile ? (
-                <a href="https://metamask.app.link/dapp/uaht.io" target="_blank" rel="noreferrer">
+                <a
+                  href={`https://metamask.app.link/dapp/uaht.io${window?.location?.search || ''}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   Відкрий у додатку
                 </a>
               ) : (

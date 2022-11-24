@@ -9,7 +9,7 @@ ERC-20 токен в мережі Polygon: [0x0D9447E16072b636b4a1E8f2b8C644e58F
 
 + **Що таке UAHT DAO?**
 
-UAHT [DAO](https://academy.binance.com/uk/articles/decentralized-autonomous-organizations-daos-explained) - децентралізована спільнота [@uaht_group](https://t.me/uaht_group) на базі смарт контракту [UAHT_DAO](https://polygonscan.com/address/0xa3b597358724D07d562615ce2AC8f85a38777257#code)\
+UAHT [DAO](https://academy.binance.com/uk/articles/decentralized-autonomous-organizations-daos-explained) - децентралізована спільнота [@uaht_group](https://t.me/uaht_group) на базі смарт контракту [UAHT_DAO](https://polygonscan.com/address/0x08b491bc7848c6af42c3882794a93d70c04e5816#code)\
 [Правила та умови](https://github.com/starscrowding/UAHT#readme) спільноти.
 
 + **Що таке Metamask?**

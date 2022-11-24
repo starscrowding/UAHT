@@ -5,6 +5,7 @@ import {Row, Button, Input, Spacer} from '@nextui-org/react';
 import {GoVerified, GoUnverified} from 'react-icons/go';
 import {api, DAO, DAO_CONTRACT, RESERVE, CONTRACT} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
+import {SignText} from './common';
 import {useSign} from './hooks';
 import styles from './wallet.module.scss';
 import {Address} from '../Metamask';
@@ -121,7 +122,7 @@ export const Dao = () => {
           className={styles.mh05}
         />
         <Button className={styles.button} size="sm" auto onClick={() => doSign()}>
-          Підписати ✍️
+          <SignText />
         </Button>
       </Row>
       {signature && (

@@ -5,7 +5,7 @@ import {Info} from '@space/components/Info';
 import {Address} from '../Metamask';
 import {PROVIDERS} from './constants';
 import {createCode} from './helpers';
-import {IO, RequestButton} from './common';
+import {IO, RequestButton, Tips, SignText} from './common';
 import styles from './wallet.module.scss';
 
 export const Fiat = ({
@@ -22,6 +22,7 @@ export const Fiat = ({
   setAmount,
   onAmountChange,
   priority,
+  setPriority,
   stamp,
   sign,
 }: any) => {
@@ -90,6 +91,7 @@ export const Fiat = ({
         <div>
           <Row className={styles.mv1} align="center">
             <Input
+              aria-label="id"
               underlined
               color="secondary"
               placeholder={`${PROVIDERS[provider]?.text || ''} ID`}
@@ -99,6 +101,7 @@ export const Fiat = ({
               onChange={e => validateId(e?.target?.value)}
             />
             <Input
+              aria-label="sum"
               underlined
               color="secondary"
               type="number"
@@ -111,6 +114,7 @@ export const Fiat = ({
               }}
               onBlur={() => onAmountChange(amount)}
             />
+            <Tips {...{priority, setPriority, amount}} />
             <Button
               className={styles.button}
               size="sm"
@@ -131,7 +135,7 @@ export const Fiat = ({
                 )
               }
             >
-              Підписати
+              <SignText />
             </Button>
           </Row>
           <Row align="center" className={styles.mt05}>

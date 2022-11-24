@@ -22,7 +22,7 @@ import styles from './wallet.module.scss';
 
 export const Wallet = () => {
   const MM = useConnector();
-  const [priority] = useState(0);
+  const [priority, setPriority] = useState(0);
   const [action, setAction] = useState('input');
   const [balance, setBalance] = useState(0);
   const [matic, setMatic] = useState();
@@ -224,6 +224,7 @@ export const Wallet = () => {
                 setAmount,
                 onAmountChange,
                 priority,
+                setPriority,
                 stamp,
                 sign,
               }}
@@ -244,6 +245,7 @@ export const Wallet = () => {
                 setAmount,
                 onAmountChange,
                 priority,
+                setPriority,
                 stamp,
                 sign,
               }}

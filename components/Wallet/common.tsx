@@ -1,5 +1,6 @@
 import {ReactElement} from 'react';
-import {Card, Row, Button, Container, Text, Modal} from '@nextui-org/react';
+import classNames from 'classnames';
+import {Card, Row, Button, Container, Text, Modal, Input} from '@nextui-org/react';
 import {FaTelegramPlane} from 'react-icons/fa';
 import {TELEGRAM} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
@@ -81,5 +82,53 @@ export const VerificationModal = ({vModal, setVModal}: any) => {
         </Row>
       </Modal.Body>
     </Modal>
+  );
+};
+
+export const SignText = () => {
+  return (
+    <>
+      <span className={classNames(styles.signText, styles.mr05)}>Підписати</span>✍️
+    </>
+  );
+};
+
+export const Tips = ({priority, setPriority, amount = 0}: any) => {
+  return (
+    <>
+      <Text color="red" className={styles.ml1}>
+        -
+      </Text>
+      <Input
+        aria-label="priority"
+        underlined
+        color="primary"
+        helperText="чай"
+        helperColor="success"
+        type="number"
+        min="0"
+        step="5"
+        width="50px"
+        value={priority}
+        onKeyDown={e => {
+          if (['-', '+', 'e', 'E', '.'].includes(e?.key)) {
+            e?.preventDefault?.();
+          }
+        }}
+        onChange={e => {
+          const value = Math.ceil(Math.abs(+e?.target?.value));
+          setPriority(value);
+        }}
+        onBlur={() => {
+          if (priority > amount) {
+            setPriority(amount);
+          }
+        }}
+      />
+      <Info
+        text="👌 чай - винагорода з суми запиту, компенсує газ та визначає пріоритет обробки ⌛"
+        className={styles.mr1}
+      />
+    </>
   );
 };

@@ -1,5 +1,6 @@
 import {useEffect, useState, useMemo} from 'react';
 import {NextPage, NextPageContext} from 'next';
+import Router from 'next/router';
 import {Container, Row, Spacer, Card, Button, Input, Text} from '@nextui-org/react';
 import {ethers} from 'ethers';
 import {isAdmin} from '@space/hooks/route';
@@ -30,7 +31,7 @@ export const parseCode = (code: string = '') => {
   }
 };
 
-const Admin: NextPage = () => {
+const Admin: NextPage = ({admin}: any) => {
   const [hash, setHash] = useState('');
   const [code, setCode] = useState('');
   const [validSignature, setValidSignature] = useState(false);
@@ -76,6 +77,11 @@ const Admin: NextPage = () => {
     validateSignature();
   }, [trx, setValidSignature]);
 
+  if (!admin) {
+    Router.replace('/login');
+    return null;
+  }
+
   return (
     <Container>
       <Row className={styles.mv1} justify="space-evenly">
@@ -106,6 +112,9 @@ const Admin: NextPage = () => {
             <Text color="error">Штамп недійсний</Text>
           ) : (
             <>
+              <Row align="center">
+                <Text color="green">чай</Text>&nbsp;{trx.priority}
+              </Row>
               {trx.type === 'v' ? (
                 <>
                   {validSignature ? (
@@ -143,7 +152,7 @@ const Admin: NextPage = () => {
                         {`UAHT_DAO.output(${+trx.value * 100})`}
                       </Button>
                       <Button className={styles.m1} as="a" target="_blank" href={source?.help}>
-                        Вивід - {trx.source}
+                        Вивід - {trx.source}({+trx.value})
                       </Button>
                     </Row>
                   ) : (

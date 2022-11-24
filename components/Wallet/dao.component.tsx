@@ -95,7 +95,7 @@ export const Dao = () => {
           size="sm"
           auto
           onClick={() => {
-            window.open(`${DAO_CONTRACT}#writeContract#F5`, '_blank');
+            window.open(`${DAO_CONTRACT}#writeContract#F7`, '_blank');
           }}
         >
           Пропозиція
@@ -105,7 +105,7 @@ export const Dao = () => {
           size="sm"
           auto
           onClick={() => {
-            window.open(`${DAO_CONTRACT}#writeContract#F7`, '_blank');
+            window.open(`${DAO_CONTRACT}#writeContract#F10`, '_blank');
           }}
         >
           Голосувати

@@ -133,7 +133,7 @@ const Admin: NextPage = ({admin}: any) => {
                     className={styles.m1}
                     as="a"
                     target="_blank"
-                    href={`${DAO_CONTRACT}#writeContract#F3`}
+                    href={`${DAO_CONTRACT}#writeContract#F5`}
                   >
                     {`UAHT_DAO.input(UAH * 100)`}
                   </Button>
@@ -147,7 +147,7 @@ const Admin: NextPage = ({admin}: any) => {
                         className={styles.m1}
                         as="a"
                         target="_blank"
-                        href={`${DAO_CONTRACT}#writeContract#F4`}
+                        href={`${DAO_CONTRACT}#writeContract#F6`}
                       >
                         {`UAHT_DAO.output(${+trx.value * 100})`}
                       </Button>

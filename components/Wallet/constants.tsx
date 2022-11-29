@@ -1,4 +1,4 @@
-export const MINIMUM = 100;
+export const MINIMUM = 200;
 export const MIN_CODE_LENGTH = 16;
 export const RESOURCES: {[key: string]: {text: string; help: string; validator: RegExp}} = {
   binance: {

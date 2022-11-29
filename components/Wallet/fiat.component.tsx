@@ -114,7 +114,7 @@ export const Fiat = ({
               }}
               onBlur={() => onAmountChange(amount)}
             />
-            <Tips {...{priority, setPriority, amount}} />
+            <Tips {...{priority, setPriority, amount, disabled: !!signature}} />
             <Button
               className={styles.button}
               size="sm"

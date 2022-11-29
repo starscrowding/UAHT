@@ -1,8 +1,8 @@
 import {useCallback, useState, useMemo} from 'react';
+import classNames from 'classnames';
 import {Card, Row, Text, Button, Collapse, Switch} from '@nextui-org/react';
 import Image from 'next/image';
 import {useConnector} from '@space/components/Wallet';
-import classNames from 'classnames';
 import {GoVerified} from 'react-icons/go';
 import {ADDRESS, DAO_ADDRESS, DAO} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
@@ -14,7 +14,7 @@ import {Empty, VerificationModal} from './common';
 import {Fiat} from './fiat.component';
 import {Ex} from './ex.component';
 import {Trade} from './trade.component';
-import {P2P, BANKS} from './p2p.component';
+import {P2P, BANK} from './p2p.component';
 import {Token} from './token.component';
 import {Dao} from './dao.component';
 import {Actions} from './actions.component';
@@ -302,7 +302,7 @@ export const Wallet = () => {
           title={<div className={styles.name}>💳 P2P перекази</div>}
           subtitle={
             <Row className={styles.address}>
-              {BANKS.map(bank => (
+              {BANK.map(bank => (
                 <Text key={bank.name} className={styles.pl05} color={bank.color}>
                   {bank.name}
                 </Text>
@@ -310,7 +310,7 @@ export const Wallet = () => {
             </Row>
           }
         >
-          <P2P />
+          <P2P {...{balance, gas: matic}} />
         </Collapse>
         <Collapse
           expanded={false}

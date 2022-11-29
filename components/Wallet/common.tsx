@@ -38,13 +38,25 @@ export const IO = ({
   );
 };
 
-export const RequestButton = ({disabled, to = TELEGRAM}: {disabled?: boolean; to?: string}) => (
+export const RequestButton = ({
+  disabled,
+  to = TELEGRAM,
+  onClick,
+}: {
+  disabled?: boolean;
+  to?: string;
+  onClick?: () => void;
+}) => (
   <Button
     size="sm"
     disabled={disabled}
     icon={<FaTelegramPlane size="21" />}
     onClick={() => {
-      window.open(to, '_blank');
+      if (!onClick && to) {
+        window.open(to, '_blank');
+      } else {
+        onClick?.();
+      }
     }}
   >
     Запит {!disabled ? <span className={styles.ml1}>👉</span> : null}
@@ -93,7 +105,16 @@ export const SignText = () => {
   );
 };
 
-export const Tips = ({priority, setPriority, amount = 0}: any) => {
+export const Tips = ({
+  priority,
+  setPriority,
+  amount = 0,
+  step = '5',
+  min = '0',
+  disabled = false,
+  helperText = 'чай',
+  infoText = '👌 чай - винагорода оператору з суми запиту, компенсує газ та визначає пріоритет обробки ⌛',
+}: any) => {
   return (
     <>
       <Text color="red" className={styles.ml1}>
@@ -103,13 +124,14 @@ export const Tips = ({priority, setPriority, amount = 0}: any) => {
         aria-label="priority"
         underlined
         color="primary"
-        helperText="чай"
+        helperText={helperText}
         helperColor="success"
         type="number"
-        min="0"
-        step="5"
-        width="50px"
+        min={min}
+        step={step}
+        width="55px"
         value={priority}
+        disabled={!amount || disabled}
         onKeyDown={e => {
           if (['-', '+', 'e', 'E', '.'].includes(e?.key)) {
             e?.preventDefault?.();
@@ -120,15 +142,15 @@ export const Tips = ({priority, setPriority, amount = 0}: any) => {
           setPriority(value);
         }}
         onBlur={() => {
+          if (min > priority) {
+            return setPriority(min);
+          }
           if (priority > amount) {
-            setPriority(amount);
+            return setPriority(Math.max(min, amount));
           }
         }}
       />
-      <Info
-        text="👌 чай - винагорода з суми запиту, компенсує газ та визначає пріоритет обробки ⌛"
-        className={styles.mr1}
-      />
+      <Info text={infoText} className={styles.mr1} />
     </>
   );
 };

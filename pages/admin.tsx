@@ -2,34 +2,11 @@ import {useEffect, useState, useMemo} from 'react';
 import {NextPage, NextPageContext} from 'next';
 import Router from 'next/router';
 import {Container, Row, Spacer, Card, Button, Input, Text} from '@nextui-org/react';
-import {ethers} from 'ethers';
 import {isAdmin} from '@space/hooks/route';
 import {RESOURCES, PROVIDERS} from '@space/components/Wallet/constants';
+import {parseCode, validateSignature} from '@space/components/Wallet/helpers';
 import {CONTRACT, DAO_CONTRACT, RESERVE_URL} from '@space/hooks/api';
 import styles from '../styles/variables.module.scss';
-
-export const parseCode = (code: string = '') => {
-  try {
-    const body = atob(code.split('.')[0]);
-    const signature = code.split('.')[1];
-    const [priority, stamp, type, source, value, account, payload] = body.split(':');
-    return {
-      priority,
-      stamp,
-      type,
-      source,
-      value,
-      account,
-      payload,
-      body,
-      signature,
-    };
-  } catch {
-    return {
-      error: 'Invalid code',
-    };
-  }
-};
 
 const Admin: NextPage = ({admin}: any) => {
   const [hash, setHash] = useState('');
@@ -62,19 +39,7 @@ const Admin: NextPage = ({admin}: any) => {
   }, []);
 
   useEffect(() => {
-    const validateSignature = async () => {
-      try {
-        if (trx.body && trx.signature) {
-          const signer = await ethers.utils.verifyMessage(trx.body, trx.signature);
-          if (trx.account && signer) {
-            setValidSignature(trx.account?.toLowerCase() === signer.toLowerCase());
-          }
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    validateSignature();
+    validateSignature({trx, setValid: setValidSignature});
   }, [trx, setValidSignature]);
 
   if (!admin) {

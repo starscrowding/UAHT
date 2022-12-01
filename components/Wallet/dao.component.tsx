@@ -7,6 +7,7 @@ import {api, DAO, DAO_CONTRACT, RESERVE, CONTRACT} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
 import {SignText} from './common';
 import {useSign} from './hooks';
+import {validateSignature} from './helpers';
 import styles from './wallet.module.scss';
 import {Address} from '../Metamask';
 
@@ -16,7 +17,10 @@ export const Dao = () => {
   const [verified, setVerified] = useState<undefined | boolean>();
   const [signature, setSignature] = useState('');
 
-  const sign = useSign({MM, setSignature});
+  const sign = (t: string) => {
+    // eslint-disable-next-line
+    useSign({MM, setSignature: (s: string) => setSignature(`${t}+${s}`)})(t);
+  };
 
   const testAccount = async (address: string) => {
     if (ethers.utils.isAddress(address)) {
@@ -34,7 +38,7 @@ export const Dao = () => {
 
   const doSign = () => {
     try {
-      const text = prompt('Що підписуємо?') || '';
+      const text = prompt('Підписати: текст') || '';
       if (text) {
         sign(text?.replace(/:/gim, ' '));
       } else {
@@ -42,6 +46,25 @@ export const Dao = () => {
       }
     } catch (e) {
       setSignature('');
+    }
+  };
+
+  const verifySign = () => {
+    try {
+      const doc = prompt('Перевірити: текст+підпис');
+      if (doc) {
+        const [body, sign] = doc.split('+') || [];
+        const [signature, account] = sign.split('.') || [];
+        validateSignature({
+          trx: {body, signature},
+          setValid: (isTrue: boolean) => {
+            alert(isTrue ? '✅' : '❌');
+          },
+          account,
+        });
+      }
+    } catch (e) {
+      alert('❌');
     }
   };
 
@@ -90,26 +113,24 @@ export const Dao = () => {
       </Row>
       <Spacer />
       <Row className={styles.row} justify="flex-start" align="center" wrap="wrap">
-        <Button
-          className={styles.button}
-          size="sm"
-          auto
-          onClick={() => {
-            window.open(`${DAO_CONTRACT}#writeContract#F7`, '_blank');
-          }}
-        >
-          Пропозиція
-        </Button>
-        <Button
-          className={styles.button}
-          size="sm"
-          auto
-          onClick={() => {
-            window.open(`${DAO_CONTRACT}#writeContract#F10`, '_blank');
-          }}
-        >
-          Голосувати
-        </Button>
+        <Button.Group size="sm" color="gradient" ghost className={styles.button}>
+          <Button
+            auto
+            onClick={() => {
+              window.open(`${DAO_CONTRACT}#writeContract#F7`, '_blank');
+            }}
+          >
+            Пропозиція
+          </Button>
+          <Button
+            auto
+            onClick={() => {
+              window.open(`${DAO_CONTRACT}#writeContract#F10`, '_blank');
+            }}
+          >
+            Голосувати
+          </Button>
+        </Button.Group>
         <Info
           text={
             <>
@@ -121,13 +142,21 @@ export const Dao = () => {
           }
           className={styles.mh05}
         />
-        <Button className={styles.button} size="sm" auto onClick={() => doSign()}>
-          <SignText />
-        </Button>
+        <Button.Group size="sm" className={styles.button}>
+          <Button auto onClick={() => doSign()}>
+            <SignText />
+          </Button>
+          <Button auto onClick={() => verifySign()} title="Перевірити підпис">
+            🧐
+          </Button>
+        </Button.Group>
       </Row>
       {signature && (
         <Row className={styles.row} justify="flex-start" align="center" wrap="wrap">
           <Address account={`${signature}.${MM.account}`} />
+          <a className={styles.ml05} onClick={() => setSignature('')}>
+            ×
+          </a>
         </Row>
       )}
     </div>

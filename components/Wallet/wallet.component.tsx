@@ -44,7 +44,7 @@ export const Wallet = () => {
 
   const onAmountChange = useCallback(
     value => {
-      setAmount(Math.max(MINIMUM, Math.min(Number(balance), Number(value))));
+      setAmount(Math.max(MINIMUM, Math.min(Math.floor(balance), Number(value))));
     },
     [setAmount, balance]
   );

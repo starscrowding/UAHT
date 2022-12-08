@@ -1,8 +1,8 @@
 import {useEffect, useState} from 'react';
 import classNames from 'classnames';
 import {Loading} from '@nextui-org/react';
-import {useMetaMask} from 'metamask-react';
 import {FaCopy, FaCheck} from 'react-icons/fa';
+import {useConnector} from '@space/components/Wallet';
 import styles from './metamask.module.scss';
 
 export const POLYGON_ID = '0x89'; // 137
@@ -49,7 +49,7 @@ export const Address = ({
 };
 
 export const MetamaskStatus = () => {
-  const MM = useMetaMask();
+  const MM = useConnector();
   const [isMobile, setIsMobile] = useState<boolean>();
   const [step, setStep] = useState(0);
 

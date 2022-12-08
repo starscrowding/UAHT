@@ -1,19 +1,18 @@
 import {NextPage} from 'next';
 import Head from 'next/head';
 import {Container, Row, Col, Text, Loading} from '@nextui-org/react';
-import {useMetaMask} from 'metamask-react';
 import {FaRegQuestionCircle} from 'react-icons/fa';
 import {BASE, CONTRACT, INFO, FAQ} from '@space/hooks/api';
 import {Logo} from '@space/components/Logo';
 import {Presentation} from '@space/components/Presentation';
 import {MetamaskStatus} from '@space/components/Metamask';
-import {Wallet} from '@space/components/Wallet';
+import {Wallet, useConnector} from '@space/components/Wallet';
 import {Info} from '@space/components/Info';
 import {Footer} from '@space/components/Footer';
-import styles from '../styles/home.module.scss';
+import styles from '../styles/index.module.scss';
 
 const Home: NextPage = () => {
-  const MM = useMetaMask();
+  const MM = useConnector();
   return (
     <>
       <Head>

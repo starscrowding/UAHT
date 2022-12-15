@@ -2,7 +2,7 @@ import {useRouter} from 'next/router';
 import {ethers} from 'ethers';
 import {Row, Text, Modal, Button} from '@nextui-org/react';
 import {useConnector} from '@space/components/Wallet';
-import {Address} from '@space/components/Metamask';
+import {Address} from '@space/components/Wallet/common';
 import UAHT_ABI from '@space/contracts/UAHT.abi.json';
 import {ADDRESS} from '@space/hooks/api';
 import styles from './wallet.module.scss';
@@ -18,8 +18,8 @@ export const Actions = () => {
 export const AllowanceModal = () => {
   const MM = useConnector();
   const router = useRouter();
-  const web3Provider = new ethers.providers.Web3Provider(MM.ethereum);
-  const signer = web3Provider.getSigner();
+  const web3Provider = MM.provider;
+  const signer = MM.signer || web3Provider;
   const uaht = new ethers.Contract(ADDRESS, UAHT_ABI, signer);
 
   const approve = async () => {

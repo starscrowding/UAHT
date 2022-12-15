@@ -6,11 +6,10 @@ import {useConnector} from '@space/components/Wallet';
 import {GoVerified} from 'react-icons/go';
 import {ADDRESS, DAO_ADDRESS, DAO} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
-import {Address, POLYGON_ID} from '../Metamask';
 import {MINIMUM} from './constants';
 import {useInit, useSign, useValidateCode, useValidateId} from './hooks';
 import {getStamp, createCode} from './helpers';
-import {Empty, VerificationModal} from './common';
+import {VerificationModal, Address} from './common';
 import {Fiat} from './fiat.component';
 import {Ex} from './ex.component';
 import {Trade} from './trade.component';
@@ -54,10 +53,6 @@ export const Wallet = () => {
   }, [setSignature]);
 
   useInit({resource, setCode, setId, provider, setBalance, setMatic, setReserve, setVerified, MM});
-
-  if (MM.chainId !== POLYGON_ID) {
-    return <Empty {...{MM}} />;
-  }
 
   return (
     <Card className={styles.wallet}>

@@ -4,8 +4,14 @@ import {AppProps} from 'next/app';
 import {createTheme, NextUIProvider} from '@nextui-org/react';
 import {ThemeProvider as NextThemesProvider} from 'next-themes';
 import Script from 'next/script';
-import {MetaMaskProvider} from 'metamask-react';
-import {HOST, DAO} from '../hooks/api';
+import {
+  wagmiClient,
+  ethereumClient,
+  WagmiConfig,
+  Web3Modal,
+  WALLET_CONNECT,
+} from '@space/components/Wallet/connector';
+import {HOST, DAO, WALLET_CONNECT as PROGECT_ID} from '../hooks/api';
 import variables from '@space/styles/variables.module.scss';
 
 const baseTheme = {
@@ -80,16 +86,17 @@ function SpaceApp({Component, pageProps}: AppProps) {
         }}
       >
         <NextUIProvider>
-          <MetaMaskProvider>
+          <WagmiConfig client={wagmiClient}>
             <Component {...pageProps} />
             <Script
               async
               src="https://www.googletagmanager.com/gtag/js?id=G-2LWYCR888X"
               onLoad={onLoad}
             />
-          </MetaMaskProvider>
+          </WagmiConfig>
         </NextUIProvider>
       </NextThemesProvider>
+      <Web3Modal projectId={WALLET_CONNECT} ethereumClient={ethereumClient} themeMode="dark" />
     </Sentry.ErrorBoundary>
   );
 }

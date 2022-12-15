@@ -13,6 +13,7 @@ export const INFO = `https://t.me/uaht_info`;
 export const FAQ = `${CODE}/blob/dev/FAQ.md`;
 export const DAO = 'https://t.me/uaht_group';
 export const TOKEN_LIST = `${BASE}/tokenlist.json`;
+export const WALLET_CONNECT = 'abf8b212906905d826da0549a00a0fd2';
 export const ENDPOINT = {
   token: {
     set: '/api/token/set',

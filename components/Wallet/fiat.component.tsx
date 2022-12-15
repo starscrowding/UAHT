@@ -2,10 +2,9 @@ import {useState} from 'react';
 import classNames from 'classnames';
 import {Row, Button, Input, Radio, Text, Checkbox} from '@nextui-org/react';
 import {Info} from '@space/components/Info';
-import {Address} from '../Metamask';
 import {PROVIDERS} from './constants';
 import {createCode} from './helpers';
-import {IO, RequestButton, Tips, SignText} from './common';
+import {IO, RequestButton, Tips, SignText, Address} from './common';
 import styles from './wallet.module.scss';
 
 export const Fiat = ({

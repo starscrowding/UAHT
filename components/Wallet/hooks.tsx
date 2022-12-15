@@ -26,7 +26,7 @@ export const useInit = ({
 
   useEffect(() => {
     const balanceOf = async () => {
-      const web3Provider = new ethers.providers.Web3Provider(MM.ethereum);
+      const web3Provider = MM.provider;
       const uaht = new ethers.Contract(ADDRESS, UAHT_ABI, web3Provider);
       try {
         const [balance, gas] = await Promise.all([
@@ -62,28 +62,29 @@ export const useInit = ({
 };
 
 export const useAddToken = ({MM}: any) => async () => {
-  try {
-    await MM.ethereum.request({
-      method: 'wallet_watchAsset',
-      params: {
-        type: 'ERC20',
-        options: {
-          address: ADDRESS,
-          symbol: 'UAHT',
-          decimals: 2,
-          image: 'https://uaht.io/icon.png',
+  if (MM.ethereum) {
+    try {
+      await MM.ethereum.request({
+        method: 'wallet_watchAsset',
+        params: {
+          type: 'ERC20',
+          options: {
+            address: ADDRESS,
+            symbol: 'UAHT',
+            decimals: 2,
+            image: 'https://uaht.io/icon.png',
+          },
         },
-      },
-    });
-  } catch (e) {
-    console.log(e);
+      });
+    } catch (e) {
+      console.log(e);
+    }
   }
 };
 
 export const useSign = ({MM, setSignature}: any) => async (msg: string) => {
   try {
-    const provider = new ethers.providers.Web3Provider(MM.ethereum);
-    const signer = provider.getSigner();
+    const signer = MM.signer;
     const signedMessage = await signer.signMessage(msg);
     setSignature(signedMessage);
   } catch (e) {

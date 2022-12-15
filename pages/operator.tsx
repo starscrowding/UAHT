@@ -3,9 +3,8 @@ import {NextPage} from 'next';
 import {ethers} from 'ethers';
 import UAHT_DAO_ABI from '@space/contracts/UAHT_DAO.abi.json';
 import {Container, Row, Spacer, Card, Button, Input, Text} from '@nextui-org/react';
-import {useConnector} from '@space/components/Wallet';
+import {useConnector, Connect} from '@space/components/Wallet';
 import {RESOURCES, PROVIDERS} from '@space/components/Wallet/constants';
-import {MetamaskStatus} from '@space/components/Metamask';
 import {parseCode, validateSignature} from '@space/components/Wallet/helpers';
 import {CONTRACT, DAO_CONTRACT, DAO_ADDRESS, RESERVE_URL} from '@space/hooks/api';
 import styles from '../styles/index.module.scss';
@@ -45,7 +44,7 @@ const Operator: NextPage = () => {
   useEffect(() => {
     if (MM.status === 'connected') {
       const checkOperator = async () => {
-        const web3Provider = new ethers.providers.Web3Provider(MM.ethereum);
+        const web3Provider = MM.provider;
         const uahtDao = new ethers.Contract(DAO_ADDRESS, UAHT_DAO_ABI, web3Provider);
         try {
           const op = await uahtDao.operators(MM.account);
@@ -67,8 +66,7 @@ const Operator: NextPage = () => {
   return (
     <Container className={styles.container}>
       <Row justify="flex-end" align="center">
-        <MetamaskStatus />
-        <div className={styles.metamask} title="MetaMask" />
+        <Connect />
       </Row>
       {!isOperator || MM.status !== 'connected' ? (
         <Row justify="center" align="center" className={styles.m1}>

@@ -1,10 +1,9 @@
-import {ReactElement} from 'react';
+import {ReactElement, useState} from 'react';
 import classNames from 'classnames';
-import {Card, Row, Button, Container, Text, Modal, Input} from '@nextui-org/react';
-import {FaTelegramPlane} from 'react-icons/fa';
+import {Row, Button, Text, Modal, Input} from '@nextui-org/react';
+import {FaTelegramPlane, FaCopy, FaCheck} from 'react-icons/fa';
 import {TELEGRAM} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
-import {POLYGON, Address} from '../Metamask';
 import {MINIMUM} from './constants';
 import styles from './wallet.module.scss';
 
@@ -62,23 +61,6 @@ export const RequestButton = ({
     Запит {!disabled ? <span className={styles.ml1}>👉</span> : null}
   </Button>
 );
-
-export const Empty = ({MM}: any) => {
-  return (
-    <Card className={styles.wallet}>
-      <Container>
-        <Row className={styles.row} justify="flex-start" align="center" wrap="wrap">
-          Для користування треба активація мережі Polygon
-        </Row>
-        <Row className={styles.row} justify="flex-start" align="center" wrap="wrap">
-          <Button className={styles.button} size="sm" auto onClick={() => MM.addChain(POLYGON)}>
-            Додати Polygon
-          </Button>
-        </Row>
-      </Container>
-    </Card>
-  );
-};
 
 export const VerificationModal = ({vModal, setVModal}: any) => {
   return (
@@ -152,5 +134,35 @@ export const Tips = ({
       />
       <Info text={infoText} className={styles.mr1} />
     </>
+  );
+};
+
+export const Address = ({
+  account = '',
+  className,
+  name,
+}: {
+  account: string;
+  className?: string;
+  name?: string;
+}) => {
+  const [state, setState] = useState('ready');
+  return (
+    <a
+      className={classNames(styles.copy, className)}
+      onClick={async () => {
+        try {
+          await navigator.clipboard.writeText(account);
+        } catch (e) {
+          prompt('Копіювати:', account);
+        } finally {
+          setState('done');
+          setTimeout(() => setState('ready'), 1234);
+        }
+      }}
+    >
+      {state === 'done' ? <FaCheck /> : <FaCopy />}{' '}
+      {name || `${account?.slice(0, 4)}...${account?.slice(-4)}`}
+    </a>
   );
 };

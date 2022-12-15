@@ -5,11 +5,10 @@ import {Row, Button, Input, Spacer} from '@nextui-org/react';
 import {GoVerified, GoUnverified} from 'react-icons/go';
 import {api, DAO, DAO_CONTRACT, RESERVE, CONTRACT} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
-import {SignText} from './common';
+import {SignText, Address} from './common';
 import {useSign} from './hooks';
 import {validateSignature} from './helpers';
 import styles from './wallet.module.scss';
-import {Address} from '../Metamask';
 
 export const Dao = () => {
   const MM = useConnector();

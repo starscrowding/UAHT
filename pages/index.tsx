@@ -5,8 +5,7 @@ import {FaRegQuestionCircle} from 'react-icons/fa';
 import {BASE, CONTRACT, INFO, FAQ} from '@space/hooks/api';
 import {Logo} from '@space/components/Logo';
 import {Presentation} from '@space/components/Presentation';
-import {MetamaskStatus} from '@space/components/Metamask';
-import {Wallet, useConnector} from '@space/components/Wallet';
+import {Wallet, useConnector, Connect} from '@space/components/Wallet';
 import {Info} from '@space/components/Info';
 import {Footer} from '@space/components/Footer';
 import styles from '../styles/index.module.scss';
@@ -29,8 +28,7 @@ const Home: NextPage = () => {
           <main>
             <section>
               <Row justify="flex-end" align="center">
-                <MetamaskStatus />
-                <div className={styles.metamask} title="MetaMask" />
+                <Connect />
               </Row>
               <Row justify="center" align="center">
                 <Logo href={CONTRACT} target="_blank" />
@@ -50,7 +48,7 @@ const Home: NextPage = () => {
                 </Text>
                 <Info link={INFO} className={styles.ml05} />
               </Row>
-              {MM.status === 'initializing' ? (
+              {!MM.status || MM.status === 'reconnecting' ? (
                 <Row justify="center" align="center" css={{minHeight: '300px'}}>
                   <Loading type="points" />
                 </Row>

@@ -13,9 +13,11 @@ export const Token = () => {
 
   return (
     <Row className={styles.row} justify="flex-start" align="center" wrap="wrap">
-      <Button className={styles.button} size="sm" auto onClick={() => addToken()}>
-        Додати в Metamask
-      </Button>
+      {MM.ethereum ? (
+        <Button className={styles.button} size="sm" auto onClick={() => addToken()}>
+          Додати в Metamask
+        </Button>
+      ) : null}
       <Button
         className={styles.button}
         size="sm"

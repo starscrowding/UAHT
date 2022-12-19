@@ -12,6 +12,7 @@ import styles from '../styles/index.module.scss';
 
 const Home: NextPage = () => {
   const MM = useConnector();
+
   return (
     <>
       <Head>
@@ -48,13 +49,15 @@ const Home: NextPage = () => {
                 </Text>
                 <Info link={INFO} className={styles.ml05} />
               </Row>
-              {!MM.status || MM.status === 'reconnecting' ? (
-                <Row justify="center" align="center" css={{minHeight: '300px'}}>
+              <Row justify="center" align="center" css={{minHeight: '250px'}}>
+                {!MM.status || MM.status === 'reconnecting' || MM.status === 'connecting' ? (
                   <Loading type="points" />
-                </Row>
-              ) : (
-                <>{MM.status === 'connected' ? <Wallet /> : <Presentation />}</>
-              )}
+                ) : MM.status === 'connected' ? (
+                  <Wallet />
+                ) : (
+                  <Presentation />
+                )}
+              </Row>
             </section>
           </main>
           <Footer />

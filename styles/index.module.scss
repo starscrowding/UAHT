@@ -4,17 +4,6 @@
   padding: 0 2rem;
 }
 
-.metamask {
-  width: 33px;
-  height: 33px;
-  background-color: #000000;
-  background-image: url('/metamask.svg');
-  background-size: contain;
-  background-repeat: no-repeat;
-  display: inline-block;
-  margin: 5px;
-}
-
 @media only screen and (max-width: 960px) {
   .container {
     max-width: 100%;

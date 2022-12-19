@@ -4,7 +4,7 @@ import {ethers} from 'ethers';
 import UAHT_DAO_ABI from '@space/contracts/UAHT_DAO.abi.json';
 import {Container, Row, Spacer, Card, Button, Input, Text} from '@nextui-org/react';
 import {useConnector, Connect} from '@space/components/Wallet';
-import {RESOURCES, PROVIDERS} from '@space/components/Wallet/constants';
+import {RESOURCES} from '@space/components/Wallet/constants';
 import {parseCode, validateSignature} from '@space/components/Wallet/helpers';
 import {CONTRACT, DAO_CONTRACT, DAO_ADDRESS, RESERVE_URL} from '@space/hooks/api';
 import styles from '../styles/index.module.scss';
@@ -22,7 +22,7 @@ const Operator: NextPage = () => {
   }, [code]);
   const source = useMemo(() => {
     if (trx && trx.source) {
-      return RESOURCES[trx.source] || PROVIDERS[trx.source];
+      return RESOURCES[trx.source];
     }
   }, [trx]);
   const expired = useMemo(() => {

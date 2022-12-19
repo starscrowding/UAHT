@@ -7,10 +7,9 @@ import {GoVerified} from 'react-icons/go';
 import {ADDRESS, DAO_ADDRESS, DAO} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
 import {MINIMUM} from './constants';
-import {useInit, useSign, useValidateCode, useValidateId} from './hooks';
+import {useInit, useSign, useValidateCode} from './hooks';
 import {getStamp, createCode} from './helpers';
 import {VerificationModal, Address} from './common';
-import {Fiat} from './fiat.component';
 import {Ex} from './ex.component';
 import {Trade} from './trade.component';
 import {P2P, BANK} from './p2p.component';
@@ -28,18 +27,14 @@ export const Wallet = () => {
   const [reserve, setReserve] = useState();
   const [amount, setAmount] = useState<number | string>(MINIMUM);
   const [resource, setResource] = useState('');
-  const [provider, setProvider] = useState('');
   const [code, setCode] = useState('');
   const [signature, setSignature] = useState('');
-  const [fiat, setFiat] = useState(false);
-  const [id, setId] = useState('');
   const [varified, setVerified] = useState(false);
   const [vModal, setVModal] = useState('');
   const stamp = useMemo(() => getStamp(), []);
 
   const sign = useSign({MM, setSignature});
   const validateCode = useValidateCode({resource, setCode});
-  const validateId = useValidateId({provider, setId});
 
   const onAmountChange = useCallback(
     value => {
@@ -52,7 +47,7 @@ export const Wallet = () => {
     setSignature('');
   }, [setSignature]);
 
-  useInit({resource, setCode, setId, provider, setBalance, setMatic, setReserve, setVerified, MM});
+  useInit({resource, setCode, setBalance, setMatic, setReserve, setVerified, MM});
 
   return (
     <Card className={styles.wallet}>
@@ -164,14 +159,7 @@ export const Wallet = () => {
             </Button.Group>
             <div className={classNames(styles.flex, styles.ac)}>
               <Text small color="grey">
-                партнерський пул:
-                <select className={styles.partner} name="partner">
-                  {['freelook'].map(p => (
-                    <option key={p} value={p}>
-                      {p}
-                    </option>
-                  ))}
-                </select>
+                партнерський пул
               </Text>
               <Info
                 className={styles.partner}
@@ -186,66 +174,26 @@ export const Wallet = () => {
               />
             </div>
           </Row>
-          <Row className={styles.mv1} justify="flex-start" align="center" wrap="wrap">
-            <a onClick={() => setFiat(false)} className={classNames({[styles.underline]: !fiat})}>
-              Біржа
-            </a>
-            <Switch
-              className={styles.switch}
-              checked={fiat}
-              onChange={() => {
-                reset();
-                setFiat(!fiat);
-              }}
-              icon={<>₴</>}
-            />
-            <a onClick={() => setFiat(true)} className={classNames({[styles.underline]: fiat})}>
-              Фіат
-            </a>
-          </Row>
-          {fiat ? (
-            <Fiat
-              {...{
-                action,
-                balance,
-                provider,
-                setProvider,
-                reserve,
-                MM,
-                signature,
-                id,
-                validateId,
-                amount,
-                setAmount,
-                onAmountChange,
-                priority,
-                setPriority,
-                stamp,
-                sign,
-              }}
-            />
-          ) : (
-            <Ex
-              {...{
-                action,
-                balance,
-                resource,
-                setResource,
-                reserve,
-                MM,
-                signature,
-                code,
-                validateCode,
-                amount,
-                setAmount,
-                onAmountChange,
-                priority,
-                setPriority,
-                stamp,
-                sign,
-              }}
-            />
-          )}
+          <Ex
+            {...{
+              action,
+              balance,
+              resource,
+              setResource,
+              reserve,
+              MM,
+              signature,
+              code,
+              validateCode,
+              amount,
+              setAmount,
+              onAmountChange,
+              priority,
+              setPriority,
+              stamp,
+              sign,
+            }}
+          />
         </Collapse>
         <Collapse
           expanded={false}

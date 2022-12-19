@@ -3,13 +3,11 @@ import {ethers} from 'ethers';
 import UAHT_ABI from '@space/contracts/UAHT.abi.json';
 import {api, ADDRESS, RESERVE} from '@space/hooks/api';
 import {precision} from './helpers';
-import {PROVIDERS, RESOURCES, MIN_CODE_LENGTH} from './constants';
+import {RESOURCES, MIN_CODE_LENGTH} from './constants';
 
 export const useInit = ({
   resource,
   setCode,
-  setId,
-  provider,
   setBalance,
   setMatic,
   setReserve,
@@ -19,10 +17,6 @@ export const useInit = ({
   useEffect(() => {
     setCode('');
   }, [resource, setCode]);
-
-  useEffect(() => {
-    setId('');
-  }, [provider, setId]);
 
   useEffect(() => {
     const balanceOf = async () => {
@@ -107,16 +101,4 @@ export const useValidateCode = ({resource, setCode}: any) =>
       }
     },
     [setCode, resource]
-  );
-
-export const useValidateId = ({provider, setId}: any) =>
-  useCallback(
-    value => {
-      if (value && PROVIDERS[provider].validator.test(value)) {
-        setId(value.replace(/ /g, ''));
-      } else {
-        setId('');
-      }
-    },
-    [setId, provider]
   );

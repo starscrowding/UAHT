@@ -1,4 +1,4 @@
-## Frequently asked questions | FAQ
+## Frequently asked questions | [UK](https://github.com/starscrowding/UAHT/blob/dev/%D0%A7%D0%B0%D0%9F%D0%B8.md)
  
 + **What is UAHT Token?**
 

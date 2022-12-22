@@ -1,6 +1,6 @@
 import {useCallback, useState, useMemo} from 'react';
 import classNames from 'classnames';
-import {Card, Row, Text, Button, Collapse, Switch} from '@nextui-org/react';
+import {Card, Row, Text, Button, Collapse} from '@nextui-org/react';
 import Image from 'next/image';
 import {useConnector} from '@space/components/Wallet';
 import {GoVerified} from 'react-icons/go';

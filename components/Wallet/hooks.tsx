@@ -1,7 +1,8 @@
-import {useEffect, useCallback} from 'react';
+import {useEffect, useCallback, useMemo} from 'react';
 import {ethers} from 'ethers';
 import UAHT_ABI from '@space/contracts/UAHT.abi.json';
 import {api, ADDRESS, RESERVE} from '@space/hooks/api';
+import {useConnector} from '@space/components/Wallet';
 import {precision} from './helpers';
 import {RESOURCES, MIN_CODE_LENGTH} from './constants';
 
@@ -102,3 +103,12 @@ export const useValidateCode = ({resource, setCode}: any) =>
     },
     [setCode, resource]
   );
+
+export const useUaht = () => {
+  const MM = useConnector();
+  return useMemo(() => {
+    const web3Provider = MM.provider;
+    const signer = MM.signer || web3Provider;
+    return new ethers.Contract(ADDRESS, UAHT_ABI, signer);
+  }, [MM]);
+};

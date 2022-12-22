@@ -64,7 +64,13 @@ export const RequestButton = ({
 
 export const VerificationModal = ({vModal, setVModal}: any) => {
   return (
-    <Modal closeButton aria-labelledby="v-modal" open={!!vModal} onClose={() => setVModal('')}>
+    <Modal
+      preventClose
+      closeButton
+      aria-labelledby="v-modal"
+      open={!!vModal}
+      onClose={() => setVModal('')}
+    >
       <Modal.Header>
         <Text size={18}>Код згенеровано ✅</Text>
       </Modal.Header>

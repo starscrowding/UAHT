@@ -12,7 +12,7 @@ import {getStamp, createCode} from './helpers';
 import {VerificationModal, Address} from './common';
 import {Ex} from './ex.component';
 import {Trade} from './trade.component';
-import {P2P, BANK} from './p2p.component';
+import {P2P, FIAT} from './p2p.component';
 import {Token} from './token.component';
 import {Dao} from './dao.component';
 import {Actions} from './actions.component';
@@ -245,9 +245,9 @@ export const Wallet = () => {
           title={<div className={styles.name}>💳 P2P перекази</div>}
           subtitle={
             <Row className={styles.address}>
-              {BANK.map(bank => (
-                <Text key={bank.name} className={styles.pl05} color={bank.color}>
-                  {bank.name}
+              {FIAT.map(p => (
+                <Text key={p.name} className={styles.pl05} color={p.color}>
+                  {p.name}
                 </Text>
               ))}
             </Row>

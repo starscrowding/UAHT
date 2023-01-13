@@ -13,12 +13,30 @@ import styles from './wallet.module.scss';
 
 export const MIN_GAS = 0.1;
 export const MIN_FEE = 20;
-export const MIN_AMOUNT = 10 * MIN_FEE;
+export const MIN_AMOUNT = MIN_FEE * 10;
 export const MAX_AMOUNT = 25 * 10 ** 3;
 
-export const BANK = [
-  {name: 'privat24', color: '#75af26'},
-  {name: 'mono', color: '#fa5255'},
+export const cardValidator = (c: string) => /^[0-9]+$/.test(c) && c?.length > 13;
+
+export const FIAT = [
+  {
+    name: 'privat24',
+    color: '#75af26',
+    help: 'https://privat24.ua/',
+    validator: {test: cardValidator} as RegExp,
+  },
+  {
+    name: 'mono',
+    color: '#fa5255',
+    help: 'https://www.monobank.ua/',
+    validator: {test: cardValidator} as RegExp,
+  },
+  {
+    name: 'geopay',
+    color: '#d5d6d8',
+    help: 'https://geo-pay.net/',
+    validator: {test: v => v?.length > 60} as RegExp,
+  },
 ];
 
 export const CHAIN = [{name: 'polygon', color: '#7b3fe5'}];
@@ -38,20 +56,20 @@ export const Agent = () => {
   );
 };
 
-export const CardInput = ({card, setCard, disabled = false}: any) => {
+export const AccountInput = ({id, setId, provider, disabled = false}: any) => {
   return (
     <Input
       aria-label="card"
       underlined
       color="secondary"
-      placeholder="Номер карти"
+      placeholder={`Рахунок ${provider?.name || ''}`}
       width="200px"
-      value={card}
+      value={id}
       disabled={!!disabled}
-      onChange={e => setCard((e?.target?.value || '').replaceAll(' ', ''))}
+      onChange={e => setId((e?.target?.value || '').replaceAll(' ', ''))}
       onBlur={() => {
-        if (!/^[0-9]+$/.test(card) || card?.length < 13) {
-          setCard('');
+        if (!provider?.validator?.test(id)) {
+          setId('');
         }
       }}
     />
@@ -75,29 +93,29 @@ export const P2P = ({balance, gas}: any) => {
   const [out, setOut] = useState('polygon');
   const [priority, setPriority] = useState(MIN_FEE);
   const [amount, setAmount] = useState(MIN_AMOUNT);
-  const [card, setCard] = useState('');
+  const [id, setId] = useState('');
   const [signature, setSignature] = useState('');
   const [validSignature, setValidSignature] = useState(false);
   const sign = useSign({MM, setSignature});
   const stamp = useMemo(() => getStamp(), []);
   const [code, setCode] = useState('');
 
-  const listIn = useCallback(() => [...BANK, ...CHAIN], []);
+  const listIn = useCallback(() => [...FIAT, ...CHAIN], []);
   const listOut = useCallback(
     (i = int) => {
-      return BANK.some(b => b.name === i) ? CHAIN : BANK;
+      return FIAT.some(p => p.name === i) ? CHAIN : FIAT;
     },
     [int]
   );
 
   const reset = useCallback(() => {
     setSignature('');
-    setCard('');
+    setId('');
     setCode('');
     setValidSignature(false);
     setAmount(MIN_AMOUNT);
     setPriority(MIN_FEE);
-  }, [setSignature, setCard, setCode, setValidSignature, setAmount, setPriority]);
+  }, [setSignature, setId, setCode, setValidSignature, setAmount, setPriority]);
 
   const trx = useMemo(() => {
     setValidSignature(false);
@@ -106,6 +124,13 @@ export const P2P = ({balance, gas}: any) => {
     }
     return {} as any;
   }, [code]);
+
+  const trxType = useMemo(() => {
+    if (trx) {
+      return trx?.type?.split('*')[1]?.split('-');
+    }
+    return [];
+  }, [trx]);
 
   useEffect(() => {
     validateSignature({
@@ -194,14 +219,15 @@ export const P2P = ({balance, gas}: any) => {
               onChange={e => {
                 const a = +e?.target?.value;
                 setAmount(a);
+                setPriority(Math.max(Math.round(a / 100), MIN_FEE));
               }}
               onBlur={() => {
                 const a = Math.max(
                   MIN_AMOUNT,
-                  Math.min(int === 'polygon' ? Math.floor(balance) : amount, MAX_AMOUNT)
+                  Math.min(int === 'polygon' ? Math.floor(balance) : amount, amount, MAX_AMOUNT)
                 );
                 setAmount(a);
-                setPriority(Math.max(Math.round(a / 100), MIN_FEE));
+                setPriority(Math.max(priority, MIN_FEE));
               }}
             />
             <Tips
@@ -209,7 +235,7 @@ export const P2P = ({balance, gas}: any) => {
                 priority,
                 setPriority,
                 amount,
-                min: Math.max(Math.round(amount / 100), MIN_FEE),
+                min: MIN_FEE,
                 infoText: '👌 чай - винагорода контрагенту з суми запиту',
                 disabled: !!signature,
               }}
@@ -217,7 +243,9 @@ export const P2P = ({balance, gas}: any) => {
           </Row>
           {int === 'polygon' ? (
             <Row className={styles.mv1}>
-              <CardInput {...{card, setCard, disabled: !!signature}} />
+              <AccountInput
+                {...{id, setId, provider: FIAT.find(p => p.name === out), disabled: !!signature}}
+              />
             </Row>
           ) : null}
           <Spacer />
@@ -227,14 +255,14 @@ export const P2P = ({balance, gas}: any) => {
                 className={styles.button}
                 size="sm"
                 auto
-                disabled={!amount || (int === 'polygon' && !card) || !!signature}
+                disabled={!amount || (int === 'polygon' && !id) || !!signature}
                 onClick={() =>
                   sign(
                     createCode({
                       priority,
                       stamp,
                       type: `p2p*${int}-${out}`,
-                      source: card,
+                      source: id,
                       value: amount?.toString(),
                       account: MM.account,
                       encode: false,
@@ -259,7 +287,7 @@ export const P2P = ({balance, gas}: any) => {
                     priority,
                     stamp,
                     type: `p2p*${int}-${out}`,
-                    source: card,
+                    source: id,
                     value: amount?.toString(),
                     account: MM.account,
                     signature,
@@ -298,8 +326,7 @@ export const P2P = ({balance, gas}: any) => {
                   <b>Тип:</b>&nbsp;
                   <Info className={styles.partner} text="Вхідний переказ" />
                   &nbsp;
-                  <Text>{trx.type.split('*')[1].split('-')[0]}</Text> →{' '}
-                  <Text>{trx.type.split('*')[1].split('-')[1]}</Text>
+                  <Text>{trxType[0]}</Text> → <Text>{trxType[1]}</Text>
                   <Info className={styles.partner} text="Вихідний переказ" />
                 </Row>
                 <Row>
@@ -334,14 +361,20 @@ export const P2P = ({balance, gas}: any) => {
                 </Row>
                 {trx.source && (
                   <Row>
-                    <b>Карта:</b>&nbsp;{trx.source}
+                    <b>Рахунок:</b>&nbsp;
+                    <Address account={trx.source} />
                     <Info
                       className={styles.ml05}
                       text={
                         <span>
-                          ℹ️ Перевірити карту можна у додатку банка
-                          <br />
-                          Рекомендоване призначення: Повернення боргу
+                          ℹ️ Перевірити рахунок можна на{' '}
+                          <a
+                            target="_blank"
+                            rel="noreferrer"
+                            href={FIAT.find(p => p.name === trxType[1])?.help}
+                          >
+                            сайті провайдера
+                          </a>
                         </span>
                       }
                     />
@@ -352,7 +385,14 @@ export const P2P = ({balance, gas}: any) => {
                     {!trx.source && (
                       <Row align="center">
                         Додай свій&nbsp;
-                        <CardInput {...{card, setCard, disabled: !!signature}} />
+                        <AccountInput
+                          {...{
+                            id,
+                            setId,
+                            provider: FIAT.find(p => p.name === trxType[0]),
+                            disabled: !!signature,
+                          }}
+                        />
                       </Row>
                     )}
                     <Row className={styles.mv1}>
@@ -368,7 +408,7 @@ export const P2P = ({balance, gas}: any) => {
                             className={styles.button}
                             size="sm"
                             auto
-                            disabled={!!signature || !(trx.source || card)}
+                            disabled={!!signature || !(trx.source || id)}
                             onClick={() => {
                               // eslint-disable-next-line
                               useSign({
@@ -377,7 +417,7 @@ export const P2P = ({balance, gas}: any) => {
                                   setCode(
                                     createCode({
                                       ...trx,
-                                      source: card || trx.source,
+                                      source: id || trx.source,
                                       payload: MM.account,
                                       signature,
                                     })
@@ -386,7 +426,7 @@ export const P2P = ({balance, gas}: any) => {
                               })(
                                 createCode({
                                   ...trx,
-                                  source: card || trx.source,
+                                  source: id || trx.source,
                                   payload: MM.account,
                                   encode: false,
                                 })

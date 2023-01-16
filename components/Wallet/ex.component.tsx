@@ -49,20 +49,25 @@ export const Ex = ({
       }
       I={
         <div>
+          <div>
+            <Text small color="grey">
+              🔐 довірче p2p-зберігання взаємозамінних кодів
+            </Text>
+          </div>
           <Row className={styles.mv1} align="center">
             <Input
               aria-label="code"
               underlined
               disabled={!resource}
               color="secondary"
-              placeholder={`${RESOURCES[resource]?.text || ''} Код UAH`}
+              placeholder={`${RESOURCES[resource]?.text || ''} UAH-код`}
               width="200px"
               value={code}
               onChange={e => validateCode(e?.target?.value)}
             />
             <Info link={RESOURCES[resource]?.help} className={styles.ml1} />
           </Row>
-          <Row align="center" className={styles.mt05}>
+          <Row align="center" className={styles.pt05}>
             <RequestButton disabled={!resource || !code} />
             {resource && code ? (
               <>
@@ -88,6 +93,11 @@ export const Ex = ({
       }
       O={
         <div>
+          <div>
+            <Text small color="grey">
+              🔐 обробка по черзі за наявністю обраного коду
+            </Text>
+          </div>
           <Row className={styles.mv1} align="center">
             <Input
               aria-label="sum"
@@ -104,6 +114,8 @@ export const Ex = ({
               onBlur={() => onAmountChange(amount)}
             />
             <Tips {...{priority, setPriority, amount, disabled: !!signature}} />
+          </Row>
+          <Row align="center" className={styles.pt05}>
             <Button
               className={styles.button}
               size="sm"
@@ -125,8 +137,6 @@ export const Ex = ({
             >
               <SignText />
             </Button>
-          </Row>
-          <Row align="center" className={styles.mt05}>
             <RequestButton disabled={!resource || !signature} />
             {resource && signature ? (
               <>
@@ -146,11 +156,6 @@ export const Ex = ({
               </>
             ) : null}
           </Row>
-          <div>
-            <Text small color="grey">
-              💸 Обробка по черзі за наявністю обраного резерву
-            </Text>
-          </div>
         </div>
       }
     />

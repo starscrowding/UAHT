@@ -197,6 +197,21 @@ export const Wallet = () => {
         </Collapse>
         <Collapse
           expanded={false}
+          title={<div className={styles.name}>💳 P2P перекази</div>}
+          subtitle={
+            <Row className={styles.address}>
+              {FIAT.map(p => (
+                <Text key={p.name} className={styles.pl05} color={p.color}>
+                  {p.name}
+                </Text>
+              ))}
+            </Row>
+          }
+        >
+          <P2P {...{balance, gas: matic}} />
+        </Collapse>
+        <Collapse
+          expanded={false}
           title={<div className={styles.name}>💰 Обмін / Торги</div>}
           subtitle={
             <Row className={styles.address}>
@@ -239,21 +254,6 @@ export const Wallet = () => {
           }
         >
           <Token />
-        </Collapse>
-        <Collapse
-          expanded={false}
-          title={<div className={styles.name}>💳 P2P перекази</div>}
-          subtitle={
-            <Row className={styles.address}>
-              {FIAT.map(p => (
-                <Text key={p.name} className={styles.pl05} color={p.color}>
-                  {p.name}
-                </Text>
-              ))}
-            </Row>
-          }
-        >
-          <P2P {...{balance, gas: matic}} />
         </Collapse>
         <Collapse
           expanded={false}

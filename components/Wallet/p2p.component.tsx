@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import {IoPerson} from 'react-icons/io5';
 import {FaTelegramPlane} from 'react-icons/fa';
 import {MdWarning} from 'react-icons/md';
-import {Button, Row, Col, Badge, Input, Spacer, Text} from '@nextui-org/react';
+import {Button, Row, Col, Badge, Input, Text} from '@nextui-org/react';
 import {useConnector} from '@space/components/Wallet';
 import {Info} from '@space/components/Info';
 import {RequestButton, SignText, Tips, Address} from './common';
@@ -165,11 +165,16 @@ export const P2P = ({balance, gas}: any) => {
         </Button.Group>
         <Info
           icon={<MdWarning color="yellow" />}
-          text="Платформа не є гарантом чи стороною p2p угоди та надає виключно технічні засоби для підписання."
+          text="Платформа не є гарантом чи стороною p2p угоди та надає виключно інформаційні послуги."
         />
       </Row>
       {step === 'p' ? (
         <Col className={styles.pv1}>
+          <div>
+            <Text small color="grey">
+              🔐 доручення на обробку коду
+            </Text>
+          </div>
           <Row align="center" className={styles.mv1}>
             <Info className={styles.partner} text="Вхідний переказ" />
             &nbsp;
@@ -236,7 +241,7 @@ export const P2P = ({balance, gas}: any) => {
                 setPriority,
                 amount,
                 min: MIN_FEE,
-                infoText: '👌 чай - винагорода контрагенту з суми запиту',
+
                 disabled: !!signature,
               }}
             />
@@ -248,8 +253,7 @@ export const P2P = ({balance, gas}: any) => {
               />
             </Row>
           ) : null}
-          <Spacer />
-          <Row align="center">
+          <Row align="center" className={styles.pt05}>
             {(int === 'polygon' && +gas >= MIN_GAS) || int !== 'polygon' ? (
               <Button
                 className={styles.button}
@@ -277,7 +281,6 @@ export const P2P = ({balance, gas}: any) => {
                 😞 газ {'<'} {MIN_GAS}
               </Text>
             )}
-            <Spacer x={0.5} />
             <RequestButton disabled={!signature} onClick={() => setStep('r')} />
             {signature ? (
               <>
@@ -306,6 +309,15 @@ export const P2P = ({balance, gas}: any) => {
       ) : null}
       {step === 'd' ? (
         <Col className={styles.pv1}>
+          <div>
+            <Text small color="grey">
+              🔐 угода може бути закріплена{' '}
+              <a href="https://paperless.com.ua/" target="_blank" rel="noreferrer">
+                paperless
+              </a>{' '}
+              на вимогу сторін
+            </Text>
+          </div>
           <Row align="center" className={styles.mv1}>
             <Input
               aria-label="code"

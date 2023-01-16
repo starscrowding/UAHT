@@ -47,6 +47,7 @@ export const RequestButton = ({
   onClick?: () => void;
 }) => (
   <Button
+    className={styles.button}
     size="sm"
     disabled={disabled}
     icon={<FaTelegramPlane size="21" />}
@@ -101,7 +102,7 @@ export const Tips = ({
   min = '0',
   disabled = false,
   helperText = 'чай',
-  infoText = '👌 чай - винагорода оператору з суми запиту, компенсує газ та визначає пріоритет обробки ⌛',
+  infoText = '👌 чай - винагорода з суми запиту, компенсує газ та визначає пріоритет обробки ⌛',
 }: any) => {
   return (
     <>

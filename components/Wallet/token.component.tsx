@@ -2,11 +2,10 @@ import {useCallback, useState} from 'react';
 import {useRouter} from 'next/router';
 import {Row, Button, Modal, Text, Input} from '@nextui-org/react';
 import {MdAddCircleOutline, MdQrCode} from 'react-icons/md';
-import {GoChecklist} from 'react-icons/go';
 import {FaDownload} from 'react-icons/fa';
 import {BiTransferAlt} from 'react-icons/bi';
 import {useConnector} from '@space/components/Wallet';
-import {ADDRESS, TOKEN_LIST, BASE} from '@space/hooks/api';
+import {ADDRESS, BASE} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
 import {QRCode} from './qr.component';
 import {useAddToken} from './hooks';
@@ -180,18 +179,6 @@ export const Token = () => {
             <MdAddCircleOutline size="18" />
           </Button>
         ) : null}
-        <Button
-          className={styles.button}
-          size="sm"
-          auto
-          flat
-          title="Токен List"
-          onClick={() => {
-            window.open(`https://tokenlists.org/token-list?url=${TOKEN_LIST}`, '_blank');
-          }}
-        >
-          <GoChecklist size="18" />
-        </Button>
         <Button
           className={styles.button}
           size="sm"

@@ -3,8 +3,8 @@ import classNames from 'classnames';
 import {Card, Row, Text, Button, Collapse} from '@nextui-org/react';
 import Image from 'next/image';
 import {useConnector} from '@space/components/Wallet';
-import {GoVerified} from 'react-icons/go';
-import {ADDRESS, DAO_ADDRESS, DAO} from '@space/hooks/api';
+import {GoVerified, GoChecklist} from 'react-icons/go';
+import {ADDRESS, TOKEN_LIST, DAO_ADDRESS, DAO} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
 import {MINIMUM} from './constants';
 import {useInit, useSign, useValidateCode} from './hooks';
@@ -198,9 +198,25 @@ export const Wallet = () => {
         <Collapse
           expanded={true}
           title={
-            <div className={styles.name}>
-              <Image src="/icon.png" width="15" height="15" alt="токен" /> Адреса токена:
-            </div>
+            <Row justify="space-between" align="center" wrap="wrap">
+              <div className={styles.name}>
+                <Image src="/icon.png" width="15" height="15" alt="токен" /> Адреса токена:
+              </div>
+              <div>
+                <Button
+                  className={styles.button}
+                  size="sm"
+                  auto
+                  light
+                  title="Токен List"
+                  onClick={() => {
+                    window.open(`https://tokenlists.org/token-list?url=${TOKEN_LIST}`, '_blank');
+                  }}
+                >
+                  <GoChecklist color="green" />
+                </Button>
+              </div>
+            </Row>
           }
           subtitle={
             <div className={styles.address}>

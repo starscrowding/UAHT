@@ -1,6 +1,8 @@
 import {useState} from 'react';
+import {ethers} from 'ethers';
 import {useRouter} from 'next/router';
-import {Row, Text, Modal, Button} from '@nextui-org/react';
+import {BiTransferAlt} from 'react-icons/bi';
+import {Row, Text, Modal, Button, Input} from '@nextui-org/react';
 import {Address} from '@space/components/Wallet/common';
 import {TransferAmount} from '@space/components/Wallet/token.component';
 import {useUaht} from './hooks';
@@ -11,7 +13,7 @@ export const Actions = () => {
   if (query?.action === 'approve' && query?.spender && query?.amount) {
     return <AllowanceModal />;
   }
-  if (query?.action === 'transfer' && query?.to) {
+  if (query?.action === 'transfer') {
     return <TransferModal />;
   }
   return null;
@@ -45,7 +47,7 @@ export const AllowanceModal = () => {
       </Modal.Header>
       <Modal.Body>
         <Row align="center" className={styles.mv1}>
-          Гаманець: <Address className={styles.ml1} account={router?.query?.spender as string} />
+          Адреса: <Address className={styles.ml1} account={router?.query?.spender as string} />
         </Row>
         <Row align="center" className={styles.mv1}>
           Сума: {router?.query?.amount}
@@ -61,13 +63,20 @@ export const AllowanceModal = () => {
 export const TransferModal = () => {
   const router = useRouter();
   const uaht = useUaht();
+  const [to, setTo] = useState<string>((router?.query?.to as unknown) as string);
   const [amount, setAmount] = useState<number | string>(
     (router?.query?.amount as unknown) as string
   );
 
+  const validateTo = () => {
+    if (!ethers.utils.isAddress(to)) {
+      setTo('');
+    }
+  };
+
   const tranfer = async () => {
     try {
-      await uaht.transfer(router?.query?.to, Number(amount) * 100);
+      await uaht.transfer(to, Number(amount) * 100);
     } catch (e) {
       console.log(e);
     } finally {
@@ -85,17 +94,32 @@ export const TransferModal = () => {
       onClose={() => router.replace('/')}
     >
       <Modal.Header>
-        <Text size={18}>💸 Зробити переказ</Text>
+        <Text size={18}>
+          <BiTransferAlt size="18" /> Зробити трансфер
+        </Text>
       </Modal.Header>
       <Modal.Body>
         <Row align="center" className={styles.mv1}>
-          Отримувач: <Address className={styles.ml1} account={router?.query?.to as string} />
+          Отримувач:{' '}
+          {router?.query?.to ? (
+            <Address className={styles.ml1} account={router?.query?.to as string} />
+          ) : (
+            <Input
+              aria-label="to"
+              underlined
+              color="secondary"
+              type="text"
+              value={to}
+              onChange={e => setTo(e?.target?.value)}
+              onBlur={() => validateTo()}
+            />
+          )}
         </Row>
         <Row align="center" className={styles.mv1}>
           <TransferAmount {...{amount, setAmount, disabled: !!router?.query?.amount}} />
         </Row>
         <Row align="center" justify="center" className={styles.mv1}>
-          <Button disabled={!router?.query?.to || !amount} onClick={() => tranfer()}>
+          <Button disabled={!to || !amount} onClick={() => tranfer()}>
             Відправити ➡️
           </Button>
         </Row>

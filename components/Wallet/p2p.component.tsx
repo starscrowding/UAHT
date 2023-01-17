@@ -77,7 +77,7 @@ export const AccountInput = ({id, setId, provider, disabled = false}: any) => {
 };
 
 export const InfoText = () => (
-  <Text color="grey">🧐 Перевір чи все 👌: контрагент має газ, баланс, перекази тощо.</Text>
+  <Text color="grey">🧐 Перевір чи все 👌: контрагент має газ, баланс, трансфери тощо.</Text>
 );
 
 export const WarnText = () => (
@@ -176,7 +176,7 @@ export const P2P = ({balance, gas}: any) => {
             </Text>
           </div>
           <Row align="center" className={styles.mv1}>
-            <Info className={styles.partner} text="Вхідний переказ" />
+            <Info className={styles.partner} text="Вхідна транзакція" />
             &nbsp;
             <select
               name="in"
@@ -209,7 +209,7 @@ export const P2P = ({balance, gas}: any) => {
                 </option>
               ))}
             </select>
-            <Info className={styles.partner} text="Вихідний переказ" />
+            <Info className={styles.partner} text="Вихідна транзакція" />
           </Row>
           <Row className={styles.mv1} align="center">
             <Input
@@ -336,10 +336,10 @@ export const P2P = ({balance, gas}: any) => {
               <Col className={styles.mv1}>
                 <Row align="center">
                   <b>Тип:</b>&nbsp;
-                  <Info className={styles.partner} text="Вхідний переказ" />
+                  <Info className={styles.partner} text="Вхідна транзакція" />
                   &nbsp;
                   <Text>{trxType[0]}</Text> → <Text>{trxType[1]}</Text>
-                  <Info className={styles.partner} text="Вихідний переказ" />
+                  <Info className={styles.partner} text="Вихідна транзакція" />
                 </Row>
                 <Row>
                   <b>Контрагент:</b>&nbsp;
@@ -352,7 +352,7 @@ export const P2P = ({balance, gas}: any) => {
                   />
                   <Info
                     className={styles.ml05}
-                    text="ℹ️ Перевірити гаманець можна в розділі ✨ Спільнота DAO"
+                    text="ℹ️ Перевірити адресу можна в розділі ✨ Спільнота DAO"
                   />
                 </Row>
                 <Row>
@@ -369,7 +369,7 @@ export const P2P = ({balance, gas}: any) => {
                 </Row>
                 <Row>
                   <b>Чай:</b>&nbsp;{trx.priority}{' '}
-                  <Info className={styles.ml05} text="ℹ️ Винагорода з суми запиту" />
+                  <Info className={styles.ml05} text="ℹ️ Винагорода відносно запиту" />
                 </Row>
                 {trx.source && (
                   <Row>
@@ -467,23 +467,36 @@ export const P2P = ({balance, gas}: any) => {
               {trx.payload ? (
                 <Col className={styles.mv1}>
                   {trx.account.toLowerCase() !== MM.account.toLowerCase() ? (
-                    <Col>
-                      <Row align="center" wrap="wrap">
-                        <b>1.</b>&nbsp;Надай&nbsp;
-                        <FaTelegramPlane color="lightblue" />
-                        &nbsp;код угоди&nbsp;
-                        <Address account={`#${code}`} />
-                        &nbsp;контрагенту та очікуй вхідний переказ 🤝
-                      </Row>
-                      <Row align="center" wrap="wrap">
-                        <b>2.</b>&nbsp;Візьми чай та зроби вихідний переказ на&nbsp;
-                        <Address account={trx.type.includes(ON_CHAIN) ? trx.source : trx.account} />
-                        &nbsp;💸
-                      </Row>
-                      <Row className={styles.mv1}>
-                        <WarnText />
-                      </Row>
-                    </Col>
+                    <>
+                      {trx.payload === MM.account ? (
+                        <Col>
+                          <Row align="center" wrap="wrap">
+                            <b>1.</b>&nbsp;Надай&nbsp;
+                            <FaTelegramPlane color="lightblue" />
+                            &nbsp;код угоди&nbsp;
+                            <Address account={`#${code}`} />
+                            &nbsp;контрагенту та очікуй вхідну транзакцію 🤝
+                          </Row>
+                          <Row align="center" wrap="wrap">
+                            <b>2.</b>&nbsp;Візьми чай та зроби вихідну транзакцію на&nbsp;
+                            <Address
+                              account={trx.type.includes(ON_CHAIN) ? trx.source : trx.account}
+                            />
+                            &nbsp;💸
+                          </Row>
+                          <Row className={styles.mv1}>
+                            <WarnText />
+                          </Row>
+                        </Col>
+                      ) : (
+                        <Col>
+                          <Row align="center" wrap="wrap">
+                            Посередник:&nbsp;
+                            <Address account={trx.payload} />
+                          </Row>
+                        </Col>
+                      )}
+                    </>
                   ) : (
                     <Col>
                       <Row className={styles.mv1}>
@@ -491,14 +504,14 @@ export const P2P = ({balance, gas}: any) => {
                       </Row>
                       <Row>👍 Даю згоду, тоді:</Row>
                       <Row align="center" wrap="wrap">
-                        <b>1.</b>&nbsp;Зроби вхідний переказ на&nbsp;
+                        <b>1.</b>&nbsp;Зроби вхідну транзакцію на&nbsp;
                         <Address account={trx.type.includes(ON_CHAIN) ? trx.payload : trx.source} />
                         &nbsp;та повідом&nbsp;
                         <FaTelegramPlane color="lightblue" />
                         &nbsp;контрагента 🤝
                       </Row>
                       <Row align="center" wrap="wrap">
-                        <b>2.</b>&nbsp;Очікуй вихідний переказ, контрагент візьме чай 💸
+                        <b>2.</b>&nbsp;Очікуй вихідну транзакцію, контрагент візьме чай 💸
                       </Row>
                       <Row className={styles.mv1}>
                         <WarnText />

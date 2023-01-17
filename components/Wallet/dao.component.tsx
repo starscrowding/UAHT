@@ -75,7 +75,7 @@ export const Dao = () => {
           underlined
           color="secondary"
           type="text"
-          placeholder="Верифікація гаманця"
+          placeholder="Верифікація адреси"
           width={verified !== undefined && account ? '123px' : '200px'}
           onChange={e => {
             setAccount(e?.target?.value || '');

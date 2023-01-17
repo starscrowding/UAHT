@@ -55,8 +55,8 @@ export const Wallet = () => {
         <Row className={styles.row} justify="flex-start" align="center" wrap="wrap">
           <div className={styles.name}>
             {' '}
-            <Image src="/polygon.ico" width="15" height="15" alt="Polygon" title="Polygon" />{' '}
-            Гаманець:
+            <Image src="/polygon.ico" width="15" height="15" alt="Polygon" title="Polygon" /> Адреса
+            ключа:
           </div>
           <Row align="center" className={styles.address}>
             <Text>{MM.account}</Text>
@@ -110,7 +110,7 @@ export const Wallet = () => {
                   <Text
                     color={matic > 0 ? 'success' : 'error'}
                     small
-                    title="Додати MATIC для переказів"
+                    title="Додати MATIC для операцій"
                     className={classNames(styles.pointer, styles.mr1)}
                     onClick={e => {
                       e?.preventDefault();
@@ -196,8 +196,32 @@ export const Wallet = () => {
           />
         </Collapse>
         <Collapse
+          expanded={true}
+          title={
+            <div className={styles.name}>
+              <Image src="/icon.png" width="15" height="15" alt="токен" /> Адреса токена:
+            </div>
+          }
+          subtitle={
+            <div className={styles.address}>
+              <Text
+                css={{
+                  textGradient: '45deg, $yellow600 10%, $blue600 50%',
+                }}
+              >
+                {ADDRESS}
+                <span className={styles.pl05} onClick={e => e?.stopPropagation?.()}>
+                  <Address account={ADDRESS} name=" " />
+                </span>
+              </Text>
+            </div>
+          }
+        >
+          <Token />
+        </Collapse>
+        <Collapse
           expanded={false}
-          title={<div className={styles.name}>💳 P2P перекази</div>}
+          title={<div className={styles.name}>💳 P2P транзакції</div>}
           subtitle={
             <Row className={styles.address}>
               {FIAT.map(p => (
@@ -230,30 +254,6 @@ export const Wallet = () => {
           }
         >
           <Trade />
-        </Collapse>
-        <Collapse
-          expanded={true}
-          title={
-            <div className={styles.name}>
-              <Image src="/icon.png" width="15" height="15" alt="токен" /> Адреса токена:
-            </div>
-          }
-          subtitle={
-            <div className={styles.address}>
-              <Text
-                css={{
-                  textGradient: '45deg, $yellow600 10%, $blue600 50%',
-                }}
-              >
-                {ADDRESS}
-                <span className={styles.pl05} onClick={e => e?.stopPropagation?.()}>
-                  <Address account={ADDRESS} name=" " />
-                </span>
-              </Text>
-            </div>
-          }
-        >
-          <Token />
         </Collapse>
         <Collapse
           expanded={false}

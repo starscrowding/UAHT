@@ -1,8 +1,10 @@
 import {useCallback, useState} from 'react';
+import {useRouter} from 'next/router';
 import {Row, Button, Modal, Text, Input} from '@nextui-org/react';
 import {MdAddCircleOutline, MdQrCode} from 'react-icons/md';
 import {GoChecklist} from 'react-icons/go';
 import {FaDownload} from 'react-icons/fa';
+import {BiTransferAlt} from 'react-icons/bi';
 import {useConnector} from '@space/components/Wallet';
 import {ADDRESS, TOKEN_LIST, BASE} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
@@ -158,6 +160,7 @@ export const StakingModal = ({showStakingModal, setShowStakingModal}: any) => {
 
 export const Token = () => {
   const MM = useConnector();
+  const router = useRouter();
   const addToken = useAddToken({MM});
   const [showQRModal, setShowQRModal] = useState(false);
   const [showStakingModal, setShowStakingModal] = useState(false);
@@ -188,6 +191,16 @@ export const Token = () => {
           }}
         >
           <GoChecklist size="18" />
+        </Button>
+        <Button
+          className={styles.button}
+          size="sm"
+          auto
+          flat
+          title="Зробити трансфер"
+          onClick={() => router.push('/?action=transfer')}
+        >
+          <BiTransferAlt size="18" />
         </Button>
         <Button
           className={styles.button}

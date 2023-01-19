@@ -232,7 +232,6 @@ export const P2P = ({balance, gas}: any) => {
                   Math.min(int === 'polygon' ? Math.floor(balance) : amount, amount, MAX_AMOUNT)
                 );
                 setAmount(a);
-                setPriority(Math.max(priority, MIN_FEE));
               }}
             />
             <Tips
@@ -240,8 +239,6 @@ export const P2P = ({balance, gas}: any) => {
                 priority,
                 setPriority,
                 amount,
-                min: MIN_FEE,
-
                 disabled: !!signature,
               }}
             />
@@ -511,7 +508,7 @@ export const P2P = ({balance, gas}: any) => {
                         &nbsp;контрагента 🤝
                       </Row>
                       <Row align="center" wrap="wrap">
-                        <b>2.</b>&nbsp;Очікуй вихідну транзакцію, контрагент візьме чай 💸
+                        <b>2.</b>&nbsp;Очікуй вихідну транзакцію, контрагент може взяти чай 💸
                       </Row>
                       <Row className={styles.mv1}>
                         <WarnText />

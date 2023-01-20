@@ -315,6 +315,18 @@ export const P2P = ({balance, gas}: any) => {
               на вимогу сторін
             </Text>
           </div>
+          <div>
+            <Text small>
+              🔍{' '}
+              <a
+                href="https://www.google.com/search?q=%D0%BA%D0%BE%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D0%BE%D1%80+%D1%8E%D1%80%D0%B8%D0%B4%D0%B8%D1%87%D0%BD%D0%B8%D1%85+%D1%83%D0%B3%D0%BE%D0%B4"
+                target="_blank"
+                rel="noreferrer"
+              >
+                юридичний конструктор
+              </a>
+            </Text>
+          </div>
           <Row align="center" className={styles.mv1}>
             <Input
               aria-label="code"

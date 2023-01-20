@@ -29,10 +29,14 @@ Community [Terms and Conditions](https://github.com/starscrowding/UAHT#readme).
 
 UAHT already allows you to use [DeFi](https://academy.binance.com/en/articles/the-complete-beginners-guide-to-decentralized-finance-defi) and [Web3](https://academy.binance.com/en/articles/web2-vs-web3-which-is-better)
 
-+ **What is Staking 🌱?**
++ **What is Staking 🌱 ?**
 
 Basic information about [staking](https://academy.binance.com/en/articles/what-is-staking) and [liquidity pools](https://academy.binance.com/en/articles/what-are-liquidity-pools-in-defi) \
 🤝 UAHT partner program https://t.me/uaht_info/29
+
++ **How to become a business partner?**
+
+[Information for operators and p2p-agents](https://github.com/starscrowding/UAHT/blob/dev/partnership.md)
 
 + **Where to find more information about the project?**
 

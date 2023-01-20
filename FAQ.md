@@ -36,7 +36,7 @@ Basic information about [staking](https://academy.binance.com/en/articles/what-i
 
 + **How to become a business partner?**
 
-[Information for operators and p2p-agents](https://github.com/starscrowding/UAHT/blob/dev/partnership.md)
+[Information for operators and p2p-agents](https://github.com/starscrowding/UAHT/blob/dev/PARTNERSHIP.md)
 
 + **Where to find more information about the project?**
 

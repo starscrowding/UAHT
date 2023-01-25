@@ -19,7 +19,7 @@ export const Trade = () => {
         size="sm"
         auto
         onClick={() => {
-          window.open(`https://app.ws.exchange/ua/eth/swap?chainId=137`, '_blank');
+          window.open(`https://app.ws.exchange/ua/eth/polygon/swap?inputCurrency=MATIC`, '_blank');
         }}
       >
         WhiteSwap

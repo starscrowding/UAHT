@@ -134,7 +134,7 @@ export const StakingModal = ({showStakingModal, setShowStakingModal}: any) => {
             size="lg"
             color="gradient"
             icon="🔄"
-            href={`https://app.ws.exchange/ua/eth/pool/add?chainId=137&inputCurrency=${ADDRESS}&outputCurrency=0xc2132D05D31c914a87C6611C10748AEb04B58e8F`}
+            href={`https://app.ws.exchange/ua/eth/polygon/pool/add?&inputCurrency=${ADDRESS}&outputCurrency=0xc2132D05D31c914a87C6611C10748AEb04B58e8F`}
           >
             WhiteSwap
           </Button>

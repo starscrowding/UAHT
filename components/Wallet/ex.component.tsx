@@ -3,6 +3,7 @@ import {Info} from '@space/components/Info';
 import {RESOURCES} from './constants';
 import {createCode} from './helpers';
 import {IO, RequestButton, Tips, SignText, Address} from './common';
+import {Jar} from './jar.component';
 import styles from './wallet.module.scss';
 
 export const Ex = ({
@@ -23,6 +24,10 @@ export const Ex = ({
   stamp,
   sign,
 }: any) => {
+  if (action === 'jar') {
+    return <Jar {...{MM, stamp}} />;
+  }
+
   return (
     <IO
       action={action}

@@ -138,6 +138,7 @@ export const Wallet = () => {
             <Button.Group color="gradient" ghost key={action}>
               {[
                 {name: 'Ввід', act: 'input'},
+                {name: 'Банка', act: 'jar'},
                 {name: 'Вивід', act: 'output'},
               ].map(b => (
                 <Button

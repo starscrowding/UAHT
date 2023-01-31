@@ -146,7 +146,7 @@ export const P2P = ({balance, gas}: any) => {
         <Button.Group color="gradient" ghost key={step}>
           {[
             {name: 'Оферта', act: 'p'},
-            {name: 'Запити', act: 'r'},
+            {name: 'Маркет', act: 'r'},
             {name: 'Угода', act: 'd'},
           ].map(b => (
             <Button
@@ -232,6 +232,7 @@ export const P2P = ({balance, gas}: any) => {
                   Math.min(int === 'polygon' ? Math.floor(balance) : amount, amount, MAX_AMOUNT)
                 );
                 setAmount(a);
+                setPriority(Math.max(Math.round(a / 100), MIN_FEE));
               }}
             />
             <Tips

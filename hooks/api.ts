@@ -14,6 +14,7 @@ export const FAQ = `${CODE}/blob/dev/FAQ.md`;
 export const DAO = 'https://t.me/uaht_group';
 export const TOKEN_LIST = `${BASE}/tokenlist.json`;
 export const WALLET_CONNECT = 'abf8b212906905d826da0549a00a0fd2';
+export const USDT_ADDRESS = '0xc2132d05d31c914a87c6611c10748aeb04b58e8f';
 export const ENDPOINT = {
   token: {
     set: '/api/token/set',

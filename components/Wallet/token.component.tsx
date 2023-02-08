@@ -5,7 +5,7 @@ import {MdAddCircleOutline, MdQrCode} from 'react-icons/md';
 import {FaDownload} from 'react-icons/fa';
 import {BiTransferAlt} from 'react-icons/bi';
 import {useConnector} from '@space/components/Wallet';
-import {ADDRESS, BASE} from '@space/hooks/api';
+import {ADDRESS, BASE, USDT_ADDRESS} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
 import {QRCode} from './qr.component';
 import {useAddToken} from './hooks';
@@ -134,7 +134,7 @@ export const StakingModal = ({showStakingModal, setShowStakingModal}: any) => {
             size="lg"
             color="gradient"
             icon="🔄"
-            href={`https://app.ws.exchange/ua/eth/polygon/pool/add?&inputCurrency=${ADDRESS}&outputCurrency=0xc2132D05D31c914a87C6611C10748AEb04B58e8F`}
+            href={`https://app.ws.exchange/ua/eth/polygon/pool/add?&inputCurrency=${ADDRESS}&outputCurrency=${USDT_ADDRESS}`}
           >
             WhiteSwap
           </Button>
@@ -147,7 +147,7 @@ export const StakingModal = ({showStakingModal, setShowStakingModal}: any) => {
             size="lg"
             color="gradient"
             icon="🦄"
-            href={`https://app.uniswap.org/#/add/0xc2132D05D31c914a87C6611C10748AEb04B58e8F/${ADDRESS}/3000?chain=polygon&lng=uk-UA`}
+            href={`https://app.uniswap.org/#/add/${USDT_ADDRESS}/${ADDRESS}/3000?chain=polygon&lng=uk-UA`}
           >
             Uniswap
           </Button>

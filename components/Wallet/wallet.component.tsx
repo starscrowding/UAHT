@@ -250,7 +250,7 @@ export const Wallet = () => {
         </Collapse>
         <Collapse
           expanded={false}
-          title={<div className={styles.name}>💰 Обмін / Торги</div>}
+          title={<div className={styles.name}>💰 Торги / Обмін</div>}
           subtitle={
             <Row className={styles.address}>
               {['MATIC', 'USDT', 'BTC', 'ETH', 'UAH'].map(pair => (

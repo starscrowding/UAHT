@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/711.0c19f443.chunk.js","mappings":"yJAEA,IAAIA,EAAK,CAACC,SAAS,CAAC,E","sources":["../node_modules/@uniswap/widgets/dist/locales/ar-SA.js"],"sourcesContent":["/*eslint-disable*/\n\nvar arSA={messages:{}};\n\nexport { arSA as default };\n"],"names":["arSA","messages"],"sourceRoot":""}

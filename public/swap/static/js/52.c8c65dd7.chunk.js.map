@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/52.c8c65dd7.chunk.js","mappings":"wJAEA,IAAIA,EAAK,CAACC,SAAS,CAAC,E","sources":["../node_modules/@uniswap/widgets/dist/locales/sr-SP.js"],"sourcesContent":["/*eslint-disable*/\n\nvar srSP={messages:{}};\n\nexport { srSP as default };\n"],"names":["srSP","messages"],"sourceRoot":""}

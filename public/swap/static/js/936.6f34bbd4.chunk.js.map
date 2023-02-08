@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/936.6f34bbd4.chunk.js","mappings":"yJAEA,IAAIA,EAAK,CAACC,SAAS,CAAC,E","sources":["../node_modules/@uniswap/widgets/dist/locales/ko-KR.js"],"sourcesContent":["/*eslint-disable*/\n\nvar koKR={messages:{}};\n\nexport { koKR as default };\n"],"names":["koKR","messages"],"sourceRoot":""}

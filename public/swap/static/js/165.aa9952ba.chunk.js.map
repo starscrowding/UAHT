@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/165.aa9952ba.chunk.js","mappings":"wJAEA,IAAIA,EAAK,CAACC,SAAS,CAAC,E","sources":["../node_modules/@uniswap/widgets/dist/locales/fi-FI.js"],"sourcesContent":["/*eslint-disable*/\n\nvar fiFI={messages:{}};\n\nexport { fiFI as default };\n"],"names":["fiFI","messages"],"sourceRoot":""}

@@ -13,14 +13,6 @@
     },
     {
       "chainId": 137,
-      "name": "Matic Token",
-      "symbol": "MATIC",
-      "decimals": 18,
-      "address": "0x0000000000000000000000000000000000001010",
-      "logoURI": "https://wallet-asset.matic.network/img/tokens/matic.svg"
-    },
-    {
-      "chainId": 137,
       "name": "Tether USD",
       "symbol": "USDT",
       "decimals": 6,

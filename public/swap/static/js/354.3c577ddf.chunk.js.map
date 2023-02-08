@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/354.3c577ddf.chunk.js","mappings":"yJAEA,IAAIA,EAAK,CAACC,SAAS,CAAC,E","sources":["../node_modules/@uniswap/widgets/dist/locales/hu-HU.js"],"sourcesContent":["/*eslint-disable*/\n\nvar huHU={messages:{}};\n\nexport { huHU as default };\n"],"names":["huHU","messages"],"sourceRoot":""}

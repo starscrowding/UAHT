@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/113.92cf20d5.chunk.js","mappings":"yJAEA,IAAIA,EAAK,CAACC,SAAS,CAAC,E","sources":["../node_modules/@uniswap/widgets/dist/locales/da-DK.js"],"sourcesContent":["/*eslint-disable*/\n\nvar daDK={messages:{}};\n\nexport { daDK as default };\n"],"names":["daDK","messages"],"sourceRoot":""}

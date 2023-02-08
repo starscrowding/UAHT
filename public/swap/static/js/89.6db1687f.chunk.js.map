@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/89.6db1687f.chunk.js","mappings":"wJAEA,IAAIA,EAAK,CAACC,SAAS,CAAC,E","sources":["../node_modules/@uniswap/widgets/dist/locales/af-ZA.js"],"sourcesContent":["/*eslint-disable*/\n\nvar afZA={messages:{}};\n\nexport { afZA as default };\n"],"names":["afZA","messages"],"sourceRoot":""}

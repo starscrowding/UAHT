@@ -1,15 +1,39 @@
 {
   "name": "UAHT",
-  "timestamp": "2022-09-29T08:41:12.278Z",
-  "version": {"major": 1, "minor": 0, "patch": 0},
+  "timestamp": "2023-02-08T15:14:11.224Z",
+  "version": {"major": 1, "minor": 0, "patch": 1},
   "tokens": [
     {
       "chainId": 137,
-      "address": "0x0D9447E16072b636b4a1E8f2b8C644e58F3eaA6A",
       "name": "uaht.io",
-      "decimals": 2,
       "symbol": "UAHT",
+      "decimals": 2,
+      "address": "0x0D9447E16072b636b4a1E8f2b8C644e58F3eaA6A",
       "logoURI": "https://uaht.io/icon.png"
+    },
+    {
+      "chainId": 137,
+      "name": "Matic Token",
+      "symbol": "MATIC",
+      "decimals": 18,
+      "address": "0x0000000000000000000000000000000000001010",
+      "logoURI": "https://wallet-asset.matic.network/img/tokens/matic.svg"
+    },
+    {
+      "chainId": 137,
+      "name": "Tether USD",
+      "symbol": "USDT",
+      "decimals": 6,
+      "address": "0xc2132d05d31c914a87c6611c10748aeb04b58e8f",
+      "logoURI": "https://wallet-asset.matic.network/img/tokens/usdt.svg"
+    },
+    {
+      "chainId": 137,
+      "name": "USD Coin",
+      "symbol": "USDC",
+      "decimals": 6,
+      "address": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+      "logoURI": "https://wallet-asset.matic.network/img/tokens/usdc.svg"
     }
   ],
   "logoURI": "https://uaht.io/icon.png"

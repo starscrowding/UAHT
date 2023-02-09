@@ -1,7 +1,7 @@
 {
   "name": "UAHT",
-  "timestamp": "2023-02-08T15:14:11.224Z",
-  "version": {"major": 1, "minor": 0, "patch": 1},
+  "timestamp": "2023-02-09T08:55:48.464Z",
+  "version": {"major": 1, "minor": 0, "patch": 2},
   "tokens": [
     {
       "chainId": 137,
@@ -26,6 +26,14 @@
       "decimals": 6,
       "address": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
       "logoURI": "https://wallet-asset.matic.network/img/tokens/usdc.svg"
+    },
+    {
+      "chainId": 137,
+      "name": "Polygon",
+      "symbol": "MATIC",
+      "decimals": 18,
+      "address": "0x0000000000000000000000000000000000001010",
+      "logoURI": "https://wallet-asset.matic.network/img/tokens/matic.svg"
     }
   ],
   "logoURI": "https://uaht.io/icon.png"

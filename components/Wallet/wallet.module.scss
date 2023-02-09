@@ -35,6 +35,12 @@
   padding: 0.25rem 0;
 }
 
+.swap {
+  width: 410px;
+  min-height: 500px;
+  border: none;
+}
+
 @media only screen and (max-width: 480px) {
   .address {
     zoom: 0.75;
@@ -46,5 +52,9 @@
 
   .signText {
     display: none;
+  }
+
+  .swap {
+    width: 100%;
   }
 }

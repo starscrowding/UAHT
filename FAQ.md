@@ -32,7 +32,10 @@ UAHT already allows you to use [DeFi](https://academy.binance.com/en/articles/th
 + **What is Staking 🌱 ?**
 
 Basic information about [staking](https://academy.binance.com/en/articles/what-is-staking) and [liquidity pools](https://academy.binance.com/en/articles/what-are-liquidity-pools-in-defi) \
-🤝 UAHT partner program https://t.me/uaht_info/29
+🤝 UAHT partner program 
+
+https://t.me/uaht_info/29 \
+https://t.me/uaht_info/52
 
 + **How to become a business partner?**
 

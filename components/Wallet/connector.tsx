@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import {configureChains, createClient, useNetwork, useAccount, useProvider, useSigner} from 'wagmi';
 import {polygon} from 'wagmi/chains';
 import {EthereumClient, modalConnectors, walletConnectProvider} from '@web3modal/ethereum';
-import {Web3Button} from '@web3modal/react';
+import {Web3Button, Web3NetworkSwitch} from '@web3modal/react';
 import {WALLET_CONNECT} from '@space/hooks/api';
 import styles from './wallet.module.scss';
 

@@ -50,7 +50,10 @@ const Home: NextPage = () => {
                 <Info link={INFO} className={styles.ml05} />
               </Row>
               <Row justify="center" align="center" css={{minHeight: '250px'}}>
-                {!MM.status || MM.status === 'reconnecting' || MM.status === 'connecting' ? (
+                {!MM.status ||
+                MM.status === 'reconnecting' ||
+                MM.status === 'connecting' ||
+                !MM.signer ? (
                   <Loading type="points" />
                 ) : MM.status === 'connected' ? (
                   <Wallet />

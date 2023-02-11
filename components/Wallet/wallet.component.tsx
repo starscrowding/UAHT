@@ -4,7 +4,7 @@ import {Card, Row, Text, Button, Collapse} from '@nextui-org/react';
 import Image from 'next/image';
 import {useConnector} from '@space/components/Wallet';
 import {GoVerified, GoChecklist} from 'react-icons/go';
-import {ADDRESS, TOKEN_LIST, DAO_ADDRESS, DAO} from '@space/hooks/api';
+import {ADDRESS, TOKEN_LIST, DAO_ADDRESS, DAO, POLYGON_NETWORK} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
 import {MINIMUM} from './constants';
 import {useInit, useSign, useValidateCode} from './hooks';
@@ -37,7 +37,7 @@ export const Wallet = () => {
   const validateCode = useValidateCode({resource, setCode});
 
   const onAmountChange = useCallback(
-    value => {
+    (value: string | number) => {
       setAmount(Math.max(MINIMUM, Math.min(Math.floor(balance), Number(value))));
     },
     [setAmount, balance]
@@ -48,6 +48,19 @@ export const Wallet = () => {
   }, [setSignature]);
 
   useInit({resource, setCode, setBalance, setMatic, setReserve, setVerified, MM});
+
+  if (MM.chainId !== POLYGON_NETWORK) {
+    return (
+      <Card className={styles.wallet}>
+        <Card.Body>
+          <Row>
+            Підключи Polygon
+            <Image src="/polygon.ico" width="24" height="24" alt="Polygon" title="Polygon" />
+          </Row>
+        </Card.Body>
+      </Card>
+    );
+  }
 
   return (
     <Card className={styles.wallet}>

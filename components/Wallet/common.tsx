@@ -10,20 +10,23 @@ import styles from './wallet.module.scss';
 export const IO = ({
   Group,
   I,
+  JAR,
   O,
   action,
   balance,
 }: {
-  Group: ReactElement;
+  Group: ReactElement | null;
   I: ReactElement;
+  JAR: ReactElement;
   O: ReactElement;
   action: string;
   balance: number;
 }) => {
   return (
     <div>
-      <div className={styles.m1}>{Group}</div>
+      {Group ? <div className={styles.m1}>{Group}</div> : null}
       {action === 'input' ? <>{I}</> : null}
+      {action === 'jar' ? <>{JAR}</> : null}
       {action === 'output' ? (
         <div>
           {balance >= MINIMUM ? (
@@ -40,10 +43,12 @@ export const IO = ({
 export const RequestButton = ({
   disabled,
   to = TELEGRAM,
+  action = '👉',
   onClick,
 }: {
   disabled?: boolean;
   to?: string;
+  action?: string;
   onClick?: () => void;
 }) => (
   <Button
@@ -59,7 +64,7 @@ export const RequestButton = ({
       }
     }}
   >
-    Запит {!disabled ? <span className={styles.ml1}>👉</span> : null}
+    Запит {!disabled ? <span className={styles.ml1}>{action}</span> : null}
   </Button>
 );
 

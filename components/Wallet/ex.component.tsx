@@ -24,33 +24,31 @@ export const Ex = ({
   stamp,
   sign,
 }: any) => {
-  if (action === 'jar') {
-    return <Jar {...{MM, stamp}} />;
-  }
-
   return (
     <IO
       action={action}
       balance={balance}
       Group={
-        <Radio.Group
-          className={styles.radio}
-          label="Обери джерело:"
-          orientation="horizontal"
-          size="sm"
-          value={resource}
-          onChange={value => setResource(value)}
-        >
-          {Object.keys(RESOURCES).map((key: string) => (
-            <Radio
-              key={key}
-              value={key}
-              description={reserve ? <span title={`Резерв ${key}`}>{reserve[key]}</span> : '-'}
-            >
-              {RESOURCES[key]?.text}
-            </Radio>
-          ))}
-        </Radio.Group>
+        action !== 'jar' ? (
+          <Radio.Group
+            className={styles.radio}
+            label="Обери джерело:"
+            orientation="horizontal"
+            size="sm"
+            value={resource}
+            onChange={value => setResource(value)}
+          >
+            {Object.keys(RESOURCES).map((key: string) => (
+              <Radio
+                key={key}
+                value={key}
+                description={reserve ? <span title={`Резерв ${key}`}>{reserve[key]}</span> : '-'}
+              >
+                {RESOURCES[key]?.text}
+              </Radio>
+            ))}
+          </Radio.Group>
+        ) : null
       }
       I={
         <div>
@@ -96,6 +94,7 @@ export const Ex = ({
           </Row>
         </div>
       }
+      JAR={<Jar {...{resource}} />}
       O={
         <div>
           <div>

@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {ethers} from 'ethers';
 import {useRouter} from 'next/router';
 import {BiTransferAlt} from 'react-icons/bi';
@@ -9,12 +9,20 @@ import {useUaht} from './hooks';
 import styles from './wallet.module.scss';
 
 export const Actions = () => {
+  const [ready, setReady] = useState(false);
   const {query} = useRouter();
-  if (query?.action === 'approve' && query?.spender && query?.amount) {
-    return <AllowanceModal />;
-  }
-  if (query?.action === 'transfer') {
-    return <TransferModal />;
+
+  useEffect(() => {
+    setReady(true);
+  }, []);
+
+  if (ready) {
+    if (query?.action === 'approve' && query?.spender && query?.amount) {
+      return <AllowanceModal />;
+    }
+    if (query?.action === 'transfer') {
+      return <TransferModal />;
+    }
   }
   return null;
 };

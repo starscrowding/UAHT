@@ -89,7 +89,7 @@ export const useSign = ({MM, setSignature}: any) => async (msg: string) => {
 
 export const useValidateCode = ({resource, setCode}: any) =>
   useCallback(
-    value => {
+    (value: string) => {
       try {
         if (value?.length >= MIN_CODE_LENGTH && RESOURCES[resource].validator.test(value)) {
           btoa(value);

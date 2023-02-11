@@ -13,20 +13,18 @@ export const Logo = ({
   target?: string;
 }) => {
   return (
-    <Link href={href}>
-      <a className={className} target={target}>
-        <Text
-          h1
-          css={{
-            display: 'inline',
-            textGradient: '45deg, $yellow500 50%, $blue500 50%',
-          }}
-          weight="bold"
-          size={size}
-        >
-          UAHT
-        </Text>
-      </a>
+    <Link href={href} className={className} target={target}>
+      <Text
+        h1
+        css={{
+          display: 'inline',
+          textGradient: '45deg, $yellow500 50%, $blue500 50%',
+        }}
+        weight="bold"
+        size={size}
+      >
+        UAHT
+      </Text>
     </Link>
   );
 };

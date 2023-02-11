@@ -92,7 +92,7 @@ export const QRModal = ({showQRModal, setShowQRModal, MM}: any) => {
           className={styles.pb1}
           style={{minHeight: '272px'}}
         >
-          <QRCode id="UAHT_QRCode" value={qr} />
+          <QRCode id="UAHT_QRCode" value={qr} title="UAHT" />
         </Row>
         <Row align="center" justify="space-around" className={styles.pb1}>
           <Button

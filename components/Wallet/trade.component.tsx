@@ -1,5 +1,5 @@
 import {Row, Button} from '@nextui-org/react';
-import {ADDRESS, USDT_ADDRESS} from '@space/hooks/api';
+import {ADDRESS, POLYGON_NETWORK, USDT_ADDRESS} from '@space/hooks/api';
 import styles from './wallet.module.scss';
 
 export const Trade = () => {
@@ -22,7 +22,7 @@ export const Trade = () => {
           auto
           onClick={() => {
             window.open(
-              `https://app.1inch.io/#/137/classic/limit-order/${USDT_ADDRESS}/${ADDRESS}`,
+              `https://app.1inch.io/#/${POLYGON_NETWORK}/classic/limit-order/${USDT_ADDRESS}/${ADDRESS}`,
               '_blank'
             );
           }}

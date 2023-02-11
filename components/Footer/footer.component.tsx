@@ -1,5 +1,6 @@
 import {useEffect} from 'react';
 import Script from 'next/script';
+import {disconnect} from '@wagmi/core';
 import {Row, Text, Checkbox} from '@nextui-org/react';
 import {CODE, DAO, INFO} from '@space/hooks/api';
 import styles from './footer.module.scss';
@@ -36,6 +37,9 @@ export const Footer = () => {
             onChange={value => {
               if (!value) {
                 window.location.href = INFO;
+                try {
+                  disconnect();
+                } catch (e) {}
               }
             }}
           >

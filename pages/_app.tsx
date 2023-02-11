@@ -12,6 +12,7 @@ import {
   WALLET_CONNECT,
 } from '@space/components/Wallet/connector';
 import {HOST, DAO, WALLET_CONNECT as PROGECT_ID} from '../hooks/api';
+import '@space/styles//global.css';
 import variables from '@space/styles/variables.module.scss';
 
 const baseTheme = {
@@ -96,7 +97,12 @@ function SpaceApp({Component, pageProps}: AppProps) {
           </WagmiConfig>
         </NextUIProvider>
       </NextThemesProvider>
-      <Web3Modal projectId={WALLET_CONNECT} ethereumClient={ethereumClient} themeMode="dark" />
+      <Web3Modal
+        projectId={WALLET_CONNECT}
+        ethereumClient={ethereumClient}
+        themeMode="dark"
+        themeZIndex={999}
+      />
     </Sentry.ErrorBoundary>
   );
 }

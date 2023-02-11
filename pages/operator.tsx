@@ -42,7 +42,7 @@ const Operator: NextPage = () => {
   }, []);
 
   useEffect(() => {
-    if (MM.status === 'connected') {
+    if (MM.status === 'connected' && MM.signer) {
       const checkOperator = async () => {
         const web3Provider = MM.provider;
         const uahtDao = new ethers.Contract(DAO_ADDRESS, UAHT_DAO_ABI, web3Provider);

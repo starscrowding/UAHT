@@ -53,7 +53,7 @@ const Home: NextPage = () => {
                 {!MM.status ||
                 MM.status === 'reconnecting' ||
                 MM.status === 'connecting' ||
-                !MM.signer ? (
+                (MM.status === 'connected' && !MM.signer) ? (
                   <Loading type="points" />
                 ) : MM.status === 'connected' ? (
                   <Wallet />

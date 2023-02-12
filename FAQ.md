@@ -49,7 +49,7 @@ Jar is a service that allows you to generate:
 🍯 Jam pools of full range MATIC ↔ UAHT ↔ USDT, \
 an example of such pool is [ЗСУ-pool](https://opensea.io/0xB0AA11ad57386c91Fe8FA26E4F32121f9a0Ede03) \
 https://t.me/uaht_info/34 \
-🍰 Pie - the operational part of the community
+🍰 Pie - the operational part of the community based on stake
 
 + **Where to find more information about the project?**
 

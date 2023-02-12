@@ -41,6 +41,16 @@ https://t.me/uaht_info/52
 
 [Information for operators and p2p-agents](https://github.com/starscrowding/UAHT/blob/dev/PARTNERSHIP.md)
 
++ **What is the Jar?**
+
+Jar is a service that allows you to generate:
+
+✅ Input through conversion \
+🍯 Jam pools of full range MATIC ↔ UAHT ↔ USDT, \
+an example of such pool is [ЗСУ-pool](https://opensea.io/0xB0AA11ad57386c91Fe8FA26E4F32121f9a0Ede03) \
+https://t.me/uaht_info/34 \
+🍰 Pie - the operational part of the community
+
 + **Where to find more information about the project?**
 
 Telegram channel with information about the project https://t.me/uaht_info \

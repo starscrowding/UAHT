@@ -28,6 +28,7 @@ Community [Terms and Conditions](https://github.com/starscrowding/UAHT#readme).
 + **What can I do with UAHT Token?**
 
 UAHT already allows you to use [DeFi](https://academy.binance.com/en/articles/the-complete-beginners-guide-to-decentralized-finance-defi) and [Web3](https://academy.binance.com/en/articles/web2-vs-web3-which-is-better) \
+💰 Exchange / Swap on leading platforms \
 🤳🏻 Create QR codes - transaction requests and accept transfers 💸 \
 https://t.me/uaht_info/44
 

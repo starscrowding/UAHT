@@ -1,9 +1,17 @@
 import {useEffect, useState} from 'react';
-import {configureChains, createClient, useNetwork, useAccount, useProvider, useSigner} from 'wagmi';
+import {
+  configureChains,
+  createClient,
+  useNetwork,
+  useAccount,
+  useProvider,
+  useSigner,
+  useSwitchNetwork,
+} from 'wagmi';
 import {polygon} from 'wagmi/chains';
 import {EthereumClient, modalConnectors, walletConnectProvider} from '@web3modal/ethereum';
-import {Web3Button, Web3NetworkSwitch} from '@web3modal/react';
-import {WALLET_CONNECT} from '@space/hooks/api';
+import {Web3Button} from '@web3modal/react';
+import {WALLET_CONNECT, POLYGON_NETWORK} from '@space/hooks/api';
 import styles from './wallet.module.scss';
 
 export {WALLET_CONNECT} from '@space/hooks/api';
@@ -47,3 +55,8 @@ export const Connect = () => (
     <Web3Button label="Підключи" />
   </div>
 );
+
+export const Switch = ({children}: any) => {
+  const {switchNetwork} = useSwitchNetwork();
+  return <a onClick={() => switchNetwork?.(POLYGON_NETWORK)}>{children}</a>;
+};

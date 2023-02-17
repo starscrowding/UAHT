@@ -1,13 +1,14 @@
 import {useState} from 'react';
 import {ethers} from 'ethers';
 import {useConnector} from '@space/components/Wallet';
-import {Row, Button, Input, Spacer} from '@nextui-org/react';
+import {Row, Card, Button, Input, Spacer, Loading} from '@nextui-org/react';
 import {GoVerified, GoUnverified} from 'react-icons/go';
+import {IoMdCloseCircleOutline} from 'react-icons/io';
 import {api, DAO, DAO_CONTRACT, RESERVE, CONTRACT} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
 import {SignText, Address} from './common';
-import {useSign} from './hooks';
-import {validateSignature} from './helpers';
+import {useSign, useUaht, useUahtDao} from './hooks';
+import {validateSignature, precision} from './helpers';
 import styles from './wallet.module.scss';
 
 export const Dao = () => {
@@ -15,13 +16,23 @@ export const Dao = () => {
   const [account, setAccount] = useState<string>('');
   const [verified, setVerified] = useState<undefined | boolean>();
   const [signature, setSignature] = useState('');
+  const uaht = useUaht();
+  const uahtDao = useUahtDao();
+  const [daoInfo, setDaoInfo] = useState<any>();
+  const [loading, setLoading] = useState(false);
+
+  const reset = () => {
+    setAccount('');
+    setSignature('');
+    setDaoInfo(undefined);
+  };
 
   const sign = (t: string) => {
     // eslint-disable-next-line
     useSign({MM, setSignature: (s: string) => setSignature(`${t}+${s}`)})(t);
   };
 
-  const testAccount = async (address: string) => {
+  const verifyAccount = async (address: string) => {
     if (ethers.utils.isAddress(address)) {
       try {
         const row = await api(RESERVE);
@@ -32,6 +43,33 @@ export const Dao = () => {
       }
     } else {
       setVerified(undefined);
+    }
+  };
+
+  const getDaoInfo = async (address: string) => {
+    if (ethers.utils.isAddress(address)) {
+      try {
+        const web3Provider = MM.provider;
+        const [allowance, balance, gas] = await Promise.all([
+          uahtDao.allowance(address),
+          uaht.balanceOf(address),
+          web3Provider.getBalance(address),
+        ]);
+        setDaoInfo({allowance, gas, balance});
+      } catch (e) {
+        setDaoInfo(undefined);
+      }
+    } else {
+      setDaoInfo(undefined);
+    }
+  };
+
+  const testAccount = async (address: string) => {
+    try {
+      setLoading(true);
+      await Promise.allSettled([verifyAccount(address), getDaoInfo(address)]);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -58,6 +96,10 @@ export const Dao = () => {
           trx: {body, signature},
           setValid: (isTrue: boolean) => {
             alert(isTrue ? '✅' : '❌');
+            if (isTrue) {
+              setAccount(account);
+              testAccount(account);
+            }
           },
           account,
         });
@@ -70,14 +112,68 @@ export const Dao = () => {
   return (
     <div>
       <Row className={styles.row} justify="flex-start" align="center" wrap="wrap">
+        <Button.Group size="sm" color="gradient" ghost className={styles.button}>
+          <Button
+            auto
+            onClick={() => {
+              window.open(`${DAO_CONTRACT}#writeContract#F7`, '_blank');
+            }}
+          >
+            Пропозиція
+          </Button>
+          <Button
+            auto
+            onClick={() => {
+              window.open(`${DAO_CONTRACT}#writeContract#F10`, '_blank');
+            }}
+          >
+            Голосувати
+          </Button>
+        </Button.Group>
+        <Info
+          text={
+            <>
+              id повідомлення{' '}
+              <a href={DAO} target="_blank" rel="noreferrer">
+                @uaht_group
+              </a>
+            </>
+          }
+          className={styles.mh05}
+        />
+        <Button.Group size="sm" className={styles.button}>
+          <Button
+            auto
+            onClick={() => {
+              reset();
+              doSign();
+            }}
+          >
+            <SignText />
+          </Button>
+          <Button
+            auto
+            onClick={() => {
+              reset();
+              verifySign();
+            }}
+            title="Перевірити підпис"
+          >
+            🧐
+          </Button>
+        </Button.Group>
+      </Row>
+      <Row className={styles.row} justify="flex-start" align="center" wrap="wrap">
         <Input
           aria-label="address"
           underlined
           color="secondary"
           type="text"
           placeholder="Верифікація адреси"
-          width={verified !== undefined && account ? '123px' : '200px'}
+          width={verified !== undefined && account ? '95px' : '207px'}
+          value={account}
           onChange={e => {
+            setDaoInfo(undefined);
             setAccount(e?.target?.value || '');
             testAccount(e?.target?.value || '');
           }}
@@ -111,52 +207,29 @@ export const Dao = () => {
         </Button>
       </Row>
       <Spacer />
-      <Row className={styles.row} justify="flex-start" align="center" wrap="wrap">
-        <Button.Group size="sm" color="gradient" ghost className={styles.button}>
-          <Button
-            auto
-            onClick={() => {
-              window.open(`${DAO_CONTRACT}#writeContract#F7`, '_blank');
-            }}
-          >
-            Пропозиція
-          </Button>
-          <Button
-            auto
-            onClick={() => {
-              window.open(`${DAO_CONTRACT}#writeContract#F10`, '_blank');
-            }}
-          >
-            Голосувати
-          </Button>
-        </Button.Group>
-        <Info
-          text={
-            <>
-              id повідомлення{' '}
-              <a href={DAO} target="_blank" rel="noreferrer">
-                @uaht_group
-              </a>
-            </>
-          }
-          className={styles.mh05}
-        />
-        <Button.Group size="sm" className={styles.button}>
-          <Button auto onClick={() => doSign()}>
-            <SignText />
-          </Button>
-          <Button auto onClick={() => verifySign()} title="Перевірити підпис">
-            🧐
-          </Button>
-        </Button.Group>
-      </Row>
       {signature && (
         <Row className={styles.row} justify="flex-start" align="center" wrap="wrap">
           <Address account={`${signature}.${MM.account}`} />
           <a className={styles.ml05} onClick={() => setSignature('')}>
-            ×
+            <IoMdCloseCircleOutline />
           </a>
         </Row>
+      )}
+      {loading && !daoInfo && <Loading type="points" />}
+      {daoInfo && (
+        <Card>
+          <Card.Body>
+            {daoInfo.balance && (
+              <Row>💰 Баланс: {ethers.utils.formatUnits(daoInfo.balance, 2)}</Row>
+            )}
+            {daoInfo.gas && (
+              <Row>⛽ Газ: {precision(ethers.utils.formatEther(daoInfo.gas), 3)}</Row>
+            )}
+            {daoInfo?.allowance && (
+              <Row>🍰 Пай: {ethers.utils.formatUnits(daoInfo.allowance, 2)}</Row>
+            )}
+          </Card.Body>
+        </Card>
       )}
     </div>
   );

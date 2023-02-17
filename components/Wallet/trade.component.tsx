@@ -1,11 +1,24 @@
+import {useState} from 'react';
 import {Row, Button} from '@nextui-org/react';
 import {ADDRESS, POLYGON_NETWORK, USDT_ADDRESS} from '@space/hooks/api';
+import {P2P} from './p2p.component';
 import styles from './wallet.module.scss';
 
-export const Trade = () => {
+export const Trade = ({balance, gas}: any) => {
+  const [act, setAct] = useState('uniswap');
+
   return (
     <div>
       <Row className={styles.row} justify="flex-start" align="center" wrap="wrap">
+        <Button
+          className={styles.button}
+          size="sm"
+          color={act === 'p2p' ? 'gradient' : undefined}
+          auto
+          onClick={() => setAct('p2p')}
+        >
+          OTC P2P
+        </Button>
         <Button
           className={styles.button}
           size="sm"
@@ -45,16 +58,21 @@ export const Trade = () => {
         <Button
           className={styles.button}
           size="sm"
-          color="gradient"
+          color={act === 'uniswap' ? 'gradient' : undefined}
           auto
           onClick={() => {
-            window.open(`https://app.uniswap.org/#/swap?chain=polygon&lng=uk-UA`, '_blank');
+            if (act !== 'uniswap') {
+              setAct('uniswap');
+            } else {
+              window.open(`https://app.uniswap.org/#/swap?chain=polygon&lng=uk-UA`, '_blank');
+            }
           }}
         >
           Uniswap
         </Button>
       </Row>
-      <iframe className={styles.swap} src="/swap/index.html" />
+      {act === 'uniswap' && <iframe className={styles.swap} src="/swap/index.html" />}
+      {act === 'p2p' && <P2P {...{balance, gas}} />}
     </div>
   );
 };

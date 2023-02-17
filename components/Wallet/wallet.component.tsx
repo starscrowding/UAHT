@@ -2,7 +2,7 @@ import {useCallback, useState, useMemo} from 'react';
 import classNames from 'classnames';
 import {Card, Row, Text, Button, Collapse} from '@nextui-org/react';
 import Image from 'next/image';
-import {useConnector} from '@space/components/Wallet';
+import {useConnector, Switch} from '@space/components/Wallet';
 import {GoVerified, GoChecklist} from 'react-icons/go';
 import {ADDRESS, TOKEN_LIST, DAO_ADDRESS, DAO, POLYGON_NETWORK} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
@@ -12,7 +12,6 @@ import {getStamp, createCode} from './helpers';
 import {VerificationModal, Address} from './common';
 import {Ex} from './ex.component';
 import {Trade} from './trade.component';
-import {P2P, FIAT} from './p2p.component';
 import {Token} from './token.component';
 import {Dao} from './dao.component';
 import {Actions} from './actions.component';
@@ -54,7 +53,7 @@ export const Wallet = () => {
       <Card className={styles.wallet}>
         <Card.Body>
           <Row>
-            Підключи Polygon
+            <Switch>Підключи</Switch>&nbsp;Polygon
             <Image src="/polygon.ico" width="24" height="24" alt="Polygon" title="Polygon" />
           </Row>
         </Card.Body>
@@ -248,21 +247,6 @@ export const Wallet = () => {
         </Collapse>
         <Collapse
           expanded={false}
-          title={<div className={styles.name}>💳 P2P транзакції</div>}
-          subtitle={
-            <Row className={styles.address}>
-              {FIAT.map(p => (
-                <Text key={p.name} className={styles.pl05} color={p.color}>
-                  {p.name}
-                </Text>
-              ))}
-            </Row>
-          }
-        >
-          <P2P {...{balance, gas: matic}} />
-        </Collapse>
-        <Collapse
-          expanded={false}
           title={<div className={styles.name}>💰 Торги / Обмін</div>}
           subtitle={
             <Row className={styles.address}>
@@ -280,7 +264,7 @@ export const Wallet = () => {
             </Row>
           }
         >
-          <Trade />
+          <Trade {...{balance, gas: matic}} />
         </Collapse>
         <Collapse
           expanded={false}

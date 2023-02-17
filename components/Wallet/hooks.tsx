@@ -1,7 +1,9 @@
 import {useEffect, useCallback, useMemo} from 'react';
 import {ethers} from 'ethers';
+
 import UAHT_ABI from '@space/contracts/UAHT.abi.json';
-import {api, ADDRESS, RESERVE} from '@space/hooks/api';
+import UAHT_DAO_ABI from '@space/contracts/UAHT_DAO.abi.json';
+import {api, ADDRESS, DAO_ADDRESS, RESERVE} from '@space/hooks/api';
 import {useConnector} from '@space/components/Wallet';
 import {precision} from './helpers';
 import {RESOURCES, MIN_CODE_LENGTH} from './constants';
@@ -15,15 +17,16 @@ export const useInit = ({
   setVerified,
   MM,
 }: any) => {
+  const uaht = useUaht();
+
   useEffect(() => {
     setCode('');
   }, [resource, setCode]);
 
   useEffect(() => {
     const balanceOf = async () => {
-      const web3Provider = MM.provider;
-      const uaht = new ethers.Contract(ADDRESS, UAHT_ABI, web3Provider);
       try {
+        const web3Provider = MM.provider;
         const [balance, gas] = await Promise.all([
           uaht.balanceOf(MM.account),
           web3Provider.getBalance(MM.account),
@@ -51,9 +54,8 @@ export const useInit = ({
         console.log(e);
       }
     };
-    balanceOf();
-    reserveOf();
-  }, [MM, setBalance, setReserve, setVerified, setMatic]);
+    Promise.allSettled([balanceOf(), reserveOf()]);
+  }, [MM, setBalance, setReserve, setVerified, setMatic, uaht]);
 };
 
 export const useAddToken = ({MM}: any) => async () => {
@@ -110,5 +112,14 @@ export const useUaht = () => {
     const web3Provider = MM.provider;
     const signer = MM.signer || web3Provider;
     return new ethers.Contract(ADDRESS, UAHT_ABI, signer);
-  }, [MM]);
+  }, [MM.provider, MM.signer]);
+};
+
+export const useUahtDao = () => {
+  const MM = useConnector();
+  return useMemo(() => {
+    const web3Provider = MM.provider;
+    const signer = MM.signer || web3Provider;
+    return new ethers.Contract(DAO_ADDRESS, UAHT_DAO_ABI, signer);
+  }, [MM.provider, MM.signer]);
 };

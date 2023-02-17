@@ -1,12 +1,11 @@
 import {useEffect, useState, useMemo} from 'react';
 import {NextPage} from 'next';
-import {ethers} from 'ethers';
-import UAHT_DAO_ABI from '@space/contracts/UAHT_DAO.abi.json';
 import {Container, Row, Spacer, Card, Button, Input, Text} from '@nextui-org/react';
 import {useConnector, Connect} from '@space/components/Wallet';
 import {RESOURCES} from '@space/components/Wallet/constants';
 import {parseCode, validateSignature} from '@space/components/Wallet/helpers';
-import {CONTRACT, DAO_CONTRACT, DAO_ADDRESS, RESERVE_URL} from '@space/hooks/api';
+import {useUahtDao} from '@space/components/Wallet/hooks';
+import {CONTRACT, DAO_CONTRACT, RESERVE_URL} from '@space/hooks/api';
 import styles from '../styles/index.module.scss';
 
 const Operator: NextPage = () => {
@@ -15,6 +14,7 @@ const Operator: NextPage = () => {
   const [hash, setHash] = useState('');
   const [code, setCode] = useState('');
   const [validSignature, setValidSignature] = useState(false);
+  const uahtDao = useUahtDao();
 
   const trx = useMemo(() => {
     setValidSignature(false);
@@ -44,12 +44,9 @@ const Operator: NextPage = () => {
   useEffect(() => {
     if (MM.status === 'connected' && MM.signer) {
       const checkOperator = async () => {
-        const web3Provider = MM.provider;
-        const uahtDao = new ethers.Contract(DAO_ADDRESS, UAHT_DAO_ABI, web3Provider);
         try {
           const op = await uahtDao.operators(MM.account);
           const isOp = !op?.isZero();
-          console.log(isOp);
           setIsOperator(!!isOp);
         } catch (e) {
           console.log(e);
@@ -57,7 +54,7 @@ const Operator: NextPage = () => {
       };
       checkOperator();
     }
-  }, [MM]);
+  }, [MM, uahtDao]);
 
   useEffect(() => {
     validateSignature({trx, setValid: setValidSignature});

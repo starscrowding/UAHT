@@ -66,8 +66,8 @@ export const P2P = ({balance, gas}: any) => {
 
   return (
     <>
-      <Col className={styles.pv1}>
-        <Row align="center" className={styles.mv1}>
+      <Col>
+        <Row align="center">
           <Info
             className={styles.partner}
             link={[...FIAT, ...CHAIN].find(i => i.name === int)?.help}
@@ -75,6 +75,7 @@ export const P2P = ({balance, gas}: any) => {
           &nbsp;
           <select
             name="in"
+            className={styles.address}
             value={int}
             onChange={e => {
               setInt(e.target.value);
@@ -90,6 +91,7 @@ export const P2P = ({balance, gas}: any) => {
           </select>
           <Input
             aria-label="sum"
+            className={styles.address}
             underlined
             color="secondary"
             type="number"
@@ -104,14 +106,22 @@ export const P2P = ({balance, gas}: any) => {
               updateAmount(amount);
             }}
           />
-          <div
-            title="Винагорода контрагенту згідно p2p угоди"
-            className={classNames(styles.mv1, styles.pointer)}
+          <Info
+            text="Винагорода контрагенту згідно p2p угоди"
+            className={classNames(styles.pointer)}
+            icon={
+              <div style={{minWidth: '50px'}}>
+                🤝
+                <Agent />
+              </div>
+            }
+          />
+          <select
+            name="out"
+            className={styles.address}
+            value={out}
+            onChange={e => setOut(e.target.value)}
           >
-            🤝 <Agent />
-            &nbsp;
-          </div>
-          <select name="out" value={out} onChange={e => setOut(e.target.value)}>
             {listOut().map(l => (
               <option key={l.name} value={l.name}>
                 {l.name}
@@ -124,7 +134,7 @@ export const P2P = ({balance, gas}: any) => {
           />
         </Row>
 
-        <Row align="center">
+        <Row align="center" className={styles.mt05}>
           🗣️&nbsp;
           <i>{msg()}</i>
           <Info

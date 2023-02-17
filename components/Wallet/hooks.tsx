@@ -55,7 +55,7 @@ export const useInit = ({
       }
     };
     Promise.allSettled([balanceOf(), reserveOf()]);
-  }, [MM, setBalance, setReserve, setVerified, setMatic, uaht]);
+  }, [MM.provider, MM.provider, setBalance, setReserve, setVerified, setMatic, uaht]);
 };
 
 export const useAddToken = ({MM}: any) => async () => {

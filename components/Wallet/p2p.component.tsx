@@ -39,104 +39,20 @@ export const Agent = () => {
 };
 
 export const P2P = ({balance, gas}: any) => {
-  const [int, setInt] = useState('sendmoney');
-  const [out, setOut] = useState('polygon');
-  const [amount, setAmount] = useState(MIN_AMOUNT);
-
-  const updateAmount = (v: number = MIN_AMOUNT, i = int) => {
-    const a =
-      i === 'polygon'
-        ? Math.min(Math.floor(balance), v)
-        : Math.max(MIN_AMOUNT, Math.min(v, MAX_AMOUNT));
-    setAmount(a);
-  };
-
-  const listIn = useCallback(() => [...FIAT, ...CHAIN], []);
-  const listOut = useCallback(
-    (i = int) => {
-      return FIAT.some(p => p.name === i) ? CHAIN : FIAT;
-    },
-    [int]
-  );
-
-  const msg = useCallback(() => (int === FIAT[0].name ? `куплю ${amount}` : `продам ${amount}`), [
-    int,
-    amount,
-  ]);
-
   return (
     <>
       <Col>
-        <Row align="center">
+        <Row align="center" className={styles.mt05}>
           <Info
-            className={styles.partner}
-            link={[...FIAT, ...CHAIN].find(i => i.name === int)?.help}
-          />
-          &nbsp;
-          <select
-            name="in"
-            className={styles.address}
-            value={int}
-            onChange={e => {
-              setInt(e.target.value);
-              setOut(listOut(e.target.value)[0].name);
-              updateAmount(MIN_AMOUNT, e.target.value);
-            }}
-          >
-            {listIn().map(l => (
-              <option key={l.name} value={l.name}>
-                {l.name}
-              </option>
-            ))}
-          </select>
-          <Input
-            aria-label="sum"
-            className={styles.address}
-            underlined
-            color="secondary"
-            type="number"
-            placeholder="Сума"
-            width="100px"
-            value={amount}
-            onChange={e => {
-              const a = +e?.target?.value;
-              setAmount(a);
-            }}
-            onBlur={() => {
-              updateAmount(amount);
-            }}
-          />
-          <Info
-            text="Винагорода контрагенту згідно p2p угоди"
+            text="контрагент p2p угоди"
             className={classNames(styles.pointer)}
             icon={
               <div style={{minWidth: '50px'}}>
-                🤝
-                <Agent />
+                <Agent /> 🤝 &nbsp;
               </div>
             }
           />
-          <select
-            name="out"
-            className={styles.address}
-            value={out}
-            onChange={e => setOut(e.target.value)}
-          >
-            {listOut().map(l => (
-              <option key={l.name} value={l.name}>
-                {l.name}
-              </option>
-            ))}
-          </select>
-          <Info
-            className={styles.partner}
-            link={[...FIAT, ...CHAIN].find(o => o.name === out)?.help}
-          />
-        </Row>
-
-        <Row align="center" className={styles.mt05}>
-          🗣️&nbsp;
-          <i>{msg()}</i>
+          оголошення
           <Info
             icon={<FaQuestionCircle color="white" />}
             className={styles.ml05}

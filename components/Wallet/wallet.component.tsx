@@ -20,7 +20,7 @@ import styles from './wallet.module.scss';
 export const Wallet = () => {
   const MM = useConnector();
   const [priority, setPriority] = useState(0);
-  const [action, setAction] = useState('input');
+  const [action, setAction] = useState('jar');
   const [balance, setBalance] = useState(0);
   const [matic, setMatic] = useState();
   const [reserve, setReserve] = useState();
@@ -147,29 +147,15 @@ export const Wallet = () => {
           }
         >
           <Row className={styles.row} justify="space-between" align="center" wrap="wrap">
-            <Button.Group color="gradient" ghost key={action}>
-              {[
-                {name: 'Ввід', act: 'input'},
-                {name: '🫙 Банка', act: 'jar'},
-                {name: 'Вивід', act: 'output'},
-              ].map(b => (
-                <Button
-                  key={b.act}
-                  size="sm"
-                  auto
-                  onClick={() => {
-                    reset();
-                    setAction(b.act);
-                  }}
-                  className={classNames({[styles.action]: action === b.act})}
-                >
-                  {b.name}
-                </Button>
-              ))}
-            </Button.Group>
+            {[{name: '🫙 Банка', act: 'jar'}].map(b => (
+              <Button key={b.act} size="md" auto color="gradient" ghost>
+                {b.name}
+              </Button>
+            ))}
+
             <div className={classNames(styles.flex, styles.ac)}>
               <Text small color="grey">
-                партнерський пул
+                🍰 пай спільноти
               </Text>
               <Info
                 className={styles.partner}

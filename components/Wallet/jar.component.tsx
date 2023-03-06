@@ -12,6 +12,7 @@ export const Jar = ({resource}: any) => {
           <select>
             <option>USDT</option>
             <option>USDC</option>
+            <option disabled>ОВДП</option>
           </select>
         </Text>
       </div>

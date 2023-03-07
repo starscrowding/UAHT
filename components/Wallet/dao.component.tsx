@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {ethers} from 'ethers';
 import {useConnector} from '@space/components/Wallet';
 import {Row, Card, Button, Input, Spacer, Loading} from '@nextui-org/react';
@@ -11,7 +11,7 @@ import {useSign, useUaht, useUahtDao} from './hooks';
 import {validateSignature, precision} from './helpers';
 import styles from './wallet.module.scss';
 
-export const Dao = () => {
+export const Dao = ({config}: any) => {
   const MM = useConnector();
   const [account, setAccount] = useState<string>('');
   const [verified, setVerified] = useState<undefined | boolean>();
@@ -73,9 +73,9 @@ export const Dao = () => {
     }
   };
 
-  const doSign = () => {
+  const doSign = (t?: string) => {
     try {
-      const text = prompt('Підписати: текст') || '';
+      const text = prompt('✍️ Підписати: текст', t) || '';
       if (text) {
         sign(text?.replace(/:/gim, ' '));
       } else {
@@ -108,6 +108,16 @@ export const Dao = () => {
       alert('❌');
     }
   };
+
+  useEffect(() => {
+    if (config?.sign) {
+      doSign(config?.sign);
+      setTimeout(() => {
+        document?.getElementById('signature')?.scrollIntoView({behavior: 'smooth'});
+      }, 3000);
+    }
+    // eslint-disable-next-line
+  }, [config?.sign]);
 
   return (
     <div>
@@ -209,6 +219,7 @@ export const Dao = () => {
       <Spacer />
       {signature && (
         <Row className={styles.row} justify="flex-start" align="center" wrap="wrap">
+          <b id="signature">Підпис:&nbsp;</b>
           <Address account={`${signature}.${MM.account}`} />
           <a className={styles.ml05} onClick={() => setSignature('')}>
             <IoMdCloseCircleOutline />

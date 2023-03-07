@@ -80,3 +80,11 @@ export const validateSignature = async ({trx, setValid, account = trx.account}: 
     console.log(e);
   }
 };
+
+export const sectionConfig = ({body = ''}: any) => {
+  try {
+    return JSON.parse(atob(body));
+  } catch (e) {
+    console.log(e);
+  }
+};

@@ -1,4 +1,4 @@
-import {useCallback, useState, useMemo} from 'react';
+import {useCallback, useState, useMemo, useEffect} from 'react';
 import classNames from 'classnames';
 import {Card, Row, Text, Button, Collapse} from '@nextui-org/react';
 import Image from 'next/image';
@@ -8,7 +8,7 @@ import {ADDRESS, TOKEN_LIST, DAO_ADDRESS, DAO, POLYGON_NETWORK} from '@space/hoo
 import {Info} from '@space/components/Info';
 import {MINIMUM} from './constants';
 import {useInit, useSign, useValidateCode} from './hooks';
-import {getStamp, createCode} from './helpers';
+import {getStamp, createCode, sectionConfig} from './helpers';
 import {VerificationModal, Address} from './common';
 import {Ex} from './ex.component';
 import {Trade} from './trade.component';
@@ -19,6 +19,8 @@ import styles from './wallet.module.scss';
 
 export const Wallet = () => {
   const MM = useConnector();
+  const [hash, setHash] = useState('');
+  const [config, setConfig] = useState();
   const [priority, setPriority] = useState(0);
   const [action, setAction] = useState('jar');
   const [balance, setBalance] = useState(0);
@@ -47,6 +49,20 @@ export const Wallet = () => {
   }, [setSignature]);
 
   useInit({resource, setCode, setBalance, setMatic, setReserve, setVerified, MM});
+
+  useEffect(() => {
+    try {
+      const hash = window?.location?.hash;
+      if (hash) {
+        const params = hash.substring(1).split(':');
+        params[0] && setHash(params[0]);
+        params[1] && setConfig(sectionConfig({body: params[1]}));
+        window.location.hash = '';
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }, []);
 
   if (MM.chainId !== POLYGON_NETWORK) {
     return (
@@ -192,7 +208,7 @@ export const Wallet = () => {
           />
         </Collapse>
         <Collapse
-          expanded={true}
+          expanded={!hash}
           title={
             <Row justify="space-between" align="center" wrap="wrap">
               <div className={styles.name}>
@@ -253,7 +269,8 @@ export const Wallet = () => {
           <Trade {...{balance, gas: matic}} />
         </Collapse>
         <Collapse
-          expanded={false}
+          id="dao"
+          expanded={hash.startsWith('dao')}
           title={<div className={styles.name}>✨ Спільнота DAO:</div>}
           subtitle={
             <div className={styles.address}>
@@ -267,7 +284,7 @@ export const Wallet = () => {
             </div>
           }
         >
-          <Dao />
+          <Dao config={config} />
         </Collapse>
       </Collapse.Group>
       <Actions />

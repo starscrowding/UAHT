@@ -1,1 +1,0 @@
-{"version":3,"file":"static/js/704.84f165ab.chunk.js","mappings":"yJAEA,IAAIA,EAAK,CAACC,SAAS,CAAC,E","sources":["../node_modules/@uniswap/widgets/dist/locales/pt-BR.js"],"sourcesContent":["/*eslint-disable*/\n\nvar ptBR={messages:{}};\n\nexport { ptBR as default };\n"],"names":["ptBR","messages"],"sourceRoot":""}

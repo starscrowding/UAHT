@@ -1,1 +1,0 @@
-{"version":3,"file":"static/js/590.624c6768.chunk.js","mappings":"yJAEA,IAAIA,EAAK,CAACC,SAAS,CAAC,E","sources":["../node_modules/@uniswap/widgets/dist/locales/ja-JP.js"],"sourcesContent":["/*eslint-disable*/\n\nvar jaJP={messages:{}};\n\nexport { jaJP as default };\n"],"names":["jaJP","messages"],"sourceRoot":""}

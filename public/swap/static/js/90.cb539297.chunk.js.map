@@ -1,1 +1,0 @@
-{"version":3,"file":"static/js/90.cb539297.chunk.js","mappings":"wJAEA,IAAIA,EAAK,CAACC,SAAS,CAAC,E","sources":["../node_modules/@uniswap/widgets/dist/locales/ru-RU.js"],"sourcesContent":["/*eslint-disable*/\n\nvar ruRU={messages:{}};\n\nexport { ruRU as default };\n"],"names":["ruRU","messages"],"sourceRoot":""}

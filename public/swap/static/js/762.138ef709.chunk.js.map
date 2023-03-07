@@ -1,1 +1,0 @@
-{"version":3,"file":"static/js/762.138ef709.chunk.js","mappings":"yJAEA,IAAIA,EAAK,CAACC,SAAS,CAAC,E","sources":["../node_modules/@uniswap/widgets/dist/locales/el-GR.js"],"sourcesContent":["/*eslint-disable*/\n\nvar elGR={messages:{}};\n\nexport { elGR as default };\n"],"names":["elGR","messages"],"sourceRoot":""}

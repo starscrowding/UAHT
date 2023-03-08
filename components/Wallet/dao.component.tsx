@@ -113,7 +113,7 @@ export const Dao = ({config}: any) => {
     if (config?.sign) {
       doSign(config?.sign);
       setTimeout(() => {
-        document?.getElementById('signature')?.scrollIntoView({behavior: 'smooth'});
+        document?.getElementById('dao')?.scrollIntoView({behavior: 'smooth'});
       }, 3000);
     }
     // eslint-disable-next-line

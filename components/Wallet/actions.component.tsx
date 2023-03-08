@@ -17,7 +17,7 @@ export const Actions = () => {
   }, []);
 
   if (ready) {
-    if (query?.action === 'approve' && query?.spender && query?.amount) {
+    if (query?.action === 'approve' && query?.spender && Number(query?.amount) >= 0) {
       return <AllowanceModal />;
     }
     if (query?.action === 'transfer') {
@@ -33,7 +33,7 @@ export const AllowanceModal = () => {
 
   const approve = async () => {
     try {
-      await uaht.approve(router?.query?.spender, router?.query?.amount);
+      await uaht.approve(router?.query?.spender, Number(router?.query?.amount) * 100);
     } catch (e) {
       console.log(e);
     } finally {

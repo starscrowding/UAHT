@@ -6,3 +6,6 @@
 3. Кожен може зробити автономний внесок у розвиток
 4. Відкритість та прозорість організації
 5. Захищеність даних та активів
+
+
+![principles](https://github.com/starscrowding/UAHT/blob/dev/public/principles.png)

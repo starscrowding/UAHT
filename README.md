@@ -26,4 +26,5 @@ UAHT може використовуватись згідно прав і сво
 ## Часті питання
 
 - FAQ: https://github.com/starscrowding/UAHT/blob/dev/FAQ.md
+- Принципи: https://github.com/starscrowding/UAHT/blob/dev/PRINCIPLES.md
 - Партнерство: https://github.com/starscrowding/UAHT/blob/dev/PARTNERSHIP.md

@@ -2,7 +2,7 @@
 
 0. Мета спільноти UAHT - розвиток web3 технологій та залучення віртуальних активів в Україну для розвитку економіки.
 1. Токен UAHT - p2p токен без меж для вільних людей - інформаційний запис про облік безвідсоткових поворотних активів.
-2. Контракт UAHT - ERC-20 смарт контракт в блокчейн мережі Polygon, який успадковує основні принципи Tether.
+2. Протокол UAHT - екосистема смарт контрактів в блокчейн мережі Polygon на основі стандарту ERC-20 та стійких принципів.
 3. uaht.io - інформаційна платформа для операцій із UAHT через протокол WalletConnect на умовах доручення від користувача.
 4. Самоврядування здійснюється на засадах публічного контракту UAHT_DAO та p2p угодах.
 5. Вхід / вихід відбувається за добровільним запитом.
@@ -15,12 +15,11 @@ UAHT може використовуватись згідно прав і сво
 
 ## Посилання
 
-- UAHT: https://uaht.io/
-- Tether: https://tether.to/
+- UAHT: https://polygonscan.com/token/0x0d9447e16072b636b4a1e8f2b8c644e58f3eaa6a#readContract
+- UAHT_DAO: https://polygonscan.com/address/0x08b491bc7848c6af42c3882794a93d70c04e5816#readContract
+- Платформа: https://uaht.io/
 - Polygon: https://polygon.technology/
-- Контракт: https://polygonscan.com/token/0x0d9447e16072b636b4a1e8f2b8c644e58f3eaa6a#readContract
 - WalletConnect: https://walletconnect.com/
-- UAHT_DAO: https://github.com/starscrowding/UAHT/blob/dev/contracts/UAHT_DAO.sol
 - Whitepaper: https://github.com/starscrowding/UAHT/blob/dev/public/whitepaper.pdf
 
 ## Часті питання

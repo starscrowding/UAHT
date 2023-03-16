@@ -5,7 +5,7 @@ import {useConnector, Connect} from '@space/components/Wallet';
 import {RESOURCES} from '@space/components/Wallet/constants';
 import {parseCode, validateSignature} from '@space/components/Wallet/helpers';
 import {useUahtDao} from '@space/components/Wallet/hooks';
-import {CONTRACT, DAO_CONTRACT, RESERVE_URL} from '@space/hooks/api';
+import {CONTRACT, DAO_CONTRACT, RESERVE_URL, BASE} from '@space/hooks/api';
 import styles from '../styles/index.module.scss';
 
 const Operator: NextPage = () => {
@@ -15,6 +15,11 @@ const Operator: NextPage = () => {
   const [code, setCode] = useState('');
   const [validSignature, setValidSignature] = useState(false);
   const uahtDao = useUahtDao();
+
+  const requestSignature = () => {
+    const text = prompt('Запит ✍️', Date.now().toString()) || '';
+    prompt('Копіювати:', `${BASE}#dao:${btoa(JSON.stringify({sign: text}))}`);
+  };
 
   const trx = useMemo(() => {
     setValidSignature(false);
@@ -73,7 +78,7 @@ const Operator: NextPage = () => {
         <>
           <Row className={styles.mv1} justify="space-evenly">
             <a href={RESERVE_URL} target="_blank" rel="noreferrer">
-              Резерв
+              ⚙️
             </a>
             <a href={`${CONTRACT}#readContract`} target="_blank" rel="noreferrer">
               UAHT
@@ -81,6 +86,7 @@ const Operator: NextPage = () => {
             <a href={`${DAO_CONTRACT}#readContract`} target="_blank" rel="noreferrer">
               UAHT_DAO
             </a>
+            <a onClick={() => requestSignature()}>🧐</a>
           </Row>
           <Spacer />
           <Card>

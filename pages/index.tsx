@@ -31,24 +31,28 @@ const Home: NextPage = () => {
               <Row justify="flex-end" align="center">
                 <Connect />
               </Row>
-              <Row justify="center" align="center">
-                <Logo href={CONTRACT} target="_blank" />
-                <a
-                  className={styles.ml05}
-                  href={FAQ}
-                  target="_blank"
-                  rel="noreferrer"
-                  title="Часті питання | FAQ"
-                >
-                  <FaRegQuestionCircle color="white" size={18} />
-                </a>
-              </Row>
-              <Row justify="center" align="center">
-                <Text h6 size={17} color="white" css={{m: 0}}>
-                  токен без меж для вільних людей
-                </Text>
-                <Info link={INFO} className={styles.ml05} />
-              </Row>
+              {MM.status !== 'connected' && (
+                <>
+                  <Row justify="center" align="center">
+                    <Logo href={CONTRACT} target="_blank" />
+                    <a
+                      className={styles.ml05}
+                      href={FAQ}
+                      target="_blank"
+                      rel="noreferrer"
+                      title="Часті питання | FAQ"
+                    >
+                      <FaRegQuestionCircle color="white" size={18} />
+                    </a>
+                  </Row>
+                  <Row justify="center" align="center">
+                    <Text h6 size={17} color="white" css={{m: 0}}>
+                      токен без меж для вільних людей
+                    </Text>
+                    <Info link={INFO} className={styles.ml05} />
+                  </Row>
+                </>
+              )}
               <Row justify="center" align="center" css={{minHeight: '250px'}}>
                 {!MM.status ||
                 MM.status === 'reconnecting' ||

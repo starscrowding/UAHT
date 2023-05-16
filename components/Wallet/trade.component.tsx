@@ -17,7 +17,7 @@ export const Trade = ({balance, gas}: any) => {
           auto
           onClick={() => setAct('p2p')}
         >
-          OTC P2P
+          P2P
         </Button>
         <Button
           className={styles.button}

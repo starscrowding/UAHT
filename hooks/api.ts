@@ -16,6 +16,7 @@ export const TOKEN_LIST = `${BASE}/tokenlist.json`;
 export const WALLET_CONNECT = 'abf8b212906905d826da0549a00a0fd2';
 export const POLYGON_NETWORK = 137;
 export const USDT_ADDRESS = '0xc2132d05d31c914a87c6611c10748aeb04b58e8f';
+export const JAR = '0x579B733576c607ab08909F4f8Dc3b274C721aAba';
 export const ENDPOINT = {
   token: {
     set: '/api/token/set',

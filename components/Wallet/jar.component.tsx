@@ -1,5 +1,6 @@
-import {Text} from '@nextui-org/react';
-import {RequestButton} from './common';
+import {Text, Col, Row} from '@nextui-org/react';
+import {JAR} from '@space/hooks/api';
+import {Address} from './common';
 import {QRCode} from './qr.component';
 import styles from './wallet.module.scss';
 
@@ -8,25 +9,28 @@ export const Jar = ({resource}: any) => {
     <div>
       <div className={styles.mv1}>
         <Text small color="grey">
-          🔐 взяти UAHT під &nbsp;
+          🔐 через &nbsp;
           <select>
             <option>USDT</option>
             <option>USDC</option>
-            <option disabled>ОВДП</option>
           </select>
+          &nbsp; за{' '}
+          <a
+            href="https://bank.gov.ua/ua/markets/exchangerate-chart?cn%5B%5D=USD"
+            rel="noreferrer"
+            target="_blank"
+            className={styles.link}
+          >
+            офіційним курсом
+          </a>
         </Text>
       </div>
-      <div className={styles.mv1}>
-        <QRCode value="0xD0920a91B0d382C1B0e83DB36178f808AF881121" title="USDT ↔ USDC" />
-      </div>
-      <div>
-        <RequestButton action="🤝" />
-      </div>
-      <div>
-        <Text small color="grey">
-          * індивідуальні умови для партнерів
-        </Text>
-      </div>
+      <Col className={styles.mv1}>
+        <QRCode value={JAR} title="USDT ↔ USDC" />
+      </Col>
+      <Row align="center">
+        <Address account={JAR} className={styles.m05} />
+      </Row>
     </div>
   );
 };

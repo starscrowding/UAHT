@@ -1,7 +1,12 @@
 @import '../../styles/variables.module.scss';
 
+.card {
+  margin: 3rem auto;
+}
+
 .wallet {
   margin-top: 1rem;
+  background: none;
 }
 
 .connect {
@@ -41,7 +46,16 @@
   border: none;
 }
 
+.link {
+  color: grey;
+  text-decoration: underline;
+}
+
 @media only screen and (max-width: 480px) {
+  .container {
+    padding: 0;
+  }
+
   .address {
     zoom: 0.75;
   }
@@ -52,9 +66,5 @@
 
   .signText {
     display: none;
-  }
-
-  .swap {
-    width: 100%;
   }
 }

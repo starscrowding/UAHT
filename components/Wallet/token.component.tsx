@@ -68,6 +68,7 @@ export const QRModal = ({showQRModal, setShowQRModal, MM}: any) => {
 
   return (
     <Modal
+      blur
       preventClose
       closeButton
       aria-labelledby="modal"
@@ -115,6 +116,7 @@ export const QRModal = ({showQRModal, setShowQRModal, MM}: any) => {
 export const StakingModal = ({showStakingModal, setShowStakingModal}: any) => {
   return (
     <Modal
+      blur
       closeButton
       aria-labelledby="modal"
       open={showStakingModal}

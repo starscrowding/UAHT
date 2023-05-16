@@ -5,7 +5,6 @@
 }
 
 .wallet {
-  margin-top: 1rem;
   background: none;
 }
 
@@ -66,5 +65,9 @@
 
   .signText {
     display: none;
+  }
+
+  .swap {
+    width: 100%;
   }
 }

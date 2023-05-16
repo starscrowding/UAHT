@@ -13,6 +13,12 @@ import styles from '../styles/index.module.scss';
 const Home: NextPage = () => {
   const MM = useConnector();
 
+  const isLoading =
+    !MM.status ||
+    MM.status === 'reconnecting' ||
+    MM.status === 'connecting' ||
+    (MM.status === 'connected' && !MM.signer);
+
   return (
     <>
       <Head>
@@ -31,7 +37,7 @@ const Home: NextPage = () => {
               <Row justify="flex-end" align="center">
                 <Connect />
               </Row>
-              {MM.status !== 'connected' && (
+              {!isLoading && MM.status !== 'connected' && (
                 <>
                   <Row justify="center" align="center">
                     <Logo href={CONTRACT} target="_blank" />
@@ -53,11 +59,8 @@ const Home: NextPage = () => {
                   </Row>
                 </>
               )}
-              <Row justify="center" align="center" css={{minHeight: '250px'}}>
-                {!MM.status ||
-                MM.status === 'reconnecting' ||
-                MM.status === 'connecting' ||
-                (MM.status === 'connected' && !MM.signer) ? (
+              <Row justify="center" align="center" css={isLoading ? {minHeight: '90vh'} : {}}>
+                {isLoading ? (
                   <Loading type="points" />
                 ) : MM.status === 'connected' ? (
                   <Wallet />

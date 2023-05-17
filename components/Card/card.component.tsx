@@ -26,10 +26,10 @@ export const Card = ({className, info, data, qr}: any) => {
           <div className={styles.data}>{data}</div>
         </div>
         <div className={styles.back}>
-          <div className={styles.logo}>
+          <div className={styles.qr}>{qr}</div>
+          <div className={styles.token}>
             <Image src="/icon.png" width="75" height="75" alt="токен" />
           </div>
-          <div className={styles.qr}>{qr}</div>
         </div>
       </div>
     </div>

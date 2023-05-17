@@ -39,6 +39,10 @@
 
 .back {
   transform: rotateY(180deg);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .flipped {
@@ -67,9 +71,11 @@
 }
 
 .qr {
-  position: absolute;
-  top: 7px;
-  left: 7px;
+  padding: 7px;
+}
+
+.token {
+  padding: 7px;
 }
 
 @media only screen and (max-width: 480px) {
@@ -78,7 +84,6 @@
   }
 
   .qr {
-    top: 0;
-    left: 0;
+    padding: 0;
   }
 }

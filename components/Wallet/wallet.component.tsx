@@ -7,6 +7,7 @@ import {GoVerified, GoChecklist, GoDatabase} from 'react-icons/go';
 import {ADDRESS, TOKEN_LIST, DAO_ADDRESS, DAO, POLYGON_NETWORK} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
 import {Card as InfoCard} from '@space/components/Card';
+import {QRCode} from './qr.component';
 import {MINIMUM} from './constants';
 import {useInit, useSign, useValidateCode} from './hooks';
 import {getStamp, createCode, sectionConfig} from './helpers';
@@ -168,6 +169,7 @@ export const Wallet = () => {
             ) : null}
           </Row>
         }
+        qr={<QRCode value={MM.account} title="QR код" />}
       />
 
       <Card className={styles.wallet}>
@@ -226,8 +228,7 @@ export const Wallet = () => {
             title={
               <Row justify="space-between" align="center" wrap="wrap">
                 <div className={styles.name}>
-                  <Image src="/favicon-16x16.png" width="16" height="16" alt="токен" /> Адреса
-                  токена:
+                  <Image src="/favicon.ico" width="16" height="16" alt="токен" /> Адреса токена:
                 </div>
                 <div>
                   <Button

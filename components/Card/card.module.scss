@@ -1,21 +1,61 @@
 @import '../../styles/variables.module.scss';
 
+.scene {
+  perspective: 500px;
+  overflow: hidden;
+  user-select: none;
+}
+
 .card {
+  position: relative;
   max-width: 500px;
   height: 300px;
+  background: #16181a;
   border: 1px solid rgba(250, 240, 240, 0.123);
   border-radius: 10px;
-  overflow: hidden;
-  backdrop-filter: blur(5px);
+  margin: 0 auto;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transform-origin: center right;
+  transition: transform 1s;
+}
+
+.shake {
+  transform: translateX(-1%) rotateY(-3deg);
+  transition: 0.3s ease-in-out;
+}
+
+.front,
+.back {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  overflow: hidden;
+}
+
+.back {
+  transform: rotateY(180deg);
+}
+
+.flipped {
+  transform: translateX(-100%) rotateY(-180deg);
 }
 
 .logo {
   display: flex;
   justify-content: flex-end;
   padding: 10px;
+}
+
+.info,
+.data {
+  p {
+    user-select: text;
+  }
 }
 
 .info {
@@ -26,8 +66,19 @@
   padding: 20px 10px;
 }
 
+.qr {
+  position: absolute;
+  top: 7px;
+  left: 7px;
+}
+
 @media only screen and (max-width: 480px) {
   .card {
-    height: 250px;
+    height: 256px;
+  }
+
+  .qr {
+    top: 0;
+    left: 0;
   }
 }

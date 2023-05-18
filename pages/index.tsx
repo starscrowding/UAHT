@@ -37,7 +37,7 @@ const Home: NextPage = () => {
               <Row
                 justify="center"
                 align="center"
-                css={isLoading ? {minHeight: '90vh'} : {minHeight: '250px'}}
+                css={isLoading ? {minHeight: '100vh'} : {minHeight: '65vh'}}
               >
                 {isLoading ? (
                   <Loading type="points" />

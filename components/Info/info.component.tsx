@@ -24,7 +24,7 @@ export const Info = ({
     </Popover>
   ) : link ? (
     <Link href={link} className={className} target="_blank">
-      <FaInfoCircle color="white" />
+      {icon ? icon : <FaInfoCircle color="white" />}
     </Link>
   ) : null;
 };

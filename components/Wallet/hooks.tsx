@@ -1,9 +1,9 @@
 import {useEffect, useCallback, useMemo} from 'react';
 import {ethers} from 'ethers';
-
+import ERC20_ABI from '@space/contracts/ERC20.abi.json';
 import UAHT_ABI from '@space/contracts/UAHT.abi.json';
 import UAHT_DAO_ABI from '@space/contracts/UAHT_DAO.abi.json';
-import {api, ADDRESS, DAO_ADDRESS, RESERVE} from '@space/hooks/api';
+import {api, ADDRESS, DAO_ADDRESS, RESERVE, USDT_ADDRESS} from '@space/hooks/api';
 import {useConnector} from '@space/components/Wallet';
 import {precision} from './helpers';
 import {RESOURCES, MIN_CODE_LENGTH} from './constants';
@@ -121,5 +121,14 @@ export const useUahtDao = () => {
     const web3Provider = MM.provider;
     const signer = MM.signer || web3Provider;
     return new ethers.Contract(DAO_ADDRESS, UAHT_DAO_ABI, signer);
+  }, [MM.provider, MM.signer]);
+};
+
+export const useERC20 = (address: string) => {
+  const MM = useConnector();
+  return useMemo(() => {
+    const web3Provider = MM.provider;
+    const signer = MM.signer || web3Provider;
+    return new ethers.Contract(address, ERC20_ABI, signer);
   }, [MM.provider, MM.signer]);
 };

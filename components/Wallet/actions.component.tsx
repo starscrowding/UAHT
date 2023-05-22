@@ -4,6 +4,7 @@ import {useRouter} from 'next/router';
 import {BiTransferAlt} from 'react-icons/bi';
 import {Row, Text, Modal, Button, Input} from '@nextui-org/react';
 import {Address} from '@space/components/Wallet/common';
+import {Jar} from '@space/components/Wallet/jar.component';
 import {TransferAmount} from '@space/components/Wallet/token.component';
 import {useUaht} from './hooks';
 import styles from './wallet.module.scss';
@@ -22,6 +23,9 @@ export const Actions = () => {
     }
     if (query?.action === 'transfer') {
       return <TransferModal />;
+    }
+    if (query?.action === 'jar') {
+      return <JarModal />;
     }
   }
   return null;
@@ -131,6 +135,25 @@ export const TransferModal = () => {
             Відправити ➡️
           </Button>
         </Row>
+      </Modal.Body>
+    </Modal>
+  );
+};
+
+export const JarModal = () => {
+  const router = useRouter();
+
+  return (
+    <Modal
+      blur
+      preventClose
+      closeButton
+      aria-labelledby="a-modal"
+      open={true}
+      onClose={() => router.replace('/')}
+    >
+      <Modal.Body>
+        <Jar />
       </Modal.Body>
     </Modal>
   );

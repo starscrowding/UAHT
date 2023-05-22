@@ -4,7 +4,7 @@ import {ADDRESS, POLYGON_NETWORK, USDT_ADDRESS} from '@space/hooks/api';
 import {P2P} from './p2p.component';
 import styles from './wallet.module.scss';
 
-export const Trade = ({balance, gas}: any) => {
+export const Swap = ({balance, gas}: any) => {
   const [act, setAct] = useState('uniswap');
 
   return (
@@ -35,7 +35,7 @@ export const Trade = ({balance, gas}: any) => {
           auto
           onClick={() => {
             window.open(
-              `https://app.1inch.io/#/${POLYGON_NETWORK}/classic/limit-order/${USDT_ADDRESS}/${ADDRESS}`,
+              `https://app.1inch.io/#/${POLYGON_NETWORK}/p2p/${USDT_ADDRESS}/${ADDRESS}`,
               '_blank'
             );
           }}

@@ -1,9 +1,11 @@
 import {useCallback, useState, useMemo, useEffect} from 'react';
 import classNames from 'classnames';
-import {Card, Row, Text, Button, Collapse, Container} from '@nextui-org/react';
+import {Card, Row, Text, Button, Collapse, Container, Spacer} from '@nextui-org/react';
 import Image from 'next/image';
+import {useRouter} from 'next/router';
 import {useConnector, Switch} from '@space/components/Wallet';
-import {GoVerified, GoChecklist, GoDatabase} from 'react-icons/go';
+import {GoVerified, GoChecklist} from 'react-icons/go';
+import {BsDatabaseFillAdd, BsDatabaseFillDash} from 'react-icons/bs';
 import {ADDRESS, TOKEN_LIST, DAO_ADDRESS, DAO, POLYGON_NETWORK} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
 import {Card as InfoCard} from '@space/components/Card';
@@ -12,8 +14,7 @@ import {MINIMUM} from './constants';
 import {useInit, useSign, useValidateCode} from './hooks';
 import {getStamp, createCode, sectionConfig} from './helpers';
 import {VerificationModal, Address} from './common';
-import {Ex} from './ex.component';
-import {Trade} from './trade.component';
+import {Swap} from './swap.component';
 import {Token} from './token.component';
 import {Dao} from './dao.component';
 import {Actions} from './actions.component';
@@ -35,6 +36,7 @@ export const Wallet = () => {
   const [varified, setVerified] = useState(false);
   const [vModal, setVModal] = useState('');
   const stamp = useMemo(() => getStamp(), []);
+  const router = useRouter();
 
   const sign = useSign({MM, setSignature});
   const validateCode = useValidateCode({resource, setCode});
@@ -173,56 +175,29 @@ export const Wallet = () => {
       />
 
       <Card className={styles.wallet}>
-        <Collapse.Group accordion={false}>
-          <Collapse
-            expanded={false}
-            title={
-              <Row justify="space-between" align="center" wrap="wrap">
-                <div className={styles.name}>
-                  <GoDatabase color="green" /> Поповнити:
-                </div>
-                <div>
-                  <Row justify="flex-end" align="center">
-                    <Text small color="grey">
-                      🫙 банка спільноти
-                    </Text>
-                    <Info
-                      className={classNames(styles.partner, styles.pl05, styles.pr1)}
-                      text={
-                        <>
-                          З приводу партнерства 🤝 звертайся до спільноти{' '}
-                          <a href={DAO} target="_blank" rel="noreferrer">
-                            @uaht_group
-                          </a>
-                        </>
-                      }
-                    />
-                  </Row>
-                </div>
-              </Row>
-            }
+        <Row justify="center" align="center">
+          <Button
+            auto
+            flat
+            color="success"
+            css={{color: 'white'}}
+            icon={<BsDatabaseFillAdd color="green" size={18} />}
+            onClick={() => router.push('/?action=jar')}
           >
-            <Ex
-              {...{
-                action,
-                balance,
-                resource,
-                setResource,
-                reserve,
-                MM,
-                signature,
-                code,
-                validateCode,
-                amount,
-                setAmount,
-                onAmountChange,
-                priority,
-                setPriority,
-                stamp,
-                sign,
-              }}
-            />
-          </Collapse>
+            Поповнити
+          </Button>
+          <Spacer />
+          <Button
+            auto
+            flat
+            css={{color: 'white'}}
+            icon={<BsDatabaseFillDash color="red" size={18} />}
+            onClick={() => router.push('/?action=transfer')}
+          >
+            Використати
+          </Button>
+        </Row>
+        <Collapse.Group accordion={false}>
           <Collapse
             expanded={!hash}
             title={
@@ -265,10 +240,32 @@ export const Wallet = () => {
           </Collapse>
           <Collapse
             expanded={false}
-            title={<div className={styles.name}>💰 Обмін:</div>}
+            title={
+              <Row justify="space-between" align="center" wrap="wrap">
+                <div className={styles.name}>💰 Обмін:</div>
+                <div>
+                  <Row justify="flex-end" align="center">
+                    <Text small color="grey">
+                      🫙 банка спільноти
+                    </Text>
+                    <Info
+                      className={classNames(styles.partner, styles.pr1)}
+                      text={
+                        <>
+                          З приводу партнерства 🤝 звертайся до спільноти{' '}
+                          <a href={DAO} target="_blank" rel="noreferrer">
+                            @uaht_group
+                          </a>
+                        </>
+                      }
+                    />
+                  </Row>
+                </div>
+              </Row>
+            }
             subtitle={
               <Row className={styles.address}>
-                {['MATIC', 'USDT', 'BTC', 'ETH', 'UAH'].map(pair => (
+                {['MATIC', 'USDT', 'USDC', 'ETH', 'BTC'].map(pair => (
                   <Text
                     key={pair}
                     className={styles.pl05}
@@ -282,7 +279,7 @@ export const Wallet = () => {
               </Row>
             }
           >
-            <Trade {...{balance, gas: matic}} />
+            <Swap {...{balance, gas: matic}} />
           </Collapse>
           <Collapse
             id="dao"

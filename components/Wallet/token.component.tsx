@@ -1,9 +1,9 @@
 import {useCallback, useState} from 'react';
+import NextImage from 'next/image';
 import {useRouter} from 'next/router';
 import {Row, Button, Modal, Text, Input} from '@nextui-org/react';
-import {MdAddCircleOutline, MdQrCode} from 'react-icons/md';
+import {MdQrCode} from 'react-icons/md';
 import {FaDownload} from 'react-icons/fa';
-import {BiTransferAlt} from 'react-icons/bi';
 import {useConnector} from '@space/components/Wallet';
 import {ADDRESS, BASE, USDT_ADDRESS} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
@@ -12,7 +12,7 @@ import {useAddToken} from './hooks';
 import {Address} from './common';
 import styles from './wallet.module.scss';
 
-export const TransferAmount = ({amount, setAmount, disabled}: any) => {
+export const TransferAmount = ({amount, setAmount, disabled, placeholder = 'UAHT'}: any) => {
   return (
     <>
       Сума:&nbsp;
@@ -21,7 +21,7 @@ export const TransferAmount = ({amount, setAmount, disabled}: any) => {
         underlined
         color="secondary"
         type="number"
-        placeholder="UAHT"
+        placeholder={placeholder}
         width="150px"
         value={amount}
         disabled={disabled}
@@ -178,19 +178,9 @@ export const Token = () => {
             title="Додати в Metamask"
             onClick={() => addToken()}
           >
-            <MdAddCircleOutline size="18" />
+            <NextImage src="/metamask.svg" width="16" height="16" alt="Metamask" />+
           </Button>
         ) : null}
-        <Button
-          className={styles.button}
-          size="sm"
-          auto
-          flat
-          title="Зробити трансфер"
-          onClick={() => router.push('/?action=transfer')}
-        >
-          <BiTransferAlt size="18" />
-        </Button>
         <Button
           className={styles.button}
           size="sm"

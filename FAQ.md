@@ -52,9 +52,9 @@ https://t.me/uaht_info/52
 
 [Information for operators and p2p-agents](https://github.com/starscrowding/UAHT/blob/dev/PARTNERSHIP.md)
 
-### What is Jar?
+### What is Jar 🫙 ?
 
-Jar is a service that allows you to generate:
+Jar is a set of decentralized services and smart contracts that allow you to generate:
 
 ✅ Input through conversion \
 🍯 Jam pools of full range MATIC ↔ UAHT ↔ USDT, \

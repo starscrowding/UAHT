@@ -5,6 +5,7 @@ import {FaTelegramPlane, FaCopy, FaCheck} from 'react-icons/fa';
 import {TELEGRAM} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
 import {MINIMUM} from './constants';
+import {sanitizeInput} from './helpers';
 import styles from './wallet.module.scss';
 
 export const IO = ({
@@ -126,11 +127,7 @@ export const Tips = ({
         width="55px"
         value={priority}
         disabled={!amount || disabled}
-        onKeyDown={e => {
-          if (['-', '+', 'e', 'E', '.'].includes(e?.key)) {
-            e?.preventDefault?.();
-          }
-        }}
+        onKeyDown={sanitizeInput}
         onChange={e => {
           const value = Math.ceil(Math.abs(+e?.target?.value));
           setPriority(value);

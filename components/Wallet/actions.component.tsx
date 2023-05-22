@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
 import {ethers} from 'ethers';
 import {useRouter} from 'next/router';
+import {toast} from 'react-toastify';
 import {BiTransferAlt} from 'react-icons/bi';
 import {Row, Text, Modal, Button, Input} from '@nextui-org/react';
 import {Address} from '@space/components/Wallet/common';
@@ -40,6 +41,8 @@ export const AllowanceModal = () => {
       await uaht.approve(router?.query?.spender, Number(router?.query?.amount) * 100);
     } catch (e) {
       console.log(e);
+      const {reason} = e as any;
+      toast(reason);
     } finally {
       router.replace('/');
     }
@@ -91,6 +94,8 @@ export const TransferModal = () => {
       await uaht.transfer(to, Number(amount) * 100);
     } catch (e) {
       console.log(e);
+      const {reason} = e as any;
+      toast(reason);
     } finally {
       router.replace('/');
     }
@@ -107,7 +112,7 @@ export const TransferModal = () => {
     >
       <Modal.Header>
         <Text size={18}>
-          <BiTransferAlt size="18" /> Зробити трансфер
+          <BiTransferAlt size="18" /> Трансфер
         </Text>
       </Modal.Header>
       <Modal.Body>

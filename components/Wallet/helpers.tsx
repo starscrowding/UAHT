@@ -88,3 +88,9 @@ export const sectionConfig = ({body = ''}: any) => {
     console.log(e);
   }
 };
+
+export const sanitizeInput = (e: any) => {
+  if (['-', '+', 'e', 'E', '.'].includes(e?.key)) {
+    e?.preventDefault?.();
+  }
+};

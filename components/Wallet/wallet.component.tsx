@@ -6,7 +6,7 @@ import {useRouter} from 'next/router';
 import {useConnector, Switch} from '@space/components/Wallet';
 import {GoVerified, GoChecklist} from 'react-icons/go';
 import {BsDatabaseFillAdd, BsDatabaseFillDash} from 'react-icons/bs';
-import {ADDRESS, TOKEN_LIST, DAO_ADDRESS, DAO, POLYGON_NETWORK} from '@space/hooks/api';
+import {ADDRESS, TOKEN_LIST, DAO_ADDRESS, DAO, POLYGON_NETWORK, JAR} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
 import {Card as InfoCard} from '@space/components/Card';
 import {QRCode} from './qr.component';
@@ -181,20 +181,20 @@ export const Wallet = () => {
             flat
             color="success"
             css={{color: 'white'}}
-            icon={<BsDatabaseFillAdd color="green" size={18} />}
+            icon={<BsDatabaseFillAdd color="green" size={24} />}
             onClick={() => router.push('/?action=jar')}
           >
-            Поповнити
+            Поповнення
           </Button>
           <Spacer />
           <Button
             auto
             flat
             css={{color: 'white'}}
-            icon={<BsDatabaseFillDash color="red" size={18} />}
-            onClick={() => router.push('/?action=transfer')}
+            icon={<BsDatabaseFillDash color="red" size={24} />}
+            onClick={() => router.push(`/?action=transfer`)}
           >
-            Використати
+            Розрахунок
           </Button>
         </Row>
         <Collapse.Group accordion={false}>
@@ -239,7 +239,8 @@ export const Wallet = () => {
             <Token />
           </Collapse>
           <Collapse
-            expanded={false}
+            id="swap"
+            expanded={hash.startsWith('swap')}
             title={
               <Row justify="space-between" align="center" wrap="wrap">
                 <div className={styles.name}>💰 Обмін:</div>

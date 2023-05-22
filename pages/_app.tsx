@@ -11,8 +11,10 @@ import {
   Web3Modal,
   WALLET_CONNECT,
 } from '@space/components/Wallet/connector';
-import {HOST, DAO, WALLET_CONNECT as PROGECT_ID} from '../hooks/api';
-import '@space/styles//global.css';
+import {ToastContainer} from 'react-toastify';
+import {HOST, DAO} from '../hooks/api';
+import '@space/styles/global.css';
+import 'react-toastify/dist/ReactToastify.css';
 import variables from '@space/styles/variables.module.scss';
 
 const baseTheme = {
@@ -88,6 +90,7 @@ function SpaceApp({Component, pageProps}: AppProps) {
       >
         <NextUIProvider>
           <WagmiConfig client={wagmiClient}>
+            <ToastContainer theme="dark" />
             <Component {...pageProps} />
             <Script
               async

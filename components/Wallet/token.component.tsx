@@ -10,6 +10,7 @@ import {Info} from '@space/components/Info';
 import {QRCode} from './qr.component';
 import {useAddToken} from './hooks';
 import {Address} from './common';
+import {sanitizeInput} from './helpers';
 import styles from './wallet.module.scss';
 
 export const TransferAmount = ({amount, setAmount, disabled, placeholder = 'UAHT'}: any) => {
@@ -29,6 +30,7 @@ export const TransferAmount = ({amount, setAmount, disabled, placeholder = 'UAHT
           setAmount(e?.target?.value);
         }}
         onBlur={() => setAmount(amount && Math.max(0, Number(amount)))}
+        onKeyDown={sanitizeInput}
       />
     </>
   );
@@ -80,7 +82,7 @@ export const QRModal = ({showQRModal, setShowQRModal, MM}: any) => {
     >
       <Modal.Header>
         <Text size={18}>
-          Твій qr-код <MdQrCode />
+          Твій QR-код <MdQrCode />
         </Text>
       </Modal.Header>
       <Modal.Body>
@@ -117,6 +119,7 @@ export const StakingModal = ({showStakingModal, setShowStakingModal}: any) => {
   return (
     <Modal
       blur
+      preventClose
       closeButton
       aria-labelledby="modal"
       open={showStakingModal}

@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import {useRouter} from 'next/router';
+import {toast} from 'react-toastify';
 import {Text, Col, Row, Button} from '@nextui-org/react';
 import {MdAddCircleOutline} from 'react-icons/md';
 import {JAR, USDT_ADDRESS} from '@space/hooks/api';
@@ -15,7 +16,15 @@ export const Jar = () => {
   );
 
   const add = async () => {
-    await usdt.transfer(JAR, Number(amount) * 10 ** 6);
+    try {
+      await usdt.transfer(JAR, Number(amount) * 10 ** 6);
+    } catch (e) {
+      console.log(e);
+      const {reason} = e as any;
+      toast(reason);
+    } finally {
+      router.replace('/');
+    }
   };
 
   return (
@@ -40,7 +49,7 @@ export const Jar = () => {
 
       <Row align="center" justify="center" className={(styles.mv1, styles.pt1)}>
         <Button disabled={!amount} onClick={() => add()}>
-          Поповнення&nbsp;
+          Поповнити&nbsp;
           <MdAddCircleOutline color="green" size="18" />
         </Button>
       </Row>

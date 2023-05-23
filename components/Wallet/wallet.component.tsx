@@ -208,7 +208,6 @@ export const Wallet = () => {
                 </div>
                 <div>
                   <Button
-                    className={styles.button}
                     size="sm"
                     auto
                     light
@@ -252,7 +251,6 @@ export const Wallet = () => {
                 <div>
                   <Row justify="flex-end" align="center">
                     <Button
-                      className={styles.button}
                       size="sm"
                       auto
                       light

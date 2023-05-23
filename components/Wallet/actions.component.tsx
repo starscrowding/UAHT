@@ -11,28 +11,20 @@ import {useUaht} from './hooks';
 import styles from './wallet.module.scss';
 
 export const Actions = () => {
-  const [ready, setReady] = useState(false);
   const {query} = useRouter();
 
-  useEffect(() => {
-    setReady(true);
-  }, []);
-
-  if (ready) {
-    if (query?.action === 'approve' && query?.spender && Number(query?.amount) >= 0) {
-      return <AllowanceModal />;
-    }
-    if (query?.action === 'transfer') {
-      return <TransferModal />;
-    }
-    if (query?.action === 'jar') {
-      return <JarModal />;
-    }
-  }
-  return null;
+  return (
+    <>
+      <AllowanceModal
+        open={query?.action === 'approve' && query?.spender && Number(query?.amount) >= 0}
+      />
+      <TransferModal open={query?.action === 'transfer'} />
+      <JarModal open={query?.action === 'jar'} />
+    </>
+  );
 };
 
-export const AllowanceModal = () => {
+export const AllowanceModal = ({open}: any) => {
   const router = useRouter();
   const uaht = useUaht();
 
@@ -54,7 +46,7 @@ export const AllowanceModal = () => {
       preventClose
       closeButton
       aria-labelledby="a-modal"
-      open={true}
+      open={open}
       onClose={() => router.replace('/')}
     >
       <Modal.Header>
@@ -75,7 +67,7 @@ export const AllowanceModal = () => {
   );
 };
 
-export const TransferModal = () => {
+export const TransferModal = ({open}: any) => {
   const router = useRouter();
   const uaht = useUaht();
   const [to, setTo] = useState<string>((router?.query?.to as unknown) as string);
@@ -107,7 +99,7 @@ export const TransferModal = () => {
       preventClose
       closeButton
       aria-labelledby="a-modal"
-      open={true}
+      open={open}
       onClose={() => router.replace('/')}
     >
       <Modal.Header>
@@ -145,7 +137,7 @@ export const TransferModal = () => {
   );
 };
 
-export const JarModal = () => {
+export const JarModal = ({open}: any) => {
   const router = useRouter();
 
   return (
@@ -154,9 +146,14 @@ export const JarModal = () => {
       preventClose
       closeButton
       aria-labelledby="a-modal"
-      open={true}
+      open={open}
       onClose={() => router.replace('/')}
     >
+      <Modal.Header>
+        <Text size={18}>
+          <BiTransferAlt size="18" /> Конвертер
+        </Text>
+      </Modal.Header>
       <Modal.Body>
         <Jar />
       </Modal.Body>

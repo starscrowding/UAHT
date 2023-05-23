@@ -5,6 +5,7 @@ import Image from 'next/image';
 import {useRouter} from 'next/router';
 import {useConnector, Switch} from '@space/components/Wallet';
 import {GoVerified, GoChecklist} from 'react-icons/go';
+import {IoIosPeople} from 'react-icons/io';
 import {BsDatabaseFillAdd, BsDatabaseFillDash} from 'react-icons/bs';
 import {ADDRESS, TOKEN_LIST, DAO_ADDRESS, DAO, POLYGON_NETWORK, JAR} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
@@ -184,7 +185,7 @@ export const Wallet = () => {
             icon={<BsDatabaseFillAdd color="green" size={24} />}
             onClick={() => router.push('/?action=jar')}
           >
-            Поповнення
+            Поповнити
           </Button>
           <Spacer />
           <Button
@@ -217,6 +218,10 @@ export const Wallet = () => {
                     }}
                   >
                     <GoChecklist color="green" />
+                    &nbsp;
+                    <Text small color="grey">
+                      список
+                    </Text>
                   </Button>
                 </div>
               </Row>
@@ -246,20 +251,20 @@ export const Wallet = () => {
                 <div className={styles.name}>💰 Обмін:</div>
                 <div>
                   <Row justify="flex-end" align="center">
-                    <Text small color="grey">
-                      🫙 банка спільноти
-                    </Text>
-                    <Info
-                      className={classNames(styles.partner, styles.pr1)}
-                      text={
-                        <>
-                          З приводу партнерства 🤝 звертайся до спільноти{' '}
-                          <a href={DAO} target="_blank" rel="noreferrer">
-                            @uaht_group
-                          </a>
-                        </>
-                      }
-                    />
+                    <Button
+                      className={styles.button}
+                      size="sm"
+                      auto
+                      light
+                      title="Банка"
+                      onClick={() => {
+                        window.open(`https://polygonscan.com/address/${JAR}#tokentxns`, '_blank');
+                      }}
+                    >
+                      <Text small color="grey">
+                        🫙 банка
+                      </Text>
+                    </Button>
                   </Row>
                 </div>
               </Row>
@@ -285,7 +290,35 @@ export const Wallet = () => {
           <Collapse
             id="dao"
             expanded={hash.startsWith('dao')}
-            title={<div className={styles.name}>✨ Спільнота DAO:</div>}
+            title={
+              <Row justify="space-between" align="center" wrap="wrap">
+                <div className={styles.name}>✨ DAO:</div>
+                <div>
+                  <Row justify="flex-end" align="center">
+                    <Info
+                      className={classNames(styles.partner, styles.pr1)}
+                      icon={
+                        <Row align="center">
+                          <IoIosPeople size={18} />
+                          &nbsp;
+                          <Text small color="grey">
+                            спільнота
+                          </Text>
+                        </Row>
+                      }
+                      text={
+                        <>
+                          З приводу партнерства 🤝 звертайся до спільноти{' '}
+                          <a href={DAO} target="_blank" rel="noreferrer">
+                            @uaht_group
+                          </a>
+                        </>
+                      }
+                    />
+                  </Row>
+                </div>
+              </Row>
+            }
             subtitle={
               <div className={styles.address}>
                 <Text

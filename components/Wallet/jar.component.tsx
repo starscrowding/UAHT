@@ -2,7 +2,6 @@ import {useState} from 'react';
 import {useRouter} from 'next/router';
 import {toast} from 'react-toastify';
 import {Text, Col, Row, Button} from '@nextui-org/react';
-import {MdAddCircleOutline} from 'react-icons/md';
 import {JAR, USDT_ADDRESS} from '@space/hooks/api';
 import {TransferAmount} from '@space/components/Wallet/token.component';
 import {useERC20} from './hooks';
@@ -49,8 +48,7 @@ export const Jar = () => {
 
       <Row align="center" justify="center" className={(styles.mv1, styles.pt1)}>
         <Button disabled={!amount} onClick={() => add()}>
-          Поповнити&nbsp;
-          <MdAddCircleOutline color="green" size="18" />
+          Ввід ✅
         </Button>
       </Row>
     </div>

@@ -130,5 +130,5 @@ export const useERC20 = (address: string) => {
     const web3Provider = MM.provider;
     const signer = MM.signer || web3Provider;
     return new ethers.Contract(address, ERC20_ABI, signer);
-  }, [MM.provider, MM.signer]);
+  }, [MM.provider, MM.signer, address]);
 };

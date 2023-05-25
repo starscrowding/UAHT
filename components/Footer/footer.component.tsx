@@ -21,7 +21,16 @@ export const Footer = () => {
   return (
     <footer className={styles.footer}>
       <Row justify="center" align="center">
-        <Text h1 size={16} css={{color: '$gray500', m: 0, fontWeight: 400, fontStyle: 'italic'}}>
+        <Text
+          h1
+          size={16}
+          css={{
+            textGradient: '45deg, grey 10%, white 90%',
+            m: 0,
+            fontWeight: 400,
+            fontStyle: 'italic',
+          }}
+        >
           токен без меж для вільних людей
         </Text>
         <Info link={INFO} className={styles.ml05} />

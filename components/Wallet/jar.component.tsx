@@ -36,7 +36,7 @@ export const Jar = () => {
         <Text color="grey">
           🔐 за{' '}
           <a
-            href="https://bank.gov.ua/ua/markets/exchangerate-chart?cn%5B%5D=USD"
+            href="https://www.google.com/finance/quote/USDT-UAH#T"
             rel="noreferrer"
             target="_blank"
             className={styles.link}

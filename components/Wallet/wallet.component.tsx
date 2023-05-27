@@ -7,6 +7,7 @@ import {useConnector, Switch} from '@space/components/Wallet';
 import {GoVerified, GoChecklist} from 'react-icons/go';
 import {IoIosPeople} from 'react-icons/io';
 import {BsDatabaseFillAdd, BsDatabaseFillDash} from 'react-icons/bs';
+import {MdShoppingCartCheckout} from 'react-icons/md';
 import {ADDRESS, TOKEN_LIST, DAO_ADDRESS, DAO, POLYGON_NETWORK, JAR} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
 import {Card as InfoCard} from '@space/components/Card';
@@ -197,6 +198,16 @@ export const Wallet = () => {
           >
             Розрахунок
           </Button>
+          <a
+            title="Маркетплейс"
+            className={styles.ml05}
+            style={{color: 'white'}}
+            href="https://uaht.com.ua/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <MdShoppingCartCheckout size={23} />
+          </a>
         </Row>
         <Collapse.Group accordion={false}>
           <Collapse
@@ -321,7 +332,7 @@ export const Wallet = () => {
               <div className={styles.address}>
                 <Text
                   css={{
-                    textGradient: '45deg, grey 10%, white 50%',
+                    textGradient: '45deg, grey 10%, white 90%',
                   }}
                 >
                   {DAO_ADDRESS}

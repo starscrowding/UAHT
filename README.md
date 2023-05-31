@@ -27,6 +27,7 @@ UAHT може використовуватись згідно прав і сво
 - Polygon: https://polygon.technology/
 - WalletConnect: https://walletconnect.com/
 - Whitepaper: https://github.com/starscrowding/UAHT/blob/dev/public/whitepaper.pdf
+- 🛣 Дорожня карта: [Roadmap](https://raw.githubusercontent.com/starscrowding/UAHT/dev/public/roadmap.png)
 
 ## Часті питання
 

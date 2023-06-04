@@ -93,6 +93,11 @@ export const TransferModal = ({open}: any) => {
     }
   };
 
+  useEffect(() => {
+    setTo(router?.query?.to as string);
+    setAmount(router?.query?.amount as string);
+  }, [router?.query, setTo, setAmount]);
+
   return (
     <Modal
       blur

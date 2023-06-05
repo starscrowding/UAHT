@@ -35,6 +35,7 @@ contract UAHT_COM is Multicall {
 
     constructor() {
         uaht = 0x0D9447E16072b636b4a1E8f2b8C644e58F3eaA6A;
+        uaht_dao = 0x08B491bC7848C6AF42c3882794A93d70c04e5816;
         vars[slots_id] = 12;
         vars[duration_id] = 7 * 24 * 60 * 60;
     }

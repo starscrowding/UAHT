@@ -13,21 +13,27 @@ export const Swap = ({balance, gas}: any) => {
         <Button
           className={styles.button}
           size="sm"
+          light
           color={act === 'p2p' ? 'gradient' : undefined}
           auto
           onClick={() => setAct('p2p')}
         >
-          P2P
+          📢
         </Button>
         <Button
           className={styles.button}
           size="sm"
+          color={act === 'uniswap' ? 'gradient' : undefined}
           auto
           onClick={() => {
-            window.open(`https://richamster.com/trade/MATIC_UAHT/?referral=nSMDbuIpnPdx`, '_blank');
+            if (act !== 'uniswap') {
+              setAct('uniswap');
+            } else {
+              window.open(`https://app.uniswap.org/#/swap?chain=polygon&lng=uk-UA`, '_blank');
+            }
           }}
         >
-          Richamster
+          Uniswap
         </Button>
         <Button
           className={styles.button}
@@ -58,17 +64,12 @@ export const Swap = ({balance, gas}: any) => {
         <Button
           className={styles.button}
           size="sm"
-          color={act === 'uniswap' ? 'gradient' : undefined}
           auto
           onClick={() => {
-            if (act !== 'uniswap') {
-              setAct('uniswap');
-            } else {
-              window.open(`https://app.uniswap.org/#/swap?chain=polygon&lng=uk-UA`, '_blank');
-            }
+            window.open(`https://richamster.com/trade/MATIC_UAHT/?referral=nSMDbuIpnPdx`, '_blank');
           }}
         >
-          Uniswap
+          Richamster
         </Button>
       </Row>
       {act === 'uniswap' && <iframe className={styles.swap} src="/swap/index.html" />}

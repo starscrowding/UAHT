@@ -329,7 +329,7 @@ export const Wallet = () => {
               </Row>
             }
             subtitle={
-              <div className={styles.address}>
+              <Row className={styles.address}>
                 <Text
                   css={{
                     textGradient: '45deg, grey 10%, white 90%',
@@ -337,7 +337,12 @@ export const Wallet = () => {
                 >
                   {DAO_ADDRESS}
                 </Text>
-              </div>
+                <Info
+                  className={classNames(styles.pl05)}
+                  link={`https://polygonscan.com/address/${DAO_ADDRESS}#readContract`}
+                  icon="↗"
+                />
+              </Row>
             }
           >
             <Dao config={config} />

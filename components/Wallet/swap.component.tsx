@@ -41,7 +41,7 @@ export const Swap = ({balance, gas}: any) => {
           auto
           onClick={() => {
             window.open(
-              `https://app.1inch.io/#/${POLYGON_NETWORK}/p2p/${USDT_ADDRESS}/${ADDRESS}`,
+              `https://app.1inch.io/#/${POLYGON_NETWORK}/simple/swap/${USDT_ADDRESS}/${ADDRESS}`,
               '_blank'
             );
           }}

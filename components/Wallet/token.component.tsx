@@ -1,11 +1,11 @@
-import {useCallback, useState} from 'react';
+import {useCallback, useState, useEffect} from 'react';
 import NextImage from 'next/image';
 import {useRouter} from 'next/router';
 import {Row, Button, Modal, Text, Input} from '@nextui-org/react';
 import {MdQrCode} from 'react-icons/md';
 import {FaDownload} from 'react-icons/fa';
 import {useConnector} from '@space/components/Wallet';
-import {ADDRESS, BASE, USDT_ADDRESS} from '@space/hooks/api';
+import {ADDRESS, BASE, BASE_COM, USDT_ADDRESS} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
 import {QRCode} from './qr.component';
 import {useAddToken} from './hooks';
@@ -36,14 +36,23 @@ export const TransferAmount = ({amount, setAmount, disabled, placeholder = 'UAHT
   );
 };
 
-export const QRModal = ({showQRModal, setShowQRModal, MM}: any) => {
+export const QRModal = ({open}: any) => {
+  const MM = useConnector();
+  const router = useRouter();
   const [amount, setAmount] = useState<number | string>();
+  const [slot, setSlot] = useState<string>((router?.query?.slot as unknown) as string);
 
   const reset = useCallback(() => {
     setAmount('');
   }, [setAmount]);
 
-  const qr = `${BASE}/?action=transfer&to=${MM.account}${amount ? `&amount=${amount}` : ''}`;
+  useEffect(() => {
+    setSlot(router?.query?.slot as string);
+  }, [router?.query, setSlot]);
+
+  const qr = !slot
+    ? `${BASE}/?action=transfer&to=${MM.account}${amount ? `&amount=${amount}` : ''}`
+    : `${BASE_COM}/offers/${MM.account}/${slot}?amount=${amount}`;
 
   const download = () => {
     try {
@@ -73,11 +82,11 @@ export const QRModal = ({showQRModal, setShowQRModal, MM}: any) => {
       blur
       preventClose
       closeButton
-      aria-labelledby="modal"
-      open={showQRModal}
+      aria-labelledby="qr-modal"
+      open={open}
       onClose={() => {
         reset();
-        setShowQRModal(false);
+        router.replace('/');
       }}
     >
       <Modal.Header>
@@ -86,8 +95,16 @@ export const QRModal = ({showQRModal, setShowQRModal, MM}: any) => {
         </Text>
       </Modal.Header>
       <Modal.Body>
-        <Row align="center" justify="flex-start" className={styles.pb1}>
+        <Row align="center" justify="space-between" className={styles.pb1}>
           <TransferAmount {...{amount, setAmount}} />
+          <Input
+            aria-label="slot"
+            type="number"
+            placeholder="Слот"
+            width="100px"
+            min="0"
+            onChange={e => setSlot(e.target.value)}
+          />
         </Row>
         <Row
           align="center"
@@ -115,15 +132,17 @@ export const QRModal = ({showQRModal, setShowQRModal, MM}: any) => {
   );
 };
 
-export const StakingModal = ({showStakingModal, setShowStakingModal}: any) => {
+export const StakingModal = ({open}: any) => {
+  const router = useRouter();
+
   return (
     <Modal
       blur
       preventClose
       closeButton
       aria-labelledby="modal"
-      open={showStakingModal}
-      onClose={() => setShowStakingModal(false)}
+      open={open}
+      onClose={() => router.replace('/')}
     >
       <Modal.Header>
         <Text size={18}>Обери провайдера 🤖</Text>
@@ -166,8 +185,6 @@ export const Token = () => {
   const MM = useConnector();
   const router = useRouter();
   const addToken = useAddToken({MM});
-  const [showQRModal, setShowQRModal] = useState(false);
-  const [showStakingModal, setShowStakingModal] = useState(false);
 
   return (
     <div>
@@ -191,7 +208,7 @@ export const Token = () => {
           flat
           title="Створити QR код"
           onClick={() => {
-            setTimeout(() => setShowQRModal(true), 123);
+            setTimeout(() => router.push('/?action=qr'), 123);
           }}
         >
           <MdQrCode size="18" />
@@ -203,7 +220,7 @@ export const Token = () => {
           auto
           title="Провайдер ліквідності"
           onClick={() => {
-            setTimeout(() => setShowStakingModal(true), 123);
+            setTimeout(() => router.push('/?action=staking'), 123);
           }}
         >
           Стейкінг 🌱
@@ -224,8 +241,6 @@ export const Token = () => {
             </>
           }
         />
-        <QRModal {...{showQRModal, setShowQRModal, MM}} />
-        <StakingModal {...{showStakingModal, setShowStakingModal}} />
       </Row>
     </div>
   );

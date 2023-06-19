@@ -6,7 +6,7 @@ import {BiTransferAlt} from 'react-icons/bi';
 import {Row, Text, Modal, Button, Input} from '@nextui-org/react';
 import {Address} from '@space/components/Wallet/common';
 import {Jar} from '@space/components/Wallet/jar.component';
-import {TransferAmount} from '@space/components/Wallet/token.component';
+import {TransferAmount, QRModal, StakingModal} from '@space/components/Wallet/token.component';
 import {useUaht} from './hooks';
 import styles from './wallet.module.scss';
 
@@ -20,6 +20,8 @@ export const Actions = () => {
       />
       <TransferModal open={query?.action === 'transfer'} />
       <JarModal open={query?.action === 'jar'} />
+      <QRModal open={query?.action === 'qr'} />
+      <StakingModal open={query?.action === 'staking'} />
     </>
   );
 };
@@ -45,7 +47,7 @@ export const AllowanceModal = ({open}: any) => {
       blur
       preventClose
       closeButton
-      aria-labelledby="a-modal"
+      aria-labelledby="allowance-modal"
       open={open}
       onClose={() => router.replace('/')}
     >
@@ -103,7 +105,7 @@ export const TransferModal = ({open}: any) => {
       blur
       preventClose
       closeButton
-      aria-labelledby="a-modal"
+      aria-labelledby="transfer-modal"
       open={open}
       onClose={() => router.replace('/')}
     >
@@ -150,7 +152,7 @@ export const JarModal = ({open}: any) => {
       blur
       preventClose
       closeButton
-      aria-labelledby="a-modal"
+      aria-labelledby="jar-modal"
       open={open}
       onClose={() => router.replace('/')}
     >

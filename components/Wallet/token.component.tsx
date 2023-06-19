@@ -47,12 +47,13 @@ export const QRModal = ({open}: any) => {
   }, [setAmount]);
 
   useEffect(() => {
+    console.log(router?.query?.slot);
     setSlot(router?.query?.slot as string);
   }, [router?.query, setSlot]);
 
   const qr = !slot
     ? `${BASE}/?action=transfer&to=${MM.account}${amount ? `&amount=${amount}` : ''}`
-    : `${BASE_COM}/offers/${MM.account}/${slot}?amount=${amount}`;
+    : `${BASE_COM}/offers/${MM.account}/${slot}${amount ? `?amount=${amount}` : ''}`;
 
   const download = () => {
     try {
@@ -98,11 +99,13 @@ export const QRModal = ({open}: any) => {
         <Row align="center" justify="space-between" className={styles.pb1}>
           <TransferAmount {...{amount, setAmount}} />
           <Input
+            size="xs"
             aria-label="slot"
             type="number"
-            placeholder="Слот"
+            labelPlaceholder="Слот"
             width="100px"
             min="0"
+            value={slot}
             onChange={e => setSlot(e.target.value)}
           />
         </Row>

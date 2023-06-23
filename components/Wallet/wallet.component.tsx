@@ -8,7 +8,7 @@ import {GoVerified, GoChecklist} from 'react-icons/go';
 import {IoIosPeople} from 'react-icons/io';
 import {BsDatabaseFillAdd, BsDatabaseFillDash} from 'react-icons/bs';
 import {MdShoppingCartCheckout} from 'react-icons/md';
-import {ADDRESS, TOKEN_LIST, DAO_ADDRESS, DAO, POLYGON_NETWORK, JAR} from '@space/hooks/api';
+import {ADDRESS, TOKEN_LIST, DAO_ADDRESS, DAO, POLYGON_NETWORK, BASE_COM} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
 import {Card as InfoCard} from '@space/components/Card';
 import {QRCode} from './qr.component';
@@ -184,7 +184,7 @@ export const Wallet = () => {
             color="success"
             css={{color: 'white'}}
             icon={<BsDatabaseFillAdd color="green" size={24} />}
-            onClick={() => router.push('/?action=jar')}
+            onClick={() => window.open(`${BASE_COM}/vouchers?tab=add`, '_blank')}
           >
             Поповнити
           </Button>
@@ -196,7 +196,7 @@ export const Wallet = () => {
             icon={<BsDatabaseFillDash color="red" size={24} />}
             onClick={() => router.push(`/?action=transfer`)}
           >
-            Розрахунок
+            Переказати
           </Button>
           <a
             title="Маркетплейс"
@@ -262,17 +262,15 @@ export const Wallet = () => {
                 <div>
                   <Row justify="flex-end" align="center">
                     <Button
-                      size="sm"
+                      css={{mr: '1rem'}}
+                      size="xs"
                       auto
-                      light
+                      flat
+                      color="success"
                       title="Банка"
-                      onClick={() => {
-                        window.open(`https://polygonscan.com/address/${JAR}#tokentxns`, '_blank');
-                      }}
+                      onClick={() => router.push('/?action=jar')}
                     >
-                      <Text small color="grey">
-                        🫙 банка
-                      </Text>
+                      🫙 банка
                     </Button>
                   </Row>
                 </div>

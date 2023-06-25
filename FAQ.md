@@ -50,7 +50,7 @@ https://t.me/uaht_info/52
 
 ### How to become a business partner?
 
-[Information for operators and p2p-agents](https://github.com/starscrowding/UAHT/blob/dev/PARTNERSHIP.md)
+[Information for operators and agents](https://github.com/starscrowding/UAHT/blob/dev/PARTNERSHIP.md)
 
 ### What is Jar 🫙 ?
 

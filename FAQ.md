@@ -48,7 +48,7 @@ Basic information about [staking](https://academy.binance.com/en/articles/what-i
 https://t.me/uaht_info/29 \
 https://t.me/uaht_info/52
 
-### How to become a business partner?
+### 💼 How to become a business partner?
 
 [Information for operators and agents](https://github.com/starscrowding/UAHT/blob/dev/PARTNERSHIP.md)
 

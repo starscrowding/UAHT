@@ -64,7 +64,7 @@ export const Wallet = () => {
         params[0] && setHash(params[0]);
         params[0] &&
           setTimeout(() => {
-            document?.getElementById('dao')?.scrollIntoView({behavior: 'smooth'});
+            document?.getElementById(params[0])?.scrollIntoView({behavior: 'smooth'});
           }, 1234);
         params[1] && setConfig(sectionConfig({body: params[1]}));
         window.location.hash = '';

@@ -24,7 +24,12 @@ export const {provider} = configureChains(chains, [
 ]);
 export const wagmiClient = createClient({
   autoConnect: true,
-  connectors: modalConnectors({appName: 'web3Modal', chains}),
+  connectors: modalConnectors({
+    appName: 'web3Modal',
+    chains,
+    version: '2',
+    projectId: WALLET_CONNECT,
+  }),
   provider,
 });
 export const ethereumClient = new EthereumClient(wagmiClient, chains);

@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import {ethers} from 'ethers';
+import {isAddress} from 'viem';
 import {useRouter} from 'next/router';
 import {toast} from 'react-toastify';
 import {BiTransferAlt} from 'react-icons/bi';
@@ -34,11 +34,11 @@ export const AllowanceModal = ({open}: any) => {
 
   const approve = async () => {
     try {
-      await uaht.approve(router?.query?.spender, Number(router?.query?.amount) * 100);
+      await uaht.approve(router?.query?.spender as string, Number(router?.query?.amount) * 100);
     } catch (e) {
       console.log(e);
-      const {reason} = e as any;
-      toast(reason);
+      const {message} = e as any;
+      toast(message);
     } finally {
       router.replace('/');
     }
@@ -81,7 +81,7 @@ export const TransferModal = ({open}: any) => {
   );
 
   const validateTo = () => {
-    if (!ethers.utils.isAddress(to)) {
+    if (!isAddress(to)) {
       setTo('');
     }
   };
@@ -91,8 +91,8 @@ export const TransferModal = ({open}: any) => {
       await uaht.transfer(to, Number(amount) * 100);
     } catch (e) {
       console.log(e);
-      const {reason} = e as any;
-      toast(reason);
+      const {message} = e as any;
+      toast(message);
     } finally {
       router.replace('/');
     }

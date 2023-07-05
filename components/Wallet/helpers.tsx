@@ -1,4 +1,4 @@
-import {ethers} from 'ethers';
+import {verifyMessage} from 'viem';
 
 export const precision = (number: string | number, precision: number) => {
   const factor = Math.pow(10, precision);
@@ -71,10 +71,12 @@ export const parseCode = (code: string = '') => {
 export const validateSignature = async ({trx, setValid, account = trx.account}: any) => {
   try {
     if (trx.body && trx.signature) {
-      const signer = await ethers.utils.verifyMessage(trx.body, trx.signature);
-      if (account && signer) {
-        setValid(account.toLowerCase() === signer.toLowerCase());
-      }
+      const valid = await verifyMessage({
+        address: account,
+        message: trx.body,
+        signature: trx.signature,
+      });
+      setValid(valid);
     }
   } catch (e) {
     console.log(e);

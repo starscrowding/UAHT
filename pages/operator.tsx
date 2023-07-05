@@ -7,6 +7,7 @@ import {parseCode, validateSignature} from '@space/components/Wallet/helpers';
 import {useUahtDao} from '@space/components/Wallet/hooks';
 import {CONTRACT, DAO_CONTRACT, RESERVE_URL, BASE} from '@space/hooks/api';
 import styles from '../styles/index.module.scss';
+import {formatUnits} from 'viem';
 
 const Operator: NextPage = () => {
   const MM = useConnector();
@@ -47,11 +48,11 @@ const Operator: NextPage = () => {
   }, []);
 
   useEffect(() => {
-    if (MM.status === 'connected' && MM.signer) {
+    if (MM.status === 'connected' && MM.wallet) {
       const checkOperator = async () => {
         try {
           const op = await uahtDao.operators(MM.account);
-          const isOp = !op?.isZero();
+          const isOp = op != 0;
           setIsOperator(!!isOp);
         } catch (e) {
           console.log(e);

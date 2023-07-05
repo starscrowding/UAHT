@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {ethers} from 'ethers';
+import {isAddress, formatEther, formatUnits} from 'viem';
 import {useConnector} from '@space/components/Wallet';
 import {Row, Card, Button, Input, Spacer, Loading} from '@nextui-org/react';
 import {GoVerified, GoUnverified} from 'react-icons/go';
@@ -33,7 +33,7 @@ export const Dao = ({config}: any) => {
   };
 
   const verifyAccount = async (address: string) => {
-    if (ethers.utils.isAddress(address)) {
+    if (isAddress(address)) {
       try {
         const row = await api(RESERVE);
         const kyc = new RegExp(address, 'mig').test(row?.files?.['x.DAO']?.content);
@@ -47,14 +47,15 @@ export const Dao = ({config}: any) => {
   };
 
   const getDaoInfo = async (address: string) => {
-    if (ethers.utils.isAddress(address)) {
+    if (isAddress(address)) {
       try {
         const web3Provider = MM.provider;
         const [allowance, balance, gas] = await Promise.all([
           uahtDao.allowance(address),
           uaht.balanceOf(address),
-          web3Provider.getBalance(address),
+          web3Provider.getBalance({address}),
         ]);
+        console.log({allowance, gas, balance});
         setDaoInfo({allowance, gas, balance});
       } catch (e) {
         setDaoInfo(undefined);
@@ -230,14 +231,14 @@ export const Dao = ({config}: any) => {
       {daoInfo && (
         <Card>
           <Card.Body>
-            {daoInfo.balance && (
-              <Row>💰 Баланс: {ethers.utils.formatUnits(daoInfo.balance, 2)}</Row>
+            {daoInfo.balance !== undefined && (
+              <Row>💰 Баланс: {formatUnits(daoInfo.balance, 2)}</Row>
             )}
-            {daoInfo.gas && (
-              <Row>⛽ Газ: {precision(ethers.utils.formatEther(daoInfo.gas), 3)}</Row>
+            {daoInfo.gas !== undefined && (
+              <Row>⛽ Газ: {precision(formatEther(daoInfo.gas), 3)}</Row>
             )}
-            {daoInfo?.allowance && (
-              <Row>🍰 Пай: {ethers.utils.formatUnits(daoInfo.allowance, 2)}</Row>
+            {daoInfo?.allowance !== undefined && (
+              <Row>🍰 Пай: {formatUnits(daoInfo.allowance, 2)}</Row>
             )}
           </Card.Body>
         </Card>

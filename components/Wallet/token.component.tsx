@@ -47,7 +47,6 @@ export const QRModal = ({open}: any) => {
   }, [setAmount]);
 
   useEffect(() => {
-    console.log(router?.query?.slot);
     setSlot(router?.query?.slot as string);
   }, [router?.query, setSlot]);
 

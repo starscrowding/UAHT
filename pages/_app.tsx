@@ -5,11 +5,12 @@ import {createTheme, NextUIProvider} from '@nextui-org/react';
 import {ThemeProvider as NextThemesProvider} from 'next-themes';
 import Script from 'next/script';
 import {
-  wagmiClient,
   ethereumClient,
   WagmiConfig,
   Web3Modal,
   WALLET_CONNECT,
+  wagmiConfig,
+  polygonChain,
 } from '@space/components/Wallet/connector';
 import {ToastContainer} from 'react-toastify';
 import {HOST, DAO} from '../hooks/api';
@@ -89,7 +90,7 @@ function SpaceApp({Component, pageProps}: AppProps) {
         }}
       >
         <NextUIProvider>
-          <WagmiConfig client={wagmiClient}>
+          <WagmiConfig config={wagmiConfig}>
             <ToastContainer theme="dark" />
             <Component {...pageProps} />
             <Script
@@ -103,8 +104,8 @@ function SpaceApp({Component, pageProps}: AppProps) {
       <Web3Modal
         projectId={WALLET_CONNECT}
         ethereumClient={ethereumClient}
+        defaultChain={polygonChain}
         themeMode="dark"
-        themeZIndex={999}
       />
     </Sentry.ErrorBoundary>
   );

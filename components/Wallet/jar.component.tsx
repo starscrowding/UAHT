@@ -19,8 +19,8 @@ export const Jar = () => {
       await usdt.transfer(JAR, Number(amount) * 10 ** 6);
     } catch (e) {
       console.log(e);
-      const {reason} = e as any;
-      toast(reason);
+      const {message} = e as any;
+      toast(message);
     } finally {
       router.replace('/');
     }

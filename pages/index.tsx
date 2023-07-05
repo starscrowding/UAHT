@@ -14,7 +14,7 @@ const Home: NextPage = () => {
     !MM.status ||
     MM.status === 'reconnecting' ||
     MM.status === 'connecting' ||
-    (MM.status === 'connected' && !MM.signer);
+    (MM.status === 'connected' && !MM.wallet);
 
   return (
     <>

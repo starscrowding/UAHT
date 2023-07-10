@@ -54,7 +54,7 @@ export const Swap = ({balance, gas}: any) => {
           auto
           onClick={() => {
             window.open(
-              `https://app.ws.exchange/ua/eth/polygon/swap?inputCurrency=MATIC`,
+              `https://app.ws.exchange/uk/eth/polygon/swap?inputCurrency=MATIC`,
               '_blank'
             );
           }}

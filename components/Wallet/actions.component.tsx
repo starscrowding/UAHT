@@ -1,41 +1,44 @@
 import {useState, useEffect} from 'react';
-import {ethers} from 'ethers';
+import {isAddress} from 'viem';
 import {useRouter} from 'next/router';
+import {toast} from 'react-toastify';
 import {BiTransferAlt} from 'react-icons/bi';
 import {Row, Text, Modal, Button, Input} from '@nextui-org/react';
 import {Address} from '@space/components/Wallet/common';
-import {TransferAmount} from '@space/components/Wallet/token.component';
+import {Jar} from '@space/components/Wallet/jar.component';
+import {useConnector} from '@space/components/Wallet';
+import {TransferAmount, QRModal, StakingModal} from '@space/components/Wallet/token.component';
+import {CONTRACT, JAR} from '@space/hooks/api';
 import {useUaht} from './hooks';
 import styles from './wallet.module.scss';
 
 export const Actions = () => {
-  const [ready, setReady] = useState(false);
   const {query} = useRouter();
 
-  useEffect(() => {
-    setReady(true);
-  }, []);
-
-  if (ready) {
-    if (query?.action === 'approve' && query?.spender && Number(query?.amount) >= 0) {
-      return <AllowanceModal />;
-    }
-    if (query?.action === 'transfer') {
-      return <TransferModal />;
-    }
-  }
-  return null;
+  return (
+    <>
+      <AllowanceModal
+        open={query?.action === 'approve' && query?.spender && Number(query?.amount) >= 0}
+      />
+      <TransferModal open={query?.action === 'transfer'} />
+      <JarModal open={query?.action === 'jar'} />
+      <QRModal open={query?.action === 'qr'} />
+      <StakingModal open={query?.action === 'staking'} />
+    </>
+  );
 };
 
-export const AllowanceModal = () => {
+export const AllowanceModal = ({open}: any) => {
   const router = useRouter();
   const uaht = useUaht();
 
   const approve = async () => {
     try {
-      await uaht.approve(router?.query?.spender, Number(router?.query?.amount) * 100);
+      await uaht.approve(router?.query?.spender as string, Number(router?.query?.amount) * 100);
     } catch (e) {
       console.log(e);
+      const {message} = e as any;
+      toast(message);
     } finally {
       router.replace('/');
     }
@@ -46,8 +49,8 @@ export const AllowanceModal = () => {
       blur
       preventClose
       closeButton
-      aria-labelledby="a-modal"
-      open={true}
+      aria-labelledby="allowance-modal"
+      open={open}
       onClose={() => router.replace('/')}
     >
       <Modal.Header>
@@ -68,16 +71,17 @@ export const AllowanceModal = () => {
   );
 };
 
-export const TransferModal = () => {
+export const TransferModal = ({open}: any) => {
   const router = useRouter();
   const uaht = useUaht();
+  const MM = useConnector();
   const [to, setTo] = useState<string>((router?.query?.to as unknown) as string);
   const [amount, setAmount] = useState<number | string>(
     (router?.query?.amount as unknown) as string
   );
 
   const validateTo = () => {
-    if (!ethers.utils.isAddress(to)) {
+    if (!isAddress(to)) {
       setTo('');
     }
   };
@@ -87,23 +91,37 @@ export const TransferModal = () => {
       await uaht.transfer(to, Number(amount) * 100);
     } catch (e) {
       console.log(e);
+      const {message} = e as any;
+      toast(message);
     } finally {
       router.replace('/');
     }
   };
+
+  useEffect(() => {
+    setTo(router?.query?.to as string);
+    setAmount(router?.query?.amount as string);
+  }, [router?.query, setTo, setAmount]);
 
   return (
     <Modal
       blur
       preventClose
       closeButton
-      aria-labelledby="a-modal"
-      open={true}
+      aria-labelledby="transfer-modal"
+      open={open}
       onClose={() => router.replace('/')}
     >
       <Modal.Header>
         <Text size={18}>
-          <BiTransferAlt size="18" /> Зробити трансфер
+          <a
+            onClick={() => {
+              window.open(`${CONTRACT}/?a=${MM.account}`, '_blank');
+            }}
+          >
+            <BiTransferAlt size="18" />
+          </a>{' '}
+          Трансфер
         </Text>
       </Modal.Header>
       <Modal.Body>
@@ -131,6 +149,37 @@ export const TransferModal = () => {
             Відправити ➡️
           </Button>
         </Row>
+      </Modal.Body>
+    </Modal>
+  );
+};
+
+export const JarModal = ({open}: any) => {
+  const router = useRouter();
+
+  return (
+    <Modal
+      blur
+      preventClose
+      closeButton
+      aria-labelledby="jar-modal"
+      open={open}
+      onClose={() => router.replace('/')}
+    >
+      <Modal.Header>
+        <Text size={18}>
+          <a
+            onClick={() => {
+              window.open(`https://polygonscan.com/address/${JAR}#tokentxns`, '_blank');
+            }}
+          >
+            <BiTransferAlt size="18" />
+          </a>{' '}
+          Конвертер
+        </Text>
+      </Modal.Header>
+      <Modal.Body>
+        <Jar />
       </Modal.Body>
     </Modal>
   );

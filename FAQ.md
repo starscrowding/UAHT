@@ -6,7 +6,7 @@ ERC-20 token on the Polygon network: [0x0D9447E16072b636b4a1E8f2b8C644e58F3eaA6A
 👀 [Whitepaper](https://uaht.io/whitepaper.pdf) \
 ▶️ Demo: https://youtube.com/playlist?list=PLFcbH5Gf1BGMZ5X1_4goLV89XS3J_fPpp \
 🏆 Nomination for the best blockchain project [PSM](https://psm7.com/) in Ukraine \
-😎 UAHT in [Forbes](https://www.forbes.com/digital-assets/assets/uaht.io-uaht/) list
+😎 UAHT in [TradingView](https://www.tradingview.com/symbols/UAHTWMATIC/)
 
 ### What is UAHT DAO?
 
@@ -48,13 +48,13 @@ Basic information about [staking](https://academy.binance.com/en/articles/what-i
 https://t.me/uaht_info/29 \
 https://t.me/uaht_info/52
 
-### How to become a business partner?
+### 💼 How to become a business partner?
 
-[Information for operators and p2p-agents](https://github.com/starscrowding/UAHT/blob/dev/PARTNERSHIP.md)
+[Information for operators and agents](https://github.com/starscrowding/UAHT/blob/dev/PARTNERSHIP.md)
 
-### What is Jar?
+### What is Jar 🫙 ?
 
-Jar is a service that allows you to generate:
+Jar is a set of decentralized services and smart contracts that allow you to generate:
 
 ✅ Input through conversion \
 🍯 Jam pools of full range MATIC ↔ UAHT ↔ USDT, \

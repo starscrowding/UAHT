@@ -1,9 +1,9 @@
 import {useEffect, useCallback, useMemo} from 'react';
-import {ethers} from 'ethers';
-
+import {formatEther, formatUnits} from 'viem';
+import ERC20_ABI from '@space/contracts/ERC20.abi.json';
 import UAHT_ABI from '@space/contracts/UAHT.abi.json';
 import UAHT_DAO_ABI from '@space/contracts/UAHT_DAO.abi.json';
-import {api, ADDRESS, DAO_ADDRESS, RESERVE} from '@space/hooks/api';
+import {api, ADDRESS, DAO_ADDRESS, RESERVE, USDT_ADDRESS} from '@space/hooks/api';
 import {useConnector} from '@space/components/Wallet';
 import {precision} from './helpers';
 import {RESOURCES, MIN_CODE_LENGTH} from './constants';
@@ -29,10 +29,10 @@ export const useInit = ({
         const web3Provider = MM.provider;
         const [balance, gas] = await Promise.all([
           uaht.balanceOf(MM.account),
-          web3Provider.getBalance(MM.account),
+          web3Provider.getBalance({address: MM.account}),
         ]);
-        setBalance(ethers.utils.formatUnits(balance, 2));
-        setMatic(precision(ethers.utils.formatEther(gas), 3));
+        setBalance(formatUnits(balance as bigint, 2));
+        setMatic(precision(formatEther(gas), 3));
       } catch (e) {
         console.log(e);
       }
@@ -81,8 +81,11 @@ export const useAddToken = ({MM}: any) => async () => {
 
 export const useSign = ({MM, setSignature}: any) => async (msg: string) => {
   try {
-    const signer = MM.signer;
-    const signedMessage = await signer.signMessage(msg);
+    const signer = MM.wallet;
+    const signedMessage = await signer?.signMessage({
+      account: MM.account,
+      message: msg,
+    });
     setSignature(signedMessage);
   } catch (e) {
     console.log(e);
@@ -108,18 +111,78 @@ export const useValidateCode = ({resource, setCode}: any) =>
 
 export const useUaht = () => {
   const MM = useConnector();
+  const config = {
+    address: ADDRESS,
+    abi: UAHT_ABI,
+  };
+
   return useMemo(() => {
-    const web3Provider = MM.provider;
-    const signer = MM.signer || web3Provider;
-    return new ethers.Contract(ADDRESS, UAHT_ABI, signer);
-  }, [MM.provider, MM.signer]);
+    return {
+      balanceOf: async (address: string) =>
+        await MM.provider.readContract({
+          ...config,
+          functionName: 'balanceOf',
+          args: [address],
+        } as any),
+      transfer: async (to: string, amount: number) =>
+        await MM.wallet.writeContract({
+          ...config,
+          functionName: 'transfer',
+          args: [to, amount],
+        } as any),
+      approve: async (spender: string, amount: number) =>
+        await MM.wallet.writeContract({
+          ...config,
+          functionName: 'approve',
+          args: [spender, amount],
+        } as any),
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [MM.provider, MM.wallet]);
 };
 
 export const useUahtDao = () => {
   const MM = useConnector();
+  const config = {
+    address: DAO_ADDRESS,
+    abi: UAHT_DAO_ABI,
+  };
+
   return useMemo(() => {
-    const web3Provider = MM.provider;
-    const signer = MM.signer || web3Provider;
-    return new ethers.Contract(DAO_ADDRESS, UAHT_DAO_ABI, signer);
-  }, [MM.provider, MM.signer]);
+    return {
+      allowance: async (address: string) =>
+        await MM.provider.readContract({
+          ...config,
+          functionName: 'allowance',
+          args: [address],
+        } as any),
+      operators: async (address: string) =>
+        await MM.provider.readContract({
+          ...config,
+          functionName: 'allowance',
+          args: [address],
+        } as any),
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [MM.provider, MM.wallet]);
+};
+
+export const useERC20 = (contract: string) => {
+  const MM = useConnector();
+  const config = {
+    address: contract,
+    abi: ERC20_ABI,
+  };
+
+  return useMemo(() => {
+    return {
+      transfer: async (to: string, amount: number) =>
+        await MM.wallet.writeContract({
+          ...config,
+          functionName: 'transfer',
+          args: [to, amount],
+        } as any),
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [MM.provider, MM.wallet, contract]);
 };

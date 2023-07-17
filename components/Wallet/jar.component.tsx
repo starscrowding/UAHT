@@ -1,32 +1,56 @@
-import {Text} from '@nextui-org/react';
-import {RequestButton} from './common';
-import {QRCode} from './qr.component';
+import {useState} from 'react';
+import {useRouter} from 'next/router';
+import {toast} from 'react-toastify';
+import {Text, Col, Row, Button} from '@nextui-org/react';
+import {JAR, USDT_ADDRESS} from '@space/hooks/api';
+import {TransferAmount} from '@space/components/Wallet/token.component';
+import {useERC20} from './hooks';
 import styles from './wallet.module.scss';
 
-export const Jar = ({resource}: any) => {
+export const Jar = () => {
+  const router = useRouter();
+  const usdt = useERC20(USDT_ADDRESS);
+  const [amount, setAmount] = useState<number | string>(
+    (router?.query?.amount as unknown) as string
+  );
+
+  const add = async () => {
+    try {
+      await usdt.transfer(JAR, Number(amount) * 10 ** 6);
+    } catch (e) {
+      console.log(e);
+      const {message} = e as any;
+      toast(message);
+    } finally {
+      router.replace('/');
+    }
+  };
+
   return (
     <div>
+      <Col className={styles.mv1}>
+        <TransferAmount {...{amount, setAmount, placeholder: 'USDT'}} />
+      </Col>
+
       <div className={styles.mv1}>
-        <Text small color="grey">
-          🔐 взяти UAHT під &nbsp;
-          <select>
-            <option>USDT</option>
-            <option>USDC</option>
-            <option disabled>ОВДП</option>
-          </select>
+        <Text color="grey">
+          🔐 за{' '}
+          <a
+            href="https://www.google.com/finance/quote/USDT-UAH#T"
+            rel="noreferrer"
+            target="_blank"
+            className={styles.link}
+          >
+            офіційним курсом
+          </a>
         </Text>
       </div>
-      <div className={styles.mv1}>
-        <QRCode value="0xD0920a91B0d382C1B0e83DB36178f808AF881121" title="USDT ↔ USDC" />
-      </div>
-      <div>
-        <RequestButton action="🤝" />
-      </div>
-      <div>
-        <Text small color="grey">
-          * індивідуальні умови для партнерів
-        </Text>
-      </div>
+
+      <Row align="center" justify="center" className={(styles.mv1, styles.pt1)}>
+        <Button disabled={!amount} onClick={() => add()}>
+          Ввід ✅
+        </Button>
+      </Row>
     </div>
   );
 };

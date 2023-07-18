@@ -145,7 +145,7 @@ export const Dao = ({config}: any) => {
             <div>
               <Row>⚡ Снапшоти - офчейн петиції та поточні рішення для спільноти.</Row>
               <Row>
-                ⚙️ Проєкти - ончейн пропозиції та проєкти по&nbsp;
+                ⚙️ Проєкти - ончейн пропозиції та ідеї по&nbsp;
                 <a
                   href="https://starscrowding.notion.site/starscrowding/UAHT-4a02f50e900d4f7f80d71c37a772edfe"
                   target="_blank"

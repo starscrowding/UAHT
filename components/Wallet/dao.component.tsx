@@ -55,7 +55,6 @@ export const Dao = ({config}: any) => {
           uaht.balanceOf(address),
           web3Provider.getBalance({address}),
         ]);
-        console.log({allowance, gas, balance});
         setDaoInfo({allowance, gas, balance});
       } catch (e) {
         setDaoInfo(undefined);
@@ -127,28 +126,43 @@ export const Dao = ({config}: any) => {
           <Button
             auto
             onClick={() => {
-              window.open(`${DAO_CONTRACT}#writeContract#F7`, '_blank');
+              window.open(`https://snapshot.org/#/uaht-io.eth`, '_blank');
             }}
           >
-            Пропозиція
+            Снапшоти ⚡
           </Button>
           <Button
             auto
             onClick={() => {
-              window.open(`${DAO_CONTRACT}#writeContract#F10`, '_blank');
+              window.open(`${DAO_CONTRACT}#writeContract#F7`, '_blank');
             }}
           >
-            Голосувати
+            Проєкти ⚙️
           </Button>
         </Button.Group>
         <Info
           text={
-            <>
-              id повідомлення{' '}
-              <a href={DAO} target="_blank" rel="noreferrer">
-                @uaht_group
-              </a>
-            </>
+            <div>
+              <Row>⚡ Снапшоти - офчейн петиції та поточні рішення для спільноти.</Row>
+              <Row>
+                ⚙️ Проєкти - ончейн пропозиції та проєкти по&nbsp;
+                <a
+                  href="https://starscrowding.notion.site/starscrowding/UAHT-4a02f50e900d4f7f80d71c37a772edfe"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  розробці
+                </a>
+                &nbsp;протоколу.
+              </Row>
+              <br />
+              <Row>
+                #️⃣ Нумерацією виступає id повідомлення&nbsp;
+                <a href={DAO} target="_blank" rel="noreferrer">
+                  @uaht_group
+                </a>
+              </Row>
+            </div>
           }
           className={styles.mh05}
         />
@@ -181,7 +195,7 @@ export const Dao = ({config}: any) => {
           color="secondary"
           type="text"
           placeholder="Верифікація адреси"
-          width={verified !== undefined && account ? '95px' : '207px'}
+          width={verified !== undefined && account ? '108px' : '220px'}
           value={account}
           onChange={e => {
             setDaoInfo(undefined);
@@ -201,7 +215,7 @@ export const Dao = ({config}: any) => {
         ) : (
           undefined
         )}
-        <div className={styles.mh1}>
+        <div className={styles.mh05}>
           {verified === undefined && <GoUnverified title="Перевірити адресу" />}
           {verified === true && <GoVerified title="Верифіковано" color="green" />}
           {verified === false && <GoVerified title="Не верифіковано" color="gray" />}

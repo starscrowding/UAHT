@@ -23,7 +23,8 @@ UAHT може використовуватись згідно прав і сво
 - UAHT_DAO: https://polygonscan.com/address/0x08b491bc7848c6af42c3882794a93d70c04e5816#readContract
 - Платформа: https://uaht.io/ \
 [IPFS-дзеркало](https://uaht-ipfs.on.fleek.co/) \
-[Маркетплейс | дошка оголошень спільноти](https://uaht.com.ua/)
+[Маркетплейс | дошка оголошень спільноти](https://uaht.com.ua/) \
+ENS: [uaht-io.eth](https://app.ens.domains/uaht-io.eth)
 - Polygon: https://polygon.technology/
 - WalletConnect: https://walletconnect.com/
 - Whitepaper: https://github.com/starscrowding/UAHT/blob/dev/public/whitepaper.pdf

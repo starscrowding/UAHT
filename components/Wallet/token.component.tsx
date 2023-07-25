@@ -159,19 +159,6 @@ export const StakingModal = ({open}: any) => {
             ghost
             size="lg"
             color="gradient"
-            icon="🔄"
-            href={`https://app.ws.exchange/ua/eth/polygon/pool/add?&inputCurrency=${ADDRESS}&outputCurrency=${USDT_ADDRESS}`}
-          >
-            WhiteSwap
-          </Button>
-          <Button
-            as="a"
-            target="_blank"
-            rel="noreferrer"
-            auto
-            ghost
-            size="lg"
-            color="gradient"
             icon="🦄"
             href={`https://app.uniswap.org/#/add/${USDT_ADDRESS}/${ADDRESS}/3000?chain=polygon&lng=uk-UA`}
           >
@@ -222,7 +209,10 @@ export const Token = () => {
           auto
           title="Провайдер ліквідності"
           onClick={() => {
-            setTimeout(() => router.push('/?action=staking'), 123);
+            window.open(
+              `https://app.uniswap.org/#/add/${USDT_ADDRESS}/${ADDRESS}/3000?chain=polygon&lng=uk-UA`,
+              '_blank'
+            );
           }}
         >
           Стейкінг 🌱

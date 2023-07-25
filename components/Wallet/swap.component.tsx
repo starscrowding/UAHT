@@ -69,7 +69,10 @@ export const Swap = ({balance, gas}: any) => {
           color={act === 'uniswap' ? 'gradient' : undefined}
           auto
           onClick={() => {
-            window.open(`https://app.uniswap.org/#/swap?chain=polygon&lng=uk-UA`, '_blank');
+            window.open(
+              `https://app.uniswap.org/#/swap?exactAmount=1&exactField=input&inputCurrency=${USDT_ADDRESS}&outputCurrency=${ADDRESS}&chain=polygon&lng=uk-UA`,
+              '_blank'
+            );
           }}
         >
           Uniswap

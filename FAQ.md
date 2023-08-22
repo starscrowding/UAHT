@@ -65,7 +65,8 @@ https://t.me/uaht_info/34 \
 ### Where to find more information about the project?
 
 Telegram channel with information about the project https://t.me/uaht_info \
-Public [development board](https://starscrowding.notion.site/starscrowding/UAHT-4a02f50e900d4f7f80d71c37a772edfe)
+Public [development board](https://starscrowding.notion.site/starscrowding/UAHT-4a02f50e900d4f7f80d71c37a772edfe) \
+UAHT [quests](https://zealy.io/c/uaht/questboard) 📍
 
 ### Have more questions?
 

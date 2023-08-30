@@ -1,0 +1,77 @@
+{
+  "name": "UAHT",
+  "hashtags": [
+    {
+      "name": "opensea",
+      "address": "https://opensea.io/"
+    },
+    {
+      "name": "silpo",
+      "address": "https://silpo.ua/gift-certificates"
+    },
+    {
+      "name": "rozetka",
+      "address": "https://rozetka.com.ua/ua/pages/certificates/"
+    },
+    {
+      "name": "prom",
+      "address": "https://prom.ua/ua/"
+    },
+    {
+      "name": "olx",
+      "address": "https://www.olx.ua/uk/"
+    },
+    {
+      "name": "epicentr",
+      "address": "https://epicentrk.ua/ua/shop/sertifikaty-i-karty-podarochnye/"
+    },
+    {
+      "name": "kyivstar",
+      "address": "https://kyivstar.ua/pay"
+    },
+    {
+      "name": "lifecell",
+      "address": "https://oplata.lifecell.ua/uk"
+    },
+    {
+      "name": "vodafone",
+      "address": "https://pay.vodafone.ua/top-up"
+    },
+    {
+      "name": "portmone",
+      "address": "https://www.portmone.com.ua/p2p"
+    },
+    {
+      "name": "easypay",
+      "address": "https://easypay.ua/ua/moneytransfer/transfer2card"
+    },
+    {
+      "name": "ipay",
+      "address": "https://www.ipay.ua/ua/p2p"
+    },
+    {
+      "name": "richamster",
+      "address": "https://richamster.com/faq/"
+    },
+    {
+      "name": "geopay",
+      "address": "https://geo-pay.net/lp/p2p-trade"
+    },
+    {
+      "name": "binance",
+      "address": "https://www.binance.com/uk-UA/gift-card"
+    },
+    {
+      "name": "kuna",
+      "address": "https://kuna.io/kuna-code"
+    },
+    {
+      "name": "qmall",
+      "address": "https://qmall.io/ua/isend"
+    },
+    {
+      "name": "whitebit",
+      "address": "https://whitebit.com/ua/codes/all"
+    }
+  ]
+}

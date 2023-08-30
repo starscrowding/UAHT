@@ -72,6 +72,14 @@
     {
       "name": "whitebit",
       "address": "https://whitebit.com/ua/codes/all"
+    },
+    {
+      "name": "novaposhta",
+      "address": "https://novaposhta.ua/money_order_branch"
+    },
+    {
+      "name": "ukrposhta",
+      "address": "https://www.ukrposhta.ua/ua/normalna-dostavka"
     }
   ]
 }

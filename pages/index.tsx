@@ -1,6 +1,6 @@
 import {NextPage} from 'next';
 import Head from 'next/head';
-import {Container, Row, Col, Text, Loading} from '@nextui-org/react';
+import {Container, Row, Col, Loading} from '@nextui-org/react';
 import {BASE} from '@space/hooks/api';
 import {Presentation} from '@space/components/Presentation';
 import {Wallet, useConnector, Connect} from '@space/components/Wallet';

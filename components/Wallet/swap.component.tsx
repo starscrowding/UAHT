@@ -79,11 +79,21 @@ export const Swap = ({balance, gas}: any) => {
         </Button>
         <a
           title="UahtSwap"
+          style={{marginTop: '0.3rem'}}
           onClick={() => {
             window.open(`/swap/index.html`, '_blank');
           }}
         >
           <TbArrowsRightLeft />
+        </a>
+        <a
+          title="jUAHT"
+          style={{paddingLeft: '0.3rem'}}
+          onClick={() => {
+            window.open(`/jam`, '_blank');
+          }}
+        >
+          🍯
         </a>
       </Row>
       {act === 'uniswap' && <iframe className={styles.swap} src="/swap/index.html" />}

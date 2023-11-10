@@ -70,7 +70,7 @@ export const Swap = ({balance, gas}: any) => {
           auto
           onClick={() => {
             window.open(
-              `https://app.uniswap.org/#/swap?exactAmount=1&exactField=input&inputCurrency=${USDT_ADDRESS}&outputCurrency=${ADDRESS}&chain=polygon&lng=uk-UA`,
+              `https://app.uniswap.org/swap?exactAmount=1&exactField=input&inputCurrency=${USDT_ADDRESS}&outputCurrency=${ADDRESS}&chain=polygon&lng=uk-UA`,
               '_blank'
             );
           }}

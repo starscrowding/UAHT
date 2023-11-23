@@ -264,17 +264,30 @@ export const Wallet = () => {
               <Row justify="space-between" align="center" wrap="wrap">
                 <div className={styles.name}>💰 Обмін:</div>
                 <div>
-                  <Row justify="flex-end" align="center">
+                  <Row justify="flex-end" align="center" css={{gap: '0.1rem'}}>
+                    <Button
+                      size="sm"
+                      auto
+                      css={{color: 'white'}}
+                      bordered
+                      color="success"
+                      title="UAHT Трейдинг"
+                      onClick={() => {
+                        window.open(`/trade`, '_blank');
+                      }}
+                    >
+                      📊 Трейд
+                    </Button>
                     <Button
                       css={{mr: '1rem'}}
                       size="xs"
                       auto
-                      flat
+                      light
                       color="success"
                       title="Банка"
                       onClick={() => router.push('/?action=jar')}
                     >
-                      🫙 банка
+                      🫙
                     </Button>
                   </Row>
                 </div>

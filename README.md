@@ -28,6 +28,7 @@ ENS: [uaht-io.eth](https://app.ens.domains/uaht-io.eth)
 - Polygon: https://polygon.technology/
 - WalletConnect: https://walletconnect.com/
 - Whitepaper: https://github.com/starscrowding/UAHT/blob/dev/public/whitepaper.pdf
+- </> SDK: https://www.npmjs.com/package/@uaht/sdk
 - 🛣 Дорожня карта: [Roadmap](https://raw.githubusercontent.com/starscrowding/UAHT/dev/public/roadmap.png)
 
 ## Часті питання

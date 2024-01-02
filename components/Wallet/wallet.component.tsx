@@ -279,8 +279,8 @@ export const Wallet = () => {
                       📊 Трейд
                     </Button>
                     <Button
-                      css={{mr: '1rem'}}
-                      size="xs"
+                      css={{p: '1rem'}}
+                      size="lg"
                       auto
                       light
                       color="success"

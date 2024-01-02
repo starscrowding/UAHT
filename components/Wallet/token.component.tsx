@@ -160,7 +160,7 @@ export const StakingModal = ({open}: any) => {
             size="lg"
             color="gradient"
             icon="🦄"
-            href={`https://app.uniswap.org/#/add/${USDT_ADDRESS}/${ADDRESS}/3000?chain=polygon&lng=uk-UA`}
+            href={`https://app.uniswap.org/add/${USDT_ADDRESS}/${ADDRESS}/3000?chain=polygon&lng=uk-UA`}
           >
             Uniswap
           </Button>
@@ -210,7 +210,7 @@ export const Token = () => {
           title="Провайдер ліквідності"
           onClick={() => {
             window.open(
-              `https://app.uniswap.org/#/add/${USDT_ADDRESS}/${ADDRESS}/3000?chain=polygon&lng=uk-UA`,
+              `https://app.uniswap.org/add/${USDT_ADDRESS}/${ADDRESS}/3000?chain=polygon&lng=uk-UA`,
               '_blank'
             );
           }}

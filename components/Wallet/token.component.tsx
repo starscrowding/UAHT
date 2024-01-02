@@ -164,6 +164,18 @@ export const StakingModal = ({open}: any) => {
           >
             Uniswap
           </Button>
+          <Button
+            as="a"
+            target="_blank"
+            rel="noreferrer"
+            auto
+            ghost
+            size="lg"
+            icon="📈"
+            href={`https://defillama.com/dexs/chains/polygon`}
+          >
+            Інші ...
+          </Button>
         </Row>
       </Modal.Body>
     </Modal>
@@ -209,10 +221,7 @@ export const Token = () => {
           auto
           title="Провайдер ліквідності"
           onClick={() => {
-            window.open(
-              `https://app.uniswap.org/add/${USDT_ADDRESS}/${ADDRESS}/3000?chain=polygon&lng=uk-UA`,
-              '_blank'
-            );
+            setTimeout(() => router.push('/?action=staking'), 123);
           }}
         >
           Стейкінг 🌱

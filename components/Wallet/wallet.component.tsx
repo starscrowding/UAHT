@@ -10,7 +10,7 @@ import {BsDatabaseFillAdd, BsDatabaseFillDash} from 'react-icons/bs';
 import {MdShoppingCartCheckout} from 'react-icons/md';
 import {ADDRESS, TOKEN_LIST, DAO_ADDRESS, DAO, POLYGON_NETWORK, BASE_COM} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
-import {Card as InfoCard} from '@space/components/Card';
+import {Card as InfoCard, useDebounce} from '@space/components/Card';
 import {QRCode} from './qr.component';
 import {MINIMUM} from './constants';
 import {useInit, useSign, useValidateCode} from './hooks';
@@ -39,6 +39,8 @@ export const Wallet = () => {
   const [vModal, setVModal] = useState('');
   const stamp = useMemo(() => getStamp(), []);
   const router = useRouter();
+  const [flipped, setFlipped] = useState(false);
+  const debounceFlipped = useDebounce<boolean>(flipped, 123);
 
   const sign = useSign({MM, setSignature});
   const validateCode = useValidateCode({resource, setCode});
@@ -91,6 +93,7 @@ export const Wallet = () => {
     <Container className={styles.container}>
       <InfoCard
         className={styles.card}
+        {...{flipped, setFlipped}}
         info={
           <div>
             <div className={styles.name}>
@@ -177,41 +180,64 @@ export const Wallet = () => {
             ) : null}
           </Row>
         }
-        qr={<QRCode value={MM.account} title="QR код" />}
+        qr={
+          <QRCode
+            value={MM.account}
+            title="QR код"
+            bgColor="grey"
+            size={50}
+            onClick={() => router.push(`/?action=qr`)}
+          />
+        }
       />
 
       <Card className={styles.wallet}>
         <Row justify="center" align="center">
-          <Button
-            auto
-            flat
-            color="success"
-            css={{color: 'white'}}
-            icon={<BsDatabaseFillAdd color="green" size={24} />}
-            onClick={() => window.open(`${BASE_COM}/vouchers?tab=add`, '_blank')}
-          >
-            Поповнити
-          </Button>
-          <Spacer />
-          <Button
-            auto
-            flat
-            css={{color: 'white'}}
-            icon={<BsDatabaseFillDash color="red" size={24} />}
-            onClick={() => router.push(`/?action=transfer`)}
-          >
-            Переказати
-          </Button>
-          <a
-            title="Маркетплейс"
-            className={styles.ml05}
-            style={{color: 'white'}}
-            href="https://uaht.com.ua/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <MdShoppingCartCheckout size={23} />
-          </a>
+          {debounceFlipped ? (
+            <Button
+              auto
+              flat
+              color="success"
+              css={{color: 'white'}}
+              icon="💸"
+              onClick={() => window.open(`${BASE_COM}/?q=кешбек`, '_blank')}
+            >
+              Кешбек
+            </Button>
+          ) : (
+            <>
+              <Button
+                auto
+                flat
+                color="success"
+                css={{color: 'white'}}
+                icon={<BsDatabaseFillAdd color="green" size={24} />}
+                onClick={() => window.open(`${BASE_COM}/vouchers?tab=add`, '_blank')}
+              >
+                Поповнити
+              </Button>
+              <Spacer />
+              <Button
+                auto
+                flat
+                css={{color: 'white'}}
+                icon={<BsDatabaseFillDash color="red" size={24} />}
+                onClick={() => router.push(`/?action=transfer`)}
+              >
+                Переказати
+              </Button>
+              <a
+                title="Маркетплейс"
+                className={styles.ml05}
+                style={{color: 'white'}}
+                href={BASE_COM}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <MdShoppingCartCheckout size={23} />
+              </a>
+            </>
+          )}
         </Row>
         <Collapse.Group accordion={false}>
           <Collapse

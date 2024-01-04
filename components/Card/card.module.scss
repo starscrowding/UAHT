@@ -39,10 +39,6 @@
 
 .back {
   transform: rotateY(180deg);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
 }
 
 .flipped {
@@ -53,6 +49,12 @@
   display: flex;
   justify-content: flex-end;
   padding: 10px;
+}
+
+.back {
+  .logo {
+    justify-content: flex-start;
+  }
 }
 
 .info,
@@ -71,19 +73,45 @@
 }
 
 .qr {
-  padding: 7px;
+  background: #313234;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 10px;
+  gap: 0.5rem;
 }
 
 .token {
   padding: 7px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100px;
 }
 
 @media only screen and (max-width: 480px) {
   .card {
     height: 256px;
   }
+}
 
-  .qr {
-    padding: 0;
+.proactive {
+  border: 3px solid #0000;
+  border-radius: 50%;
+  background: linear-gradient(#131219, #131219) padding-box,
+    linear-gradient(var(--angle), #070707, #687aff) border-box;
+  animation: 8s proactive linear infinite;
+}
+
+@keyframes proactive {
+  to {
+    --angle: 360deg;
   }
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
 }

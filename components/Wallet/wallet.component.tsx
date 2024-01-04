@@ -8,7 +8,15 @@ import {GoVerified, GoChecklist} from 'react-icons/go';
 import {IoIosPeople} from 'react-icons/io';
 import {BsDatabaseFillAdd, BsDatabaseFillDash} from 'react-icons/bs';
 import {MdShoppingCartCheckout} from 'react-icons/md';
-import {ADDRESS, TOKEN_LIST, DAO_ADDRESS, DAO, POLYGON_NETWORK, BASE_COM} from '@space/hooks/api';
+import {
+  ADDRESS,
+  TOKEN_LIST,
+  DAO_ADDRESS,
+  DAO,
+  POLYGON_NETWORK,
+  BASE_COM,
+  TELEGRAM,
+} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
 import {Card as InfoCard, useDebounce} from '@space/components/Card';
 import {QRCode} from './qr.component';
@@ -194,16 +202,28 @@ export const Wallet = () => {
       <Card className={styles.wallet}>
         <Row justify="center" align="center">
           {debounceFlipped ? (
-            <Button
-              auto
-              flat
-              color="success"
-              css={{color: 'white'}}
-              icon="💸"
-              onClick={() => window.open(`${BASE_COM}/?q=кешбек`, '_blank')}
-            >
-              Кешбек
-            </Button>
+            <>
+              <Button
+                auto
+                flat
+                color="success"
+                css={{color: 'white'}}
+                icon={<Text size={21}>💸</Text>}
+                onClick={() => window.open(`${BASE_COM}/?q=кешбек`, '_blank')}
+              >
+                Кешбек
+              </Button>
+              <Spacer />
+              <Button
+                auto
+                flat
+                css={{color: 'white'}}
+                icon={<Text size={21}>🤖</Text>}
+                onClick={() => window.open(`${TELEGRAM}`, '_blank')}
+              >
+                Запит
+              </Button>
+            </>
           ) : (
             <>
               <Button

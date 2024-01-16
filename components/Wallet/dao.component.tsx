@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useRef} from 'react';
 import {isAddress, formatEther, formatUnits} from 'viem';
 import {useConnector} from '@space/components/Wallet';
 import {Row, Card, Button, Input, Spacer, Loading} from '@nextui-org/react';
@@ -108,16 +108,17 @@ export const Dao = ({config}: any) => {
       alert('❌');
     }
   };
-
+  const isSignCalledRef = useRef(false);
   useEffect(() => {
-    if (config?.sign) {
+    if (config?.sign && MM?.wallet && !isSignCalledRef.current) {
+      isSignCalledRef.current = true;
       doSign(config?.sign);
       setTimeout(() => {
         document?.getElementById('dao')?.scrollIntoView({behavior: 'smooth'});
       }, 3000);
     }
     // eslint-disable-next-line
-  }, [config?.sign]);
+  }, [config?.sign, MM?.wallet]);
 
   return (
     <div>

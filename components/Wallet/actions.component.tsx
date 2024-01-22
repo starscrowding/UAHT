@@ -13,9 +13,10 @@ import {useUaht} from './hooks';
 import styles from './wallet.module.scss';
 
 export const Actions = () => {
+  const MM = useConnector();
   const {query} = useRouter();
 
-  return (
+  return MM.wallet && MM.provider ? (
     <>
       <AllowanceModal
         open={query?.action === 'approve' && query?.spender && Number(query?.amount) >= 0}
@@ -25,7 +26,7 @@ export const Actions = () => {
       <QRModal open={query?.action === 'qr'} />
       <StakingModal open={query?.action === 'staking'} />
     </>
-  );
+  ) : null;
 };
 
 export const AllowanceModal = ({open}: any) => {

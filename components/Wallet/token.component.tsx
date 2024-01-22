@@ -31,9 +31,9 @@ export const TransferAmount = ({amount, setAmount, disabled, placeholder = 'UAHT
         value={amount}
         disabled={disabled}
         onChange={e => {
-          setAmount(e?.target?.value);
+          setAmount(+e?.target?.value);
         }}
-        onBlur={() => setAmount(amount && Math.max(0, Number(amount)))}
+        onBlur={e => setAmount(e?.target?.value && Math.max(0, Number(e?.target?.value)))}
         onKeyDown={sanitizeInput}
       />
     </>

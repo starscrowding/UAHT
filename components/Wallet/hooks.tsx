@@ -4,7 +4,7 @@ import ERC20_ABI from '@space/contracts/ERC20.abi.json';
 import UAHT_ABI from '@space/contracts/UAHT.abi.json';
 import UAHT_DAO_ABI from '@space/contracts/UAHT_DAO.abi.json';
 import {Address as AddressType} from 'viem';
-import {useUahtBalanceOf} from '@uaht/sdk';
+import {useUahtApprove, useUahtBalanceOf, useUahtTransfer} from '@uaht/sdk';
 import {api, ADDRESS, DAO_ADDRESS, RESERVE} from '@space/hooks/api';
 import {useConnector} from '@space/components/Wallet';
 import {precision} from './helpers';
@@ -126,6 +126,8 @@ export const useUaht = () => {
     address: ADDRESS,
     abi: UAHT_ABI,
   };
+  const {writeAsync: transfer} = useUahtTransfer();
+  const {writeAsync: approve} = useUahtApprove();
 
   return useMemo(() => {
     return {
@@ -136,16 +138,12 @@ export const useUaht = () => {
           args: [address],
         } as any),
       transfer: async (to: string, amount: number) =>
-        await MM.wallet.writeContract({
-          ...config,
-          functionName: 'transfer',
-          args: [to, amount],
-        } as any),
+        await transfer({
+          args: [to as AddressType, BigInt(amount)],
+        }),
       approve: async (spender: string, amount: number) =>
-        await MM.wallet.writeContract({
-          ...config,
-          functionName: 'approve',
-          args: [spender, amount],
+        await approve({
+          args: [spender as AddressType, BigInt(amount)],
         } as any),
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps

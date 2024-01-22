@@ -3,7 +3,9 @@ import {formatEther, formatUnits} from 'viem';
 import ERC20_ABI from '@space/contracts/ERC20.abi.json';
 import UAHT_ABI from '@space/contracts/UAHT.abi.json';
 import UAHT_DAO_ABI from '@space/contracts/UAHT_DAO.abi.json';
-import {api, ADDRESS, DAO_ADDRESS, RESERVE, USDT_ADDRESS} from '@space/hooks/api';
+import {Address as AddressType} from 'viem';
+import {useUahtBalanceOf} from '@uaht/sdk';
+import {api, ADDRESS, DAO_ADDRESS, RESERVE} from '@space/hooks/api';
 import {useConnector} from '@space/components/Wallet';
 import {precision} from './helpers';
 import {RESOURCES, MIN_CODE_LENGTH} from './constants';
@@ -18,10 +20,18 @@ export const useInit = ({
   MM,
 }: any) => {
   const uaht = useUaht();
+  const {data: balance} = useUahtBalanceOf({
+    args: [MM.account as AddressType],
+    watch: true,
+  });
 
   useEffect(() => {
     setCode('');
   }, [resource, setCode]);
+
+  useEffect(() => {
+    setBalance(formatUnits(balance as bigint, 2));
+  }, [balance, setBalance]);
 
   useEffect(() => {
     const balanceOf = async () => {
@@ -31,7 +41,6 @@ export const useInit = ({
           uaht.balanceOf(MM.account),
           web3Provider.getBalance({address: MM.account}),
         ]);
-        setBalance(formatUnits(balance as bigint, 2));
         setMatic(precision(formatEther(gas), 3));
       } catch (e) {
         console.log(e);
@@ -55,7 +64,7 @@ export const useInit = ({
       }
     };
     Promise.allSettled([balanceOf(), reserveOf()]);
-  }, [MM.account, MM.provider, setBalance, setReserve, setVerified, setMatic, uaht]);
+  }, [MM.account, MM.provider, setReserve, setVerified, setMatic, uaht]);
 };
 
 export const useAddToken = ({MM}: any) => async () => {

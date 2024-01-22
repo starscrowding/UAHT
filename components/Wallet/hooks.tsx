@@ -30,7 +30,9 @@ export const useInit = ({
   }, [resource, setCode]);
 
   useEffect(() => {
-    setBalance(formatUnits(balance as bigint, 2));
+    if (balance) {
+      setBalance(formatUnits(balance as bigint, 2));
+    }
   }, [balance, setBalance]);
 
   useEffect(() => {

@@ -1,11 +1,15 @@
 import {useCallback, useState, useEffect} from 'react';
 import NextImage from 'next/image';
 import {useRouter} from 'next/router';
+import {toast} from 'react-toastify';
 import {Row, Button, Modal, Text, Input} from '@nextui-org/react';
 import {MdQrCode} from 'react-icons/md';
 import {FaDownload} from 'react-icons/fa';
+import {BiTransferAlt} from 'react-icons/bi';
+import {uahtABI} from '@uaht/sdk';
+import {Address as AddressType} from 'viem';
 import {useConnector} from '@space/components/Wallet';
-import {ADDRESS, BASE, BASE_COM, USDT_ADDRESS} from '@space/hooks/api';
+import {ADDRESS, BASE, BASE_COM, USDT_ADDRESS, CONTRACT} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
 import {QRCode} from './qr.component';
 import {useAddToken} from './hooks';
@@ -42,9 +46,35 @@ export const QRModal = ({open}: any) => {
   const [amount, setAmount] = useState<number | string>();
   const [slot, setSlot] = useState<string>((router?.query?.slot as unknown) as string);
 
+  const unwatch = MM?.provider?.watchContractEvent({
+    address: ADDRESS,
+    abi: uahtABI,
+    eventName: 'Transfer',
+    args: {
+      to: MM?.account as AddressType,
+    },
+    batch: false,
+    onLogs(logs: any) {
+      try {
+        toast.success(`Отримано: ${Number(logs?.[0]?.args?.value || 0) / 100} UAHT`, {
+          toastId: 'qr',
+        });
+        onClose();
+      } catch (e) {
+        console.log(e);
+      }
+    },
+  });
+
   const reset = useCallback(() => {
     setAmount('');
   }, [setAmount]);
+
+  const onClose = () => {
+    reset();
+    unwatch?.();
+    router.replace('/');
+  };
 
   useEffect(() => {
     setSlot(router?.query?.slot as string);
@@ -78,19 +108,19 @@ export const QRModal = ({open}: any) => {
   };
 
   return (
-    <Modal
-      blur
-      preventClose
-      closeButton
-      aria-labelledby="qr-modal"
-      open={open}
-      onClose={() => {
-        reset();
-        router.replace('/');
-      }}
-    >
+    <Modal blur preventClose closeButton aria-labelledby="qr-modal" open={open} onClose={onClose}>
       <Modal.Header>
         <Text size={18}>
+          <a
+            onClick={() => {
+              window.open(
+                `https://polygonscan.com/advanced-filter?tkn=${ADDRESS}&txntype=2&tadd=${MM.account}&mtd=0xa9059cbb%7eTransfer`,
+                '_blank'
+              );
+            }}
+          >
+            <BiTransferAlt size="18" />
+          </a>{' '}
           Твій QR-код <MdQrCode />
         </Text>
       </Modal.Header>
@@ -243,6 +273,17 @@ export const Token = () => {
           }
         />
       </Row>
+      <Button
+        size="xs"
+        auto
+        flat
+        onClick={() => {
+          window.open(`${CONTRACT}/?a=${MM.account}`, '_blank');
+        }}
+        icon={<BiTransferAlt />}
+      >
+        транзакції
+      </Button>
     </div>
   );
 };

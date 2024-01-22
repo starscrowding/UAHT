@@ -8,7 +8,7 @@ import {Address} from '@space/components/Wallet/common';
 import {Jar} from '@space/components/Wallet/jar.component';
 import {useConnector} from '@space/components/Wallet';
 import {TransferAmount, QRModal, StakingModal} from '@space/components/Wallet/token.component';
-import {CONTRACT, JAR} from '@space/hooks/api';
+import {ADDRESS, JAR} from '@space/hooks/api';
 import {useUaht} from './hooks';
 import styles from './wallet.module.scss';
 
@@ -116,7 +116,10 @@ export const TransferModal = ({open}: any) => {
         <Text size={18}>
           <a
             onClick={() => {
-              window.open(`${CONTRACT}/?a=${MM.account}`, '_blank');
+              window.open(
+                `https://polygonscan.com/advanced-filter?tkn=${ADDRESS}&txntype=2&fadd=${MM.account}&mtd=0xa9059cbb%7eTransfer`,
+                '_blank'
+              );
             }}
           >
             <BiTransferAlt size="18" />

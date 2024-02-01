@@ -24,7 +24,8 @@ UAHT може використовуватись згідно прав і сво
 - Платформа: https://uaht.io/ \
 [IPFS-дзеркало](https://uaht-ipfs.on.fleek.co/) \
 [Маркетплейс | дошка оголошень спільноти](https://uaht.com.ua/) \
-ENS: [uaht-io.eth](https://app.ens.domains/uaht-io.eth)
+ENS: [uaht-io.eth](https://app.ens.domains/uaht-io.eth) \
+Decentraland: [UAHT.dcl.eth](https://play.decentraland.org/world/UAHT)
 - Polygon: https://polygon.technology/
 - WalletConnect: https://walletconnect.com/
 - Whitepaper: https://github.com/starscrowding/UAHT/blob/dev/public/whitepaper.pdf

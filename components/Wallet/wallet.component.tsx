@@ -377,9 +377,22 @@ export const Wallet = () => {
                 <Text
                   css={{
                     textGradient: '45deg, white 10%, $blue600 90%',
+                    '@smMax': {
+                      display: 'none',
+                    },
                   }}
                 >
                   {JAR_CONTRACT}
+                </Text>
+                <Text
+                  css={{
+                    textGradient: '45deg, white 10%, $blue600 90%',
+                    '@smMin': {
+                      display: 'none',
+                    },
+                  }}
+                >
+                  <Address account={JAR_CONTRACT} />
                 </Text>
                 <Info
                   className={classNames(styles.pl05)}

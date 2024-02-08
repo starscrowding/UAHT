@@ -16,6 +16,7 @@ import {
   POLYGON_NETWORK,
   BASE_COM,
   TELEGRAM,
+  JAR_CONTRACT,
 } from '@space/hooks/api';
 import {Info} from '@space/components/Info';
 import {Card as InfoCard, useDebounce} from '@space/components/Card';
@@ -25,6 +26,7 @@ import {useInit, useSign, useValidateCode} from './hooks';
 import {getStamp, createCode, sectionConfig} from './helpers';
 import {VerificationModal, Address} from './common';
 import {Swap} from './swap.component';
+import {Jar} from './jar.component';
 import {Token} from './token.component';
 import {Dao} from './dao.component';
 import {Actions} from './actions.component';
@@ -314,7 +316,7 @@ export const Wallet = () => {
                     <Button
                       size="sm"
                       auto
-                      css={{color: 'white'}}
+                      css={{color: 'white', mr: '1rem'}}
                       bordered
                       color="success"
                       title="UAHT Трейдинг"
@@ -323,17 +325,6 @@ export const Wallet = () => {
                       }}
                     >
                       📊 Трейд
-                    </Button>
-                    <Button
-                      css={{p: '1rem'}}
-                      size="lg"
-                      auto
-                      light
-                      color="success"
-                      title="Банка"
-                      onClick={() => router.push('/?action=jar')}
-                    >
-                      🫙
                     </Button>
                   </Row>
                 </div>
@@ -356,6 +347,49 @@ export const Wallet = () => {
             }
           >
             <Swap {...{balance, gas: matic}} />
+          </Collapse>
+          <Collapse
+            id="jar"
+            expanded={hash.startsWith('jar')}
+            title={
+              <Row justify="space-between" align="center" wrap="wrap">
+                <div className={styles.name}>🫙 Банка:</div>
+                <div>
+                  <Row justify="flex-end" align="center">
+                    <Button
+                      flat
+                      size="sm"
+                      auto
+                      css={{color: 'white', mr: '1rem'}}
+                      title="Відкриті / закриті"
+                      onClick={() => {
+                        window.open(`https://polygonscan.com/txs?a=${JAR_CONTRACT}`, '_blank');
+                      }}
+                    >
+                      🔍 Позики
+                    </Button>
+                  </Row>
+                </div>
+              </Row>
+            }
+            subtitle={
+              <Row className={styles.address}>
+                <Text
+                  css={{
+                    textGradient: '45deg, white 10%, $blue600 90%',
+                  }}
+                >
+                  {JAR_CONTRACT}
+                </Text>
+                <Info
+                  className={classNames(styles.pl05)}
+                  link={`https://polygonscan.com/address/${JAR_CONTRACT}#readContract`}
+                  icon="↗"
+                />
+              </Row>
+            }
+          >
+            <Jar />
           </Collapse>
           <Collapse
             id="dao"

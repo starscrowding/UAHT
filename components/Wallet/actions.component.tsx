@@ -5,7 +5,6 @@ import {toast} from 'react-toastify';
 import {BiTransferAlt} from 'react-icons/bi';
 import {Row, Text, Modal, Button, Input} from '@nextui-org/react';
 import {Address} from '@space/components/Wallet/common';
-import {Jar} from '@space/components/Wallet/jar.component';
 import {useConnector} from '@space/components/Wallet';
 import {TransferAmount, QRModal, StakingModal} from '@space/components/Wallet/token.component';
 import {ADDRESS, JAR} from '@space/hooks/api';
@@ -22,7 +21,6 @@ export const Actions = () => {
         open={query?.action === 'approve' && query?.spender && Number(query?.amount) >= 0}
       />
       <TransferModal open={query?.action === 'transfer'} />
-      <JarModal open={query?.action === 'jar'} />
       <QRModal open={query?.action === 'qr'} />
       <StakingModal open={query?.action === 'staking'} />
     </>
@@ -153,37 +151,6 @@ export const TransferModal = ({open}: any) => {
             Відправити ➡️
           </Button>
         </Row>
-      </Modal.Body>
-    </Modal>
-  );
-};
-
-export const JarModal = ({open}: any) => {
-  const router = useRouter();
-
-  return (
-    <Modal
-      blur
-      preventClose
-      closeButton
-      aria-labelledby="jar-modal"
-      open={open}
-      onClose={() => router.replace('/')}
-    >
-      <Modal.Header>
-        <Text size={18}>
-          <a
-            onClick={() => {
-              window.open(`https://polygonscan.com/address/${JAR}#tokentxns`, '_blank');
-            }}
-          >
-            <BiTransferAlt size="18" />
-          </a>{' '}
-          Конвертер
-        </Text>
-      </Modal.Header>
-      <Modal.Body>
-        <Jar />
       </Modal.Body>
     </Modal>
   );

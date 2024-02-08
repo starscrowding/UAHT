@@ -57,7 +57,7 @@ https://t.me/uaht_info/52
 
 Jar is a set of decentralized services and smart contracts that allow you to generate:
 
-✅ Input through conversion \
+✅ Input through open collateral \
 🍯 Jam pools of full range MATIC ↔ UAHT ↔ USDT and other flatassets [jUAHT](https://uaht.io/jam) against inflation, \
 an example of such pool is [ЗСУ-pool](https://opensea.io/0xB0AA11ad57386c91Fe8FA26E4F32121f9a0Ede03) \
 https://t.me/uaht_info/34 \

@@ -1,0 +1,11 @@
+Contact: mailto:space+security@uaht.io
+Expires: 2134-01-01T12:00:00.000Z
+Preferred-Languages: en, uk
+
+# Bug Bounty 🤝
+1ETH+ for Critical Bugs in UAHT protocol:
+
+- tokens access without approval
+- stake access without approval
+
+Safe Vault: https://app.safe.global/balances?safe=matic:0x8321EA117e9CfaA334214DAf0AAD16eC5A10c0dD

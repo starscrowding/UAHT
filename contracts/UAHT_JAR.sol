@@ -2,11 +2,12 @@
 pragma solidity ^0.8.13;
 
 import "@openzeppelin/contracts/utils/math/Math.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "./UAHT_DAO.sol";
 import "./UAHT_ORACLE.sol";
 
-contract UAHT_JAR {
+contract UAHT_JAR is ReentrancyGuard {
     address public jar = 0x579B733576c607ab08909F4f8Dc3b274C721aAba;
     address public uaht_dao = 0x08B491bC7848C6AF42c3882794A93d70c04e5816;
     address public uaht_oracle = 0x626CEF050c13eDE2B1b801bc6a76863E212ec25d;
@@ -51,7 +52,7 @@ contract UAHT_JAR {
         return top() - total_uaht();
     }
 
-    function put(address asset, uint256 amount) public returns(uint256) { // застава
+    function put(address asset, uint256 amount) public nonReentrant() returns(uint256) { // застава
         require(position[block.timestamp].sender == address(0), "!empty");
         SafeERC20.safeTransferFrom(ERC20(asset), msg.sender, address(this), amount);
         position[block.timestamp] = Position(msg.sender, asset, amount, to_uaht(asset, amount));
@@ -61,7 +62,7 @@ contract UAHT_JAR {
         return block.timestamp;
     }
 
-    function pop(uint256 timestamp) public { // ліквідація
+    function pop(uint256 timestamp) public nonReentrant() { // ліквідація
         require(position[timestamp].sender == msg.sender || timestamp + 365 * 24 * 60 * 60 < block.timestamp, "!access");
         require(position[timestamp].stake > 0 && position[timestamp].debt > 0, "empty");
         UAHT_DAO(uaht_dao).output(msg.sender, position[timestamp].debt);

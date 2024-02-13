@@ -9,6 +9,8 @@ ERC-20 token on the Polygon network: [0x0D9447E16072b636b4a1E8f2b8C644e58F3eaA6A
 &nbsp;&nbsp; \+ [Global Startup Awards](https://www.globalstartupawards.com/) best new web3.0 project 🇺🇦 \
 😎 UAHT in [TradingView](https://www.tradingview.com/symbols/UAHTWMATIC/)
 
+X: https://twitter.com/uaht_io
+
 ### What is UAHT DAO?
 
 UAHT [DAO](https://academy.binance.com/uk/articles/decentralized-autonomous-organizations-daos-explained) - decentralized community [@uaht_group](https://t.me/uaht_group) based on smart contract [UAHT_DAO](https://polygonscan.com/address/0x08b491bc7848c6af42c3882794a93d70c04e5816#code)\

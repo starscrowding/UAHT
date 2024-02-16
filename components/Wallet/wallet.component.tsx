@@ -26,8 +26,9 @@ import {useInit, useSign, useValidateCode} from './hooks';
 import {getStamp, createCode, sectionConfig} from './helpers';
 import {VerificationModal, Address} from './common';
 import {Swap} from './swap.component';
-import {Jar} from './jar.component';
 import {Token} from './token.component';
+import {Jar} from './jar.component';
+import {Emission} from './emission.component';
 import {Dao} from './dao.component';
 import {Actions} from './actions.component';
 import styles from './wallet.module.scss';
@@ -267,7 +268,7 @@ export const Wallet = () => {
             title={
               <Row justify="space-between" align="center" wrap="wrap">
                 <div className={styles.name}>
-                  <Image src="/favicon.ico" width="16" height="16" alt="токен" /> Адреса токена:
+                  <Image src="/favicon.ico" width="16" height="16" alt="токен" /> Токен:
                 </div>
                 <div>
                   <Button
@@ -406,6 +407,7 @@ export const Wallet = () => {
           </Collapse>
           <Collapse
             id="dao"
+            css={{borderBottom: 0}}
             expanded={hash.startsWith('dao')}
             title={
               <Row justify="space-between" align="center" wrap="wrap">
@@ -455,6 +457,7 @@ export const Wallet = () => {
           >
             <Dao config={config} />
           </Collapse>
+          <Emission />
         </Collapse.Group>
         <Actions />
       </Card>

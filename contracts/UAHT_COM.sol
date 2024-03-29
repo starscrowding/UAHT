@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.13;
+pragma solidity ^0.8.24;
 
 import "@openzeppelin/contracts/utils/Multicall.sol";
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
+import "@openzeppelin/contracts/utils/cryptography/MessageHashUtils.sol";
+import "@openzeppelin/contracts/utils/cryptography/SignatureChecker.sol";
 import "./UAHT_DAO.sol";
 
 contract UAHT_COM is Multicall {
@@ -45,11 +47,11 @@ contract UAHT_COM is Multicall {
     }
 
     function signedHash(uint256 nonce) public view returns (bytes32) {
-        return ECDSA.toEthSignedMessageHash(hash(nonce));
+        return MessageHashUtils.toEthSignedMessageHash(hash(nonce));
     }
 
     function verifyHash(uint256 nonce, bytes memory sig, address from) public view returns (bool) {
-        return ECDSA.recover(signedHash(nonce), sig) == from;
+        return SignatureChecker.isValidSignatureNow(from, signedHash(nonce), sig);
     }
 
     function fee(uint256 uah) public view returns (uint256) {
@@ -116,6 +118,7 @@ contract UAHT_COM is Multicall {
         ERC20(uaht).transfer(msg.sender, fee(deals[from][msg.sender]));
         balance -= deals[from][msg.sender];
         deals[from][msg.sender] = 0;
+        clock[msg.sender][msg.sender] = block.timestamp;
         emit CloseDeal(from, msg.sender);
     }
 

@@ -7,7 +7,7 @@ ERC-20 token on the Polygon network: [0x0D9447E16072b636b4a1E8f2b8C644e58F3eaA6A
 ▶️ Demo: https://youtube.com/playlist?list=PLFcbH5Gf1BGMZ5X1_4goLV89XS3J_fPpp \
 🏆 Nomination for the best blockchain project [PSM](https://psm7.com/) in Ukraine \
 &nbsp;&nbsp; \+ [Global Startup Awards](https://www.globalstartupawards.com/) best new web3.0 project 🇺🇦 \
-😎 UAHT in [TradingView](https://www.tradingview.com/symbols/UAHTWMATIC/)
+😎 UAHT [results](https://www.google.com/search?q=uaht+io+price)
 
 X: https://twitter.com/uaht_io
 

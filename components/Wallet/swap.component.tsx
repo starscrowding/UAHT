@@ -46,7 +46,7 @@ export const Swap = ({balance, gas}: any) => {
           auto
           onClick={() => {
             window.open(
-              `https://www.okx.com/ua/web3/dex#inputChain=${POLYGON_NETWORK}&inputCurrency=${USDT_ADDRESS}&outputChain=${POLYGON_NETWORK}&outputCurrency=${ADDRESS}`,
+              `https://www.okx.com/ua/web3/dex-swap#inputChain=${POLYGON_NETWORK}&inputCurrency=${USDT_ADDRESS}&outputChain=${POLYGON_NETWORK}&outputCurrency=${ADDRESS}`,
               '_blank'
             );
           }}

@@ -66,6 +66,16 @@ export const Swap = ({balance, gas}: any) => {
         <Button
           className={styles.button}
           size="sm"
+          auto
+          onClick={() => {
+            window.open(`https://www.occe.io/exchange/usdt_uaht`, '_blank');
+          }}
+        >
+          OCCE
+        </Button>
+        <Button
+          className={styles.button}
+          size="sm"
           color={act === 'uniswap' ? 'gradient' : undefined}
           auto
           onClick={() => {

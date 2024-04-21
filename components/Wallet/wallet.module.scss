@@ -50,6 +50,13 @@
   text-decoration: underline;
 }
 
+.listItem {
+  height: 23px;
+  > span {
+    height: 23px;
+  }
+}
+
 @media only screen and (max-width: 480px) {
   .container {
     padding: 0;

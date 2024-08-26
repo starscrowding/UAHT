@@ -7,8 +7,9 @@ import {Row, Text, Modal, Button, Input} from '@nextui-org/react';
 import {Address} from '@space/components/Wallet/common';
 import {useConnector} from '@space/components/Wallet';
 import {TransferAmount, QRModal, StakingModal} from '@space/components/Wallet/token.component';
-import {ADDRESS, JAR} from '@space/hooks/api';
-import {useUaht} from './hooks';
+import {ADDRESS} from '@space/hooks/api';
+import {Info} from '@space/components/Info';
+import {useUaht, useUahtCheckout} from './hooks';
 import styles from './wallet.module.scss';
 
 export const Actions = () => {
@@ -73,11 +74,13 @@ export const AllowanceModal = ({open}: any) => {
 export const TransferModal = ({open}: any) => {
   const router = useRouter();
   const uaht = useUaht();
+  const uahtCheckout = useUahtCheckout();
   const MM = useConnector();
   const [to, setTo] = useState<string>((router?.query?.to as unknown) as string);
   const [amount, setAmount] = useState<number | string>(
     (router?.query?.amount as unknown) as string
   );
+  const [msg, setMsg] = useState<string>((router?.query?.msg as unknown) as string);
 
   const validateTo = () => {
     if (!isAddress(to)) {
@@ -87,7 +90,12 @@ export const TransferModal = ({open}: any) => {
 
   const tranfer = async () => {
     try {
-      await uaht.transfer(to, Number(amount) * 100);
+      const value = Number(amount) * 100;
+      if (msg) {
+        await uahtCheckout.transfer(to, msg, value);
+      } else {
+        await uaht.transfer(to, value);
+      }
     } catch (e) {
       console.log(e);
       const {message} = e as any;
@@ -100,7 +108,8 @@ export const TransferModal = ({open}: any) => {
   useEffect(() => {
     setTo(router?.query?.to as string);
     setAmount(router?.query?.amount as string);
-  }, [router?.query, setTo, setAmount]);
+    setMsg(router?.query?.msg as string);
+  }, [router?.query, setTo, setAmount, setMsg]);
 
   return (
     <Modal
@@ -145,6 +154,18 @@ export const TransferModal = ({open}: any) => {
         </Row>
         <Row align="center" className={styles.mv1}>
           <TransferAmount {...{amount, setAmount, disabled: !!router?.query?.amount}} />
+        </Row>
+        <Row align="center" className={styles.mv1} css={{gap: '1rem'}}>
+          <Info text="👀 Публічний коментар у блокчейн мережі 💬" />
+          <textarea
+            style={{border: '1px dashed #393a3c', width: '100%'}}
+            placeholder="призначення"
+            aria-label="msg"
+            color="secondary"
+            value={msg}
+            disabled={!!router?.query?.msg}
+            onChange={e => setMsg(e?.target?.value)}
+          />
         </Row>
         <Row align="center" justify="center" className={styles.mv1}>
           <Button disabled={!to || !amount} onClick={() => tranfer()}>

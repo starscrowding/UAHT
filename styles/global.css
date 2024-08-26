@@ -1,3 +1,8 @@
 body {
   --w3m-z-index: 999;
 }
+
+.nextui-input-disabled,
+textarea[disabled] {
+  color: #ccc !important;
+}

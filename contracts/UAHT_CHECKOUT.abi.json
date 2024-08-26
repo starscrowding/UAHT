@@ -1,0 +1,31 @@
+[
+  {
+    "anonymous": false,
+    "inputs": [
+      {"indexed": false, "internalType": "address", "name": "to", "type": "address"},
+      {"indexed": false, "internalType": "string", "name": "offer", "type": "string"},
+      {"indexed": false, "internalType": "uint256", "name": "uah", "type": "uint256"},
+      {"indexed": false, "internalType": "address", "name": "from", "type": "address"}
+    ],
+    "name": "Order",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {"internalType": "address", "name": "to", "type": "address"},
+      {"internalType": "string", "name": "offer", "type": "string"},
+      {"internalType": "uint256", "name": "uah", "type": "uint256"}
+    ],
+    "name": "order",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "uaht_dao",
+    "outputs": [{"internalType": "address", "name": "", "type": "address"}],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]

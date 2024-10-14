@@ -381,9 +381,12 @@ export const Wallet = () => {
                       size="sm"
                       auto
                       css={{color: 'white', mr: '1rem'}}
-                      title="Відкриті / закриті"
+                      title="Позиції"
                       onClick={() => {
-                        window.open(`https://polygonscan.com/txs?a=${JAR_CONTRACT}`, '_blank');
+                        window.open(
+                          `https://polygonscan.com/address/${JAR_CONTRACT}#readContract#F6`,
+                          '_blank'
+                        );
                       }}
                     >
                       🔍 Позики

@@ -1,21 +1,9 @@
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import classNames from 'classnames';
 import Image from 'next/image';
 import {Text, Row} from '@nextui-org/react';
 import {Logo} from '@space/components/Logo';
 import styles from './card.module.scss';
-
-export function useDebounce<T>(value: T, delay?: number): T {
-  const [debouncedValue, setDebouncedValue] = useState<T>(value);
-  useEffect(() => {
-    const timer = setTimeout(() => setDebouncedValue(value), delay || 500);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [value, delay]);
-  return debouncedValue;
-}
 
 export const Card = ({className, info, data, qr, flipped, setFlipped}: any) => {
   const [shake, setShake] = useState(false);

@@ -19,7 +19,8 @@ import {
   JAR_CONTRACT,
 } from '@space/hooks/api';
 import {Info} from '@space/components/Info';
-import {Card as InfoCard, useDebounce} from '@space/components/Card';
+import {Card as InfoCard} from '@space/components/Card';
+import {useDebounce} from '@space/hooks/helpers';
 import {QRCode} from './qr.component';
 import {MINIMUM} from './constants';
 import {useInit, useSign, useValidateCode} from './hooks';

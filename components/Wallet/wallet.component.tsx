@@ -397,36 +397,44 @@ export const Wallet = () => {
               </Row>
             }
             subtitle={
-              <Row className={styles.address}>
-                <Text
-                  css={{
-                    textGradient: '45deg, white 10%, $blue600 90%',
-                    '@smMax': {
-                      display: 'none',
-                    },
-                  }}
-                >
-                  {JAR_CONTRACT}
-                </Text>
-                <Text
-                  css={{
-                    textGradient: '45deg, white 10%, $blue600 90%',
-                    '@smMin': {
-                      display: 'none',
-                    },
-                  }}
-                >
-                  <Address account={JAR_CONTRACT} />
-                </Text>
-                <Info
-                  className={classNames(styles.pl05)}
-                  link={`https://polygonscan.com/address/${JAR_CONTRACT}#readContract`}
-                  icon="↗"
-                />
-              </Row>
+              JAR_CONTRACT ? (
+                <Row className={styles.address}>
+                  <Text
+                    css={{
+                      textGradient: '45deg, white 10%, $blue600 90%',
+                      '@smMax': {
+                        display: 'none',
+                      },
+                    }}
+                  >
+                    {JAR_CONTRACT}
+                  </Text>
+                  <Text
+                    css={{
+                      textGradient: '45deg, white 10%, $blue600 90%',
+                      '@smMin': {
+                        display: 'none',
+                      },
+                    }}
+                  >
+                    <Address account={JAR_CONTRACT} />
+                  </Text>
+                  <Info
+                    className={classNames(styles.pl05)}
+                    link={`https://polygonscan.com/address/${JAR_CONTRACT}#readContract`}
+                    icon="↗"
+                  />
+                </Row>
+              ) : null
             }
           >
-            <Jar />
+            {JAR_CONTRACT ? (
+              <Jar />
+            ) : (
+              <Text i color="grey">
+                немає відкритих позицій
+              </Text>
+            )}
           </Collapse>
           <Collapse
             id="dao"

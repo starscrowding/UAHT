@@ -71,6 +71,16 @@ function SpaceApp({Component, pageProps}: AppProps) {
 
   useEffect(() => {
     Guard();
+    try {
+      if (navigator?.clipboard) {
+        const writeText = navigator?.clipboard?.writeText?.bind(navigator?.clipboard);
+        navigator.clipboard.writeText = (...args) => {
+          return writeText(...args).catch(() => {
+            prompt('Copy:', args[0]);
+          });
+        };
+      }
+    } catch {}
     if (window?.location?.hostname === HOST) {
       Sentry.init({
         dsn:

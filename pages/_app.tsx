@@ -12,6 +12,7 @@ import {
   wagmiConfig,
   polygonChain,
 } from '@space/components/Wallet/connector';
+import {toast} from 'react-toastify';
 import {ToastContainer} from 'react-toastify';
 import {HOST, DAO} from '../hooks/api';
 import '@space/styles/global.css';
@@ -76,7 +77,15 @@ function SpaceApp({Component, pageProps}: AppProps) {
         const writeText = navigator?.clipboard?.writeText?.bind(navigator?.clipboard);
         navigator.clipboard.writeText = (...args) => {
           return writeText(...args).catch(() => {
-            prompt('Copy:', args[0]);
+            if (args?.[0]) {
+              toast(<div>{args?.[0]}</div>, {
+                toastId: 'copy',
+                autoClose: false,
+                closeOnClick: false,
+                draggable: false,
+                position: 'top-center',
+              });
+            }
           });
         };
       }

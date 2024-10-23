@@ -58,7 +58,7 @@ export const Swap = ({balance, gas}: any) => {
           size="sm"
           auto
           onClick={() => {
-            window.open(`https://richamster.com/trade/MATIC_UAHT/`, '_blank');
+            window.open(`https://richamster.com/trading/POL_UAHT/`, '_blank');
           }}
         >
           Richamster

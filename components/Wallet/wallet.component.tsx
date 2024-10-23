@@ -178,7 +178,7 @@ export const Wallet = () => {
                 <Text
                   color={matic > 0 ? 'success' : 'error'}
                   small
-                  title="Додати MATIC для операцій"
+                  title="Додати POL для операцій"
                   className={classNames(styles.pointer, styles.mr1)}
                   onClick={e => {
                     e?.preventDefault();
@@ -353,7 +353,7 @@ export const Wallet = () => {
             }
             subtitle={
               <Row className={styles.address}>
-                {['MATIC', 'USDT', 'USDC', 'ETH', 'BTC'].map(pair => (
+                {['POL', 'USDT', 'USDC', 'ETH', 'BTC'].map(pair => (
                   <Text
                     key={pair}
                     className={styles.pl05}

@@ -1,6 +1,5 @@
-import {Row, Button, Text, Input, Loading, Card} from '@nextui-org/react';
+import {Row, Button, Text, Loading} from '@nextui-org/react';
 import {JAR_CONTRACT, USDT_ADDRESS, ADDRESS} from '@space/hooks/api';
-import {Info} from '@space/components/Info';
 import {useConnector} from '@space/components/Wallet';
 import UAHT_JAR_ABI from '@space/contracts/UAHT_JAR.abi.json';
 import ERC20_ABI from '@space/contracts/ERC20.abi.json';
@@ -9,7 +8,7 @@ import {formatUnits} from 'viem';
 import {useState} from 'react';
 import {useDebounce} from '@space/hooks/helpers';
 import {precision} from './helpers';
-import {JarBadge, JarRange} from './Jar';
+import {JarBadge, JarRange, JarTo} from './Jar';
 import styles from './wallet.module.scss';
 
 const jarContract = {
@@ -157,6 +156,9 @@ export const Jar = () => {
               <Text b>{usdtValue} USDT</Text> внесок 📥
             </div>
           </div>
+          <Row>
+            <JarTo to={MM.account} />
+          </Row>
           <Row align="center">
             {allowanceUsdt < usdtValue ? (
               <Button
@@ -218,19 +220,7 @@ export const Jar = () => {
             </div>
           </div>
           <Row>
-            <Input
-              underlined
-              color="success"
-              labelLeft="💳"
-              placeholder="Отримувач"
-              width="min(100%, 400px)"
-              css={{
-                input: {
-                  fontSize: 'smaller',
-                },
-              }}
-              value={MM.account}
-            />
+            <JarTo to={MM.account} />
           </Row>
           <Row align="center">
             <Button

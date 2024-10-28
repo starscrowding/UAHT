@@ -378,19 +378,20 @@ export const Wallet = () => {
                 <div>
                   <Row justify="flex-end" align="center">
                     <Button
-                      flat
+                      bordered
+                      color="gradient"
                       size="sm"
                       auto
                       css={{color: 'white', mr: '1rem'}}
                       title="Позиції"
                       onClick={() => {
                         window.open(
-                          `https://polygonscan.com/address/${JAR_CONTRACT}#readContract#F6`,
+                          `https://app.aave.com/reserve-overview/?underlyingAsset=0xc2132d05d31c914a87c6611c10748aeb04b58e8f&marketName=proto_polygon_v3`,
                           '_blank'
                         );
                       }}
                     >
-                      🔍 Позики
+                      AAVE
                     </Button>
                   </Row>
                 </div>

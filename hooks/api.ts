@@ -20,7 +20,7 @@ export const WALLET_CONNECT = 'abf8b212906905d826da0549a00a0fd2';
 export const POLYGON_NETWORK = 137;
 export const USDT_ADDRESS = '0xc2132d05d31c914a87c6611c10748aeb04b58e8f';
 export const JAR = '0x579B733576c607ab08909F4f8Dc3b274C721aAba';
-export const JAR_CONTRACT = '' as any;
+export const JAR_CONTRACT = '0xC19a0265B862480048474E8F96861B68587aC1Fa';
 export const JAR_SLOTS = `${BASE_COM}/offers/0xD0920a91B0d382C1B0e83DB36178f808AF881121`;
 export const ENDPOINT = {
   token: {

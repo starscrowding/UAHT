@@ -422,7 +422,7 @@ export const Wallet = () => {
                   </Text>
                   <Info
                     className={classNames(styles.pl05)}
-                    link={`https://polygonscan.com/address/${JAR_CONTRACT}#readContract`}
+                    link={`https://polygonscan.com/address/${JAR_CONTRACT}`}
                     icon="↗"
                   />
                 </Row>

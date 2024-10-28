@@ -3,6 +3,8 @@ pragma solidity ^0.8.28;
 
 interface IUAHT_JAR { // відкриті позики
 
+    function to_uaht(address asset, uint256 amount) external returns(uint256);
+
     function free_uaht() external returns(uint256);
 
     function total_asset(address asset) external returns(uint256);

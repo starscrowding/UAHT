@@ -8,7 +8,7 @@ import {formatUnits} from 'viem';
 import {useState} from 'react';
 import {useDebounce} from '@space/hooks/helpers';
 import {precision} from './helpers';
-import {JarBadge, JarRange, JarTo} from './Jar';
+import {JarBadge, JarRange, JarRangeInput, JarTo} from './Jar';
 import styles from './wallet.module.scss';
 
 const jarContract = {
@@ -153,7 +153,15 @@ export const Jar = () => {
               {...{min: 0, max: Math.floor(balanceUsdt), value: usdtValue, onChange: setUsdtValue}}
             />
             <div>
-              <Text b>{usdtValue} USDT</Text> внесок 📥
+              <JarRangeInput
+                {...{
+                  min: 0,
+                  max: Math.floor(balanceUsdt),
+                  value: usdtValue,
+                  onChange: setUsdtValue,
+                }}
+              />
+              <Text b>USDT</Text> внесок 📥
             </div>
           </div>
           <Row>
@@ -216,7 +224,15 @@ export const Jar = () => {
               }}
             />
             <div>
-              <Text b>{uahtValue} UAHT</Text> внесок 📥
+              <JarRangeInput
+                {...{
+                  min: 0,
+                  max: Math.floor(balanceUaht),
+                  value: uahtValue,
+                  onChange: setUahtValue,
+                }}
+              />
+              <Text b>UAHT</Text> внесок 📥
             </div>
           </div>
           <Row>

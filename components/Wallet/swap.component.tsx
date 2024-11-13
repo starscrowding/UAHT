@@ -31,6 +31,21 @@ export const Swap = ({balance, gas}: any) => {
           className={styles.button}
           size="sm"
           auto
+          flat
+          onClick={() => {
+            window.open(
+              `https://swap.defillama.com/?tab=swap&chain=polygon&from=${USDT_ADDRESS}&to=${ADDRESS}`,
+              '_blank'
+            );
+          }}
+          iconRight="🦙"
+        >
+          Агрегатор
+        </Button>
+        <Button
+          className={styles.button}
+          size="sm"
+          auto
           onClick={() => {
             window.open(
               `https://app.1inch.io/#/${POLYGON_NETWORK}/advanced/limit-order/${USDT_ADDRESS}/${ADDRESS}`,

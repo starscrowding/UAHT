@@ -272,18 +272,41 @@ export const Token = () => {
             </>
           }
         />
+        <Button
+          className={styles.button}
+          css={{
+            color: 'gold',
+            fontWeight: 'bold',
+            background: 'transparent',
+            borderBottom: '1px solid',
+          }}
+          size="xs"
+          auto
+          flat
+          title="Хедж UAHT"
+          onClick={() => {
+            window.open(
+              'https://www.geckoterminal.com/polygon_pos/pools/0x52b51b5d21e3262908a5404643cc474cabc3a9b9',
+              '_blank'
+            );
+          }}
+        >
+          xUAHT
+        </Button>
       </Row>
-      <Button
-        size="xs"
-        auto
-        flat
-        onClick={() => {
-          window.open(`${CONTRACT}/?a=${MM.account}`, '_blank');
-        }}
-        icon={<BiTransferAlt />}
-      >
-        транзакції
-      </Button>
+      <Row className={styles.row} justify="flex-start" align="center" wrap="wrap" css={{gap: 4}}>
+        <Button
+          size="xs"
+          auto
+          flat
+          onClick={() => {
+            window.open(`${CONTRACT}/?a=${MM.account}`, '_blank');
+          }}
+          icon={<BiTransferAlt />}
+        >
+          транзакції
+        </Button>
+      </Row>
     </div>
   );
 };

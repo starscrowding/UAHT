@@ -22,6 +22,7 @@ UAHT може використовуватись згідно прав і сво
 - UAHT: https://polygonscan.com/token/0x0d9447e16072b636b4a1e8f2b8c644e58f3eaa6a#readContract \
   🌀 кросчейн: [Solana](https://solscan.io/token/4B11WHT1TgVRiLb8KfJ3MbYBxxnRo9GyEWhm7uT1HdRp) | [TON](https://tonscan.org/jetton/EQAIgSq9oBgUcYjM4oa6cF9YjbY-iRlApCNUfZzq5srUJkRM#source)
 - UAHT_DAO: https://polygonscan.com/address/0x08b491bc7848c6af42c3882794a93d70c04e5816#readContract
+- xUAHT: https://polygonscan.com/token/0x9D7f61233106E698d96Ec3Aff908D8812b5F3F3A#readContract
 - Платформа: https://uaht.io/ \
 [IPFS-дзеркало](https://uaht-ipfs.on.fleek.co/) \
 [Маркетплейс | дошка оголошень спільноти](https://uaht.com.ua/) \

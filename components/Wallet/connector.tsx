@@ -5,6 +5,7 @@ import {getPublicClient, getWalletClient} from '@wagmi/core';
 import {polygon} from 'wagmi/chains';
 import {Web3Button} from '@web3modal/react';
 import {WALLET_CONNECT, POLYGON_NETWORK} from '@space/hooks/api';
+import {clsx} from 'clsx';
 import styles from './wallet.module.scss';
 
 export {polygon as polygonChain} from 'wagmi/chains';
@@ -55,7 +56,7 @@ export const useConnector = () => {
 };
 
 export const Connect = () => (
-  <div className={styles.connect}>
+  <div className={clsx(styles.connect, 'private')}>
     <Web3Button label="Підключи" />
   </div>
 );

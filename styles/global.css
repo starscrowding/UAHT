@@ -6,3 +6,8 @@ body {
 textarea[disabled] {
   color: #ccc !important;
 }
+
+.eyeSlash .private,
+.eyeSlash .private-input input {
+  filter: blur(3px);
+}

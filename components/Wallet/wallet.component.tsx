@@ -1,6 +1,6 @@
 import {useCallback, useState, useMemo, useEffect} from 'react';
 import classNames from 'classnames';
-import {Card, Row, Text, Button, Collapse, Container, Spacer} from '@nextui-org/react';
+import {Card, Row, Text, Button, Collapse, Container, Spacer, Badge} from '@nextui-org/react';
 import Image from 'next/image';
 import {useRouter} from 'next/router';
 import {useConnector, Switch} from '@space/components/Wallet';
@@ -17,6 +17,8 @@ import {
   BASE_COM,
   TELEGRAM,
   JAR_CONTRACT,
+  USDC_ADDRESS,
+  USDT_ADDRESS,
 } from '@space/hooks/api';
 import {Info} from '@space/components/Info';
 import {Card as InfoCard} from '@space/components/Card';
@@ -53,6 +55,7 @@ export const Wallet = () => {
   const router = useRouter();
   const [flipped, setFlipped] = useState(false);
   const debounceFlipped = useDebounce<boolean>(flipped, 123);
+  const [jarAsset, setJarAsset] = useState('USDC');
 
   const sign = useSign({MM, setSignature});
   const validateCode = useValidateCode({resource, setCode});
@@ -114,6 +117,7 @@ export const Wallet = () => {
             </div>
             <Row align="center" className={styles.address}>
               <Text
+                className="private"
                 css={{
                   textGradient: '45deg, $blue600 10%, $yellow600 90%',
                 }}
@@ -374,7 +378,34 @@ export const Wallet = () => {
             expanded={hash.startsWith('jar')}
             title={
               <Row justify="space-between" align="center" wrap="wrap">
-                <div className={styles.name}>🫙 Банка:</div>
+                <div>
+                  🫙{' '}
+                  <Badge
+                    placement="top-right"
+                    size="xs"
+                    content="UAHT"
+                    variant="flat"
+                    color="success"
+                    verticalOffset="-21%"
+                  >
+                    Банка
+                  </Badge>
+                  :{' '}
+                  <Button.Group size="sm" onClick={e => e?.stopPropagation?.()}>
+                    <Button
+                      css={{background: jarAsset === 'USDC' ? '$primary' : '$gray300'}}
+                      onClick={() => setJarAsset('USDC')}
+                    >
+                      USDC
+                    </Button>
+                    <Button
+                      css={{background: jarAsset === 'USDT' ? '$primary' : '$gray300'}}
+                      onClick={() => setJarAsset('USDT')}
+                    >
+                      USDT
+                    </Button>
+                  </Button.Group>
+                </div>
                 <div>
                   <Row justify="flex-end" align="center">
                     <Button
@@ -386,7 +417,9 @@ export const Wallet = () => {
                       title="Позиції"
                       onClick={() => {
                         window.open(
-                          `https://app.aave.com/reserve-overview/?underlyingAsset=0xc2132d05d31c914a87c6611c10748aeb04b58e8f&marketName=proto_polygon_v3`,
+                          `https://app.aave.com/reserve-overview/?underlyingAsset=${
+                            jarAsset === 'USDC' ? USDC_ADDRESS : USDT_ADDRESS
+                          }&marketName=proto_polygon_v3`,
                           '_blank'
                         );
                       }}
@@ -430,7 +463,7 @@ export const Wallet = () => {
             }
           >
             {JAR_CONTRACT ? (
-              <Jar />
+              <Jar jarAsset={jarAsset} />
             ) : (
               <Text i color="grey">
                 немає відкритих позицій

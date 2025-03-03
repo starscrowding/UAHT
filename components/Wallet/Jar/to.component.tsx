@@ -4,6 +4,7 @@ import styles from './jar.module.scss';
 export const JarTo = ({to}: any) => {
   return (
     <Input
+      className="private-input"
       aria-label="to"
       underlined
       color="success"

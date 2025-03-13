@@ -3,6 +3,7 @@ export const HOST_COM = 'uaht.com.ua';
 export const BASE = `https://${HOST}`;
 export const BASE_COM = `https://${HOST_COM}`;
 export const ADDRESS = '0x0d9447e16072b636b4a1e8f2b8c644e58f3eaa6a';
+export const ADDRESS_SOLANA = '4B11WHT1TgVRiLb8KfJ3MbYBxxnRo9GyEWhm7uT1HdRp';
 export const DAO_ADDRESS = '0x08b491bc7848c6af42c3882794a93d70c04e5816';
 export const CHECKOUT_ADDRESS = '0x7a63F4943C8c5A815BF8eFFf801c058f951597e1';
 export const CONTRACT = `https://polygonscan.com/token/${ADDRESS}`;

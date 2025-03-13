@@ -10,6 +10,7 @@ import {BsDatabaseFillAdd, BsDatabaseFillDash} from 'react-icons/bs';
 import {MdShoppingCartCheckout} from 'react-icons/md';
 import {
   ADDRESS,
+  ADDRESS_SOLANA,
   TOKEN_LIST,
   DAO_ADDRESS,
   DAO,
@@ -55,6 +56,7 @@ export const Wallet = () => {
   const router = useRouter();
   const [flipped, setFlipped] = useState(false);
   const debounceFlipped = useDebounce<boolean>(flipped, 123);
+  const [network, setNetwork] = useState('polygon');
   const [jarAsset, setJarAsset] = useState('USDC');
 
   const sign = useSign({MM, setSignature});
@@ -273,7 +275,21 @@ export const Wallet = () => {
             title={
               <Row justify="space-between" align="center" wrap="wrap">
                 <div className={styles.name}>
-                  <Image src="/favicon.ico" width="16" height="16" alt="токен" /> Токен:
+                  <Image src="/favicon.ico" width="16" height="16" alt="токен" /> Токен:{' '}
+                  <Button.Group size="sm" onClick={e => e?.stopPropagation?.()}>
+                    <Button
+                      css={{background: network === 'polygon' ? '$secondary' : '$gray300'}}
+                      onClick={() => setNetwork('polygon')}
+                    >
+                      Polygon
+                    </Button>
+                    <Button
+                      css={{background: network === 'solana' ? '$secondary' : '$gray300'}}
+                      onClick={() => setNetwork('solana')}
+                    >
+                      Solana
+                    </Button>
+                  </Button.Group>
                 </div>
                 <div>
                   <Button
@@ -320,9 +336,9 @@ export const Wallet = () => {
                     textGradient: '45deg, $yellow600 10%, $blue600 50%',
                   }}
                 >
-                  {ADDRESS}
+                  {network === 'solana' ? ADDRESS_SOLANA : ADDRESS}
                   <span className={styles.pl05} onClick={e => e?.stopPropagation?.()}>
-                    <Address account={ADDRESS} name=" " />
+                    <Address account={network === 'solana' ? ADDRESS_SOLANA : ADDRESS} name=" " />
                   </span>
                 </Text>
               </div>

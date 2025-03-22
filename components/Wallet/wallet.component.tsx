@@ -9,6 +9,7 @@ import {IoIosPeople} from 'react-icons/io';
 import {BsDatabaseFillAdd, BsDatabaseFillDash} from 'react-icons/bs';
 import {MdShoppingCartCheckout} from 'react-icons/md';
 import {
+  Networks,
   ADDRESS,
   ADDRESS_SOLANA,
   TOKEN_LIST,
@@ -56,7 +57,7 @@ export const Wallet = () => {
   const router = useRouter();
   const [flipped, setFlipped] = useState(false);
   const debounceFlipped = useDebounce<boolean>(flipped, 123);
-  const [network, setNetwork] = useState('polygon');
+  const [network, setNetwork] = useState(Networks.Polygon);
   const [jarAsset, setJarAsset] = useState('USDC');
 
   const sign = useSign({MM, setSignature});
@@ -278,14 +279,14 @@ export const Wallet = () => {
                   <Image src="/favicon.ico" width="16" height="16" alt="токен" /> Токен:{' '}
                   <Button.Group size="sm" onClick={e => e?.stopPropagation?.()}>
                     <Button
-                      css={{background: network === 'polygon' ? '$secondary' : '$gray300'}}
-                      onClick={() => setNetwork('polygon')}
+                      css={{background: network === Networks.Polygon ? '$secondary' : '$gray300'}}
+                      onClick={() => setNetwork(Networks.Polygon)}
                     >
                       Polygon
                     </Button>
                     <Button
-                      css={{background: network === 'solana' ? '$secondary' : '$gray300'}}
-                      onClick={() => setNetwork('solana')}
+                      css={{background: network === Networks.Solana ? '$secondary' : '$gray300'}}
+                      onClick={() => setNetwork(Networks.Solana)}
                     >
                       Solana
                     </Button>
@@ -336,9 +337,12 @@ export const Wallet = () => {
                     textGradient: '45deg, $yellow600 10%, $blue600 50%',
                   }}
                 >
-                  {network === 'solana' ? ADDRESS_SOLANA : ADDRESS}
+                  {network === Networks.Solana ? ADDRESS_SOLANA : ADDRESS}
                   <span className={styles.pl05} onClick={e => e?.stopPropagation?.()}>
-                    <Address account={network === 'solana' ? ADDRESS_SOLANA : ADDRESS} name=" " />
+                    <Address
+                      account={network === Networks.Solana ? ADDRESS_SOLANA : ADDRESS}
+                      name=" "
+                    />
                   </span>
                 </Text>
               </div>
@@ -352,7 +356,7 @@ export const Wallet = () => {
             title={
               <Row justify="space-between" align="center" wrap="wrap">
                 <div className={styles.name}>💰 Обмін:</div>
-                {network === 'polyhon' && (
+                {network === Networks.Polygon && (
                   <div>
                     <Row justify="flex-end" align="center" css={{gap: '0.1rem'}}>
                       <Button
@@ -391,7 +395,7 @@ export const Wallet = () => {
           >
             <Swap {...{balance, gas: matic, network}} />
           </Collapse>
-          {network === 'polygon' ? (
+          {network === Networks.Polygon ? (
             <>
               <Collapse
                 id="jar"

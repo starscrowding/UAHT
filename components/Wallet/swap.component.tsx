@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import {Row, Button} from '@nextui-org/react';
 import {
+  Networks,
   ADDRESS,
   POLYGON_NETWORK,
   USDT_ADDRESS,
@@ -33,7 +34,7 @@ export const Swap = ({balance, gas, network}: any) => {
         >
           📢
         </Button>
-        {network === 'polygon' ? (
+        {network === Networks.Polygon ? (
           <>
             <Button
               className={styles.button}

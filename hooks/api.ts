@@ -25,6 +25,12 @@ export const USDC_SOLANA = 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v';
 export const JAR = '0x579B733576c607ab08909F4f8Dc3b274C721aAba';
 export const JAR_CONTRACT = '0xC19a0265B862480048474E8F96861B68587aC1Fa';
 export const JAR_SLOTS = `${BASE_COM}/offers/0xD0920a91B0d382C1B0e83DB36178f808AF881121`;
+
+export enum Networks {
+  Polygon = 'polygon',
+  Solana = 'solana',
+}
+
 export const ENDPOINT = {
   token: {
     set: '/api/token/set',

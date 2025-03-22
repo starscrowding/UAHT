@@ -9,7 +9,15 @@ import {BiTransferAlt} from 'react-icons/bi';
 import {uahtABI} from '@uaht/sdk';
 import {Address as AddressType} from 'viem';
 import {useConnector} from '@space/components/Wallet';
-import {ADDRESS, BASE, BASE_COM, USDT_ADDRESS, CONTRACT, ADDRESS_SOLANA} from '@space/hooks/api';
+import {
+  Networks,
+  ADDRESS,
+  BASE,
+  BASE_COM,
+  USDT_ADDRESS,
+  CONTRACT,
+  ADDRESS_SOLANA,
+} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
 import {QRCode} from './qr.component';
 import {useAddToken} from './hooks';
@@ -219,7 +227,7 @@ export const Token = ({network}: any) => {
 
   return (
     <div>
-      {network === 'polygon' ? (
+      {network === Networks.Polygon ? (
         <>
           <Row className={styles.row} justify="flex-start" align="center" wrap="wrap">
             {MM.ethereum ? (

@@ -344,7 +344,7 @@ export const Wallet = () => {
               </div>
             }
           >
-            <Token />
+            <Token {...{network}} />
           </Collapse>
           <Collapse
             id="swap"
@@ -352,28 +352,30 @@ export const Wallet = () => {
             title={
               <Row justify="space-between" align="center" wrap="wrap">
                 <div className={styles.name}>💰 Обмін:</div>
-                <div>
-                  <Row justify="flex-end" align="center" css={{gap: '0.1rem'}}>
-                    <Button
-                      size="sm"
-                      auto
-                      css={{color: 'white', mr: '1rem'}}
-                      bordered
-                      color="success"
-                      title="UAHT Трейдинг"
-                      onClick={() => {
-                        window.open(`/trade`, '_blank');
-                      }}
-                    >
-                      📊 Трейд
-                    </Button>
-                  </Row>
-                </div>
+                {network === 'polyhon' && (
+                  <div>
+                    <Row justify="flex-end" align="center" css={{gap: '0.1rem'}}>
+                      <Button
+                        size="sm"
+                        auto
+                        css={{color: 'white', mr: '1rem'}}
+                        bordered
+                        color="success"
+                        title="UAHT Трейдинг"
+                        onClick={() => {
+                          window.open(`/trade`, '_blank');
+                        }}
+                      >
+                        📊 Трейд
+                      </Button>
+                    </Row>
+                  </div>
+                )}
               </Row>
             }
             subtitle={
               <Row className={styles.address}>
-                {['POL', 'USDT', 'USDC', 'ETH', 'BTC'].map(pair => (
+                {['POL', 'SOL', 'USDT', 'USDC', 'ETH', 'BTC'].map(pair => (
                   <Text
                     key={pair}
                     className={styles.pl05}
@@ -387,158 +389,162 @@ export const Wallet = () => {
               </Row>
             }
           >
-            <Swap {...{balance, gas: matic}} />
+            <Swap {...{balance, gas: matic, network}} />
           </Collapse>
-          <Collapse
-            id="jar"
-            expanded={hash.startsWith('jar')}
-            title={
-              <Row justify="space-between" align="center" wrap="wrap">
-                <div>
-                  🫙{' '}
-                  <Badge
-                    placement="top-right"
-                    size="xs"
-                    content="UAHT"
-                    variant="flat"
-                    color="success"
-                    verticalOffset="-21%"
-                  >
-                    Банка
-                  </Badge>
-                  :{' '}
-                  <Button.Group size="sm" onClick={e => e?.stopPropagation?.()}>
-                    <Button
-                      css={{background: jarAsset === 'USDC' ? '$primary' : '$gray300'}}
-                      onClick={() => setJarAsset('USDC')}
-                    >
-                      USDC
-                    </Button>
-                    <Button
-                      css={{background: jarAsset === 'USDT' ? '$primary' : '$gray300'}}
-                      onClick={() => setJarAsset('USDT')}
-                    >
-                      USDT
-                    </Button>
-                  </Button.Group>
-                </div>
-                <div>
-                  <Row justify="flex-end" align="center">
-                    <Button
-                      bordered
-                      color="gradient"
-                      size="sm"
-                      auto
-                      css={{color: 'white', mr: '1rem'}}
-                      title="Позиції"
-                      onClick={() => {
-                        window.open(
-                          `https://app.aave.com/reserve-overview/?underlyingAsset=${
-                            jarAsset === 'USDC' ? USDC_ADDRESS : USDT_ADDRESS
-                          }&marketName=proto_polygon_v3`,
-                          '_blank'
-                        );
+          {network === 'polygon' ? (
+            <>
+              <Collapse
+                id="jar"
+                expanded={hash.startsWith('jar')}
+                title={
+                  <Row justify="space-between" align="center" wrap="wrap">
+                    <div>
+                      🫙{' '}
+                      <Badge
+                        placement="top-right"
+                        size="xs"
+                        content="UAHT"
+                        variant="flat"
+                        color="success"
+                        verticalOffset="-21%"
+                      >
+                        Банка
+                      </Badge>
+                      :{' '}
+                      <Button.Group size="sm" onClick={e => e?.stopPropagation?.()}>
+                        <Button
+                          css={{background: jarAsset === 'USDC' ? '$primary' : '$gray300'}}
+                          onClick={() => setJarAsset('USDC')}
+                        >
+                          USDC
+                        </Button>
+                        <Button
+                          css={{background: jarAsset === 'USDT' ? '$primary' : '$gray300'}}
+                          onClick={() => setJarAsset('USDT')}
+                        >
+                          USDT
+                        </Button>
+                      </Button.Group>
+                    </div>
+                    <div>
+                      <Row justify="flex-end" align="center">
+                        <Button
+                          bordered
+                          color="gradient"
+                          size="sm"
+                          auto
+                          css={{color: 'white', mr: '1rem'}}
+                          title="Позиції"
+                          onClick={() => {
+                            window.open(
+                              `https://app.aave.com/reserve-overview/?underlyingAsset=${
+                                jarAsset === 'USDC' ? USDC_ADDRESS : USDT_ADDRESS
+                              }&marketName=proto_polygon_v3`,
+                              '_blank'
+                            );
+                          }}
+                        >
+                          AAVE
+                        </Button>
+                      </Row>
+                    </div>
+                  </Row>
+                }
+                subtitle={
+                  JAR_CONTRACT ? (
+                    <Row className={styles.address}>
+                      <Text
+                        css={{
+                          textGradient: '45deg, white 10%, $blue600 90%',
+                          '@smMax': {
+                            display: 'none',
+                          },
+                        }}
+                      >
+                        {JAR_CONTRACT}
+                      </Text>
+                      <Text
+                        css={{
+                          textGradient: '45deg, white 10%, $blue600 90%',
+                          '@smMin': {
+                            display: 'none',
+                          },
+                        }}
+                      >
+                        <Address account={JAR_CONTRACT} />
+                      </Text>
+                      <Info
+                        className={classNames(styles.pl05)}
+                        link={`https://polygonscan.com/address/${JAR_CONTRACT}`}
+                        icon="↗"
+                      />
+                    </Row>
+                  ) : null
+                }
+              >
+                {JAR_CONTRACT ? (
+                  <Jar jarAsset={jarAsset} />
+                ) : (
+                  <Text i color="grey">
+                    немає відкритих позицій
+                  </Text>
+                )}
+              </Collapse>
+              <Collapse
+                id="dao"
+                css={{borderBottom: 0}}
+                expanded={hash.startsWith('dao')}
+                title={
+                  <Row justify="space-between" align="center" wrap="wrap">
+                    <div className={styles.name}>✨ DAO:</div>
+                    <div>
+                      <Row justify="flex-end" align="center">
+                        <Info
+                          className={classNames(styles.partner, styles.pr1)}
+                          icon={
+                            <Row align="center">
+                              <IoIosPeople size={18} />
+                              &nbsp;
+                              <Text small color="grey">
+                                спільнота
+                              </Text>
+                            </Row>
+                          }
+                          text={
+                            <>
+                              З приводу партнерства 🤝 звертайся до спільноти{' '}
+                              <a href={DAO} target="_blank" rel="noreferrer">
+                                @uaht_group
+                              </a>
+                            </>
+                          }
+                        />
+                      </Row>
+                    </div>
+                  </Row>
+                }
+                subtitle={
+                  <Row className={styles.address}>
+                    <Text
+                      css={{
+                        textGradient: '45deg, grey 10%, white 90%',
                       }}
                     >
-                      AAVE
-                    </Button>
-                  </Row>
-                </div>
-              </Row>
-            }
-            subtitle={
-              JAR_CONTRACT ? (
-                <Row className={styles.address}>
-                  <Text
-                    css={{
-                      textGradient: '45deg, white 10%, $blue600 90%',
-                      '@smMax': {
-                        display: 'none',
-                      },
-                    }}
-                  >
-                    {JAR_CONTRACT}
-                  </Text>
-                  <Text
-                    css={{
-                      textGradient: '45deg, white 10%, $blue600 90%',
-                      '@smMin': {
-                        display: 'none',
-                      },
-                    }}
-                  >
-                    <Address account={JAR_CONTRACT} />
-                  </Text>
-                  <Info
-                    className={classNames(styles.pl05)}
-                    link={`https://polygonscan.com/address/${JAR_CONTRACT}`}
-                    icon="↗"
-                  />
-                </Row>
-              ) : null
-            }
-          >
-            {JAR_CONTRACT ? (
-              <Jar jarAsset={jarAsset} />
-            ) : (
-              <Text i color="grey">
-                немає відкритих позицій
-              </Text>
-            )}
-          </Collapse>
-          <Collapse
-            id="dao"
-            css={{borderBottom: 0}}
-            expanded={hash.startsWith('dao')}
-            title={
-              <Row justify="space-between" align="center" wrap="wrap">
-                <div className={styles.name}>✨ DAO:</div>
-                <div>
-                  <Row justify="flex-end" align="center">
+                      {DAO_ADDRESS}
+                    </Text>
                     <Info
-                      className={classNames(styles.partner, styles.pr1)}
-                      icon={
-                        <Row align="center">
-                          <IoIosPeople size={18} />
-                          &nbsp;
-                          <Text small color="grey">
-                            спільнота
-                          </Text>
-                        </Row>
-                      }
-                      text={
-                        <>
-                          З приводу партнерства 🤝 звертайся до спільноти{' '}
-                          <a href={DAO} target="_blank" rel="noreferrer">
-                            @uaht_group
-                          </a>
-                        </>
-                      }
+                      className={classNames(styles.pl05)}
+                      link={`https://polygonscan.com/address/${DAO_ADDRESS}#readContract`}
+                      icon="↗"
                     />
                   </Row>
-                </div>
-              </Row>
-            }
-            subtitle={
-              <Row className={styles.address}>
-                <Text
-                  css={{
-                    textGradient: '45deg, grey 10%, white 90%',
-                  }}
-                >
-                  {DAO_ADDRESS}
-                </Text>
-                <Info
-                  className={classNames(styles.pl05)}
-                  link={`https://polygonscan.com/address/${DAO_ADDRESS}#readContract`}
-                  icon="↗"
-                />
-              </Row>
-            }
-          >
-            <Dao config={config} />
-          </Collapse>
-          <Emission />
+                }
+              >
+                <Dao config={config} />
+              </Collapse>
+              <Emission />
+            </>
+          ) : null}
         </Collapse.Group>
         <Actions />
       </Card>

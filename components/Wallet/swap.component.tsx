@@ -1,11 +1,17 @@
 import {useState} from 'react';
 import {Row, Button} from '@nextui-org/react';
-import {ADDRESS, POLYGON_NETWORK, USDT_ADDRESS} from '@space/hooks/api';
+import {
+  ADDRESS,
+  POLYGON_NETWORK,
+  USDT_ADDRESS,
+  ADDRESS_SOLANA,
+  USDC_SOLANA,
+} from '@space/hooks/api';
 import {TbArrowsRightLeft} from 'react-icons/tb';
 import {P2P} from './p2p.component';
 import styles from './wallet.module.scss';
 
-export const Swap = ({balance, gas}: any) => {
+export const Swap = ({balance, gas, network}: any) => {
   const [act, setAct] = useState('');
 
   return (
@@ -27,99 +33,165 @@ export const Swap = ({balance, gas}: any) => {
         >
           📢
         </Button>
-        <Button
-          className={styles.button}
-          size="sm"
-          auto
-          flat
-          onClick={() => {
-            window.open(
-              `https://swap.defillama.com/?tab=swap&chain=polygon&from=${USDT_ADDRESS}&to=${ADDRESS}`,
-              '_blank'
-            );
-          }}
-          iconRight="🦙"
-        >
-          Агрегатор
-        </Button>
-        <Button
-          className={styles.button}
-          size="sm"
-          auto
-          onClick={() => {
-            window.open(
-              `https://app.1inch.io/#/${POLYGON_NETWORK}/advanced/limit-order/${USDT_ADDRESS}/${ADDRESS}`,
-              '_blank'
-            );
-          }}
-        >
-          1inch
-        </Button>
-        <Button
-          className={styles.button}
-          size="sm"
-          auto
-          onClick={() => {
-            window.open(
-              `https://www.okx.com/ua/web3/dex-swap#inputChain=${POLYGON_NETWORK}&inputCurrency=${USDT_ADDRESS}&outputChain=${POLYGON_NETWORK}&outputCurrency=${ADDRESS}`,
-              '_blank'
-            );
-          }}
-        >
-          OKX
-        </Button>
-        <Button
-          className={styles.button}
-          size="sm"
-          auto
-          onClick={() => {
-            window.open(`https://richamster.com/trade/POL_UAHT/`, '_blank');
-          }}
-        >
-          Richamster
-        </Button>
-        <Button
-          className={styles.button}
-          size="sm"
-          auto
-          onClick={() => {
-            window.open(`https://www.occe.io/exchange/usdt_uaht`, '_blank');
-          }}
-        >
-          OCCE
-        </Button>
-        <Button
-          className={styles.button}
-          size="sm"
-          color={act === 'uniswap' ? 'gradient' : undefined}
-          auto
-          onClick={() => {
-            window.open(
-              `https://app.uniswap.org/swap?exactAmount=1&exactField=input&inputCurrency=${USDT_ADDRESS}&outputCurrency=${ADDRESS}&chain=polygon&lng=uk-UA`,
-              '_blank'
-            );
-          }}
-        >
-          Uniswap
-        </Button>
-        <a
-          title="UahtSwap"
-          style={{marginTop: '0.3rem'}}
-          onClick={() => {
-            window.open(`/swap/index.html`, '_blank');
-          }}
-        >
-          <TbArrowsRightLeft />
-        </a>
-        <a
-          title="jUAHT"
-          style={{paddingLeft: '0.3rem'}}
-          onClick={() => {
-            window.open(`/jam`, '_blank');
-          }}
-        >
-          🍯
-        </a>
+        {network === 'polygon' ? (
+          <>
+            <Button
+              className={styles.button}
+              size="sm"
+              auto
+              flat
+              onClick={() => {
+                window.open(
+                  `https://swap.defillama.com/?tab=swap&chain=polygon&from=${USDT_ADDRESS}&to=${ADDRESS}`,
+                  '_blank'
+                );
+              }}
+              iconRight="🦙"
+            >
+              Агрегатор
+            </Button>
+            <Button
+              className={styles.button}
+              size="sm"
+              auto
+              onClick={() => {
+                window.open(
+                  `https://app.1inch.io/#/${POLYGON_NETWORK}/advanced/limit-order/${USDT_ADDRESS}/${ADDRESS}`,
+                  '_blank'
+                );
+              }}
+            >
+              1inch
+            </Button>
+            <Button
+              className={styles.button}
+              size="sm"
+              auto
+              onClick={() => {
+                window.open(
+                  `https://www.okx.com/ua/web3/dex-swap#inputChain=${POLYGON_NETWORK}&inputCurrency=${USDT_ADDRESS}&outputChain=${POLYGON_NETWORK}&outputCurrency=${ADDRESS}`,
+                  '_blank'
+                );
+              }}
+            >
+              OKX
+            </Button>
+            <Button
+              className={styles.button}
+              size="sm"
+              auto
+              onClick={() => {
+                window.open(`https://richamster.com/trade/POL_UAHT/`, '_blank');
+              }}
+            >
+              Richamster
+            </Button>
+            <Button
+              className={styles.button}
+              size="sm"
+              auto
+              onClick={() => {
+                window.open(`https://www.occe.io/exchange/usdt_uaht`, '_blank');
+              }}
+            >
+              OCCE
+            </Button>
+            <Button
+              className={styles.button}
+              size="sm"
+              color={act === 'uniswap' ? 'gradient' : undefined}
+              auto
+              onClick={() => {
+                window.open(
+                  `https://app.uniswap.org/swap?exactAmount=1&exactField=input&inputCurrency=${USDT_ADDRESS}&outputCurrency=${ADDRESS}&chain=polygon&lng=uk-UA`,
+                  '_blank'
+                );
+              }}
+            >
+              Uniswap
+            </Button>
+            <a
+              title="UahtSwap"
+              style={{marginTop: '0.3rem'}}
+              onClick={() => {
+                window.open(`/swap/index.html`, '_blank');
+              }}
+            >
+              <TbArrowsRightLeft />
+            </a>
+            <a
+              title="jUAHT"
+              style={{paddingLeft: '0.3rem'}}
+              onClick={() => {
+                window.open(`/jam`, '_blank');
+              }}
+            >
+              🍯
+            </a>
+          </>
+        ) : (
+          <>
+            <Button
+              className={styles.button}
+              size="sm"
+              auto
+              onClick={() => {
+                window.open(`https://jup.ag/swap/USDC-${ADDRESS_SOLANA}`, '_blank');
+              }}
+            >
+              Jupiter
+            </Button>
+            <Button
+              className={styles.button}
+              size="sm"
+              auto
+              onClick={() => {
+                window.open(`https://www.occe.io/exchange/usdt_uaht`, '_blank');
+              }}
+            >
+              OCCE
+            </Button>
+            <Button
+              className={styles.button}
+              size="sm"
+              auto
+              onClick={() => {
+                window.open(
+                  `https://raydium.io/swap/?inputMint=${USDC_SOLANA}&outputMint=${ADDRESS_SOLANA}`,
+                  '_blank'
+                );
+              }}
+            >
+              Raydium
+            </Button>
+            <Button
+              className={styles.button}
+              size="sm"
+              auto
+              onClick={() => {
+                window.open(
+                  `https://www.orca.so/?tokenIn=${USDC_SOLANA}&tokenOut=${ADDRESS_SOLANA}`,
+                  '_blank'
+                );
+              }}
+            >
+              Orca
+            </Button>
+            <Button
+              className={styles.button}
+              size="sm"
+              auto
+              onClick={() => {
+                window.open(
+                  `https://www.dexlab.space/swap?pay=${USDC_SOLANA}&receive=${ADDRESS_SOLANA}`,
+                  '_blank'
+                );
+              }}
+            >
+              Dexlab
+            </Button>
+          </>
+        )}
       </Row>
       {act === 'uniswap' && <iframe className={styles.swap} src="/swap/index.html" />}
       {act === 'p2p' && <P2P {...{balance, gas}} />}

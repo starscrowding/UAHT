@@ -9,7 +9,7 @@ import {BiTransferAlt} from 'react-icons/bi';
 import {uahtABI} from '@uaht/sdk';
 import {Address as AddressType} from 'viem';
 import {useConnector} from '@space/components/Wallet';
-import {ADDRESS, BASE, BASE_COM, USDT_ADDRESS, CONTRACT} from '@space/hooks/api';
+import {ADDRESS, BASE, BASE_COM, USDT_ADDRESS, CONTRACT, ADDRESS_SOLANA} from '@space/hooks/api';
 import {Info} from '@space/components/Info';
 import {QRCode} from './qr.component';
 import {useAddToken} from './hooks';
@@ -212,101 +212,155 @@ export const StakingModal = ({open}: any) => {
   );
 };
 
-export const Token = () => {
+export const Token = ({network}: any) => {
   const MM = useConnector();
   const router = useRouter();
   const addToken = useAddToken({MM});
 
   return (
     <div>
-      <Row className={styles.row} justify="flex-start" align="center" wrap="wrap">
-        {MM.ethereum ? (
+      {network === 'polygon' ? (
+        <>
+          <Row className={styles.row} justify="flex-start" align="center" wrap="wrap">
+            {MM.ethereum ? (
+              <Button
+                className={styles.button}
+                size="sm"
+                auto
+                flat
+                title="Додати в Metamask"
+                onClick={() => addToken()}
+              >
+                <NextImage src="/metamask.svg" width="16" height="16" alt="Metamask" />+
+              </Button>
+            ) : null}
+            <Button
+              className={styles.button}
+              size="sm"
+              auto
+              flat
+              title="Створити QR код"
+              onClick={() => {
+                setTimeout(() => router.push('/?action=qr'), 123);
+              }}
+            >
+              <MdQrCode size="18" />
+            </Button>
+            <Button
+              className={styles.button}
+              size="sm"
+              color="gradient"
+              auto
+              title="Провайдер ліквідності"
+              onClick={() => {
+                setTimeout(() => router.push('/?action=staking'), 123);
+              }}
+            >
+              Дохід 🌱
+            </Button>
+            <Info
+              className={styles.partner}
+              text={
+                <>
+                  Можливість зрощувати 🌱 активи через{' '}
+                  <a
+                    href="https://academy.binance.com/uk/articles/what-are-liquidity-pools-in-defi"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    пули ліквідності
+                  </a>{' '}
+                  🐳
+                </>
+              }
+            />
+            <Button
+              className={styles.button}
+              css={{
+                color: 'gold',
+                fontWeight: 'bold',
+                background: 'transparent',
+                borderBottom: '1px solid',
+              }}
+              size="xs"
+              auto
+              flat
+              title="Хедж UAHT"
+              onClick={() => {
+                window.open(
+                  'https://www.geckoterminal.com/polygon_pos/pools/0x52b51b5d21e3262908a5404643cc474cabc3a9b9',
+                  '_blank'
+                );
+              }}
+            >
+              xUAHT
+            </Button>
+          </Row>
+          <Row
+            className={styles.row}
+            justify="flex-start"
+            align="center"
+            wrap="wrap"
+            css={{gap: 4}}
+          >
+            <Button
+              size="xs"
+              auto
+              flat
+              onClick={() => {
+                window.open(`${CONTRACT}/?a=${MM.account}`, '_blank');
+              }}
+              icon={<BiTransferAlt />}
+            >
+              транзакції
+            </Button>
+          </Row>
+        </>
+      ) : (
+        <Row className={styles.row} justify="flex-start" align="center" wrap="wrap">
+          <Text className="proactive" color="gray">
+            🌉 міст:
+          </Text>{' '}
           <Button
             className={styles.button}
             size="sm"
             auto
-            flat
-            title="Додати в Metamask"
-            onClick={() => addToken()}
+            onClick={() => {
+              window.open('https://www.occe.io/balance?coin=UAHT', '_blank');
+            }}
           >
-            <NextImage src="/metamask.svg" width="16" height="16" alt="Metamask" />+
+            OCCE
           </Button>
-        ) : null}
-        <Button
-          className={styles.button}
-          size="sm"
-          auto
-          flat
-          title="Створити QR код"
-          onClick={() => {
-            setTimeout(() => router.push('/?action=qr'), 123);
-          }}
-        >
-          <MdQrCode size="18" />
-        </Button>
-        <Button
-          className={styles.button}
-          size="sm"
-          color="gradient"
-          auto
-          title="Провайдер ліквідності"
-          onClick={() => {
-            setTimeout(() => router.push('/?action=staking'), 123);
-          }}
-        >
-          Стейкінг 🌱
-        </Button>
-        <Info
-          className={styles.partner}
-          text={
-            <>
-              Можливість зрощувати 🌱 активи через{' '}
-              <a
-                href="https://academy.binance.com/uk/articles/what-are-liquidity-pools-in-defi"
-                target="_blank"
-                rel="noreferrer"
-              >
-                пули ліквідності
-              </a>{' '}
-              🐳
-            </>
-          }
-        />
-        <Button
-          className={styles.button}
-          css={{
-            color: 'gold',
-            fontWeight: 'bold',
-            background: 'transparent',
-            borderBottom: '1px solid',
-          }}
-          size="xs"
-          auto
-          flat
-          title="Хедж UAHT"
-          onClick={() => {
-            window.open(
-              'https://www.geckoterminal.com/polygon_pos/pools/0x52b51b5d21e3262908a5404643cc474cabc3a9b9',
-              '_blank'
-            );
-          }}
-        >
-          xUAHT
-        </Button>
-      </Row>
-      <Row className={styles.row} justify="flex-start" align="center" wrap="wrap" css={{gap: 4}}>
-        <Button
-          size="xs"
-          auto
-          flat
-          onClick={() => {
-            window.open(`${CONTRACT}/?a=${MM.account}`, '_blank');
-          }}
-          icon={<BiTransferAlt />}
-        >
-          транзакції
-        </Button>
-      </Row>
+          <Button
+            className={styles.button}
+            size="sm"
+            auto
+            onClick={() => {
+              window.open(
+                `https://jumper.exchange/?fromChain=137&toChain=1151111081099710&toToken=${ADDRESS_SOLANA}`,
+                '_blank'
+              );
+            }}
+          >
+            Jumper
+          </Button>
+          <Button
+            size="sm"
+            color="gradient"
+            auto
+            title="Провайдер ліквідності"
+            onClick={() => {
+              window.open(`https://raydium.io/liquidity-pools/?token=${ADDRESS_SOLANA}`, '_blank');
+            }}
+            css={{
+              marginLeft: '1rem',
+              '@smMin': {marginLeft: '5rem'},
+            }}
+          >
+            Дохід 🌱
+          </Button>
+        </Row>
+      )}
     </div>
   );
 };

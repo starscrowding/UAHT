@@ -2,6 +2,10 @@
   "name": "UAHT",
   "hashtags": [
     {
+      "name": "aave",
+      "address": "https://aave.com/"
+    },
+    {
       "name": "opensea",
       "address": "https://opensea.io/"
     },
@@ -62,20 +66,12 @@
       "address": "https://richamster.com/faq/"
     },
     {
-      "name": "geopay",
-      "address": "https://geo-pay.net/lp/p2p-trade"
+      "name": "trustee",
+      "address": "https://trusteeglobal.com/"
     },
     {
       "name": "binance",
       "address": "https://www.binance.com/uk-UA/gift-card"
-    },
-    {
-      "name": "kuna",
-      "address": "https://kuna.io/kuna-code"
-    },
-    {
-      "name": "qmall",
-      "address": "https://qmall.io/ua/isend"
     },
     {
       "name": "whitebit",

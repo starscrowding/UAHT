@@ -1,13 +1,13 @@
-import {useCallback, useState, useMemo, useEffect} from 'react';
+import { useCallback, useState, useMemo, useEffect } from 'react';
 import classNames from 'classnames';
-import {Card, Row, Text, Button, Collapse, Container, Spacer, Badge} from '@nextui-org/react';
+import { Card, Row, Text, Button, Collapse, Container, Spacer, Badge } from '@nextui-org/react';
 import Image from 'next/image';
-import {useRouter} from 'next/router';
-import {useConnector, Switch} from '@space/components/Wallet';
-import {GoVerified, GoChecklist} from 'react-icons/go';
-import {IoIosPeople} from 'react-icons/io';
-import {BsDatabaseFillAdd, BsDatabaseFillDash} from 'react-icons/bs';
-import {MdShoppingCartCheckout} from 'react-icons/md';
+import { useRouter } from 'next/router';
+import { useConnector, Switch } from '@space/components/Wallet';
+import { GoVerified, GoChecklist } from 'react-icons/go';
+import { IoIosPeople } from 'react-icons/io';
+import { BsDatabaseFillAdd, BsDatabaseFillDash } from 'react-icons/bs';
+import { MdShoppingCartCheckout } from 'react-icons/md';
 import {
   Networks,
   ADDRESS,
@@ -22,20 +22,20 @@ import {
   USDC_ADDRESS,
   USDT_ADDRESS,
 } from '@space/hooks/api';
-import {Info} from '@space/components/Info';
-import {Card as InfoCard} from '@space/components/Card';
-import {useDebounce} from '@space/hooks/helpers';
-import {QRCode} from './qr.component';
-import {MINIMUM} from './constants';
-import {useInit, useSign, useValidateCode} from './hooks';
-import {getStamp, createCode, sectionConfig} from './helpers';
-import {VerificationModal, Address} from './common';
-import {Swap} from './swap.component';
-import {Token} from './token.component';
-import {Jar} from './jar.component';
-import {Emission} from './emission.component';
-import {Dao} from './dao.component';
-import {Actions} from './actions.component';
+import { Info } from '@space/components/Info';
+import { Card as InfoCard } from '@space/components/Card';
+import { useDebounce } from '@space/hooks/helpers';
+import { QRCode } from './qr.component';
+import { MINIMUM } from './constants';
+import { useInit, useSign, useValidateCode } from './hooks';
+import { getStamp, createCode, sectionConfig } from './helpers';
+import { VerificationModal, Address } from './common';
+import { Swap } from './swap.component';
+import { Token } from './token.component';
+import { Jar } from './jar.component';
+import { Emission } from './emission.component';
+import { Dao } from './dao.component';
+import { Actions } from './actions.component';
 import styles from './wallet.module.scss';
 
 export const Wallet = () => {
@@ -60,8 +60,8 @@ export const Wallet = () => {
   const [network, setNetwork] = useState(Networks.Polygon);
   const [jarAsset, setJarAsset] = useState('USDC');
 
-  const sign = useSign({MM, setSignature});
-  const validateCode = useValidateCode({resource, setCode});
+  const sign = useSign({ MM, setSignature });
+  const validateCode = useValidateCode({ resource, setCode });
 
   const onAmountChange = useCallback(
     (value: string | number) => {
@@ -74,7 +74,7 @@ export const Wallet = () => {
     setSignature('');
   }, [setSignature]);
 
-  useInit({resource, setCode, setBalance, setMatic, setReserve, setVerified, MM});
+  useInit({ resource, setCode, setBalance, setMatic, setReserve, setVerified, MM });
 
   useEffect(() => {
     try {
@@ -84,9 +84,9 @@ export const Wallet = () => {
         params[0] && setHash(params[0]);
         params[0] &&
           setTimeout(() => {
-            document?.getElementById(params[0])?.scrollIntoView({behavior: 'smooth'});
+            document?.getElementById(params[0])?.scrollIntoView({ behavior: 'smooth' });
           }, 1234);
-        params[1] && setConfig(sectionConfig({body: params[1]}));
+        params[1] && setConfig(sectionConfig({ body: params[1] }));
         window.location.hash = '';
       }
     } catch (e) {
@@ -111,7 +111,7 @@ export const Wallet = () => {
     <Container className={styles.container}>
       <InfoCard
         className={styles.card}
-        {...{flipped, setFlipped}}
+        {...{ flipped, setFlipped }}
         info={
           <div>
             <div className={styles.name}>
@@ -164,7 +164,7 @@ export const Wallet = () => {
                   }}
                 />
               )}
-              <VerificationModal {...{vModal, setVModal}} />
+              <VerificationModal {...{ vModal, setVModal }} />
             </Row>
           </div>
         }
@@ -218,7 +218,7 @@ export const Wallet = () => {
                 auto
                 flat
                 color="success"
-                css={{color: 'white'}}
+                css={{ color: 'white' }}
                 icon={<Text size={21}>💸</Text>}
                 onClick={() => window.open(`${BASE_COM}/?q=кешбек`, '_blank')}
               >
@@ -228,7 +228,7 @@ export const Wallet = () => {
               <Button
                 auto
                 flat
-                css={{color: 'white'}}
+                css={{ color: 'white' }}
                 icon={<Text size={21}>🤖</Text>}
                 onClick={() => window.open(`${TELEGRAM}`, '_blank')}
               >
@@ -241,7 +241,7 @@ export const Wallet = () => {
                 auto
                 flat
                 color="success"
-                css={{color: 'white'}}
+                css={{ color: 'white' }}
                 icon={<BsDatabaseFillAdd color="green" size={24} />}
                 onClick={() => window.open(`${BASE_COM}/vouchers?tab=add`, '_blank')}
               >
@@ -251,7 +251,7 @@ export const Wallet = () => {
               <Button
                 auto
                 flat
-                css={{color: 'white'}}
+                css={{ color: 'white' }}
                 icon={<BsDatabaseFillDash color="red" size={24} />}
                 onClick={() => router.push(`/?action=transfer`)}
               >
@@ -260,7 +260,7 @@ export const Wallet = () => {
               <a
                 title="Маркетплейс"
                 className={styles.ml05}
-                style={{color: 'white'}}
+                style={{ color: 'white' }}
                 href={BASE_COM}
                 target="_blank"
                 rel="noreferrer"
@@ -279,13 +279,13 @@ export const Wallet = () => {
                   <Image src="/favicon.ico" width="16" height="16" alt="токен" /> Токен:{' '}
                   <Button.Group size="sm" onClick={e => e?.stopPropagation?.()}>
                     <Button
-                      css={{background: network === Networks.Polygon ? '$secondary' : '$gray300'}}
+                      css={{ background: network === Networks.Polygon ? '$secondary' : '$gray300' }}
                       onClick={() => setNetwork(Networks.Polygon)}
                     >
                       Polygon
                     </Button>
                     <Button
-                      css={{background: network === Networks.Solana ? '$secondary' : '$gray300'}}
+                      css={{ background: network === Networks.Solana ? '$secondary' : '$gray300' }}
                       onClick={() => setNetwork(Networks.Solana)}
                     >
                       Solana
@@ -348,7 +348,7 @@ export const Wallet = () => {
               </div>
             }
           >
-            <Token {...{network}} />
+            <Token {...{ network }} />
           </Collapse>
           <Collapse
             id="swap"
@@ -358,11 +358,11 @@ export const Wallet = () => {
                 <div className={styles.name}>💰 Обмін:</div>
                 {network === Networks.Polygon && (
                   <div>
-                    <Row justify="flex-end" align="center" css={{gap: '0.1rem'}}>
+                    <Row justify="flex-end" align="center" css={{ gap: '0.1rem' }}>
                       <Button
                         size="sm"
                         auto
-                        css={{color: 'white', mr: '1rem'}}
+                        css={{ color: 'white', mr: '1rem' }}
                         bordered
                         color="success"
                         title="UAHT Трейдинг"
@@ -393,12 +393,13 @@ export const Wallet = () => {
               </Row>
             }
           >
-            <Swap {...{balance, gas: matic, network}} />
+            <Swap {...{ balance, gas: matic, network }} />
           </Collapse>
           {network === Networks.Polygon ? (
-            <>
+            [
               <Collapse
                 id="jar"
+                key="jar"
                 expanded={hash.startsWith('jar')}
                 title={
                   <Row justify="space-between" align="center" wrap="wrap">
@@ -417,13 +418,13 @@ export const Wallet = () => {
                       :{' '}
                       <Button.Group size="sm" onClick={e => e?.stopPropagation?.()}>
                         <Button
-                          css={{background: jarAsset === 'USDC' ? '$primary' : '$gray300'}}
+                          css={{ background: jarAsset === 'USDC' ? '$primary' : '$gray300' }}
                           onClick={() => setJarAsset('USDC')}
                         >
                           USDC
                         </Button>
                         <Button
-                          css={{background: jarAsset === 'USDT' ? '$primary' : '$gray300'}}
+                          css={{ background: jarAsset === 'USDT' ? '$primary' : '$gray300' }}
                           onClick={() => setJarAsset('USDT')}
                         >
                           USDT
@@ -437,12 +438,11 @@ export const Wallet = () => {
                           color="gradient"
                           size="sm"
                           auto
-                          css={{color: 'white', mr: '1rem'}}
+                          css={{ color: 'white', mr: '1rem' }}
                           title="Позиції"
                           onClick={() => {
                             window.open(
-                              `https://app.aave.com/reserve-overview/?underlyingAsset=${
-                                jarAsset === 'USDC' ? USDC_ADDRESS : USDT_ADDRESS
+                              `https://app.aave.com/reserve-overview/?underlyingAsset=${jarAsset === 'USDC' ? USDC_ADDRESS : USDT_ADDRESS
                               }&marketName=proto_polygon_v3`,
                               '_blank'
                             );
@@ -493,10 +493,11 @@ export const Wallet = () => {
                     немає відкритих позицій
                   </Text>
                 )}
-              </Collapse>
+              </Collapse>,
               <Collapse
                 id="dao"
-                css={{borderBottom: 0}}
+                key="dao"
+                css={{ borderBottom: 0 }}
                 expanded={hash.startsWith('dao')}
                 title={
                   <Row justify="space-between" align="center" wrap="wrap">
@@ -545,9 +546,9 @@ export const Wallet = () => {
                 }
               >
                 <Dao config={config} />
-              </Collapse>
-              <Emission />
-            </>
+              </Collapse>,
+              <Emission key="io" />
+            ]
           ) : null}
         </Collapse.Group>
         <Actions />

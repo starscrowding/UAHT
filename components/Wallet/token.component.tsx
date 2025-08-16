@@ -296,7 +296,7 @@ export const Token = ({network}: any) => {
               title="Хедж UAHT"
               onClick={() => {
                 window.open(
-                  'https://www.geckoterminal.com/polygon_pos/pools/0x52b51b5d21e3262908a5404643cc474cabc3a9b9',
+                  'https://dexpaprika.com/polygon/pool/0x52b51b5d21e3262908a5404643cc474cabc3a9b9?inversed=1',
                   '_blank'
                 );
               }}

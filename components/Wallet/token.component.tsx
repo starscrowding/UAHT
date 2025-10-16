@@ -16,6 +16,7 @@ import {
   BASE_COM,
   USDT_ADDRESS,
   CONTRACT,
+  CONTRACT_SOLANA,
   ADDRESS_SOLANA,
 } from '@space/hooks/api';
 import { Info } from '@space/components/Info';
@@ -198,7 +199,9 @@ export const StakingModal = ({ open }: any) => {
             size="lg"
             color="gradient"
             icon="🦄"
-            href={`https://app.uniswap.org/add/${USDT_ADDRESS}/${ADDRESS}/3000?chain=polygon&lng=uk-UA`}
+            href={
+              `https://app.uniswap.org/positions/create/v3?currencyA=${ADDRESS}&currencyB=${USDT_ADDRESS}&chain=polygon&step=1&lng=uk-UA`
+            }
           >
             Uniswap
           </Button>
@@ -325,50 +328,72 @@ export const Token = ({ network }: any) => {
           </Row>
         </>
       ) : (
-        <Row className={styles.row} justify="flex-start" align="center" wrap="wrap">
-          <Text className="proactive" color="gray">
-            🌉 міст:
-          </Text>{' '}
-          <Button
-            className={styles.button}
-            size="sm"
-            auto
-            onClick={() => {
-              window.open('https://www.occe.io/balance?coin=UAHT', '_blank');
-            }}
+        <>
+          <Row className={styles.row} justify="flex-start" align="center" wrap="wrap">
+            <Text className="proactive" color="gray">
+              🌉 міст:
+            </Text>{' '}
+            <Button
+              className={styles.button}
+              size="sm"
+              auto
+              onClick={() => {
+                window.open('https://www.occe.io/balance?coin=UAHT', '_blank');
+              }}
+            >
+              OCCE
+            </Button>
+            <Button
+              className={styles.button}
+              size="sm"
+              auto
+              onClick={() => {
+                window.open(
+                  `https://jumper.exchange/?fromChain=137&toChain=1151111081099710&toToken=${ADDRESS_SOLANA}`,
+                  '_blank'
+                );
+              }}
+            >
+              Jumper
+            </Button>
+            <Button
+              size="sm"
+              color="gradient"
+              auto
+              title="Провайдер ліквідності"
+              onClick={() => {
+                window.open(`https://www.orca.so/pools?tokens=${ADDRESS_SOLANA}`, '_blank');
+              }}
+              css={{
+                marginLeft: '1rem',
+                '@smMin': { marginLeft: '5rem' },
+              }}
+            >
+              Дохід 🌱
+            </Button>
+          </Row>
+          <Row
+            className={styles.row}
+            justify="flex-start"
+            align="center"
+            wrap="wrap"
+            css={{ gap: 4 }}
           >
-            OCCE
-          </Button>
-          <Button
-            className={styles.button}
-            size="sm"
-            auto
-            onClick={() => {
-              window.open(
-                `https://jumper.exchange/?fromChain=137&toChain=1151111081099710&toToken=${ADDRESS_SOLANA}`,
-                '_blank'
-              );
-            }}
-          >
-            Jumper
-          </Button>
-          <Button
-            size="sm"
-            color="gradient"
-            auto
-            title="Провайдер ліквідності"
-            onClick={() => {
-              window.open(`https://www.orca.so/pools?tokens=${ADDRESS_SOLANA}`, '_blank');
-            }}
-            css={{
-              marginLeft: '1rem',
-              '@smMin': { marginLeft: '5rem' },
-            }}
-          >
-            Дохід 🌱
-          </Button>
-        </Row>
-      )}
-    </div>
+            <Button
+              size="xs"
+              auto
+              flat
+              onClick={() => {
+                window.open(`${CONTRACT_SOLANA}`, '_blank');
+              }}
+              icon={<BiTransferAlt />}
+            >
+              транзакції
+            </Button>
+          </Row>
+        </>
+      )
+      }
+    </div >
   );
 };

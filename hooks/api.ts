@@ -7,6 +7,7 @@ export const ADDRESS_SOLANA = '4B11WHT1TgVRiLb8KfJ3MbYBxxnRo9GyEWhm7uT1HdRp';
 export const DAO_ADDRESS = '0x08b491bc7848c6af42c3882794a93d70c04e5816';
 export const CHECKOUT_ADDRESS = '0x7a63F4943C8c5A815BF8eFFf801c058f951597e1';
 export const CONTRACT = `https://polygonscan.com/token/${ADDRESS}`;
+export const CONTRACT_SOLANA = `https://solscan.io/token/${ADDRESS_SOLANA}`;
 export const DAO_CONTRACT = `https://polygonscan.com/address/${DAO_ADDRESS}`;
 export const CODE = 'https://github.com/starscrowding/UAHT';
 export const TELEGRAM = 'https://t.me/uaht_bot';

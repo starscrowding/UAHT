@@ -1,14 +1,14 @@
-import {useCallback, useState, useEffect} from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import NextImage from 'next/image';
-import {useRouter} from 'next/router';
-import {toast} from 'react-toastify';
-import {Row, Button, Modal, Text, Input} from '@nextui-org/react';
-import {MdQrCode} from 'react-icons/md';
-import {FaDownload} from 'react-icons/fa';
-import {BiTransferAlt} from 'react-icons/bi';
-import {uahtABI} from '@uaht/sdk';
-import {Address as AddressType} from 'viem';
-import {useConnector} from '@space/components/Wallet';
+import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
+import { Row, Button, Modal, Text, Input } from '@nextui-org/react';
+import { MdQrCode } from 'react-icons/md';
+import { FaDownload } from 'react-icons/fa';
+import { BiTransferAlt } from 'react-icons/bi';
+import { uahtABI } from '@uaht/sdk';
+import { Address as AddressType } from 'viem';
+import { useConnector } from '@space/components/Wallet';
 import {
   Networks,
   ADDRESS,
@@ -18,14 +18,14 @@ import {
   CONTRACT,
   ADDRESS_SOLANA,
 } from '@space/hooks/api';
-import {Info} from '@space/components/Info';
-import {QRCode} from './qr.component';
-import {useAddToken} from './hooks';
-import {Address} from './common';
-import {sanitizeInput} from './helpers';
+import { Info } from '@space/components/Info';
+import { QRCode } from './qr.component';
+import { useAddToken } from './hooks';
+import { Address } from './common';
+import { sanitizeInput } from './helpers';
 import styles from './wallet.module.scss';
 
-export const TransferAmount = ({amount, setAmount, disabled, placeholder = 'UAHT'}: any) => {
+export const TransferAmount = ({ amount, setAmount, disabled, placeholder = 'UAHT' }: any) => {
   return (
     <>
       Сума:&nbsp;
@@ -48,7 +48,7 @@ export const TransferAmount = ({amount, setAmount, disabled, placeholder = 'UAHT
   );
 };
 
-export const QRModal = ({open}: any) => {
+export const QRModal = ({ open }: any) => {
   const MM = useConnector();
   const router = useRouter();
   const [amount, setAmount] = useState<number | string>();
@@ -134,7 +134,7 @@ export const QRModal = ({open}: any) => {
       </Modal.Header>
       <Modal.Body>
         <Row align="center" justify="space-between" className={styles.pb1}>
-          <TransferAmount {...{amount, setAmount}} />
+          <TransferAmount {...{ amount, setAmount }} />
           <Input
             size="xs"
             aria-label="slot"
@@ -150,7 +150,7 @@ export const QRModal = ({open}: any) => {
           align="center"
           justify="space-evenly"
           className={styles.pb1}
-          style={{minHeight: '272px'}}
+          style={{ minHeight: '272px' }}
         >
           <QRCode id="UAHT_QRCode" value={qr} title="UAHT" />
         </Row>
@@ -172,7 +172,7 @@ export const QRModal = ({open}: any) => {
   );
 };
 
-export const StakingModal = ({open}: any) => {
+export const StakingModal = ({ open }: any) => {
   const router = useRouter();
 
   return (
@@ -220,10 +220,10 @@ export const StakingModal = ({open}: any) => {
   );
 };
 
-export const Token = ({network}: any) => {
+export const Token = ({ network }: any) => {
   const MM = useConnector();
   const router = useRouter();
-  const addToken = useAddToken({MM});
+  const addToken = useAddToken({ MM });
 
   return (
     <div>
@@ -309,7 +309,7 @@ export const Token = ({network}: any) => {
             justify="flex-start"
             align="center"
             wrap="wrap"
-            css={{gap: 4}}
+            css={{ gap: 4 }}
           >
             <Button
               size="xs"
@@ -358,11 +358,11 @@ export const Token = ({network}: any) => {
             auto
             title="Провайдер ліквідності"
             onClick={() => {
-              window.open(`https://raydium.io/liquidity-pools/?token=${ADDRESS_SOLANA}`, '_blank');
+              window.open(`https://www.orca.so/pools?tokens=${ADDRESS_SOLANA}`, '_blank');
             }}
             css={{
               marginLeft: '1rem',
-              '@smMin': {marginLeft: '5rem'},
+              '@smMin': { marginLeft: '5rem' },
             }}
           >
             Дохід 🌱

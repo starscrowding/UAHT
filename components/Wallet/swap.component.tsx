@@ -1,5 +1,5 @@
-import {useState} from 'react';
-import {Row, Button} from '@nextui-org/react';
+import { useState } from 'react';
+import { Row, Button } from '@nextui-org/react';
 import {
   Networks,
   ADDRESS,
@@ -8,11 +8,11 @@ import {
   ADDRESS_SOLANA,
   USDC_SOLANA,
 } from '@space/hooks/api';
-import {TbArrowsRightLeft} from 'react-icons/tb';
-import {P2P} from './p2p.component';
+import { TbArrowsRightLeft } from 'react-icons/tb';
+import { P2P } from './p2p.component';
 import styles from './wallet.module.scss';
 
-export const Swap = ({balance, gas, network}: any) => {
+export const Swap = ({ balance, gas, network }: any) => {
   const [act, setAct] = useState('');
 
   return (
@@ -57,7 +57,7 @@ export const Swap = ({balance, gas, network}: any) => {
               auto
               onClick={() => {
                 window.open(
-                  `https://app.1inch.io/#/${POLYGON_NETWORK}/advanced/limit-order/${USDT_ADDRESS}/${ADDRESS}`,
+                  `https://app.1inch.io/advanced/limit?network=${POLYGON_NETWORK}&src=${USDT_ADDRESS}&dst=${ADDRESS}`,
                   '_blank'
                 );
               }}
@@ -113,7 +113,7 @@ export const Swap = ({balance, gas, network}: any) => {
             </Button>
             <a
               title="UahtSwap"
-              style={{marginTop: '0.3rem'}}
+              style={{ marginTop: '0.3rem' }}
               onClick={() => {
                 window.open(`/swap/index.html`, '_blank');
               }}
@@ -122,7 +122,7 @@ export const Swap = ({balance, gas, network}: any) => {
             </a>
             <a
               title="jUAHT"
-              style={{paddingLeft: '0.3rem'}}
+              style={{ paddingLeft: '0.3rem' }}
               onClick={() => {
                 window.open(`/jam`, '_blank');
               }}
@@ -137,7 +137,8 @@ export const Swap = ({balance, gas, network}: any) => {
               size="sm"
               auto
               onClick={() => {
-                window.open(`https://jup.ag/swap/USDC-${ADDRESS_SOLANA}`, '_blank');
+                window.open(
+                  `https://jup.ag/swap?sell=${USDC_SOLANA}&buy=${ADDRESS_SOLANA}`, '_blank');
               }}
             >
               Jupiter
@@ -184,7 +185,7 @@ export const Swap = ({balance, gas, network}: any) => {
               auto
               onClick={() => {
                 window.open(
-                  `https://www.dexlab.space/swap?pay=${USDC_SOLANA}&receive=${ADDRESS_SOLANA}`,
+                  `https://app.dexlab.space/swap?pay=${USDC_SOLANA}&receive=${ADDRESS_SOLANA}`,
                   '_blank'
                 );
               }}
@@ -195,7 +196,7 @@ export const Swap = ({balance, gas, network}: any) => {
         )}
       </Row>
       {act === 'uniswap' && <iframe className={styles.swap} src="/swap/index.html" />}
-      {act === 'p2p' && <P2P {...{balance, gas}} />}
+      {act === 'p2p' && <P2P {...{ balance, gas }} />}
     </div>
   );
 };

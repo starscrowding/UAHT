@@ -176,7 +176,7 @@ const Factory: NextPage = () => {
                           <Row>
                             <Link
                               target="_blank"
-                              href="https://app.uniswap.org/add/0x0d9447e16072b636b4a1e8f2b8c644e58f3eaa6a/3000?chain=polygon&lng=uk-UA"
+                              href="https://app.uniswap.org/positions/create/v3?currencyA=0x0d9447e16072b636b4a1e8f2b8c644e58f3eaa6a&chain=polygon&step=0&lng=uk-UA"
                             >
                               <Text b color="#FF4ECD">
                                 Uniswap
@@ -199,14 +199,14 @@ const Factory: NextPage = () => {
                         <Card.Divider />
                         <Card.Body>
                           <Row css={{gap: 10}}>
-                            <Link target="_blank" href="https://www.okx.com/ua/web3/dex-swap/limit">
+                            <Link target="_blank" href="https://web3.okx.com/ua/dex-swap">
                               <Text b color="#FF4ECD">
                                 OKX
                               </Text>
                             </Link>
                             <Link
                               target="_blank"
-                              href="https://app.1inch.io/#/137/advanced/limit-order"
+                              href="https://app.1inch.io/advanced/limit?network=137"
                             >
                               <Text b color="#FF4ECD">
                                 1inch

@@ -317,7 +317,7 @@ export const Wallet = () => {
                     title="Multi-Chain міст"
                     onClick={() => {
                       window.open(
-                        `https://uaht.com.ua/offers/0xD0920a91B0d382C1B0e83DB36178f808AF881121/3`,
+                        `https://com.uaht.io/offers/0xD0920a91B0d382C1B0e83DB36178f808AF881121/3`,
                         '_blank'
                       );
                     }}

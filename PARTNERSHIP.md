@@ -15,7 +15,7 @@
   - поповнення та постачання для слотів
   - інші операції від імені та за рахунок контрагента
  
-2. Відкрити pull request з документом в папку [`/public/docs`](https://github.com/starscrowding/UAHT/tree/dev/public/docs) або додати оферту на [маркетплейс](https://uaht.com.ua/) 🤝
+2. Відкрити pull request з документом в папку [`/public/docs`](https://github.com/starscrowding/UAHT/tree/dev/public/docs) або додати оферту на [маркетплейс](https://com.uaht.io/) 🤝
 
 <br/>
 <br/>

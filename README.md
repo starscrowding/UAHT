@@ -25,7 +25,7 @@ UAHT може використовуватись згідно прав і сво
 - xUAHT: https://polygonscan.com/token/0x9D7f61233106E698d96Ec3Aff908D8812b5F3F3A#readContract
 - Платформа: https://uaht.io/ + [дзеркало1](https://uaht.vercel.app/) \
 [IPFS-дзеркало](https://uaht-ipfs.on.fleek.co/) \
-[Маркетплейс | дошка оголошень спільноти](https://uaht.com.ua/) + [дзеркало1](https://uaht-com.vercel.app/) \
+[Маркетплейс | дошка оголошень спільноти](https://com.uaht.io/) + [дзеркало1](https://uaht-com.vercel.app/) \
 [Фабрика токенів](https://uaht.io/factory) \
 ENS: [uaht-io.eth](https://app.ens.domains/uaht-io.eth) \
 Decentraland: [UAHT.dcl.eth](https://play.decentraland.org/world/UAHT)
